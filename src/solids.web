@@ -2692,8 +2692,7 @@ void
 show(string text = "", char coords = 'w',
      const bool do_persp = true, const bool do_apply = true,
      Focus* f = 0, const unsigned short proj = Projections::persp,
-     const real factor = 1, 
-     int show_connectors = 0) const;
+     const real factor = 1) const;
 
 @
 @<Define |Solid| functions@>=
@@ -2701,8 +2700,7 @@ void
 Solid::show(string text, char coords,
             const bool do_persp, const bool do_apply,
             Focus* f, const unsigned short proj,
-            const real factor,
-            int show_connectors) const
+            const real factor) const
 {
 
   if (text == "")
@@ -5874,15 +5872,14 @@ Removed the explicit template argument from the call to
 @<Declare |Solid| functions@>=
 virtual
 void   
-output(Scanner_Node s, unsigned int output_command_arg = 0);
+output(Scanner_Node s);
 
 @  
 @<Define |Solid| functions@>=
 void
-Solid::output(Scanner_Node s, unsigned int output_command_arg)
+Solid::output(Scanner_Node s)
 {
-  bool DEBUG = true; /* |false| */ 
-
+  bool DEBUG = false; /* |true| */ 
   if (DEBUG)
     cerr << "Entering Solid::output().\n";
 
@@ -5921,7 +5918,7 @@ Solid::output(Scanner_Node s, unsigned int output_command_arg)
   for (vector <Shape*>::iterator iter = v.begin();
        iter != v.end(); ++iter)
     {
-      (**iter).output(s, output_command_arg);
+      (**iter).output(s);
       delete (*iter);
     }
 

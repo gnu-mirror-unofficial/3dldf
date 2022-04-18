@@ -207,18 +207,6 @@ Scan_Parse
   extern const unsigned short MAX_FILENAME          = 64;
 #endif 
 
-
-  extern const unsigned int BEGINFIG_COMMAND                 = 1;
-  extern const unsigned int BEGINCHAR_COMMAND                = 2;
-
-  extern const unsigned int ENDFIG_COMMAND                   =  1;
-  extern const unsigned int ENDCHAR_COMMAND                  =  2;
-  extern const unsigned int METAFONT_OUTPUT_COMMAND          =  4;
-  extern const unsigned int METAPOST_OUTPUT_COMMAND          =  8;
-  extern const unsigned int VERBATIM_METAFONT_COMMAND        = 16;
-  extern const unsigned int VERBATIM_METAPOST_COMMAND        = 32;
-  extern const unsigned int VERBATIM_TEX_COMMAND             = 64;
-
   char filename_array[MAX_FILE_ARGS][MAX_FILENAME];
   unsigned short filename_array_ctr                 = 0;
 
@@ -246,19 +234,6 @@ Scan_Parse
    extern const unsigned short MAX_FILE_ARGS;
    extern const unsigned short MAX_FILENAME;
 #endif 
-
-   extern const unsigned int BEGINFIG_COMMAND;
-   extern const unsigned int BEGINCHAR_COMMAND;
-
-   extern const unsigned int ENDFIG_COMMAND;
-   extern const unsigned int ENDCHAR_COMMAND;
-   extern const unsigned int METAFONT_OUTPUT_COMMAND;
-   extern const unsigned int METAPOST_OUTPUT_COMMAND;
-
-   extern const unsigned int VERBATIM_METAFONT_COMMAND;
-   extern const unsigned int VERBATIM_METAPOST_COMMAND;
-   extern const unsigned int VERBATIM_TEX_COMMAND;
-
    extern char filename_array[MAX_FILE_ARGS][MAX_FILENAME];
    extern unsigned short filename_array_ctr;
 
@@ -318,8 +293,6 @@ Picture_Output_Arg_Type
   Picture* picture;
   Scanner_Node scanner_node;
 
-  unsigned int output_command_arg;
-
   Focus* focus;  
 
   bool endfig;
@@ -370,12 +343,9 @@ Scan_Parse::Picture_Output_Arg_Type::~Picture_Output_Arg_Type(void)
 {
   if (picture != static_cast<Picture*>(0))
     {
-#if 0 
-/* !!START HERE:  LDF 2022.04.17.  */ 
       picture->clear();
       delete picture;
       picture = 0;
-#endif 
     }
 
   if (focus != static_cast<Focus*>(0))
@@ -902,16 +872,16 @@ is non-null.
 int
 Scan_Parse::beginfig_func(Scanner_Node scanner_node, 
                           int fig_num, 
-                          unsigned int begin_command,
+                          bool do_metafont, 
                           string s, 
-                          real wd, 
-                          real ht, 
-                          real dp)
+                          int wd, 
+                          int ht, 
+                          int dp)
 {
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   stringstream cerr_strm;
@@ -934,61 +904,6 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
       cerr_strm.str("");
     }
 #endif /* |DEBUG_COMPILE|  */@;
-
-  bool local_do_metafont = (metafont_output && (begin_command & Scan_Parse::BEGINCHAR_COMMAND))
-     ? true : false;
-
-  bool local_do_metapost = (metapost_output && (begin_command & Scan_Parse::BEGINFIG_COMMAND))
-     ? true : false;
-
-@q **** (4) Handle the case that the form of output corresponding @>
-@q **** (4) to |begin_command| isn't enabled. @>
-
-@ Handle the case that the form of output corresponding to |begin_command| isn't enabled.
-\initials{LDF 2022.04.13.}
-
-\LOG
-Added this section.
-\ENDLOG 
-
-@<Define |Scan_Parse| functions@>=
-
-   if (!(local_do_metafont || local_do_metapost))
-   {
-#if DEBUG_COMPILE
-       if (DEBUG)
-       { 
-          cerr_strm << thread_name
-                    << "In `Scan_Parse::beginfig_func':"
-                    << endl 
-                    << "Called `beginchar' and not performing METAPOST output or"
-                    << endl 
-                    << "called `beginfig' and not performing MetaPost output."
-                    << endl
-                    << "`begin_command' == ";
-
-          if (begin_command == Scan_Parse::BEGINCHAR_COMMAND)
-             cerr_strm << "Scan_Parse::BEGINCHAR_COMMAND" << endl;
-          else if (begin_command == Scan_Parse::BEGINFIG_COMMAND)
-             cerr_strm << "Scan_Parse::BEGINFIG_COMMAND" << endl;
-
-          cerr_strm << "`local_do_metafont' == " << local_do_metafont << endl 
-                    << "`local_do_metapost' == " << local_do_metapost << endl;
-
-          cerr_strm << "This is normal behavior:  these commands are ignored "
-                    << "when not performing the corresponding form of output."
-                    << endl 
-                    << "Exiting function successfully with return value 2."
-                    << endl;
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-
-       }  
-#endif /* |DEBUG_COMPILE|  */@; 
-     
-       return 2;
-
-   }  /* |if|  */
 
 @q **** (4).@>
 @
@@ -1015,84 +930,12 @@ Added this section.
 
   } /* |else|  */
 
-@q **** (4) Error handling.  @>
-@ Error handling.  
-\initials{LDF 2022.04.13.}
 
-\LOG
-\initials{LDF 2022.04.13.}
-Added this section.
-\ENDLOG 
+  Output_Struct* os = scanner_node->out[Run_State::METAPOST_RS];
 
-@<Define |Scan_Parse| functions@>=
+  ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
-@q ***** (5) @>
-
-  if (begin_command == Scan_Parse::BEGINFIG_COMMAND && scanner_node->beginfig_flag == true)
-  {
-    cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':" 
-              << endl
-              << "`begin_command' == `Scan_Parse::BEGINFIG_COMMAND' and "
-              << "`scanner_node->beginfig_flag' == `true'."
-              << endl 
-              << "Not starting new figure."
-              << endl 
-              << "Exiting function unsuccessfully with return value 1."
-              << endl;
-
-    log_message(cerr_strm); 
-    cerr_message(cerr_strm);
-    cerr_strm.str("");
-
-    return 1;
-  }
-
-
-@q ***** (5) @>
-
-  if (begin_command == Scan_Parse::BEGINCHAR_COMMAND && scanner_node->beginchar_flag == true)
-  {
-    cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':" 
-              << endl
-              << "`begin_command' == `Scan_Parse::BEGINCHAR_COMMAND' and "
-              << "`scanner_node->beginchar_flag' == `true'."
-              << endl 
-              << "Not starting new character."
-              << endl 
-              << "Exiting function unsuccessfully with return value 1."
-              << endl;
-
-    log_message(cerr_strm); 
-    cerr_message(cerr_strm);
-    cerr_strm.str("");
-
-    return 1;
-  }
-
-@q ***** (5) @>
-
-@q **** (4) @>
-@
-@<Define |Scan_Parse| functions@>=
-
-
-  Output_Struct* os_mf = 0;
-  Output_Struct* os_mp = 0;
-  ofstream* out_stream_mf = 0;
-  ofstream* out_stream_mp = 0;
-
-  if (local_do_metafont)
-  {
-     os_mf = scanner_node->out[Run_State::METAFONT_RS];
-     out_stream_mf  = static_cast<ofstream*>(os_mf->stream_ptr);
-  }
-  if (local_do_metapost)
-  {
-     os_mp = scanner_node->out[Run_State::METAPOST_RS];
-     out_stream_mp  = static_cast<ofstream*>(os_mp->stream_ptr);
-  }
-
-@q **** (4) Try to lock |scanner_node->output_pending|.@>  
+@q ****** (6) Try to lock |scanner_node->output_pending|.@>  
 @ Try to lock |scanner_node->output_pending|.
 \initials{LDF 2004.07.15.}
 
@@ -1144,15 +987,13 @@ Added this section.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-@q **** (4) Check whether an output operation is pending.@>
+@q ****** (6) Check whether an output operation is pending.@>
 @ Check whether an output operation is pending.
 \initials{LDF 2004.07.15.}
 @<Define |Scan_Parse| functions@>=
 
   while (scanner_node->output_pending.value_0)
     {
-
-@q ***** (5) @>
 
 #if DEBUG_COMPILE
         if (DEBUG)
@@ -1175,7 +1016,7 @@ Added this section.
         
         status = scanner_node->output_pending.timedwait(&timeout);
 
-@q ***** (5) Error handling:  Timout.@>
+@q ******* (7) Error handling:  Timout.@>
 @ Error handling:  Timout.
 \initials{LDF 2004.07.16.}
 
@@ -1202,8 +1043,8 @@ Added this section.
 
     } /* |if (status == ETIMEDOUT)|  */
 
-@q ***** (5) Error handling:  @>
-@q ***** (5) |scanner_node->output_pending.timedwait| failed.@> 
+@q ******* (7) Error handling:  @>
+@q ******* (7) |scanner_node->output_pending.timedwait| failed.@> 
 
 @ Error handling:  |scanner_node->output_pending.timedwait| failed.
 \initials{LDF 2004.07.15.}
@@ -1231,7 +1072,7 @@ Added this section.
 
     } /* |else if (status != 0)|  */
 
-@q ***** (5) @>
+@q ******* (7) @> 
 
 #if DEBUG_COMPILE
    else if (DEBUG) /* (|status == 0|)  */
@@ -1248,11 +1089,11 @@ Added this section.
      } /* |else if (DEBUG)| (|status == 0|)  */
 #endif /* |DEBUG_COMPILE|  */@; 
        
-@q ***** (5) @>
+@q ******* (7) @> 
 
   } /* |while (scanner_node->output_pending.value)|  */
 
-@q **** (4) @>
+@q ****** (6).@> 
 
 #if DEBUG_COMPILE
         if (DEBUG)
@@ -1271,160 +1112,82 @@ Added this section.
    scanner_node->output_pending.value_0 = true;
    scanner_node->output_pending.value_1++;
 
-@q **** (4) Try to lock |os_mf->mutex|.@>  
-@ Try to lock |os_mf->mutex|.
-\initials{LDF 2022.04.14.}
-
-@<Define |Scan_Parse| functions@>= 
-
-   if (local_do_metafont)
-   {
-
-#ifdef HAVE_PTHREAD_H  
-
-#if DEBUG_COMPILE
-      if (DEBUG)
-      {
-
-       cerr_strm << thread_name << "In `Scan_Parse::beginfig_func':"
-                 << endl
-                 << "About to call `os_mf->lock()'. ";
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-      }
-#endif /* |DEBUG_COMPILE|  */@; 
-
-      status = os_mf->lock();
-
-@q **** (4) @>
-
-      if (status != 0)
-      {
-          cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
-                    << endl
-                    << "`os_mf->lock()' failed. "
-                    << "Not writing to `out_stream'."
-                    << endl << "Will try to continue.";
-
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm, error_stop_value); 
-          cerr_strm.str("");
-
-      } /* |if (status != 0)|  */
-
-@q **** (4) @>
-
-      else /* |os_mf->lock| succeeded.  */
-      {
-
-#if DEBUG_COMPILE
-           if (DEBUG)
-           {
-              cerr_strm << "`os_mf->lock()' succeeded!";
-              cerr_message(cerr_strm);
-              cerr_strm.str("");
-           }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-      } /* |else| (|os_mf->lock| succeeded.)  */
-
-#endif /* |HAVE_PTHREAD_H|  */@; 
-
-   }  /* |if (local_do_metafont)| */
-
-@q **** (4) Try to lock |os_mp->mutex|.@>  
-@ Try to lock |os_mp->mutex|.
+@q ****** (6) Try to lock |os->mutex|.@>  
+@ Try to lock |os->mutex|.
 \initials{LDF 2004.07.15.}
 
 @<Define |Scan_Parse| functions@>= 
 
-   if (local_do_metapost)
-   {
-
 #ifdef HAVE_PTHREAD_H  
 
 #if DEBUG_COMPILE
-      if (DEBUG)
-      {
+   if (DEBUG)
+     {
 
-       cerr_strm << thread_name << "In `Scan_Parse::beginfig_func':"
-                 << endl
-                 << "About to call `os_mp->lock()'. ";
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-      }
+      cerr_strm << thread_name << "In `Scan_Parse::beginfig_func':"
+                << endl
+                << "About to call `os->lock()'. ";
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-      status = os_mp->lock();
+  status = os->lock();
 
-@q **** (4) @>
+@q ******* (7) @> 
 
-      if (status != 0)
-      {
-          cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
-                    << endl
-                    << "`os_mp->lock()' failed. "
-                    << "Not writing to `out_stream'."
-                    << endl << "Will try to continue.";
+  if (status != 0)
+    {
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
+                << endl
+                << "`os->lock()' failed. "
+                << "Not writing to `out_stream'."
+                << endl << "Will try to continue.";
 
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm, error_stop_value); 
-          cerr_strm.str("");
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm, error_stop_value); 
+      cerr_strm.str("");
 
-      } /* |if (status != 0)|  */
+    } /* |if (status != 0)|  */
 
-@q **** (4) @>
+@q ******* (7) @> 
 
-      else /* |os_mp->lock| succeeded.  */
-      {
+  else /* |os->lock| succeeded.  */
+    {
 
 #if DEBUG_COMPILE
-           if (DEBUG)
-           {
-              cerr_strm << "`os_mp->lock()' succeeded!";
-              cerr_message(cerr_strm);
-              cerr_strm.str("");
-           }  
+      if (DEBUG)
+        {
+          cerr_strm << "`os->lock()' succeeded!";
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+        }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-      } /* |else| (|os_mp->lock| succeeded.)  */
+    } /* |else| (|os->lock| succeeded.)  */
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-   }  /* |if (local_do_metapost)| */
-
-@q **** (4) Write to |*out_stream|.@>
+@q ****** (6) Write to |*out_stream|.@>
 @ Write to |*out_stream|.
 @<Define |Scan_Parse| functions@>= 
 
-    if (begin_command == Scan_Parse::BEGINCHAR_COMMAND)
+    if (do_metafont)
     {
-#if DEBUG_COMPILE
-       if (DEBUG)
-       { 
-           cerr << "wd == " << wd << endl
-                << "ht == " << ht << endl
-                << "dp == " << dp << endl;
-       }   
-#endif /* |DEBUG_COMPILE|  */@; 
-
-       if (local_do_metafont)
-          *out_stream_mf << "beginchar(\"" << s << "\", " << wd 
-                         << "cm#, " << ht << "cm#, " << dp << "cm#);" 
-                         << endl;
-
+       *out_stream << "beginchar(\"" << s << "\", " << wd 
+                   << "pt#, " << ht << "pt#, " << dp << "pt#);" 
+                   << endl;
     }
-
-    if (begin_command == Scan_Parse::BEGINFIG_COMMAND)
+    else
     {
-       if (local_do_metapost)
-          *out_stream_mp << "beginfig(" << fig_num << ");" 
-                         << endl;
+       *out_stream << "beginfig(" << fig_num << ");" 
+                   << endl;
     }
 
 
-@q **** (4) @>
+@q ******* (7) @> 
 @ 
+
 \LOG
 \initials{LDF 2004.11.12.}
 Added this section.
@@ -1438,103 +1201,51 @@ Replaced the code in this section with a call to
 
       if (*(scanner_node->default_pen) != static_cast<Pen*>(0))
         {
-           if (local_do_metafont)
-              *out_stream_mf << "pickup " << **(scanner_node->default_pen);
-
-           if (local_do_metapost)
-              *out_stream_mp << "pickup " << **(scanner_node->default_pen);
+           *out_stream << "pickup " << **(scanner_node->default_pen);
                    
         }  /* |if (*(scanner_node->default_pen) != 0)|  */
 
-@q **** (4) Try to unlock |os_mf->mutex|.@>  
-@ Try to unlock |os_mf->mutex|.
-\initials{LDF 2022.04.14.}
-
-@<Define |Scan_Parse| functions@>= 
-
-   if (local_do_metafont)
-   {
-
-#ifdef HAVE_PTHREAD_H  
-      status = os_mf->unlock();
-
-      if (status != 0)
-      {
-         cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
-                   << endl
-                   << "`os_mf->unlock()' failed. "
-                   << "Not writing to `out_stream_mf'."
-                   << endl << "Will try to continue.";
-
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-
-     } /* |if (status != 0)|  */
-
-     else /* |os_mf->unlock| succeeded.  */
-     {
-
-#if DEBUG_COMPILE
-        if (DEBUG)
-        {
-          cerr_strm << "`os_mf->unlock()' succeeded!";
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-        }
-#endif /* |DEBUG_COMPILE|  */@; 
-
-     } /* |else| (|os_mf->unlock| succeeded.)  */
-
-#endif /* |HAVE_PTHREAD_H|  */@; 
-
-   }  /* |if (local_do_metafont)| */
-
-@q **** (4) Try to unlock |os_mp->mutex|.@>  
-@ Try to unlock |os_mp->mutex|.
+@q ****** (6) Try to unlock |os->mutex|.@>  
+@ Try to unlock |os->mutex|.
 \initials{LDF 2004.07.15.}
 
 @<Define |Scan_Parse| functions@>= 
 
-   if (local_do_metapost)
-   {
-
 #ifdef HAVE_PTHREAD_H  
-      status = os_mp->unlock();
+  status = os->unlock();
 
-      if (status != 0)
-      {
-         cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
-                   << endl
-                   << "`os_mp->unlock()' failed. "
-                   << "Not writing to `out_stream_mp'."
-                   << endl << "Will try to continue.";
+  if (status != 0)
+    {
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
+                << endl
+                << "`os->unlock()' failed. "
+                << "Not writing to `out_stream'."
+                << endl << "Will try to continue.";
 
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
 
-     } /* |if (status != 0)|  */
+    } /* |if (status != 0)|  */
 
-     else /* |os_mp->unlock| succeeded.  */
-     {
+  else /* |os->unlock| succeeded.  */
+    {
 
 #if DEBUG_COMPILE
-        if (DEBUG)
+      if (DEBUG)
         {
-          cerr_strm << "`os_mp->unlock()' succeeded!";
+          cerr_strm << "`os->unlock()' succeeded!";
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-     } /* |else| (|os_mp->unlock| succeeded.)  */
+    } /* |else| (|os->unlock| succeeded.)  */
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-   }  /* |if (local_do_metapost)| */
-
-@q **** (4) Set |scanner_node->output_pending.value_0| to |false|, @>  
-@q **** (4) decrement |scanner_node->output_pending.value_1|, and  @>  
-@q **** (4) and signal condition.                                  @>  
+@q ****** (6) Set |scanner_node->output_pending.value_0| to |false|, @>  
+@q ****** (6) decrement |scanner_node->output_pending.value_1|, and  @>  
+@q ****** (6) and signal condition.                                  @>  
 @ Set |scanner_node->output_pending.value_0| to |false|,  
 decrement |scanner_node->output_pending.value_1|, and   
 and signal condition.                                   
@@ -1548,7 +1259,7 @@ and signal condition.
   
   status = scanner_node->output_pending.signal();
 
-@q **** (4) Error handling:  |scanner_node->output_pending.signal| failed.@>
+@q ******* (7) Error handling:  |scanner_node->output_pending.signal| failed.@>
 @ Error handling:  |scanner_node->output_pending.signal| failed.
 \initials{LDF 2004.07.15.}
 
@@ -1589,7 +1300,7 @@ and signal condition.
      } /* |else if (DEBUG)| (|status == 0|)  */
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q **** (4) Try to unlock |scanner_node->output_pending|.@>  
+@q ****** (6) Try to unlock |scanner_node->output_pending|.@>  
 @ Try to unlock |scanner_node->output_pending|.
 \initials{LDF 2004.07.15.}
 
@@ -1603,7 +1314,7 @@ and signal condition.
       cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
                 << endl
                 << "`scanner_node->output_pending.unlock()' failed. "
-                << "Not writing to `out_stream_mf' or `out_stream_mp'."
+                << "Not writing to `out_stream'."
                 << endl << "Will try to continue.";
 
       log_message(cerr_strm); 
@@ -1628,16 +1339,13 @@ and signal condition.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-@q **** (4) @>
+@q ***** (5) @>
 @ 
 \LOG
 \initials{LDF 2021.12.15.}
 Added this section.
 \ENDLOG 
 @<Define |Scan_Parse| functions@>=
-
-#if 0 /* !!START HERE: LDF 2022.04.18.  Testing */ 
-
 
    Id_Map_Entry_Node entry = scanner_node->lookup("current_figure_number", true);
 
@@ -1663,9 +1371,7 @@ Added this section.
        *static_cast<real*>(entry->object) = fig_num;
    }
 
-#endif 
-
-@q **** (4) Exit function successfully.@>
+@q ***** (5) Exit function successfully.@>
 @ Exit function successfully.
 @<Define |Scan_Parse| functions@>=
 
@@ -1675,16 +1381,11 @@ Added this section.
         cerr_strm << "Exiting `Scan_Parse::beginfig_func'.";
         cerr_message(cerr_strm);
         cerr_strm.str("");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
   return 0;
-
-} /* End of |Scan_Parse::beginfig_func| definition  */
+}
 
 @q *** (3) |output_func|.@>
 @*3 {\bf output\_func}.
@@ -1708,9 +1409,9 @@ and |real max_z_proj|.
 Revised this function.
 
 \initials{LDF 2004.07.22.}
-Added calls to |log_message| and rearranged the code for debugging and error output.  
-Now calling |cerr_strm.str("")| to clear |cerr_strm|, since |cerr_message| no longer 
-does this.  
+Added calls to |log_message| and rearranged the code for debugging and error
+output.  Now calling |cerr_strm.str("")| to clear 
+|cerr_strm|, since |cerr_message| no longer does this.  
 \ENDLOG 
 
 @q **** (4) Definition.@>
@@ -1721,7 +1422,7 @@ Scan_Parse::output_func(void* arg)
 {
 
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@;
 
   Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info(true);
@@ -1878,18 +1579,32 @@ without \.{--multithread-input}.
 
 @<Define |Scan_Parse| functions@>=
 
-  Output_Struct* out_stream_mf = 0;
-  Output_Struct* out_stream_mp = 0;
+  Output_Struct* out_stream = picture_ptr_arg->scanner_node->out[Run_State::METAPOST_RS];
 
-  if (metafont_output)
-  {
-     out_stream_mf = picture_ptr_arg->scanner_node->out[Run_State::METAFONT_RS];
-
-     if (out_stream_mf == static_cast<Output_Struct*>(0))
+  if (out_stream == static_cast<Output_Struct*>(0))
      {
+         cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
+                   << endl 
+                   << "`out_stream == 0."
+                   << endl << "Exiting function with `*return_value' == 1.";
+
+         log_message(cerr_strm); 
+         cerr_message(cerr_strm, error_stop_value);
+         cerr_strm.str("");
+
+         *return_value = 1;
+         return static_cast<void*>(return_value); 
+
+      }
+
+  status = out_stream->lock();
+
+  if (status != 0)
+    {
+
         cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
                   << endl 
-                  << "`out_stream_mf == 0."
+                  << "`out_stream->lock() failed."
                   << endl << "Exiting function with `*return_value' == 1.";
 
         log_message(cerr_strm); 
@@ -1898,72 +1613,7 @@ without \.{--multithread-input}.
 
         *return_value = 1;
         return static_cast<void*>(return_value); 
-
-     }
-  }
-
-  if (metapost_output)
-  {
-     out_stream_mp = picture_ptr_arg->scanner_node->out[Run_State::METAPOST_RS];
-     
-     if (out_stream_mp == static_cast<Output_Struct*>(0))
-     {
-        cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
-                  << endl 
-                  << "`out_stream_mp == 0."
-                  << endl << "Exiting function with `*return_value' == 1.";
-
-        log_message(cerr_strm); 
-        cerr_message(cerr_strm, error_stop_value);
-        cerr_strm.str("");
-
-        *return_value = 1;
-        return static_cast<void*>(return_value); 
-
-     }
-  }
-
-  if (metafont_output)
-  {
-     status = out_stream_mf->lock();
-
-     if (status != 0)
-       {
-
-           cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
-                     << endl 
-                     << "`out_stream_mf->lock() failed."
-                     << endl << "Exiting function with `*return_value' == 1.";
-
-           log_message(cerr_strm); 
-           cerr_message(cerr_strm, error_stop_value);
-           cerr_strm.str("");
-
-           *return_value = 1;
-           return static_cast<void*>(return_value); 
-       }
-  }
-
-  if (metapost_output)
-  {
-     status = out_stream_mp->lock();
-
-     if (status != 0)
-       {
-
-           cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
-                     << endl 
-                     << "`out_stream_mp->lock() failed."
-                     << endl << "Exiting function with `*return_value' == 1.";
-
-           log_message(cerr_strm); 
-           cerr_message(cerr_strm, error_stop_value);
-           cerr_strm.str("");
-
-           *return_value = 1;
-           return static_cast<void*>(return_value); 
-       }
-  }
+    }
 
 @q ***** (5) Call |Picture::output|.@>
 
@@ -2009,7 +1659,6 @@ cerr_mutex.lock();
   cerr_strm.str("");
 
   picture_ptr_arg->picture->output(picture_ptr_arg->scanner_node,
-                                   picture_ptr_arg->output_command_arg,
                                    *(picture_ptr_arg->focus),
                                    picture_ptr_arg->projection,
                                    picture_ptr_arg->factor,
@@ -2058,10 +1707,7 @@ MetaPost code.
 
       cerr_strm.str("");
 
-      if (metafont_output)
-         *(out_stream_mf->stream_ptr) << "endfig;" << endl << endl << flush;
-      if (metapost_output)
-         *(out_stream_mp->stream_ptr) << "endfig;" << endl << endl << flush;
+      *(out_stream->stream_ptr) << "endfig;" << endl << endl << flush;
 
     } /* |if (picture_ptr_arg->endfig)|  */
 
@@ -2083,56 +1729,246 @@ MetaPost code.
 
 @q ***** (5) Unlock output stream mutex.  Exit on error.@>
 
-@ Unlock output stream mutexes.  Exit on error.
+@ Unlock output stream mutex.  Exit on error.
 \initials{LDF 2004.07.14.}
 
 @<Define |Scan_Parse| functions@>=
 
-  if (metafont_output)
-  {
+  status = out_stream->unlock();
 
-     status = out_stream_mf->unlock();
+  if (status != 0)
+    {
 
-     if (status != 0)
-       {
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
+                << endl 
+                << "`out_stream->unlock()' failed."
+                << endl << "Exiting function with `*return_value' == 1.";
 
-         cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
-                   << endl 
-                   << "`out_stream_mf->unlock()' failed."
-                   << endl << "Exiting function with `*return_value' == 1.";
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm, error_stop_value);
+      cerr_strm.str("");
 
-         log_message(cerr_strm); 
-         cerr_message(cerr_strm, error_stop_value);
-         cerr_strm.str("");
+      *return_value = 1;
+      return static_cast<void*>(return_value); 
 
-         *return_value = 1;
-         return static_cast<void*>(return_value); 
+    } /* |if (status != 0)|  */
 
-       } /* |if (status != 0)|  */
-  }
+@q ***** (5) Try to lock |*(picture_ptr_arg->picture)| and then unlock it.@>
 
-  if (metapost_output)
-  {
+@ Try to lock |*(picture_ptr_arg->picture)| and then unlock it.
+\initials{LDF 2004.08.25.}
 
-     status = out_stream_mp->unlock();
+\LOG
+\initials{LDF 2004.08.25.}
+Added this section.
 
-     if (status != 0)
-       {
+@:BUG@> BUG: 
+\initials{LDF 2004.08.25.}
+Now calling |picture_ptr_arg->picture->trylock| and 
+|picture_ptr_arg->picture->unlock|.  This is an attempt to fix a bug
+that occurs on Glen Ritchie's (GCR's) system.  I think |*(picture_ptr_arg->picture)| 
+might be locked on his system.  It's not on mine, and no error occurs on my system. 
 
-         cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
-                   << endl 
-                   << "`out_stream_mp->unlock()' failed."
-                   << endl << "Exiting function with `*return_value' == 1.";
+\initials{LDF 2004.08.25.}
+If |*(picture_ptr_arg->picture)| isn't locked, or if it's locked by the 
+thread of which this function is the start function,
+then this should work.
+Otherwise, i.e., if it's locked by another thread, it should fail.  
+In this case, this function issues a warning, but continues.
+\ENDLOG 
 
-         log_message(cerr_strm); 
-         cerr_message(cerr_strm, error_stop_value);
-         cerr_strm.str("");
+@q ****** (6) Try to lock |*(picture_ptr_arg->picture)|.@>
 
-         *return_value = 1;
-         return static_cast<void*>(return_value); 
+@ Try to lock |*(picture_ptr_arg->picture)|.
+\initials{LDF 2004.08.25.}
 
-       } /* |if (status != 0)|  */
-  }
+\LOG
+\initials{LDF 2004.08.25.}
+Added this section.
+\ENDLOG
+
+@<Define |Scan_Parse| functions@>=
+
+  status = picture_ptr_arg->picture->trylock();
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << thread_name << "In `Scan_Parse::output_func':"
+                << endl 
+                << "`picture_ptr_arg->picture->trylock()' returned " 
+                << status << ".";
+      
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm, DEBUG); 
+      cerr_strm.str(""); 
+    }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) |picture_ptr_arg->picture->trylock| succeeded.@>
+
+@ |picture_ptr_arg->picture->trylock| succeeded.
+\initials{LDF 2004.08.25.}
+
+\LOG
+\initials{LDF 2004.08.25.}
+Added this section.
+\ENDLOG 
+
+@<Define |Scan_Parse| functions@>=
+
+  if (status == 0) /* |picture_ptr_arg->picture->trylock| succeeded.  */
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+        {
+          cerr_strm << thread_name << "In `Scan_Parse::output_func':"
+                    << endl
+                    << "`*(picture_ptr_arg->picture)' wasn't locked. "
+                    << "Will try to unlock it.";
+
+          log_message(cerr_strm); 
+          cerr_message(cerr_strm, DEBUG); 
+          cerr_strm.str("");
+        }
+
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+    } /* |if (status == 0)| 
+         (|picture_ptr_arg->picture->trylock| succeeded.)  */
+
+@q ******* (7) |picture_ptr_arg->picture->trylock| failed.@>
+
+@ |picture_ptr_arg->picture->trylock| failed.
+Will try to unlock |*(picture_ptr_arg->picture)| anyway.  If it was
+locked by this thread, it should succeed, otherwise it will fail.
+\initials{LDF 2004.08.25.}
+
+\LOG
+\initials{LDF 2004.08.25.}
+Added this section.
+\ENDLOG 
+
+@<Define |Scan_Parse| functions@>=
+
+  else 
+
+@q /* (|status == 0|---|picture_ptr_arg->picture->trylock| failed.)  */ @>
+
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+        {
+          cerr_strm << thread_name << "In `Scan_Parse::output_func':"
+                    << endl
+                    << "`*(picture_ptr_arg->picture)' was locked. "
+                    << "Will try to unlock it anyway."
+                    << endl
+                    << "If it was locked by this thread, this should "
+                    << "succeed, otherwise it should fail.";
+
+          log_message(cerr_strm); 
+          cerr_message(cerr_strm, DEBUG); 
+          cerr_strm.str("");
+        }
+#endif 
+
+@q /* |DEBUG_COMPILE|  */ @>
+ 
+    }
+
+@q   /* |else| (|status == 0|---|picture_ptr_arg->picture->trylock| @>
+@q          failed.)  */ @>
+
+@q ****** (6) Try to unlock |*(picture_ptr_arg->picture)|.@>
+
+@ Try to unlock |*(picture_ptr_arg->picture)|.
+If it was locked by the call to |trylock| above, or if was locked 
+by this thread previously, this should succeed, otherwise it should 
+fail.
+\initials{LDF 2004.08.25.}
+
+\LOG
+\initials{LDF 2004.08.25.}
+Added this section.
+\ENDLOG 
+
+@<Define |Scan_Parse| functions@>=
+
+       status = picture_ptr_arg->picture->unlock();
+
+@q ******* (7) |picture_ptr_arg->picture->unlock| succeeded.@>
+
+@ |picture_ptr_arg->picture->unlock| succeeded.
+\initials{LDF 2004.08.25.}
+
+\LOG
+\initials{LDF 2004.08.25.}
+Added this section.
+\ENDLOG 
+
+@<Define |Scan_Parse| functions@>=
+
+  if (status == 0) /* |picture_ptr_arg->picture->unlock| succeeded.  */
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+        {
+          cerr_strm << thread_name << "In `Scan_Parse::output_func':"
+                    << endl
+                    << "`picture_ptr_arg->picture->unlock()' succeeded."
+                    << endl
+                    << "This means that `*(picture_ptr_arg->picture)' was either "
+                    << "locked by the previous call to `trylock()',"
+                    << endl 
+                    << "or that it was locked somewhere else in this thread (this is good).";
+
+          log_message(cerr_strm); 
+          cerr_message(cerr_strm, DEBUG); 
+          cerr_strm.str("");
+        }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+    } /* |if (status == 0)| 
+         (|picture_ptr_arg->picture->unlock| succeeded.)  */
+
+@q ******* (7) |picture_ptr_arg->picture->unlock| failed.@>
+
+@ |picture_ptr_arg->picture->unlock| failed.
+This probably means that |*(picture_ptr_arg->picture)| was
+locked by another thread.  Will try to continue anyway.
+\initials{LDF 2004.08.25.}
+
+\LOG
+\initials{LDF 2004.08.25.}
+Added this section.
+\ENDLOG 
+
+@<Define |Scan_Parse| functions@>=
+
+  else 
+
+@q /* (|status == 0|---|picture_ptr_arg->picture->unlock| @>
+@q   failed.)  */                                         @>
+
+    {
+
+      cerr_strm << thread_name << "WARNING! In `Scan_Parse::output_func':"
+                << endl
+                << "`picture_ptr_arg->picture->unlock()' failed."
+                << endl
+                << "This probably means that `*(picture_ptr_arg->picture)' "
+                << "was locked by another thread." << endl
+                << "Will try to continue.";
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm, error_stop_value); 
+      cerr_strm.str("");
+        
+    }   /* |else| (|status == 0| (|picture_ptr_arg->picture->unlock| failed.)  */
 
 @q ***** (5) Delete |picture_ptr_arg|.@>
 
@@ -2364,10 +2200,8 @@ Programmed the single-threaded case.
 @
 @<Define |Scan_Parse| functions@>=
 int
-Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_command_arg)
+Scan_Parse::output_command_func(Scanner_Node scanner_node, bool do_metafont)
 {
-
-return 0;  /* !!START HERE:  LDF 2022.04.18.   Testing */ 
 
 @q ***** (5) Get thread information and set |thread_name|.@>
 
@@ -2397,27 +2231,16 @@ return 0;  /* !!START HERE:  LDF 2022.04.18.   Testing */
 @<Define |Scan_Parse| functions@>=
 
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name
-                << "Entering `Scan_Parse::output_command_func'.";
-
-      cerr_strm << endl << "`output_command_arg' == " << output_command_arg
-                << " == 0" << oct << output_command_arg << " (oct)"
-                << " == 0x" << hex << output_command_arg
-                << " (hex)" << dec;
-
+                << "Entering `Scan_Parse::output_command_func'."
+                << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
-
     }
 #endif /* |DEBUG_COMPILE|  */@; 
-
-
-@q ***** (5) @>
-@
-@<Define |Scan_Parse| functions@>=
 
    int status;
    bool multithread_output  = scanner_node->run_state.multithread_output;
@@ -2429,230 +2252,7 @@ return 0;  /* !!START HERE:  LDF 2022.04.18.   Testing */
 
    bool error_stop_value = false;
 
-   bool is_endfig_or_endchar = false; 
-
-@q ***** (5) @>   
-@
-@<Define |Scan_Parse| functions@>=
-
-  bool local_do_metafont = 
-     (metafont_output && (   output_command_arg & Scan_Parse::ENDCHAR_COMMAND
-                          || output_command_arg & Scan_Parse::METAFONT_OUTPUT_COMMAND))
-     ? true : false;
-
-  bool local_do_metapost = 
-     (metapost_output && (   output_command_arg & Scan_Parse::ENDFIG_COMMAND
-                          || output_command_arg & Scan_Parse::METAPOST_OUTPUT_COMMAND))
-     ? true : false;
-
-
-
-@q ***** (5) @>
-@
-\LOG
-\initials{LDF 2022.04.16.}
-Added this section.
-\ENDLOG
-
-@<Define |Scan_Parse| functions@>=
-
-    Id_Map_Entry_Node entry = 0;
-
-
-    if (scanner_node->picture_entry_ptr)
-    {
-       cerr << "`scanner_node->picture_entry_ptr' is non-NULL." << endl;
-
-       cerr << "Error after here 5." << endl; 
-
-       entry = static_cast<Id_Map_Entry_Node>(scanner_node->picture_entry_ptr);
-
-       cerr << "Error after here 6." << endl; 
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-
-    }
-    else
-    {
-       cerr << "`scanner_node->picture_entry_ptr' is NULL." << endl;
-
-       cerr << "Error after here 7." << endl; 
-
-       entry = scanner_node->lookup("current_picture");
-
-       cerr << "Error after here 8." << endl; 
-
-       if (entry == 0)
-          cerr << "entry is NULL." << endl;
-       else if (entry->object == 0)
-          cerr << "entry is non-NULL but entry->object is NULL." << endl;
-       else
-          cerr << "entry and entry->object are both non-NULL." << endl;
-         
-       scanner_node->picture_entry_ptr = static_cast<void*>(entry);
-
-       cerr << "Error after here 9." << endl; 
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-
-    }
-
-    return 0; /* /* !!START HERE:  LDF 2022.04.17.  */ 
-
-    cerr << "Error after here 10." << endl; 
-
-
-
-    if (entry == 0 || entry->object == 0)
-    {
-       cerr << "Error after here 11." << endl; 
-
-       cerr_strm << thread_name
-                 << "ERROR!  In `Scan_Parse::output_command_func':"
-                 << endl
-                 << "`Id_Map_Entry_Node entry' is NULL or `entry->object' is NULL."
-                 << endl 
-                 << "Can't output picture." 
-                 << endl 
-                 << "Exiting function unsuccessfully with return value 1."
-                 << endl;
-
-       cerr_message(cerr_strm, true);
-       cerr_strm.str("");
-
-       cerr << "Error after here 12." << endl;      
-
-       return 1;
-
-    }  /* |if (entry == 0)| */
-   
-
-    cerr << "Error after here 13." << endl; 
-
-
-
-
-@q ***** (5) Handle the case that the form or forms of output corresponding @>
-@q ***** (5) to |output_command_arg| aren't enabled. @>
-
-@ Handle the case that the form or forms of output corresponding to |output_command_arg| 
-aren't enabled.
-\initials{LDF 2022.04.13.}
-
-\LOG
-Added this section.
-\ENDLOG 
-
-@<Define |Scan_Parse| functions@>=
-
-   if (!(metafont_output || metapost_output))
-   {
-       cerr_strm << thread_name
-                 << "WARNING!  In `Scan_Parse::output_command_func':"
-                 << endl
-                 << "`metafont_output' and `metapost_output' are both `false'."
-                 << endl                 
-                 << "Not performing either form of output."
-                 << endl 
-                 << "Exiting function unsuccessfully with return value 2."
-                 << endl;
-       cerr_message(cerr_strm, true);
-       cerr_strm.str("");
-
-      return 2;
-   }   
-   else if (metafont_output && metapost_output &&
-            !(   output_command_arg & Scan_Parse::ENDCHAR_COMMAND
-              || output_command_arg & Scan_Parse::METAFONT_OUTPUT_COMMAND
-              || output_command_arg & Scan_Parse::ENDFIG_COMMAND
-              || output_command_arg & Scan_Parse::METAPOST_OUTPUT_COMMAND))
-   {
-
-       cerr_strm << thread_name
-                 << "WARNING!  In `Scan_Parse::output_command_func':"
-                 << endl
-                 << "`metafont_output' and `metapost_output' are both `true', "
-                 << "but `output_command_arg' doesn't contain"
-                 << endl
-                 << "a command for performing either form of output."
-                 << endl 
-                 << "`output_command_arg' == 0x" << hex << output_command_arg << dec
-                 << " (hex)"
-                 << endl 
-                 << "Exiting function unsuccessfully with return value 2."
-                 << endl;
-       cerr_message(cerr_strm, true);
-       cerr_strm.str("");
-
-       return 2;
-   }
-   else if (metafont_output && !metapost_output &&
-            !(   output_command_arg & Scan_Parse::ENDCHAR_COMMAND
-              || output_command_arg & Scan_Parse::METAFONT_OUTPUT_COMMAND))
-   {
-      cerr_strm << thread_name
-                 << "WARNING!  In `Scan_Parse::output_command_func':"
-                 << endl
-                 << "`metafont_output' is `true',  but `metapost_output' is `false' and "
-                 << "`output_command_arg' doesn't contain"
-                 << endl
-                 << "a command for performing METAFONT output."
-                 << endl 
-                 << "`output_command_arg' == 0x" << hex << output_command_arg << dec
-                 << " (hex)"
-                 << endl 
-                 << "Exiting function unsuccessfully with return value 2."
-                 << endl;
-       cerr_message(cerr_strm, true);
-       cerr_strm.str("");
-
-       return 2;
- 
-   }
-   else if (metapost_output && !metafont_output &&
-            !(   output_command_arg & Scan_Parse::ENDFIG_COMMAND
-              || output_command_arg & Scan_Parse::METAPOST_OUTPUT_COMMAND))
-   {
-      cerr_strm << thread_name
-                 << "WARNING!  In `Scan_Parse::output_command_func':"
-                 << endl
-                 << "`metapost_output' is `true',  but `metafont_output' is `false' and "
-                 << "`output_command_arg' doesn't contain"
-                 << endl
-                 << "a command for performing MetaPost output."
-                 << endl 
-                 << "`output_command_arg' == 0x" << hex << output_command_arg << dec
-                 << " (hex)"
-                 << endl 
-                 << "Exiting function unsuccessfully with return value 2."
-                 << endl;
-       cerr_message(cerr_strm, true);
-       cerr_strm.str("");
-
-       return 2;
- 
-   }
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-      cerr_strm << thread_name
-                 << "In `Scan_Parse::output_command_func':"
-                 << endl
-                 << "Performing MetaPost output:"
-                 << endl 
-                 << "`metafont_output' == " << metafont_output
-                 << endl 
-                 << "`metapost_output' == " << metapost_output
-                 << endl;
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
+   bool is_endfig = false; 
 
 @q ***** (5) Get |current_picture|, if this is for |endfig|.@>
 
@@ -2661,16 +2261,12 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-return 0;
-
-
-
   if (scanner_node->endfig_ptr != static_cast<void*>(0))
     {
       
-      is_endfig_or_endchar = *static_cast<bool*>(scanner_node->endfig_ptr);
+      is_endfig = *static_cast<bool*>(scanner_node->endfig_ptr);
       
-      if (!is_endfig_or_endchar) /* Error handling.  */
+      if (!is_endfig) /* Error handling.  */
         {
           cerr_strm << thread_name 
                     << "ERROR! In `Scan_Parse::output_command_func':"
@@ -2686,7 +2282,30 @@ return 0;
 
           return 1;
 
-        } /* |if (!is_endfig_or_endchar)|  */
+        } /* |if (!is_endfig)|  */
+
+      Id_Map_Entry_Node entry = scanner_node->lookup("current_picture");
+
+@q ****** (6) Error handling:  |current_picture| not found.@>
+
+@ Error handling:  |current_picture| not found.
+\initials{LDF 2004.07.14.}
+
+@<Define |Scan_Parse| functions@>=
+
+      if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
+        {
+
+          cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func':"
+                    << endl << "`current_picture' not found. "
+                    << "Exiting function with return value 1."; 
+        
+          cerr_message(cerr_strm, error_stop_value);
+          cerr_strm.str("");
+
+          return 1;
+
+} /* |if (entry == 0 && entry->object == 0)|  */
 
 @q ****** (6) Lock |entry|. Exit on error.@>
 
@@ -2722,6 +2341,34 @@ at this time.
           return 1;
           
         }
+
+@q ****** (6) Success!  Setting |scanner_node->picture_entry_ptr| to |entry|.@>
+
+@ Success!  Setting |scanner_node->picture_entry_ptr| to |entry|.
+\initials{LDF 2004.07.14.}
+
+@<Define |Scan_Parse| functions@>=
+
+scanner_node->picture_entry_ptr = static_cast<void*>(entry);
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+
+       cerr << thread_name << "In `Scan_Parse::output_command_func':"
+            << endl;
+
+       static_cast<Picture*>(entry->object)->show("current_picture on entry:");
+       static_cast<Picture*>(
+          static_cast<Id_Map_Entry_Node>(
+             scanner_node->picture_entry_ptr)->object)->show(
+                "current_picture on arg:");  
+#if 0 
+    cerr_message(cerr_strm, true);
+#endif 
+    cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q ****** (6) Unlock |entry|. Exit on error.@>
 
@@ -2787,7 +2434,6 @@ at this time.
         cerr_strm.str("");
 
         return 1;
-
     } /* |if (p == 0)|  */
 
 @q ***** (5) If we're using multithreaded output,       @>
@@ -2943,7 +2589,7 @@ and increment |scanner_node->output_pending.value_1|.
       cerr_strm.str("");
 
       scanner_node->output_pending.unlock();
-
+      
       return 1;
 
     } /* |if (status == ETIMEDOUT)|  */
@@ -2968,7 +2614,7 @@ and increment |scanner_node->output_pending.value_1|.
       cerr_strm.str("");
 
       scanner_node->output_pending.unlock();
-
+      
       return 1;
 
     } /* |else if (status != 0)|  */
@@ -3036,8 +2682,6 @@ and increment |scanner_node->output_pending.value_1|.
           cerr_message(cerr_strm, error_stop_value);
           cerr_strm.str("");
 
-          return 1;
-
         } /* |if (status != 0)|  */
 
 @q ******* (7) |output_pending.unlock| succeeded.@>
@@ -3069,8 +2713,6 @@ and increment |scanner_node->output_pending.value_1|.
 \initials{LDF 2004.07.12.}
 
 @<Define |Scan_Parse| functions@>=
-
-      p->output_command_arg = output_command_arg;
 
       status = pthread_create(scanner_node->thread_vector.back(),
                               0,
@@ -3163,72 +2805,34 @@ to |Picture::output|.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #ifdef HAVE_PTHREAD_H  
-   if (metafont_output)
-      p->scanner_node->out[Run_State::METAFONT_RS]->lock();
-   else
-      p->scanner_node->out[Run_State::METAPOST_RS]->lock();
-
+   p->scanner_node->out[Run_State::METAPOST_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-   if (local_do_metafont || local_do_metapost)
+   p->picture->output(p->scanner_node,
+                      *(p->focus),
+                      p->projection,
+                      p->factor,
+                      p->sort_value,
+                      p->do_warnings,
+                      p->min_x_proj,
+                      p->max_x_proj,
+                      p->min_y_proj,
+                      p->max_y_proj,
+                      p->min_z_proj,
+                      p->max_z_proj,
+                      p->surface_hiding_value);
+
+   if (is_endfig)
    {
 
-      p->picture->output(p->scanner_node,
-                         output_command_arg,
-                         *(p->focus),
-                         p->projection,
-                         p->factor,
-                         p->sort_value,
-                         p->do_warnings,
-                         p->min_x_proj,
-                         p->max_x_proj,
-                         p->min_y_proj,
-                         p->max_y_proj,
-                         p->min_z_proj,
-                         p->max_z_proj,
-                         p->surface_hiding_value);
-  }
-  else
-  {
- 
+     string s = (do_metafont) ? "endchar;" : "endfig;";
 
-     cerr_strm << thread_name 
-               << "WARNING!  In `Scan_Parse::output_command_func':"
-               << endl 
-               << "`local_do_metafont' and `local_do_metapost' are both `false'."
-               << endl
-               << "Not calling `Picture::output'.  Continuing.";
-       
-     log_message(cerr_strm);
-     cerr_message(cerr_strm);
-     cerr_strm.str("");
-
-  } /* |else| */
-
-@ !! TODO:  Add code to account for other output formats.
-\initials{LDF 2022.04.13.}
-
-@<Define |Scan_Parse| functions@>=
-
-   if (is_endfig_or_endchar)
-   {
-     if (metafont_output && output_command_arg == ENDCHAR_COMMAND)
-        *(p->scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) 
-              << "endchar;" << endl << endl << flush;
-
-     if (metapost_output && output_command_arg == ENDFIG_COMMAND)
-        *(p->scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) 
-              << "endfig;" << endl << endl << flush;
+     *(p->scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) 
+           << s << endl << endl << flush;
    }
 
-@
-@<Define |Scan_Parse| functions@>=
-
 #ifdef HAVE_PTHREAD_H  
-   if (metafont_output)
-      p->scanner_node->out[Run_State::METAFONT_RS]->unlock();
-   else
-      p->scanner_node->out[Run_State::METAPOST_RS]->unlock();
+   p->scanner_node->out[Run_State::METAPOST_RS]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
     }     /* |else | (|!multithread_output|)  */
@@ -3242,16 +2846,14 @@ to |Picture::output|.
 
 #if DEBUG_COMPILE
   if (DEBUG)
-  {
-    cerr_strm << "Exiting `Scan_Parse::output_command_func'."
-              << endl;
-    cerr_message(cerr_strm);
-    cerr_strm.str("");
-    
-  }
+    {
+      cerr_strm << "Exiting `Scan_Parse::output_command_func'."
+                << endl;
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
 #endif /* |DEBUG_COMPILE|  */@; 
-
-cerr << "Error after here 3." << endl; 
 
   return 0;
 
@@ -4751,7 +4353,6 @@ If either attempt fails, try to unlock the mutexes we've already locked.
 @<Define |Scan_Parse| functions@>=
 
 #ifdef HAVE_PTHREAD_H  
-
   status = t->lock();
 
   if (status != 0)
@@ -4849,20 +4450,6 @@ If any attempt fails, try to unlock the mutexes that are still locked.
 
     } /* |if (status != 0)| */
 
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-      cerr_strm << thread_name 
-                << "In `Scan_Parse::assign_picture_simple()':"
-                << endl << "`t->unlock()' succeeded.";
-
-      log_message(cerr_strm); 
-      cerr_message(cerr_strm, error_stop_value); 
-      cerr_strm.str("");
-      
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
 #endif 
 
 @q ****** (6) |s->unlock|.@>
@@ -4899,20 +4486,6 @@ If any attempt fails, try to unlock the mutexes that are still locked.
       return ivp;
 
     } /* |if (status != 0)| */
-
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-      cerr_strm << thread_name 
-                << "In `Scan_Parse::assign_picture_simple()':"
-                << endl << "`s->unlock()' succeeded.";
-
-      log_message(cerr_strm); 
-      cerr_message(cerr_strm, error_stop_value); 
-      cerr_strm.str("");
-      
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
 
 #endif 
  
@@ -5285,7 +4858,6 @@ If either attempt fails, try to unlock the mutexes we've already locked.
 @<Define |Scan_Parse| functions@>=
 
 #ifdef HAVE_PTHREAD_H  
-
   status = s->lock();
 
   if (status != 0)
@@ -5336,7 +4908,6 @@ If either attempt fails, try to unlock the mutexes we've already locked.
 @<Define |Scan_Parse| functions@>=
 
 #ifdef HAVE_PTHREAD_H  
-
   status = t->lock();
 
   if (status != 0)
@@ -11882,22 +11453,14 @@ plane_assignment_func(void* entry, Triangle* c, void* parameter = 0);
 
 template <class C>
 int
-Scan_Parse::show_func(C* c, string text, void* parameter, int with_connectors, bool delete_object)
+Scan_Parse::show_func(C* c, string text, void* parameter)
 {
-@q **** (4) @>
-
-#if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
-
-   if (DEBUG)
-   { 
-       cerr << "Entering `Scan_Parse::show_func'." << endl;
-   }  
-
-#endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4) Preliminaries.@>   
 
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
 
@@ -11920,68 +11483,30 @@ Scan_Parse::show_func(C* c, string text, void* parameter, int with_connectors, b
 #if DEBUG_COMPILE
   if (DEBUG)
         {
-           cerr_strm << thread_name << "Entering `Scan_Parse::show_func'.";
-
-           cerr_strm << endl << "text == " << text;
-
+           cerr_strm << thread_name << "Entering `Scan_Parse::show_func().'";
            cerr_message(cerr_strm);
            cerr_strm.str("");
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
+@q **** (4).@>
 
    string s;
 
    cerr_strm << thread_name << ">> ";
 
-@q **** (4) BUG FIX.  @>
-
-@ BUG FIX:  Now handling |Pictures| specially.  Without the code in the
-conditional in this section, the program either blocks or crashes at the end
-of the run or both.
-\par
-It might be neater to pass the type of the template argument |C *c| as another argument
-or to make a specialization of this function for |Pictures|.  However, this solution works.
-\initials{LDF 2022.04.15.}
-
-\LOG
-\initials{LDF 2022.04.15.}
-Added this section.  
-\ENDLOG 
-@<Define |Scan_Parse| template functions@>=
-
-   if (text == "picture" || text == "Picture" || text == "PICTURE")
-   {
-
-       C* p = create_new<C>(*c);
-       *p = *c;
-       p->show(text);
-
-       delete p;
-       p = 0;
-
-       return 0;
-   }
-
-@q **** (4).@>
-@
-@<Define |Scan_Parse| template functions@>=
-
    if (c)
-   {
+      {
+          text += ":";
+          c->show(text);
+          cerr_message(cerr_strm);
+          log_message(cerr_strm);
+          cerr_strm.str("");
 
-       text += ":";
-       c->show(text);
-
-       cerr_message(cerr_strm);
-       log_message(cerr_strm);
-       cerr_strm.str("");
-
-   }  /* |if (p)|  */
+      }  /* |if (p)|  */
 
 else  /* |!c|  */
      {
-
         cerr_strm << "(unknown " << text << ")";
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -11989,24 +11514,7 @@ else  /* |!c|  */
 
      }  /* |else| (|!c|)  */
 
-     if (text != "picture")
-     {
-        delete c;
-        c = 0;
-
-     }
-
-#if DEBUG_COMPILE
-
-   if (DEBUG)
-   { 
-       cerr << "Exiting `Scan_Parse::show_func' successfully with return value 0." 
-            << endl;
-   }  
-
-#endif /* |DEBUG_COMPILE|  */@; 
-
-     return 0;
+   return 0;
 
 }  /* End of |Scan_Parse::show_func| definition.  */
 
@@ -12056,148 +11564,148 @@ Added declarations for versions with
 @<Declare |Scan_Parse| functions@>=
 
 int
-show_func(Matrix* m, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Matrix* m, string text = "", void* parameter = 0);
 
 int
-show_func(Transform* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Transform* c, string text = "", void* parameter = 0);
 
 int
-show_func(Color* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Color* c, string text = "", void* parameter = 0);
 
 int
-show_func(Dash_Pattern* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Dash_Pattern* c, string text = "", void* parameter = 0);
 
 int
-show_func(Pen* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Pen* c, string text = "", void* parameter = 0);
 
 int
-show_func(Picture* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Picture* c, string text = "", void* parameter = 0);
 
 int
-show_func(Glyph* c, string text = "glyph", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Glyph* c, string text = "glyph", void* parameter = 0);
 
 int
-show_func(Plane* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Plane* c, string text = "", void* parameter = 0);
 
 int
-show_func(Origami_Figure* c, string text = "origami_figure", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Origami_Figure* c, string text = "origami_figure", void* parameter = 0);
 
 int
-show_func(Focus* c, string text = "focus", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Focus* c, string text = "focus", void* parameter = 0);
 
 int
-show_func(Point* c, string text = "point", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Point* c, string text = "point", void* parameter = 0);
 
 int
-show_func(Bool_Point* c, string text = "bool_point", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Bool_Point* c, string text = "bool_point", void* parameter = 0);
 
 int
-show_func(Path* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Path* c, string text = "", void* parameter = 0);
 
 int
-show_func(Ellipse* c, string text = "ellipse", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Ellipse* c, string text = "ellipse", void* parameter = 0);
 
 int
-show_func(Parabola* c, string text = "parabola", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Parabola* c, string text = "parabola", void* parameter = 0);
 
 int
-show_func(Hyperbola* c, string text = "hyperbola", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Hyperbola* c, string text = "hyperbola", void* parameter = 0);
 
 int
-show_func(Circle* c, string text = "circle", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Circle* c, string text = "circle", void* parameter = 0);
 
 int
-show_func(Arc* a, string text = "arc", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Arc* a, string text = "arc", void* parameter = 0);
 
 int
-show_func(Polygon* c, string text = "polygon", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Polygon* c, string text = "polygon", void* parameter = 0);
 
 int
-show_func(Reg_Polygon* c, string text = "reg_polygon", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Reg_Polygon* c, string text = "reg_polygon", void* parameter = 0);
 
 int
-show_func(Rectangle* c, string text = "rectangle", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Rectangle* c, string text = "rectangle", void* parameter = 0);
 
 int
-show_func(Triangle* c, string text = "triangle", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Triangle* c, string text = "triangle", void* parameter = 0);
 
 int
-show_func(Cuboid* c, string text = "cuboid", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Cuboid* c, string text = "cuboid", void* parameter = 0);
 
 int
-show_func(Cylinder* c, string text = "cylinder", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Cylinder* c, string text = "cylinder", void* parameter = 0);
 
 int
-show_func(Sphere* s, string text = "sphere", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Sphere* s, string text = "sphere", void* parameter = 0);
 
 int
-show_func(Sphere_Development* s, string text = "sphere", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Sphere_Development* s, string text = "sphere", void* parameter = 0);
 
 int
-show_func(Polyhedron* c, string text = "polyhedron", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Polyhedron* c, string text = "polyhedron", void* parameter = 0);
 
 int
-show_func(Ellipsoid* c, string text = "ellipsoid", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Ellipsoid* c, string text = "ellipsoid", void* parameter = 0);
 
 int
-show_func(Cone* c, string text = "cone", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Cone* c, string text = "cone", void* parameter = 0);
 
 int
-show_func(Helix* c, string text = "helix", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Helix* c, string text = "helix", void* parameter = 0);
 
 int
-show_func(Nurb* c, string text = "nurb", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Nurb* c, string text = "nurb", void* parameter = 0);
 
 int
-show_func(Ellipse_Slice* c, string text = "ellipse_slice", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Ellipse_Slice* c, string text = "ellipse_slice", void* parameter = 0);
 
 int
-show_func(Circle_Slice* c, string text = "circle_slice", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+show_func(Circle_Slice* c, string text = "circle_slice", void* parameter = 0);
 
 int
 show_func(Polyhedron_Slice* c, 
                       string text = "polyhedron_slice", 
-                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+                      void* parameter = 0);
 
 int
 show_func(Pointer_Vector<Matrix>* c, 
           string text = "matrix_vector", 
-          void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+          void* parameter = 0);
 
 int
 show_func(Pointer_Vector<Ellipse>* c, 
                       string text = "ellipse_vector", 
-                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+                      void* parameter = 0);
 
 int
 show_func(Pointer_Vector<Parabola>* c, 
                       string text = "parabola_vector", 
-                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+                      void* parameter = 0);
 
 int
 show_func(Pointer_Vector<Hyperbola>* c, 
                       string text = "hyperbola_vector", 
-                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+                      void* parameter = 0);
 
 int
 show_func(Pointer_Vector<Ellipsoid>* c, 
                       string text = "ellipsoid_vector", 
-                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+                      void* parameter = 0);
 
 int
 show_func(Pointer_Vector<Sphere>* s, 
                       string text = "sphere_vector", 
-                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+                      void* parameter = 0);
 
 int
 show_func(Pointer_Vector<Sphere_Development>* s, 
                       string text = "sphere_development_vector", 
-                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+                      void* parameter = 0);
 
 int
 show_func(Pointer_Vector<Cuboid>* c, 
                       string text = "Cuboid_vector", 
-                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
+                      void* parameter = 0);
 
 @q *** (3) |ellipsoid_like_plane_intersection_func|.@> 
 @*2  {\bf ellipsoid\_like\_plane\_intersection\_func}.

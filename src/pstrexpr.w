@@ -91,8 +91,6 @@ This condition occurs legitimately when one tries to show an
 
   @<Common declarations for rules@>@; 
 
-  string* s = new string;
-
 #if DEBUG_COMPILE
    DEBUG = false; /* |true| */ @; 
    if (DEBUG)
@@ -109,28 +107,21 @@ This condition occurs legitimately when one tries to show an
    entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
    if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
-   {
-         cerr_strm << thread_name 
-                   << "WARNING!  In `string_primary --> string_variable':"
-                   << endl 
-                   << "`entry' or `entry->object' is NULL.  Creating and returning an empty `string' "
-                   << "and continuing.";
+      {
 
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-  
-         *s = "";
+         @=$$@> = static_cast<void*>(0);
 
-   } /* |if (entry == 0 || entry->object == 0)|  */
+      } /* |if (entry == 0 || entry->object == 0)|  */
 
    else /* |entry != 0 && entry->object != 0|  */@;
-   {
-      *s = *static_cast<string*>(entry->object); 
+      {
+         string* s = new string;
+  
+         *s = *static_cast<string*>(entry->object); 
+  
+         @=$$@> = static_cast<void*>(s);
 
-   }  /* |else| (|entry != 0 && entry->object != 0|)  */@;
-
-   @=$$@> = static_cast<void*>(s);
+      }  /* |else| (|entry != 0 && entry->object != 0|)  */@;
 
 };
 

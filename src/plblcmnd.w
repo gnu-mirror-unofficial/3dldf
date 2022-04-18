@@ -64,15 +64,15 @@ Added this type declaration.
 @q **** (4) LEFT_PARENTHESIS string_expression               @>
 @q **** (4) COMMA point_expression RIGHT_PARENTHESIS         @>
 @q **** (4) transformer_optional                             @>   
-@q **** (4) with_color_optional with_text_color_optional     @>   
-@q **** (4) with_dot_color_optional on_picture_optional      @>
+@q **** (4) with_text_color_optional with_dot_color_optional @>   
+@q **** (4) on_picture_optional                              @>
 
 @*3 \§label command> $\longrightarrow$ \§label or dotlabel>
 \§label suffix>
 \.{LEFT\_PARENTHESIS} \§string expression>
 \.{COMMA} \§point expression> \.{RIGHT\_PARENTHESIS}
 \§with transformer optional>
-\§with color optional> \§with text color optional> \§with dot color optional>
+\§with text color optional> \§with dot color optional>
 \§on picture optional>.
 
 \LOG
@@ -92,9 +92,6 @@ which is defined in \filename{scanprsf.web}.
 Added \§with text color optional> and \§with dot color optional>.
 Passing the pointers to |Color| that these non-terminal symbols
 reference, or 0, on to |Scan_Parse::label_point_command|.
-
-\initials{LDF 2022.04.11.}
-Added \§with color optional>.
 \ENDLOG 
 
 @q ***** (5) Definition.@>
@@ -106,33 +103,9 @@ Added \§with color optional>.
 @=LEFT_PARENTHESIS string_expression @>@/
 @=COMMA point_expression RIGHT_PARENTHESIS @>@/
 @=transformer_optional@>@/
-@=with_color_optional with_text_color_optional with_dot_color_optional@>@/ 
+@=with_text_color_optional with_dot_color_optional@>@/ 
 @=on_picture_optional@>@/
 {
-
-    Color *c          = static_cast<Color*>(@=$9@>);
-    Color *text_color = static_cast<Color*>(@=$10@>);
-    Color *dot_color  = static_cast<Color*>(@=$11@>);
-
-    if (c != 0) 
-    {
-        if (text_color != 0 && dot_color != 0)
-        {
-           delete c;
-           c = 0;
-        }   
-        else if (text_color == 0 && dot_color == 0)
-        {
-            text_color = c;
-            dot_color = create_new<Color>(c);
-        }    
-
-        else if (text_color == 0 && dot_color != 0)
-           text_color = c;
-
-        else if (text_color != 0 && dot_color == 0)
-           dot_color = c;
-    }
 
     label_point_command(static_cast<Scanner_Node>(parameter),
                         @=$1@>, 
@@ -140,9 +113,9 @@ Added \§with color optional>.
                         static_cast<string*>(@=$4@>),
                         static_cast<Point*>(@=$6@>),
                         static_cast<Transform*>(@=$8@>),
-                        text_color,
-                        dot_color,
-                        static_cast<Id_Map_Entry_Node>(@=$12@>)); 
+                        static_cast<Color*>(@=$9@>),
+                        static_cast<Color*>(@=$10@>),
+                        static_cast<Id_Map_Entry_Node>(@=$11@>)); 
 
 };
 
@@ -159,10 +132,6 @@ Added \§with color optional>.
 \§with text color optional> \§with dot color optional>
 \§on picture optional>.
 
-!! TODO:  \initials{LDF 2022.04.11.}  Add \§transformer optional>.
-Add \§with color optional> to the rules below.  They aren't used very
-often.
-
 \LOG
 \initials{LDF 2004.10.09.}
 Added this rule.
@@ -172,9 +141,6 @@ Changed \.{INTEGER} to \§numeric expression>.
 
 \initials{LDF 2005.01.31.}
 Added \§with text color optional> and \§with dot color optional>.
-
-\initials{LDF 2022.04.11.}
-Added \§with color optional>.
 \ENDLOG 
 
 @q ***** (5) Definition.@>
@@ -185,7 +151,7 @@ Added \§with color optional>.
 @=label_command: label_or_dotlabel label_suffix @>@/
 @=LEFT_PARENTHESIS numeric_expression @>@/
 @=COMMA point_expression RIGHT_PARENTHESIS @>@/
-@=with_color_optional with_text_color_optional with_dot_color_optional@>@/
+@=with_text_color_optional with_dot_color_optional@>@/
 @=on_picture_optional@>@/
 {
 
@@ -199,39 +165,15 @@ Added \§with color optional>.
 
   *s = label_strm.str();
 
-  Color *c          = static_cast<Color*>(@=$9@>);
-  Color *text_color = static_cast<Color*>(@=$9@>);
-  Color *dot_color  = static_cast<Color*>(@=$10@>);
-
-  if (c != 0) 
-  {
-      if (text_color != 0 && dot_color != 0)
-      {
-         delete c;
-         c = 0;
-      }   
-      else if (text_color == 0 && dot_color == 0)
-      {
-          text_color = c;
-          dot_color = create_new<Color>(c);
-      }    
-
-      else if (text_color == 0 && dot_color != 0)
-         text_color = c;
-
-      else if (text_color != 0 && dot_color == 0)
-         dot_color = c;
-  }
-
   label_point_command(static_cast<Scanner_Node>(parameter),
                       @=$1@>, 
                       @=$2@>, 
                       s,
                       static_cast<Point*>(@=$6@>),
                       0,
-                      text_color,
-                      dot_color,
-                      static_cast<Id_Map_Entry_Node>(@=$11@>)); 
+                      static_cast<Color*>(@=$8@>),
+                      static_cast<Color*>(@=$9@>),
+                      static_cast<Id_Map_Entry_Node>(@=$10@>)); 
 };
 
 @q **** (4) label_command --> label_or_dotlabel label_suffix     @>
@@ -1493,59 +1435,6 @@ Added this rule.
 
 @<Define rules@>=
 @=with_dot_color_optional: WITH_DOT_COLOR color_expression@>
-{
-
-  @=$$@> = static_cast<void*>(@=$2@>);
-
-};
-
-@q * (1) with_color_optional.@> 
-@* \§with color optional>.
-\initials{LDF 2005.01.29.}
-
-\LOG
-\initials{LDF 2005.01.29.}
-Added this type declaration.
-\ENDLOG
-
-@<Type declarations for non-terminal symbols@>=
-@=%type <pointer_value> with_color_optional@>
-
-@q ** (2) with_color_optional --> EMPTY.@> 
-@*1 \§with color optional> $\longrightarrow$ \.{EMPTY}.
-\initials{LDF 2005.01.29.}
-
-\LOG
-\initials{LDF 2005.01.29.}
-Added this rule.
-\ENDLOG
-
-@q *** (3) Definition.@> 
-
-@<Define rules@>=
-@=with_color_optional: /* Empty  */@>
-{
-
-  @=$$@> = static_cast<void*>(0);
-
-};
-
-@q ** (2) with_color_optional -->     @> 
-@q ** (2) WITH_COLOR color_expression.@> 
-
-@*1 \§with color optional> $\longrightarrow$ 
-\.{WITH\_DOT\_COLOR} \§color expression>.
-\initials{LDF 2005.01.29.}
-
-\LOG
-\initials{LDF 2005.01.29.}
-Added this rule.
-\ENDLOG
-
-@q *** (3) Definition.@> 
-
-@<Define rules@>=
-@=with_color_optional: WITH_COLOR color_expression@>
 {
 
   @=$$@> = static_cast<void*>(@=$2@>);

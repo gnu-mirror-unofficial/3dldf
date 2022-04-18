@@ -4496,7 +4496,7 @@ Scan_Parse::drawing_command_glyph(Scanner_Node scanner_node,
 {
 @q **** (4) @>
 
-  bool DEBUG = false; /* |true| */ 
+  bool DEBUG = true; /* |false| */ 
 
   stringstream cerr_strm;
 
@@ -9651,8 +9651,8 @@ log_message(cerr_strm);
 
 }  /* |Scan_Parse::for_suffixes_internal_func|  */
 
-@q ** (2) |verbatim_func|.@>
-@*1 {\bf verbatim\_func}.
+@q ** (2) |verbatim_metapost_func|.@>
+@*1 {\bf verbatim\_metapost\_func}.
 
 \LOG
 \initials{LDF 2004.12.13.}
@@ -9664,9 +9664,8 @@ Added this function.
 @
 @<Define |Scan_Parse| functions@>=
 int
-Scan_Parse::verbatim_func(Scanner_Node scanner_node,  
-                          string *s,
-                          unsigned int verbatim_command_arg)
+Scan_Parse::verbatim_metapost_func(Scanner_Node scanner_node, 
+                                   const string* s)
 {
 
 @q ***** (5) Preliminaries.@>   
@@ -9694,32 +9693,15 @@ Scan_Parse::verbatim_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name
-                << "Entering `Scan_Parse::verbatim_func'." << endl
-                << "`verbatim_command_arg' == " << verbatim_command_arg;
-
-      if (verbatim_command_arg == VERBATIM_METAFONT_COMMAND)
-         cerr_strm << " == `VERBATIM_METAFONT_COMMAND'." << endl; 
-      else if (verbatim_command_arg == VERBATIM_METAPOST_COMMAND)
-         cerr_strm << " == `VERBATIM_METAPOST_COMMAND'." << endl; 
-      else if (verbatim_command_arg == VERBATIM_TEX_COMMAND)
-         cerr_strm << " == `VERBATIM_TEX_COMMAND'.";
-
+                << "Entering `Scan_Parse::verbatim_metapost_func'."
+                << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
-
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
    int status;
    bool multithread_output  = scanner_node->run_state.multithread_output;
-
-   bool local_do_metafont = (metafont_output && verbatim_command_arg & VERBATIM_METAFONT_COMMAND)
-      ? true : false;
-
-   bool local_do_metapost = 
-      (metapost_output && (verbatim_command_arg & VERBATIM_METAPOST_COMMAND
-                           || verbatim_command_arg & VERBATIM_TEX_COMMAND))
-      ? true : false;
 
 @q ***** (5) If we're using multithreaded output,       @>
 @q ***** (5) @>
@@ -9749,7 +9731,7 @@ and increment |scanner_node->output_pending.value_1|.
   if (DEBUG)
     {
 
-      cerr_strm << thread_name << "In `Scan_Parse::verbatim_func':"
+      cerr_strm << thread_name << "In `Scan_Parse::verbatim_metapost_func':"
                 << endl
                   << "About to call `scanner_node->output_pending.lock()'.";
       cerr_message(cerr_strm);
@@ -9769,7 +9751,7 @@ and increment |scanner_node->output_pending.value_1|.
       if (status != 0)
         {
           cerr_strm << thread_name 
-                    << "ERROR! In `Scan_Parse::verbatim_func':"
+                    << "ERROR! In `Scan_Parse::verbatim_metapost_func':"
                     << endl
                     << "`scanner_node->output_pending.lock()' failed. "
                     << "Not writing to output file."
@@ -9796,7 +9778,7 @@ and increment |scanner_node->output_pending.value_1|.
           if (DEBUG)
             {
               cerr_strm << thread_name 
-                        << "In `Scan_Parse::verbatim_func':"
+                        << "In `Scan_Parse::verbatim_metapost_func':"
                         << endl 
                         << "`scanner_node->output_pending.lock()' succeeded!";
 
@@ -9820,7 +9802,7 @@ and increment |scanner_node->output_pending.value_1|.
         {
 
           cerr_strm << thread_name 
-                    << "In `Scan_Parse::verbatim_func':"
+                    << "In `Scan_Parse::verbatim_metapost_func':"
                     << endl << "Output pending.  Going to sleep.";
 
           log_message(cerr_strm); 
@@ -9846,7 +9828,7 @@ and increment |scanner_node->output_pending.value_1|.
   if (status == ETIMEDOUT)
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::verbatim_func':" 
+                << "ERROR! In `Scan_Parse::verbatim_metapost_func':" 
                 << endl
                 << "`scanner_node->output_pending.timedwait(&timeout)' "
                 << "timed out after " << timeout.tv_sec << "seconds." 
@@ -9877,7 +9859,7 @@ and increment |scanner_node->output_pending.value_1|.
     {
 
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::verbatim_func':"
+                << "ERROR! In `Scan_Parse::verbatim_metapost_func':"
                 << endl << "`scanner_node->output_pending.timedwait()' failed. "
                 << "Not performing output." << endl << "Will try to unlock "
                 << "`scanner_node->output_pending' and "
@@ -9898,7 +9880,7 @@ and increment |scanner_node->output_pending.value_1|.
      {
 
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::verbatim_func':"
+                 << "In `Scan_Parse::verbatim_metapost_func':"
                  << endl << "`scanner_node->output_pending.timedwait()' "
                  << "succeeded.";
 
@@ -9915,7 +9897,7 @@ and increment |scanner_node->output_pending.value_1|.
             {
 
               cerr_strm << thread_name 
-                        << "`Scan_Parse::verbatim_func':"
+                        << "`Scan_Parse::verbatim_metapost_func':"
                         << endl << "Output not pending. "
                         << "Setting `output_pending->value' to `true' "
                         << "and continuing.";
@@ -9939,22 +9921,14 @@ and increment |scanner_node->output_pending.value_1|.
 @<Define |Scan_Parse| functions@>= 
 
 #ifdef HAVE_PTHREAD_H  
-   if (local_do_metafont)
-      scanner_node->out[Run_State::METAFONT_RS]->lock();
-   if (local_do_metapost)
-      scanner_node->out[Run_State::METAPOST_RS]->lock();
+   scanner_node->out[Run_State::METAPOST_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
-
-   if (local_do_metafont)    
-      *(scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) << *s << endl << flush;
-   if (local_do_metapost)
-      *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s << endl << flush;
+  
+     *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) 
+           << *s << endl << flush;
 
 #ifdef HAVE_PTHREAD_H  
-   if (local_do_metafont)
-      scanner_node->out[Run_State::METAFONT_RS]->unlock();
-   if (local_do_metapost)
-      scanner_node->out[Run_State::METAPOST_RS]->unlock();
+   scanner_node->out[Run_State::METAPOST_RS]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
    scanner_node->output_pending.value_0 = false;
@@ -9978,7 +9952,7 @@ and increment |scanner_node->output_pending.value_1|.
       if (status != 0)
         {
           cerr_strm << thread_name 
-                    << "ERROR! In `Scan_Parse::verbatim_func':"
+                    << "ERROR! In `Scan_Parse::verbatim_metapost_func':"
                     << endl
                     << "`scanner_node->output_pending.unlock()' failed. "
                     << "Exiting function with return value 1.";
@@ -10002,7 +9976,7 @@ and increment |scanner_node->output_pending.value_1|.
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr_strm << thread_name << "In `Scan_Parse::verbatim_func':"
+              cerr_strm << thread_name << "In `Scan_Parse::verbatim_metapost_func':"
                         << endl
                         << "`scanner_node->output_pending.unlock()' succeeded!";
               cerr_message(cerr_strm);
@@ -10026,13 +10000,14 @@ and increment |scanner_node->output_pending.value_1|.
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
   else  /* (|!multithread_output|)  */
+
     {
 
 #if DEBUG_COMPILE
    if (DEBUG)
      {
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::verbatim_func':"
+                 << "In `Scan_Parse::verbatim_metapost_func':"
                  << endl << "Non-multithreaded output.";
        
        log_message(cerr_strm);
@@ -10043,40 +10018,14 @@ and increment |scanner_node->output_pending.value_1|.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #ifdef HAVE_PTHREAD_H  
-   if (local_do_metafont)
-      scanner_node->out[Run_State::METAFONT_RS]->lock();
-   if (local_do_metapost)
-      scanner_node->out[Run_State::METAPOST_RS]->lock();
+   scanner_node->out[Run_State::METAPOST_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
-       
-   if (local_do_metafont)
-   {
-      *(scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) << *s << endl << flush;
-   }
-   if (local_do_metapost)
-   {
-
-
-      if (verbatim_command_arg == VERBATIM_TEX_COMMAND)
-      {
-         *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << "verbatimtex ";
-         if (s->size() > 0 && s->back() == ';')
-           s->erase(s->size() - 1);
-      }
-       
-      *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s;
-
-      if (verbatim_command_arg == VERBATIM_TEX_COMMAND)
-         *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << " etex;";
-
-      *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << endl << flush;
-   }
+  
+     *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) 
+           << *s << endl << flush;
 
 #ifdef HAVE_PTHREAD_H  
-   if (local_do_metafont)
-      scanner_node->out[Run_State::METAFONT_RS]->unlock();
-   if (local_do_metapost)
-      scanner_node->out[Run_State::METAPOST_RS]->unlock();
+   scanner_node->out[Run_State::METAPOST_RS]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
     }     /* |else | (|!multithread_output|)  */
@@ -10090,18 +10039,19 @@ and increment |scanner_node->output_pending.value_1|.
 
 #if DEBUG_COMPILE
   if (DEBUG)
-  {
-    cerr_strm << "Exiting `Scan_Parse::verbatim_func'."
-              << endl;
-    cerr_message(cerr_strm);
-    cerr_strm.str("");
-    
-  }
+    {
+      cerr_strm << "Exiting `Scan_Parse::verbatim_metapost_func'."
+                << endl;
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
 #endif /* |DEBUG_COMPILE|  */@; 
 
   return 0;
 
-}  /* End of |Scan_Parse::verbatim_func| definition.  */
+}  /* End of |Scan_Parse::verbatim_metapost_func|
+     definition.  */
 
 @q ** (2) |end_group_func|.@>
 @*1 {\bf end\_group\_func}.
@@ -14356,19 +14306,8 @@ Scan_Parse::clip_to_func(void* arg1, void* parameter)
 
 @q **** (4) @>   
 
-   Output_Struct* os;
-   ofstream* out_stream;
-
-   if (metafont_output)
-   {
-      os = scanner_node->out[Run_State::METAFONT_RS];
-      out_stream  = static_cast<ofstream*>(os->stream_ptr);
-   }
-   else
-   {
-      os = scanner_node->out[Run_State::METAPOST_RS];
-      out_stream  = static_cast<ofstream*>(os->stream_ptr);
-   }
+   Output_Struct* os = scanner_node->out[Run_State::METAPOST_RS];
+   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
    Path* p = static_cast<Path*>(arg1); 
 
@@ -17661,7 +17600,7 @@ Scan_Parse::plot_star_func(Star *s, Point* p, real radius, Scanner_Node scanner_
   stringstream cerr_strm;                                                          
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
   if (DEBUG) 
     {
       cerr_strm << thread_name << "Entering `Scan_Parse::plot_star_func'."

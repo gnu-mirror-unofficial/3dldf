@@ -251,7 +251,6 @@ Scanner_Type::create(string str,
 #endif
 
 
-
 @q ** (2) Set up input and output streams.@>      
 
 @*1  Set up input and output streams.
@@ -265,13 +264,11 @@ Scanner_Type::create(string str,
   string in_filename;
 
   string out_filename_metapost;
-  string out_filename_metafont;
   string out_filename_png;
   string out_filename_libplot;
   string out_filename;
   ofstream* out_file; 
   ofstream* out_file_metapost; 
-  ofstream* out_file_metafont; 
   ofstream* out_file_png; 
   ofstream* out_file_libplot; 
 
@@ -282,7 +279,7 @@ Scanner_Type::create(string str,
 
 @<Define |Scanner_Type::create|@>=
 
-  if (str != "")
+ if (str != "")
   {
 
     in_file = new ifstream;
@@ -394,13 +391,11 @@ Added this section.
       @<Check |in_filename|, return 0 upon failure@>@;
 
 @q **** (4)    @>          
-
 @ Now set the output file names.  There might be multiple output
 files, if more than one output format is desired.  Currently, only
 MetaPost output is supported, but I plan to support PNG output and one
 or more of the formats supported by the GNU plotutils package.
 \initials{LDF 2004.03.28.}
-
 @<Define |Scanner_Type::create|@>=
 
   string out_filename_base = str;
@@ -417,61 +412,39 @@ or more of the formats supported by the GNU plotutils package.
 
 #if DEBUG_COMPILE
   if (DEBUG)   
-  {
-      cerr << "out_filename_base after erase == "
-           << out_filename_base << endl;
- 
-     cerr << "r.do_output[Run_State::METAPOST_RS] == " << r.do_output[Run_State::METAPOST_RS] << endl;
-     cerr << "r.do_output[Run_State::METAFONT_RS] == " << r.do_output[Run_State::METAFONT_RS] << endl;
-
-  }
-#endif 
+    cerr << "out_filename_base after erase == "
+         << out_filename_base << endl;
+#endif
 
   if (r.do_output[Run_State::METAPOST_RS])
-  {
-    out_file = 0;
-    out_filename_metapost = out_filename_base + ".mp";
-    out_filename = out_filename_metapost;
-    @<Check |out_filename|, return 0 upon failure@>@;
-    out_file_metapost = out_file;
-    out_file = 0;
-  }  
-
-  if (r.do_output[Run_State::METAFONT_RS])
-  {
-
-    out_file = 0;
-    out_filename_metafont = out_filename_base + ".mf";
-    out_filename = out_filename_metafont;
-
-#if 0 
-      cerr << "out_filename == " << out_filename << endl;
-#endif 
-
-    @<Check |out_filename|, return 0 upon failure@>@;
-    out_file_metafont = out_file;
-    out_file = 0;
-  }  
+    {
+      out_file = 0;
+      out_filename_metapost = out_filename_base + ".mp";
+      out_filename = out_filename_metapost;
+      @<Check |out_filename|, return 0 upon failure@>@;
+      out_file_metapost = out_file;
+      out_file = 0;
+    }  
 
   if (r.do_output[Run_State::PNG])
-  {
-    out_file = 0;
-    out_filename_png = out_filename_base + ".png";
-    out_filename = out_filename_png;
-    @<Check |out_filename|, return 0 upon failure@>@;
-    out_file_png = out_file;
-    out_file = 0;
-  }
+    {
+      out_file = 0;
+      out_filename_png = out_filename_base + ".png";
+      out_filename = out_filename_png;
+      @<Check |out_filename|, return 0 upon failure@>@;
+      out_file_png = out_file;
+      out_file = 0;
+    }
 
   if (r.do_output[Run_State::LIBPLOT])
-  {
-    out_file = 0;
-    out_filename_libplot = out_filename_base + ".lpt";
-    out_filename = out_filename_libplot;
-    @<Check |out_filename|, return 0 upon failure@>@;
-    out_file_libplot = out_file;
-    out_file = 0;
-  }
+    {
+      out_file = 0;
+      out_filename_libplot = out_filename_base + ".lpt";
+      out_filename = out_filename_libplot;
+      @<Check |out_filename|, return 0 upon failure@>@;
+      out_file_libplot = out_file;
+      out_file = 0;
+    }
 
   } /* if (str != "")  */
 
@@ -487,19 +460,54 @@ This code works, but when I try to use it a memory fault error occurs in
 |yyparse|.  Currently, it's too hard to debug because it takes so long for
 \filename{parser.c++} to compile.  I'll try to debug it once I've removed more
 code from the parser rules and put it into functions.
-
-\initials{LDF 2022.04.14.}
-Removed commented-out code.
 \ENDLOG 
 
 @<Define |Scanner_Type::create|@>=
 
+/* LDF 2004.09.18.   Working on this.  */
+
   else /* (|str == ""|)  */
-  {
+    {
 
       in_stream = &cin;
 
-  } /* |else | (|str == ""|)  */
+#if 0 /* LDF 2004.09.18.  Commented-out.  */
+
+      if (r.do_output[Run_State::METAPOST_RS])
+        {
+          out_file = 0;
+
+          out_filename_metapost = "3dldfput.mp";
+          out_filename = out_filename_metapost;
+
+          @<Check |out_filename|, return 0 upon failure@>@;
+          out_file_metapost = out_file;
+          out_file = 0;
+        }  
+
+      if (r.do_output[Run_State::PNG])
+        {
+          out_file = 0;
+          out_filename_png = "3dldfput.png";
+          out_filename = out_filename_png;
+          @<Check |out_filename|, return 0 upon failure@>@;
+          out_file_png = out_file;
+          out_file = 0;
+        }
+
+      if (r.do_output[Run_State::LIBPLOT])
+        {
+          out_file = 0;
+          out_filename_libplot = "3dldfput.lpt";
+          out_filename = out_filename_libplot;
+          @<Check |out_filename|, return 0 upon failure@>@;
+          out_file_libplot = out_file;
+          out_file = 0;
+        }
+
+#endif /* LDF 2004.09.18.  Commented-out.  */
+
+    } /* |else | (|str == ""|)  */
 
 @q **** (4) Success!  Allocate memory.  @>          
 
@@ -547,9 +555,6 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
 @<Define |Scanner_Type::create|@>=
 
   Scanner_Node scanner_node = new Scanner_Type;
-
-  scanner_node->beginfig_flag  = false;
-  scanner_node->beginchar_flag = false;
 
   scanner_node->run_state = r;
   scanner_node->thread_info = 0;
@@ -693,8 +698,6 @@ needed, because this function predefines variables for these |Colors|.
 
 @<Define |Scanner_Type::create|@>=
 
-@q ****** (6) @>
-
   time_t tt;
   tm *lt;
   tt = time(0);
@@ -703,11 +706,10 @@ needed, because this function predefines variables for these |Colors|.
   string datestamp(asctime(lt));
   datestamp.erase(datestamp.size() - 1); // Remove terminal line-feed.
 
-@q ****** (6) @>
-
-  if (scanner_node->in->type == Io_Struct::FILE_TYPE && r.do_output[Run_State::METAPOST_RS])
+  if (      scanner_node->in->type 
+         == Io_Struct::FILE_TYPE 
+      && r.do_output[Run_State::METAPOST_RS])
     {
-
       scanner_node->out[Run_State::METAPOST_RS] = new Output_Struct;
       scanner_node->out[Run_State::METAPOST_RS]->filename = out_filename_metapost;
       scanner_node->out[Run_State::METAPOST_RS]->stream_ptr
@@ -731,38 +733,6 @@ needed, because this function predefines variables for these |Colors|.
     }
   else
     scanner_node->out[Run_State::METAPOST_RS] = 0;
-
-@q ****** (6) @>
-
-  if (   scanner_node->in->type == Io_Struct::FILE_TYPE 
-      && r.do_output[Run_State::METAFONT_RS])
-    {
-
-      scanner_node->out[Run_State::METAFONT_RS] = new Output_Struct;
-      scanner_node->out[Run_State::METAFONT_RS]->filename = out_filename_metafont;
-      scanner_node->out[Run_State::METAFONT_RS]->stream_ptr
-        = static_cast<ostream*>(out_file_metafont);
-
-      scanner_node->out[Run_State::METAFONT_RS]->type = Io_Struct::FILE_TYPE;
-
-      out_file_metafont->setf(ios::fixed, ios::floatfield);
-  
-      *out_file_metafont << "%%%% " << out_filename_metafont << "." << endl
-                         << "%%%% Generated on " << datestamp << endl 
-                         << "%%%% from " << in_filename << " by "
-                         << "GNU 3DLDF " << VERSION_3DLDF << "."
-                         << endl << endl << flush; 
-
-#if 0 
-    Color::initialize_colors(out_file_metafont);
-#endif 
-      
-      out_file_metafont = 0;
-    }
-  else
-    scanner_node->out[Run_State::METAFONT_RS] = 0;
-
-@q ****** (6) @>
 
   if (   scanner_node->in->type 
       == Io_Struct::FILE_TYPE && r.do_output[Run_State::PNG])
@@ -948,9 +918,6 @@ section, except for |focus_ptr|, which already had it.
 
 \initials{LDF 2005.03.13.}
 Now setting |scanner_node->surface_hiding_value_ptr| to 0.
-
-\initials{LDF 2022.04.16.}
-Now setting |unsigned int output_format_val| to |0U|.
 \ENDLOG 
 
 @<Define |Scanner_Type::create|@>=
@@ -967,7 +934,6 @@ Now setting |unsigned int output_format_val| to |0U|.
    scanner_node->max_z_proj_ptr  = 0;
 
    scanner_node->surface_hiding_value_ptr = 0;
-   scanner_node->output_format_val        = 0U;
 
 @q *** (3) Pointers for |predicate_clause|. @>
 @*2 Pointers for |predicate_clause|.
@@ -3227,7 +3193,6 @@ Added calls to |add_entry| for |WITH_SURFACE_HIDING| and
 @<Define |Scanner_Type::create|@>=
 
   scanner_node->add_entry("output", OUTPUT, spark);
-
   scanner_node->add_entry("clear", CLEAR, spark);
   scanner_node->add_entry("no_clear", NO_CLEAR, spark);
   scanner_node->add_synonym("noclear", "no_clear");
@@ -4834,74 +4799,6 @@ Commented-out this section.
   }  /* End of group (|Predicates|)  */
 #endif 
 
-@q ***** (5) |Booleans|.  @>          
-@*4 |Booleans|.
-\initials{LDF 2022.04.11.}
-
-!! TODO:  Add code for other forms of output, PNG, SVG, etc.  Currently,
-|is_metafont| is set to |true| if the global variable |metafont_output| 
-is |true|.  Otherwise, it's set to |false| and |is_metapost| is set to 
-|true|.  That is, the latter is the default.
-\initials{LDF 2022.04.11.}
-
-\LOG
-\initials{LDF 2022.04.11.}
-Added this section with a calls to |add_entry| for |is_metafont| and |is_metapost|.
-\ENDLOG
-
-@<Define |Scanner_Type::create|@>=
-
-    {  /* Beginning of group for booleans  */
-
-       bool* b;
-   
-@q ****** (6) |is_metafont|.@> 
-@ |is_metafont|.
-\initials{LDF 2022.04.11.}
-
-@<Define |Scanner_Type::create|@>=
-
-       b = new bool;
-
-       *b = (metafont_output) ? true : false;
-       
-       v = static_cast<void*>(b); 
-
-       scanner_node->add_entry("is_metafont",
-                               BOOLEAN,
-                               regular,
-                               is_constant,
-                               not_array,
-                               Id_Map_Entry_Type::KNOWN,
-                               v);
-
-       scanner_node->add_synonym("do_metafont", "is_metafont");
-
-
-@q ****** (6) |is_metapost|.@> 
-@ |is_metapost|.
-\initials{LDF 2022.04.11.}
-
-@<Define |Scanner_Type::create|@>=
-
-       b = new bool;
-
-       *b = (metapost_output) ? true : false;
-
-       v = static_cast<void*>(b); 
-
-       scanner_node->add_entry("is_metapost",
-                               BOOLEAN,
-                               regular,
-                               is_constant,
-                               not_array,
-                               Id_Map_Entry_Type::KNOWN,
-                               v);
-
-       scanner_node->add_synonym("do_metapost", "is_metapost");
-
-   }  /* End of group for booleans  */
-
 @q ***** (5) |Reals|.  @>          
 @*4 |Reals|.
 \initials{LDF 2004.10.23.}
@@ -4964,7 +4861,6 @@ Added call to |add_entry| for |register_width|.
                                not_array,
                                Id_Map_Entry_Type::KNOWN,
                                v);
-
 
 @q ****** (6) |register_width|.@> 
 

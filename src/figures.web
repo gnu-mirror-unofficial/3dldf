@@ -201,32 +201,20 @@ beginfig(Scanner_Node s, unsigned short i, bool silent)
     cerr << "Beginning figure " << i << "." 
          << endl;
 
-  ofstream* out_stream;
-  Output_Struct* os;
+  Output_Struct* os = s->out[Run_State::METAPOST_RS];
+  ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
-  if (metafont_output)
-  {
-     os = s->out[Run_State::METAFONT_RS];
-     out_stream  = static_cast<ofstream*>(os->stream_ptr);
-  }
-  else
-  {
-     os = s->out[Run_State::METAPOST_RS];
-     out_stream  = static_cast<ofstream*>(os->stream_ptr);
-  }
+@ !! START HERE.  Change the way |current_picture| is handled.
+\initials{LDF 2004.05.25.}
 
-@ 
 @<Define figure functions@>=
-
   if (current_picture != static_cast<Picture*>(0))
     {
       if (DEBUG)
         cerr << "current_picture != 0.  Clearing and freeing the memory."
              << endl;
-#if 0 
       current_picture->clear();
       delete current_picture;
-#endif 
     }
   else
     {
@@ -235,19 +223,108 @@ beginfig(Scanner_Node s, unsigned short i, bool silent)
     }
 
   current_picture = new Picture;
-
-#if 0 
   current_picture->clear();
-#endif 
 
-  *out_stream << "beginfig(" << i << ");\n";
+*out_stream << "beginfig(" << i << ");\n";
 
   if (DEBUG) 
     cerr << "Exiting beginfig(" << i << ")" << endl;
 
   return;
+}
 
-}  /* End of |beginfig| definition  */
+@q * End figure.@>
+@* End figure.
+\LOG
+\initials{LDF 2003.07.16.}  Added |silent| argument, and a message printed
+conditionally to |stdout|, saying which figure is being ended.  
+This should help in finding where errors occur.
+
+\initials{LDF 2003.07.16.}  Made non-inline.
+
+\initials{LDF 2003.08.17.} Made |silent| non-|const|.   Setting it to |true|, if 
+|SILENT_GLOBAL| is |true|.   
+
+\initials{LDF 2004.03.09.}  Moved |endfig| from
+\filename{io.web} and redefined it, so that |endfig| calls 
+|current_picture->output|.  There are now two versions, with
+argument lists that correspond to those of the two versions of
+|Picture::output|.  I've added the constant |SUPPRESS| to |namespace
+Projections|, in order to be able to suppress output.
+
+\initials{LDF 2004.05.25.}  Added |Scanner_Node| argument.  Changed 
+|out_stream| from a global |ofstream| to an |ofstream*|.  It's now set
+using the |Scanner_Node| argument.
+
+\initials{LDF 2004.06.07.}  Got rid of the version of this function that didn't
+take a |Focus| argument, because I've gotten rid of |default_focus|.  I may
+replace |default_focus| with a predefined variable defined in 
+|Scanner_Type::create|.  
+\ENDLOG 
+
+@<Declare figure functions@>=
+void 
+endfig (Scanner_Node s,
+        const Focus& f,
+        const unsigned short projection = Projections::persp,
+        real factor = 1,
+        const unsigned short sort_value = Sorting::MAX_Z,
+        const bool do_warnings = true,
+        const real min_x_proj = -40, const real max_x_proj = 40,
+        const real min_y_proj = -40, const real max_y_proj = 40,
+        const real min_z_proj = -40, const real max_z_proj = 40);
+
+@
+@<Define figure functions@>=
+void 
+endfig (Scanner_Node s,
+        const Focus& f,
+        const unsigned short projection,
+        real factor,
+        const unsigned short sort_value,
+        const bool do_warnings,
+        const real min_x_proj, const real max_x_proj,
+        const real min_y_proj, const real max_y_proj,
+        const real min_z_proj, const real max_z_proj)
+{
+  bool DEBUG = true; /* |false| */ @;
+
+  if (DEBUG) 
+    cerr << "Entering endfig.\n";
+
+  Output_Struct* os = s->out[Run_State::METAPOST_RS];
+  ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
+
+  if (projection != Projections::suppress)
+    {
+      if (DEBUG)
+        cerr << "projection != Projections::suppress. "
+             << "Calling current_picture->output." << "\n";
+      current_picture->output(s, f, projection, factor, sort_value,
+                              do_warnings, 
+                              min_x_proj, max_x_proj,
+                              min_y_proj, max_y_proj,
+                              min_z_proj, max_z_proj);
+    }
+  else
+    {
+      if (DEBUG)
+        cerr << "projection == Projections::suppress. "
+             << "Not calling current_picture->output." << "\n";
+    }
+
+current_picture->clear();
+  delete current_picture;
+  current_picture = 0;
+
+  *out_stream << "endfig" << ";\n";
+
+  if (DEBUG) 
+    cerr << "Exiting endfig.\n";
+
+  return;
+
+}  /* End of |endfig| definition */
 
 @q * Putting figures together.@>
 @ Putting figures together.

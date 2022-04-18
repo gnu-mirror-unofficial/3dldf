@@ -133,7 +133,6 @@ Added this rule.
   {
  
      delete pv;
-     pv = 0;
 
      @=$$@> = static_cast<void*>(0);
   }

@@ -98,7 +98,6 @@ versions are now in their own RCS repository.
 #include "parser.h++"   
 #include "parser_1.h++"
 
-
 @q * (1) Point class definition.@>
 @* {\bf Point} class definition.
 \initials{LDF 2002.10.20.}
@@ -4286,7 +4285,7 @@ $90^\circ$.  Then it will be on the y-axis.
 @<Define |Transform| functions@>=
 
 #if 0 
-  DEBUG = false; /* |true|  */
+  DEBUG = true;
 #endif 
 
   if (axis_2_pt != 0)
@@ -5668,8 +5667,7 @@ show(string text = "",
      const bool do_apply = true,
      Focus* f = 0, 
      const unsigned short proj = Projections::persp,
-     const real factor = 1,
-     int show_connectors = 0) const;
+     const real factor = 1) const;
 
 @q *** (3) Definition.@>
 @ 
@@ -5681,21 +5679,16 @@ Point::show(string text,
             const bool do_apply, 
             Focus* f, 
             const unsigned short proj,
-            const real factor,
-            int show_connectors) const
+            const real factor) const
 {
     bool DEBUG = false; /* |true| */@; 
 
     vector<char> coords_vector;
 
     cerr_mutex.lock();
-#if DEBUG_COMPILE
-    if (DEBUG)
-    { 
 
+    if (DEBUG)
        cerr << "Entering `Point::show'." << endl;
-    }  
-#endif /* |DEBUG_COMPILE|  */@; 
 
     if (text != "")
       cerr  << text << endl;
@@ -5783,13 +5776,9 @@ Point::show(string text,
 
   cerr << endl;
 
-#if DEBUG_COMPILE
-    if (DEBUG)
-    { 
-        cerr << "Exiting `Point::show' successfully with void return value." 
-             << endl;    
-    }  
-#endif /* |DEBUG_COMPILE|  */@; 
+  if (DEBUG)
+     cerr << "Exiting `Point::show' successfully with void return value." 
+          << endl;
 
   cerr_mutex.unlock();
 
@@ -7557,8 +7546,202 @@ Now breaking line and indenting in output file before |withcolor| and
 
 @<Declare |Point| functions@>=
 void 
-output(Scanner_Node s, unsigned int output_command_arg = 0);
+output(Scanner_Node s);
 
+@q *** (3) Definition.@>
+
+@ 
+@<Define |Point| functions@>=
+void 
+Point::output(Scanner_Node scanner_node) 
+{
+  bool DEBUG = false; /* |true| */
+
+  if (DEBUG)
+    cerr << "Entering Point::output().\n";
+
+  Output_Struct* os = scanner_node->out[Run_State::METAPOST_RS];
+  
+  ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
+  
+  if (do_output == false)
+    {
+      if (DEBUG)
+        cerr << "In Point::output(): do_output == false. Returning.\n";
+
+      return;
+    }
+
+@q **** (4) |drawdot| or |undrawdot|.  @>
+@ |drawdot| or |undrawdot|. 
+
+\LOG
+\initials{LDF 2004.08.17.}
+@:BUG FIX@> BUG FIX: 
+Now writing ``{\bf undrawdot}'' to |*out_stream| when 
+|(drawdot_value == UNDRAWDOT_VALUE)|.  Formerly, 
+``{\bf drawdot}'' was written.
+\ENDLOG 
+@<Define |Point| functions@>=
+
+  if (drawdot_value == DRAWDOT_VALUE)
+
+    *out_stream << "drawdot ";
+
+  else if (drawdot_value == UNDRAWDOT_VALUE)
+
+    *out_stream << "undrawdot ";
+
+  else  /* Invalid |DRAWDOT_VALUE|.  */      
+    {
+      cerr << "WARNING! Invalid |drawdot_value|: "
+        << drawdot_value << ". Using \"drawdot\"\n";
+
+      if (scanner_node->get_run_state()->error_stop_mode == Run_State::STOPPING)
+        {
+          cerr << "In `Point::output':  Type <RETURN> to continue.\n";
+
+          getchar();  /* Don't delete this!  */@;  
+        } 
+
+      *out_stream << "drawdot ";
+
+    } /* |else| (invalid |DRAWDOT_VALUE|.)  */@;      
+
+  *out_stream << "(" << projective_coordinates[0]
+              << measurement_units
+              << ", " << projective_coordinates[1]
+              << measurement_units << ")";
+
+@q **** (4) Handle |Color|.  @>
+@ Handle |Color|.
+\initials{LDF Undated.}
+
+\LOG
+\initials{LDF 2005.03.17.}
+Now outputting |*(draw_color_vector->v[0])|, if 
+|draw_color_vector != 0 && draw_color_vector->ctr > 0|.  
+Formerly, I output |*drawdot_color|, 
+but I've removed |drawdot_color|.
+\ENDLOG
+
+@<Define |Point| functions@>=
+
+  if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) && draw_color_vector->ctr > 0)
+    *out_stream << endl << "   withcolor " << *(draw_color_vector->v[0]);
+
+@q **** (4) Handle |pen_vector|.@>
+@ Handle |pen_vector|.
+
+\LOG
+\initials{LDF 2005.03.17.}
+Now handling |Pointer_Vector<Pen>* Point::pen_vector| instead 
+of |Pen* Point::pen|, which I've removed.
+\ENDLOG 
+
+@<Define |Point| functions@>=
+
+  if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)
+    {
+
+       Pen* pen = pen_vector->v[0]; 
+       unsigned short pen_type = pen->get_type();
+
+      *out_stream << endl << "   ";
+
+      if (pen_type == Pen::CIRCLE_PEN)
+        {
+          *out_stream << "withpen pencircle";
+        }
+      else if (pen_type == Pen::RAZOR_PEN)
+        {
+          *out_stream << " withpen penrazor";
+        }
+
+      else if (pen_type == Pen::SPECK_PEN)
+        {
+          *out_stream << " withpen penspeck";
+        }
+
+      else if (pen_type == Pen::SQUARE_PEN)
+        {
+          *out_stream << " withpen pensquare";
+        }
+      else /* Invalid |pen->type|.  */
+        {
+          cerr << "ERROR! In Point::output():\n"
+               << "Invalid Pen type: " << pen_type
+               << endl << "Not specifying pen and will try to "
+               << "continue.\n";
+          
+          if (scanner_node->get_run_state()->error_stop_mode 
+              == Run_State::STOPPING)
+            {
+              cerr << "In `Point::output':  Type <RETURN> to continue.\n";
+
+              getchar();  /* Don't delete this!  */@;  
+            } 
+
+          *out_stream << ";\n";
+          return;
+          
+        } /* |else| (invalid |pen->type|).  */
+
+@q ***** (5) Handle |pen->transform|.@>   
+@ Handle |pen->transform|.
+\initials{LDF 2004.09.08.}
+
+\LOG
+\initials{LDF 2004.09.08.}
+@:BUG FIX@> BUG FIX:  Fixed the way the 3DLDF's three-dimensional
+transformation matrix is converted to {\MF/}/{\MP/}'s 
+two-dimensional one.
+
+\initials{LDF 2005.06.24.}
+@:BUG FIX@> BUG FIX:  Now appending |"cm"| to the numbers output 
+for the transformation. 
+
+\initials{LDF 2021.12.15.}
+@:BUG FIX@> BUG FIX:  Removed the conditional |if (!t.is_identity())|:
+This failed when the |Pen| was scaled by |(1cm, 1cm, 1cm)|.
+\ENDLOG 
+
+@<Define |Point| functions@>=
+
+      Transform t = pen->get_transform();
+
+      *out_stream << " transformed"
+                  << endl << "begingroup; save T; transform T;" 
+
+                  << endl << "xxpart T = " 
+                  << t.get_element(0, 0) << "cm;"
+                  << endl << "xpart T = " 
+                  << t.get_element(3, 0) << "cm;"
+                  << endl << "xypart T = " 
+                  << t.get_element(1, 0) << "cm;"
+
+                  << endl << "yypart T = " 
+                  << t.get_element(1, 1) << "cm;"
+                  << endl << "ypart T = " 
+                  << t.get_element(3, 1) << "cm;"
+                  << endl << "yxpart T = " 
+                  << t.get_element(0, 1) << "cm;"
+
+                  << endl << "T endgroup" << endl;
+
+    }  /* |if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)|  */
+
+@q **** (4) Finish and exit function.  @>
+@ Finish and exit function.
+
+@<Define |Point| functions@>=
+
+  *out_stream << ";\n";
+
+  if (DEBUG)
+    cerr << "Exiting Point::output().\n";
+  return;
+}
 
 @q * (1) Labelling.@>
 @* Labelling. 
@@ -8216,6 +8399,126 @@ Label::get_copy() const
 
 }  /* End of |Label::get_copy| definition.  */
 
+@q ** (2) Output Labels.@>
+@*1 Output {\bf Labels}.
+@^\cfunc{Label}{output}@>
+\initials{LDF 2002.10.23.}  Declared in \filename{pictures.web}.  Must be defined
+here, because |Point| is an incomplete type there.
+
+\LOG 
+\initials{LDF 2002.10.23.}  
+Added arguments |proj| and |factor|.
+
+\initials{LDF 2004.05.25.}  
+Added |Scanner_Node| argument.  Changed 
+|out_stream| from a global |ofstream| to an |ofstream*|.  It's now set
+using the |Scanner_Node| argument.
+
+\initials{LDF 2005.01.31.}
+Now outputting code for |text_color| and |dot_color|.
+
+\initials{LDF 2005.08.14.}
+Now outputting code for transforming the text, if |transform != 0|.
+
+\initials{LDF 2005.12.09.}
+Added code for outputting |*pen|, if |dot == true| and |Pen* pen| is non-null.
+
+\initials{2008.12.30.}
+@:BUG FIX@> BUG FIX:  Now outputting a newline after the semi-colon.
+\ENDLOG 
+
+@<Define |Label| functions@>=
+void
+Label::output(Scanner_Node s,
+              const Focus& f,
+              const unsigned short proj,
+              real factor,
+              const Transform& t)
+{
+
+   Output_Struct* os = s->out[Run_State::METAPOST_RS];
+   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
+
+   if (!t.is_identity())
+     *pt *= t;
+
+   pt->apply_transform();
+   if(!pt->project(f, proj, factor))
+     {
+       cerr << "WARNING! In Label::output():\n"
+            << "Point in Label cannot be projected! "
+            << "Not printing Label\n";
+       return;
+     }  
+
+   *out_stream << "label";
+   
+   if (position != "")
+     *out_stream << "." << position;
+   
+   *out_stream << "(btex " << text << " etex ";
+
+     if (transform && !transform->is_identity())
+        {
+
+          *out_stream << " transformed "
+                      << "begingroup; save T; transform T;"
+                      << endl  
+                      << " xxpart T = " 
+                      << transform->get_element(0, 0) << "; "
+                      << "xpart T = "                                   
+                      << transform->get_element(3, 0) << "; "
+                      << "xypart T = "                                 
+                      << transform->get_element(1, 0) << "; " 
+                      << endl                                                   
+                      << " yypart T = "                               
+                      << transform->get_element(1, 1) << "; "
+                      << "ypart T = "                                   
+                      << transform->get_element(3, 1) << "; "
+                      << "yxpart T = "                                 
+                      << transform->get_element(0, 1) << "; "
+                      << "T endgroup ";
+
+        } /* |if (transform && !transform->is_identity())|  */@;
+
+   *out_stream << ", ("
+               << pt->get_x('p', false)
+               << Point::measurement_units << ", "
+               << pt->get_y('p', false)
+               << Point::measurement_units << "))";
+
+if (text_color)
+      *out_stream << endl << " withcolor " << *text_color;
+
+   *out_stream << ";" << endl;
+
+   if (dot == true)
+       {
+          *out_stream << "begingroup" << endl 
+                      << "interim linecap := rounded;" 
+                      << endl
+                      << "drawdot (" 
+                      << pt->get_x('p', false)
+                      << Point::measurement_units << ", "
+                      << pt->get_y('p', false)
+                      << Point::measurement_units << ")";
+
+            if (pen)
+               *out_stream << " withpen " << *pen;
+            else 
+               *out_stream << " withpen pencircle scaled dotlabeldiam";
+          
+          if (dot_color)
+             *out_stream << " withcolor " << *dot_color;
+
+          *out_stream << ";" << "endgroup;" << endl;
+         
+      } /* |if (dot == true)|  */
+
+   return;
+
+}  /* End of |Label::output| definition.  */
+
 @q * (1) |Transform_Matrix| operations. @>
 @* {\bf Transform\_Matrix} operations.
 
@@ -8683,8 +8986,9 @@ Point::magnitude() const
       cerr << "In magnitude().\n";
       cerr << "Point has too great a magnitude!\n";
       @:!!@> 
-        /* !! This |show| outputs to |stdout|. It would be nice to output it 
-              to |stderr| instead. Must write function for this. */
+        /* !! This |show| outputs to |stdout|. It would be nice to
+          output it to |stderr| instead. Must write function for
+            this. */
         cerr << "Returning INVALID_REAL.\n";
       return INVALID_REAL;
     }
@@ -10928,16 +11232,13 @@ void
 Picture::clear(void)
 {
 
-return;  /* /* !!START HERE:  LDF 2022.04.17.  */ 
-
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ 
+  bool DEBUG = false; /* |true| */ 
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #if DEBUG_COMPILE
   if (DEBUG) 
     cerr << "Entering Picture::clear().\n";
-
 #endif /* |DEBUG_COMPILE|  */@; 
 
   transform.reset();
@@ -10983,7 +11284,7 @@ Removed call to |delete (*iter)->pt|.  |Label::pt| is now deleted in
       cerr << "Exiting Picture::clear().\n";
 #endif /* |DEBUG_COMPILE|  */@;   
 
-}  /* End of |Picture::clear| definition  */
+}
 
 @q ** (2) Output.@> 
 @*1 Output.

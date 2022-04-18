@@ -49,12 +49,12 @@
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
-@q *** (3) command --> BEGINFIG LEFT_PARENTHESIS numeric_expression RIGHT_PARENTHESIS @>
-@q *** clear_current_picture_optional.                                                @> 
+@q *** (3) command --> BEGINFIG LEFT_PARENTHESIS @>
+@q *** (3) numeric_expression RIGHT_PARENTHESIS. @> 
 
 @*2 \§command> $\longrightarrow$ 
 \.{BEGINFIG} \.{LEFT\_PARENTHESIS}' \§numeric expression> 
-\.{RIGHT\_PARENTHESIS} \§clear currentpicture optional>.
+\.{RIGHT\_PARENTHESIS}.
 
 \LOG
 \initials{LDF 2004.06.19.}  
@@ -78,135 +78,15 @@ possible to use |beginfig| in loops.
 @ 
 @<Define rules@>= 
   
-@=command: BEGINFIG LEFT_PARENTHESIS numeric_expression RIGHT_PARENTHESIS @>
-@=clear_current_picture_optional@>@/
+@=command: BEGINFIG LEFT_PARENTHESIS numeric_expression@>@/
+@= RIGHT_PARENTHESIS@>@/
 {
-@q ****** (6) @>
 
-   @<Common declarations for rules@>@;
+   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-#if DEBUG_COMPILE
-   DEBUG = true; /* |false|  */
-   if (DEBUG)
-   { 
-       cerr_strm << thread_name 
-          << "*** Parser, rule  `command: BEGINFIG LEFT_PARENTHESIS numeric_expression"
-          << endl 
-          << "RIGHT_PARENTHESIS clear_current_picture_optional'." 
-          << endl
-          << "$5 == " << @=$5@> << endl;
+   int i = static_cast<int>(floor(fabs(@=$3@>) + .5)); 
 
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ****** (6) @>
-
-   if (scanner_node->beginfig_flag)
-   {
-       cerr_strm << thread_name 
-          << "WARNING! In parser, rule `command: BEGINFIG LEFT_PARENTHESIS numeric_expression"
-          << endl 
-          << "RIGHT_PARENTHESIS clear_current_picture_optional':" 
-          << endl 
-          << "`scanner_node->beginfig_flag' == `true'."
-          << endl 
-          << "Already collecting a figure.  Continuing."
-          << endl;
-
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-   }
-
-@q ****** (6) @>
-
-   else
-   {
-      int i = static_cast<int>(floor(fabs(@=$3@>) + .5)); 
-
-@q ******* (7) @>
-
-       if (!scanner_node->beginchar_flag && ((clear_current_picture == true && @=$5@> >= 0) || @=$5@> > 0))
-       {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-                 cerr_strm << thread_name 
-                           << "In parser, rule `command: BEGINFIG LEFT_PARENTHESIS"
-                           << "numeric_expression RIGHT_PARENTHESIS clear_current_picture_optional':" 
-                           << endl 
-                           << "`scanner_node->beginchar_flag'           == " << scanner_node->beginchar_flag
-                           << endl 
-                           << "Global variable `clear_current_picture' == " << clear_current_picture
-                           << endl 
-                           << "`clear_current_picture_optional'        == " << @=$5@> 
-                           << endl 
-                           << "Clearing `current_picture'.";
-
-               log_message(cerr_strm);
-               cerr_message(cerr_strm);
-               cerr_strm.str("");
-
-           }       
-#endif /* |DEBUG_COMPILE|  */@; 
-
-#if 1 /* !!START HERE:  LDF 2022.04.18.  Testing.  */ 
-
-           scanner_node->clear_current_picture_func();      
-#endif 
-
-       } /* |if| */
-
-@q ******* (7) @>
-
-#if DEBUG_COMPILE
-      else if (DEBUG)
-      { 
-          cerr_strm << thread_name 
-                    << "In parser, rule `command: BEGINFIG LEFT_PARENTHESIS"
-                    << "numeric_expression RIGHT_PARENTHESIS clear_current_picture_optional':" 
-                    << endl 
-                    << "`scanner_node->beginchar_flag'           == " << scanner_node->beginchar_flag
-                    << endl 
-                    << "Global variable `clear_current_picture' == " << clear_current_picture
-                    << endl 
-                    << "`clear_current_picture_optional'        == " << @=$5@> 
-                    << endl 
-                    << "Not clearing `current_picture'.";
-
-          log_message(cerr_strm);
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-
-      }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******* (7) @>
-
-cerr << "Error after here 20." << endl; 
-
-      status = Scan_Parse::beginfig_func(scanner_node, i, Scan_Parse::BEGINFIG_COMMAND);
-
-cerr << "Error after here 21." << endl; 
-
-      scanner_node->beginfig_flag  = true;
-
-cerr << "Error after here 22." << endl; 
-
-   }  /* |else| */
-
-@q ****** (6) @>
-
-cerr << "Error after here 23." << endl; 
-
-cerr << "Exiting beginfig rule." << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+   Scan_Parse::beginfig_func(scanner_node, i);
 
    @=$$@> = static_cast<void*>(0);
 
@@ -273,92 +153,21 @@ Rewrote this rule.  It now calls |output_command_func|.
 @=command: ENDFIG with_clause_output_list@>@/
 {
 
-#if 0 /* !!START HERE:  LDF 2022.04.18.   Testing */ 
+  Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-@q ****** (6) @>
+  bool* c = new bool;
+  *c = true;
 
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ 
-
-   if (DEBUG)
-   { 
-      cerr_strm << thread_name 
-                << "*** Parser, rule `command: ENDFIG with_clause_output_list'." 
-                << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ****** (6) @>
-
-  if (!scanner_node->beginfig_flag)
-  {
-      cerr_strm << thread_name 
-                << "WARNING! In parser, rule `command: ENDFIG with_clause_output_list':" 
-                << endl 
-                << "`scanner_node->beginfig_flag' == `false'.  Not collecting a figure."
-                << endl 
-                << "Not performing output.  Continuing."
-                << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-      
-  }
-
-@q ****** (6) @>
-
-  else
-  {
-#if DEBUG_COMPILE
-
-     if (DEBUG)
-     { 
-        cerr_strm << thread_name 
-                  << "In parser, rule `command: ENDFIG with_clause_output_list':" 
-                  << endl 
-                  << "`scanner_node->beginfig_flag' == `true'.  Will perform output."
-                  << endl;
-     }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-     bool* c = new bool;
-     *c = true;
-
-     bool* e = new bool;
-     *e = true;
+  bool* e = new bool;
+  *e = true;
  
-     scanner_node->clear_ptr = static_cast<void*>(c); 
-     scanner_node->endfig_ptr  = static_cast<void*>(e); 
+  scanner_node->clear_ptr = static_cast<void*>(c); 
+  scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
-/* !!START HERE:  LDF 2022.04.17.  */ 
-
-     cerr << "Error after here 0." << endl; 
-
-     status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
-
-     cerr << "Error after here 1." << endl; 
-
-     scanner_node->beginfig_flag  = false;
-
-     cerr << "Error after here 14." << endl; 
-
-  }
-
-     cerr << "Error after here 15." << endl; 
-
-@q ****** (6) @>
+  Scan_Parse::output_command_func(scanner_node);
 
   @=$$@> = static_cast<void*>(0);
  
-  cerr << "Error after here 16." << endl; 
-
-#endif /* !!START HERE:  LDF 2022.04.18.   Testing */ 
-
- @=$$@> = static_cast<void*>(0);
-
 };
 
 @*3 \§command> $\longrightarrow$ \.{BEGINCHAR} $\ldots$.
@@ -375,341 +184,34 @@ Added this rule.
   
 @=command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA@>@/
 @=numeric_expression COMMA numeric_expression COMMA numeric_expression@>@/ 
-@=RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional@>@/
+@=RIGHT_PARENTHESIS character_comment_optional@>@/
 {
-@q ****** (6) @>
-
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
                 << "*** Parser: `command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA" << endl 
                 << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional'." << endl;
+                << "RIGHT_PARENTHESIS character_comment_optional'." << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
-
-      cerr << "$5 == " << @=$5@> << endl
-           << "$7 == " << @=$7@> << endl
-           << "$9 == " << @=$9@> << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ****** (6) @>
+   string *s = static_cast<string*>(@=$3@>);
 
-   if (scanner_node->beginchar_flag)
-   {
-       cerr_strm << thread_name 
-          << "WARNING! In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA" << endl 
-                << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional':"
-          << endl 
-          << "`scanner_node->beginchar_flag' == `true'."
-          << endl 
-          << "Already collecting a character.  Continuing.";
+   Scan_Parse::beginfig_func(scanner_node, 0, true, *s, @=$5@>, @=$7@>, @=$9@>);
 
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-   }
-
-@q ****** (6) @>
-
-   else
-   {
-@q ******* (7) @>
-
-       string *s = static_cast<string*>(@=$3@>);
-
-@q ******* (7) @>
-
-       if (!scanner_node->beginfig_flag && ((clear_current_picture == true && @=$12@> >= 0) || @=$12@> > 0))
-       {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-                 cerr_strm << thread_name 
-                           << "In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA" << endl 
-                           << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                           << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional':"
-                           << endl 
-                           << "`scanner_node->beginfig_flag'           == " << scanner_node->beginfig_flag
-                           << endl 
-                           << "Global variable `clear_current_picture' == " << clear_current_picture
-                           << endl 
-                           << "`clear_current_picture_optional'        == " << @=$12@> 
-                           << endl 
-                           << "Clearing `current_picture'.";
-
-               log_message(cerr_strm);
-               cerr_message(cerr_strm);
-               cerr_strm.str("");
-
-           }       
-#endif /* |DEBUG_COMPILE|  */@; 
-
-           scanner_node->clear_current_picture_func();      
-
-       } /* |if| */
-
-@q ******* (7) @>
-
-       status = Scan_Parse::beginfig_func(scanner_node, 
-                                          0, 
-                                          Scan_Parse::BEGINCHAR_COMMAND, 
-                                          *s, 
-                                          @=$5@>, 
-                                          @=$7@>, 
-                                          @=$9@>); 
-
-       delete s;
-       s = 0;
-
-       scanner_node->beginchar_flag  = true;
-
-@q ******* (7) @>
-
-   } /* |else| */
-
-@q ****** (6) @>
+   delete s;
+   s = 0;
 
    @=$$@> = static_cast<void*>(0);
 
-};
-
-@*3 \§command> $\longrightarrow$ \.{BEGINCHAR} $\ldots$.
-\initials{LDF 2022.04.12.}
-
-\LOG
-\initials{LDF 2022.04.12.}
-Added this rule.
-\ENDLOG
-
-@q ***** (5) Definition.@> 
- 
-@<Define rules@>= 
-  
-@=command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA@>@/
-@=numeric_expression COMMA numeric_expression COMMA numeric_expression@>@/ 
-@=RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional@>@/
-{
-@q ****** (6) @>
-
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
-  if (DEBUG)
-    {
-      cerr_strm << thread_name 
-                << "*** Parser: `command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA" << endl 
-                << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional'." << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-
-      cerr << "$5 == " << @=$5@> << endl
-           << "$7 == " << @=$7@> << endl
-           << "$9 == " << @=$9@> << endl;
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-@q ****** (6) @>
-@
-@<Define rules@>= 
-
-   if (scanner_node->beginchar_flag)
-   {
-       cerr_strm << thread_name 
-                 << "WARNING! In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA" << endl 
-                 << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                 << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional':"
-                 << endl 
-                 << "`scanner_node->beginchar_flag' == `true'."
-                 << endl 
-                 << "Already collecting a character.  Continuing.";
-
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-   }
-
-@q ****** (6) @>
-@
-@<Define rules@>= 
-
-   else
-   {
-
-       int i = @=$3@>;
-
-       stringstream temp_strm;
-
-       temp_strm << i;
-
-@q ******* (7) @>
-
-       if (!scanner_node->beginfig_flag && ((clear_current_picture == true && @=$12@> >= 0) || @=$12@> > 0))
-       {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-                 cerr_strm << thread_name 
-                           << "In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA" << endl 
-                           << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                           << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional':"
-                           << endl 
-                           << "`scanner_node->beginfig_flag'           == " << scanner_node->beginfig_flag
-                           << endl 
-                           << "Global variable `clear_current_picture' == " << clear_current_picture
-                           << endl 
-                           << "`clear_current_picture_optional'        == " << @=$12@> 
-                           << endl 
-                           << "Clearing `current_picture'.";
-
-               log_message(cerr_strm);
-               cerr_message(cerr_strm);
-               cerr_strm.str("");
-
-           }       
-#endif /* |DEBUG_COMPILE|  */@; 
-
-           scanner_node->clear_current_picture_func();      
-
-       } /* |if| */
-
-@q ******* (7) @>
-@
-@<Define rules@>= 
-
-       status = Scan_Parse::beginfig_func(scanner_node, 
-                                          0, 
-                                          Scan_Parse::BEGINCHAR_COMMAND, 
-                                          temp_strm.str(), 
-                                          @=$5@>, 
-                                          @=$7@>, 
-                                          @=$9@>); 
-
-       scanner_node->beginchar_flag  = true;
-
-   }  /* |else| */
-
-@q ****** (6) @>
-
-   @=$$@> = static_cast<void*>(0);
-};
-
-@q *** (3) clear_current_picture_optional.@>   
-@*2 \§clear currentpicture optional>.
-\initials{LDF 2022.04.15.}
-
-\LOG
-\initials{LDF 2022.04.15.}
-Added this type declaration.
-\ENDLOG
-
-@<Type declarations for non-terminal symbols@>=
-@=%type <int_value> clear_current_picture_optional@>
-
-@q **** (4) clear_current_picture_optional --> /* EMPTY  */@>   
-@*3 \§clear currentpicture optional>$\longrightarrow$ \.{EMPTY}.
-\initials{LDF 2022.04.15.}
-
-\LOG
-\initials{LDF 2022.04.15.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>= 
-  
-@=clear_current_picture_optional: /* Empty  */@>
-{
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
-  if (DEBUG)
-    {
-      cerr_strm << thread_name 
-                << "*** Parser: `clear_current_picture_optional: EMPTY'." << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-   @=$$@> = 0;
-};
-
-@q **** (4) clear_current_picture_optional --> CLEAR @>   
-@*3 \§clear currentpicture optional>$\longrightarrow$ \.{CLEAR}.
-\initials{LDF 2022.04.15.}
-
-\LOG
-\initials{LDF 2022.04.15.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>= 
-  
-@=clear_current_picture_optional: CLEAR@>
-{
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
-  if (DEBUG)
-    {
-      cerr_strm << thread_name 
-                << "*** Parser: `clear_current_picture_optional: CLEAR'." << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-   @=$$@> = 1;
-};
-
-@q **** (4) clear_current_picture_optional --> NO_CLEAR @>   
-@*3 \§clear currentpicture optional>$\longrightarrow$ \.{NO\_CLEAR}.
-\initials{LDF 2022.04.15.}
-
-\LOG
-\initials{LDF 2022.04.15.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>= 
-  
-@=clear_current_picture_optional: NO_CLEAR@>
-{
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
-  if (DEBUG)
-    {
-      cerr_strm << thread_name 
-                << "*** Parser: `clear_current_picture_optional: NO_CLEAR'." << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-   @=$$@> = -1;
 };
 
 @q *** (3) character_comment_optional.@>   
@@ -774,12 +276,11 @@ Added this rule.
   
 @=command: ENDCHAR with_clause_output_list@>@/
 {
-@q ****** (6) @>
 
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -791,52 +292,24 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ****** (6) @>
+  bool* c = new bool;
+  *c = true;
 
-  if (!scanner_node->beginchar_flag)
-  {
-      cerr_strm << thread_name 
-                << "WARNING! In parser, rule `command: ENDCHAR with_clause_output_list':" 
-                << endl 
-                << "`scanner_node->beginchar_flag' == `false'.  Not collecting a character."
-                << endl 
-                << "Not performing output.  Continuing."
-                << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-      
-  } /* |if| */
-
-@q ****** (6) @>
-
-  else
-  {
-     bool* c = new bool;
-     *c = true;
-
-     bool* e = new bool;
-     *e = true;
+  bool* e = new bool;
+  *e = true;
  
-     scanner_node->clear_ptr   = static_cast<void*>(c); 
-     scanner_node->endfig_ptr  = static_cast<void*>(e); 
+  scanner_node->clear_ptr   = static_cast<void*>(c); 
+  scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
-     status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
+  Scan_Parse::output_command_func(scanner_node, true);
 
-     cerr << "Error after here 14." << endl; 
-
-     scanner_node->beginchar_flag  = false;
-
-  } /* |else| */
-
-@q ****** (6) @>
- 
   @=$$@> = static_cast<void*>(0);
+
  
 };
 
-@q **** (4) command --> OUTPUT picture_expression with_clause_output_list. @>
+@q **** (4) command --> OUTPUT picture_expression @>
+@q **** (4) with_clause_output_list.                   @>
 
 @*3 \§command> $\longrightarrow$ `\.{OUTPUT}'
 \§picture expression> \§with clause output list>.
@@ -872,48 +345,13 @@ and unnecessary.
   
 @=command: OUTPUT picture_expression with_clause_output_list@>@/
 {
-@q ****** (6) @>
 
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-   DEBUG = true; /* |false|  */
-   if (DEBUG)
-   { 
-       cerr_strm << thread_name 
-          << "*** Parser, rule  `command: OUTPUT picture_expression with_clause_output_list'."
-          << endl
-          << "`scanner_node->output_format_val' == " << scanner_node->output_format_val
-          << " == 0" << oct << scanner_node->output_format_val << " (oct)"
-          << " == 0x" << hex << scanner_node->output_format_val
-          << " (hex)" << dec;
-
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
   
+    scanner_node->picture_entry_ptr = @=$2@>; 
 
-@q ****** (6) @>
+    Scan_Parse::output_command_func(scanner_node);
 
-    entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
-
-    entry->show("entry:");
-
-    scanner_node->picture_entry_ptr = static_cast<void*>(entry);
-
-    status = 0;
-
-    unsigned int i = scanner_node->output_format_val;
-    scanner_node->output_format_val = 0U;        
-
-    status = Scan_Parse::output_command_func(scanner_node, i);
-
-    cerr << "Error after here 2." << endl; 
-
-    scanner_node->picture_entry_ptr = 0;
     @=$$@> = static_cast<void*>(0);
 
 };
@@ -942,12 +380,7 @@ Added this rule.
 @=with_clause_output_list: /* Empty.  */@>
 {
 
-  @<Common declarations for rules@>@;
-
-   scanner_node->output_format_val  = Scan_Parse::METAFONT_OUTPUT_COMMAND;
-   scanner_node->output_format_val |=  Scan_Parse::METAPOST_OUTPUT_COMMAND;
-
-   @=$$@> = static_cast<void*>(0);
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1664,278 +1097,6 @@ Added this rule.
      *r = 0;
 
      @=$$@> = scanner_node->surface_hiding_value_ptr = static_cast<void*>(r); 
-
-};
-
-@q ***** (5) with_clause_output --> metafont_metapost_output_option.@>
-@*4 \§with clause output> $\longrightarrow$ \§metafont metapost output option>.
-\initials{LDF 2022.04.16.}
-
-\LOG
-\initials{LDF 2022.04.16.}
-Added this rule.
-\ENDLOG 
-
-@<Define rules@>= 
-  
-@=with_clause_output: metafont_metapost_output_option@>
-{
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-   DEBUG = true; /* |false|  */
-   if (DEBUG)
-   { 
-       cerr_strm << thread_name << "*** Parser, rule  `with_clause_output:  "
-                 << "metafont_metapost_output_option'."
-                 << endl;
-
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   @=$$@> = 0;
-
-};
-
-@q ***** (5) metafont_metapost_output_option.  @>
-@
-\LOG
-\initials{LDF 2022.04.16.}
-Added this type declaration.
-\ENDLOG 
-
-@<Type declarations for non-terminal symbols@>=
-@=%type <int_value> metafont_metapost_output_option@>
-
-
-@q ****** (6) metafont_metapost_output_option: METAFONT @>
-
-@ \§metafont metapost output option> $\longrightarrow$ \.{METAFONT}.
-\initials{LDF 2022.04.16.}
-
-\LOG
-\initials{LDF 2022.04.16.}
-Added this rule.
-\ENDLOG 
-
-@<Define rules@>= 
-  
-@=metafont_metapost_output_option: METAFONT@>
-{
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-   DEBUG = true; /* |false|  */
-   if (DEBUG)
-   { 
-       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: METAFONT'."
-                 << endl 
-                 << "$1 == " << name_map[@=$1@>] << endl;
-
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   scanner_node->output_format_val |= Scan_Parse::METAFONT_OUTPUT_COMMAND;
-
-   @=$$@> = 0;
-
-};
-
-@q ****** (6) metafont_metapost_output_option: METAPOST @>
-
-@ \§metafont metapost output option> $\longrightarrow$ \.{METAPOST}.
-\initials{LDF 2022.04.16.}
-
-\LOG
-\initials{LDF 2022.04.16.}
-Added this rule.
-\ENDLOG 
-
-@<Define rules@>= 
-  
-@=metafont_metapost_output_option: METAPOST@>
-{
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-   DEBUG = true; /* |false|  */
-   if (DEBUG)
-   { 
-       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: METAPOST'."
-                 << endl 
-                 << "$1 == " << name_map[@=$1@>] << endl;
-
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   scanner_node->output_format_val |= Scan_Parse::METAPOST_OUTPUT_COMMAND;
-
-
-   @=$$@> = 0;
-
-};
-
-@q ****** (6) metafont_metapost_output_option: NO_METAFONT @>
-
-@ \§metafont metapost output option> $\longrightarrow$ \.{NO\_METAFONT}.
-\initials{LDF 2022.04.16.}
-
-\LOG
-\initials{LDF 2022.04.16.}
-Added this rule.
-\ENDLOG 
-
-@<Define rules@>= 
-  
-@=metafont_metapost_output_option: NO_METAFONT@>
-{
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-   DEBUG = true; /* |false|  */
-   if (DEBUG)
-   { 
-       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: NO_METAFONT'."
-                 << endl 
-                 << "$1 == " << name_map[@=$1@>] << endl;
-
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   scanner_node->output_format_val &= ~Scan_Parse::METAFONT_OUTPUT_COMMAND;
-
-   @=$$@> = 0;
-
-};
-
-@q ****** (6) metafont_metapost_output_option: NO_METAPOST @>
-
-@ \§metafont metapost output option> $\longrightarrow$ \.{NO\_METAPOST}.
-\initials{LDF 2022.04.16.}
-
-\LOG
-\initials{LDF 2022.04.16.}
-Added this rule.
-\ENDLOG 
-
-@<Define rules@>= 
-  
-@=metafont_metapost_output_option: NO_METAPOST@>
-{
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-   DEBUG = true; /* |false|  */
-   if (DEBUG)
-   { 
-       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: NO_METAPOST'."
-                 << endl 
-                 << "$1 == " << name_map[@=$1@>] << endl;
-
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   scanner_node->output_format_val &= ~Scan_Parse::METAPOST_OUTPUT_COMMAND;
-
-   @=$$@> = 0;
-
-};
-
-@q ****** (6) metafont_metapost_output_option: METAFONT_ONLY @>
-
-@ \§metafont metapost output option> $\longrightarrow$ \.{METAFONT\_ONLY}.
-\initials{LDF 2022.04.16.}
-
-\LOG
-\initials{LDF 2022.04.16.}
-Added this rule.
-\ENDLOG 
-
-@<Define rules@>= 
-  
-@=metafont_metapost_output_option: METAFONT_ONLY@>
-{
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-   DEBUG = true; /* |false|  */
-   if (DEBUG)
-   { 
-       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: "
-                 << "METAFONT_ONLY'."
-                 << endl 
-                 << "$1 == " << name_map[@=$1@>] << endl;
-
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   scanner_node->output_format_val &= ~Scan_Parse::METAPOST_OUTPUT_COMMAND;
-   scanner_node->output_format_val |=  Scan_Parse::METAFONT_OUTPUT_COMMAND;
-
-   @=$$@> = 0;
-
-};
-
-@q ****** (6) metafont_metapost_output_option: METAPOST_ONLY @>
-
-@ \§metafont metapost output option> $\longrightarrow$ \.{METAPOST\_ONLY}.
-\initials{LDF 2022.04.16.}
-
-\LOG
-\initials{LDF 2022.04.16.}
-Added this rule.
-\ENDLOG 
-
-@<Define rules@>= 
-  
-@=metafont_metapost_output_option: METAPOST_ONLY@>
-{
-   @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-   DEBUG = true; /* |false|  */
-   if (DEBUG)
-   { 
-       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option:  "
-                 << "METAPOST_ONLY'."
-                 << endl 
-                 << "$1 == " << name_map[@=$1@>] << endl;
-
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   scanner_node->output_format_val &= ~Scan_Parse::METAFONT_OUTPUT_COMMAND;
-   scanner_node->output_format_val |=  Scan_Parse::METAPOST_OUTPUT_COMMAND;
-
-   @=$$@> = 0;
 
 };
 

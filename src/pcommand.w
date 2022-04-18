@@ -201,7 +201,7 @@ Removed debugging code.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `command --> RESOLVE path_variable"
@@ -557,184 +557,85 @@ Added this rule.
       }   /* |else| (|str_ptr != 0|)  */
 };
 
-@q **** (4) verbatim_command @>
-
-@ \§verbatim command>.
-\initials{LDF 2022.04.17.}
-
-\LOG
-\initials{LDF 2022.04.17.}
-Added this type declaration.
-\ENDLOG
-
-@<Type declarations for non-terminal symbols@>=
-@=%type <int_value> verbatim_command@>
-
-@q ***** (5) verbatim_command: VERBATIM_METAFONT @>
-@ \§verbatim command> $\longrightarrow$ \.{VERBATIM\_METAFONT}.
-\initials{LDF 2022.04.17.}
+@q ** (2) command --> VERBATIM_METAPOST.@> 
+@*1 \§command> $\longrightarrow$ \.{VERBATIM\_METAPOST}.
+\§string expression>.
+\initials{LDF 2004.12.13.}
 
 \LOG
-\initials{LDF 2022.04.17.}
+\initials{LDF 2004.12.13.}
 Added this rule.
 \ENDLOG
 
-@<Define rules@>=
-@=verbatim_command: VERBATIM_METAFONT@>@/
-{
-   @=$$@> = VERBATIM_METAFONT_COMMAND;
-};
-
-@q ***** (5) verbatim_command: VERBATIM_METAPOST @>
-@ \§verbatim command> $\longrightarrow$ \.{VERBATIM\_METAPOST}.
-\initials{LDF 2022.04.17.}
-
-\LOG
-\initials{LDF 2022.04.17.}
-Added this rule.
-\ENDLOG
+@q *** (3).@> 
 
 @<Define rules@>=
-@=verbatim_command: VERBATIM_METAPOST@>@/
+@=command: VERBATIM_METAPOST string_expression@>@/
 {
-   @=$$@> = VERBATIM_METAPOST_COMMAND;
-};
 
-@q ***** (5) verbatim_command: VERBATIM_TEX @>
-@ \§verbatim command> $\longrightarrow$ \.{VERBATIM\_TEX}.
-\initials{LDF 2022.04.17.}
+   string* s = static_cast<string*>(@=$2@>); 
 
-\LOG
-\initials{LDF 2022.04.17.}
-Added this rule.
-\ENDLOG
+@q **** (4) Error handling:  |s == 0|.@>   
+
+@ Error handling:  |s == 0|.
+\initials{LDF 2004.12.13.}
 
 @<Define rules@>=
-@=verbatim_command: VERBATIM_TEX@>@/
-{
-   @=$$@> = VERBATIM_TEX_COMMAND;
-};
 
-@q ***** (5) command: verbatim_command string_expression @>
-@ \§command> $\longrightarrow$ \§verbatim command> \§string expression}.
-\initials{LDF 2022.04.17.}
+   if (s == static_cast<string*>(0))
+      {
+          @=$$@> = static_cast<void*>(0);
 
-\LOG
-\initials{LDF 2022.04.17.}
-Added this rule.
-\ENDLOG
+      } /* |s == 0|  */
+
+@q **** (4) |s != 0|.@>   
+
+@ |s != 0|.
+\initials{LDF 2004.12.13.}
 
 @<Define rules@>=
-@=command: verbatim_command string_expression@>@/
-{
-@q ****** (6) @>
 
-  @<Common declarations for rules@>@; 
+   else /* |s != 0|  */
+      {
+         int status = verbatim_metapost_func(static_cast<Scanner_Node>(parameter), s);
 
-#if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
-  if (DEBUG)
-  {
-      cerr_strm << "*** Parser: `command --> verbatim_command string_expression'.";
+@q ***** (5) Error handling:  |verbatim_metapost_func| failed.@>   
 
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-  } 
-#endif /* |DEBUG_COMPILE|  */@;
+@ Error handling:  |verbatim_metapost_func| failed.
+\initials{LDF 2004.12.13.}
 
-  string *s = static_cast<string*>(@=$2@>);
-
-  if (s == 0 || s->size() < 1)
-  {
-      cerr_strm << "WARNING!  In parser, `command --> verbatim_command string_expression':"
-                << endl 
-                << "`string_expression' is NULL or empty.  Not outputting.  Continuing.";
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
+@<Define rules@>=
  
-      goto END_VERBATIM_RULE;
+         if (status != 0)
+         {
 
-  }
+#if 0 
+                cerr_strm << thread_name 
+                          << "ERROR!  In `yyparse()', rule "
+                          << "`verbatim_metapost_command "
+                          << "--> VERBATIM_METAPOST string_expression':"
+                          << endl << "`verbatim_metapost_func()' failed.  "
+                          << "Will try to continue.";
 
-@q ****** (6) @>
+                log_message(cerr_strm); 
+                cerr_message(cerr_strm, error_stop_value); 
+                cerr_strm.str("");
+#endif 
 
-#if DEBUG_COMPILE
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: `command --> verbatim_command string_expression'." << endl 
-                << "`verbatim_command' == " << @=$1@> << endl
-                << "`*static_cast<string*>($2)' == " << *static_cast<string*>(@=$2@>) << endl;
+         } /* |if (status != 0)|  */
 
-      if (@=$1@> == VERBATIM_METAFONT_COMMAND)
-         cerr_strm << " == `VERBATIM_METAFONT_COMMAND'." << endl; 
-      else if (@=$1@> == VERBATIM_METAPOST_COMMAND)
-         cerr_strm << " == `VERBATIM_METAPOST_COMMAND'." << endl; 
-      else if (@=$1@> == VERBATIM_TEX_COMMAND)
-         cerr_strm << " == `VERBATIM_TEX_COMMAND'." << endl; 
-           
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
-#endif /* |DEBUG_COMPILE|  */@;
+@q ***** (5) @>   
 
-@q ****** (6) @>
+         delete s;
 
-    status = verbatim_func(scanner_node, s, @=$1@>);
+         @=$$@> = static_cast<void*>(0);
 
-    if (status != 0)
-    {
-        cerr_strm << "ERROR!  In parser, `command --> verbatim_command string_expression':" 
-                  << endl 
-                  << "`Scan_Parse::verbatim_func' failed, returning " << status << "."
-                  << endl 
-                  << "Failed to write verbatim " << ((@=$1@> == VERBATIM_TEX) ? "TeX " : "")
-                  << "code to " << ((@=$1@> == VERBATIM_METAFONT) ? "METAFONT " : "MetaPost ")
-                  << "file.  Continuing.";
+@q ***** (5).@> 
 
-        log_message(cerr_strm);
-        cerr_message(cerr_strm);
-        cerr_strm.str("");
-
-    }
-
-@q ****** (6) @>
-
-#if DEBUG_COMPILE
-    else if (DEBUG)
-    { 
-        cerr_strm << "In parser, `command --> verbatim_command string_expression':" 
-                  << endl 
-                  << "`Scan_Parse::verbatim_func' succeeded, returning 0."
-                  << endl 
-                  << "Wrote verbatim " << ((@=$1@> == VERBATIM_TEX) ? "TeX " : "")
-                  << "code to " 
-                  << ((@=$1@> == VERBATIM_METAFONT) ? "METAFONT " : "MetaPost ")
-                  << "file successfully.";
-
-        log_message(cerr_strm);
-        cerr_message(cerr_strm);
-        cerr_strm.str("");
- 
-    }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ****** (6) @>
-
-END_VERBATIM_RULE:
-
-    if (s)
-    {
-       delete s;
-       s = 0;
-    }
-
-    @=$$@> = 0;
+   }   /* |else| (|s != 0|)  */  
 
 };
+
 
 @q **** (4) command --> PLOT STARS sphere_expression stars_option_list @>
 
@@ -1169,518 +1070,7 @@ Added this rule.
 
 @q *** (3) @>
 
-@q ** (2) expand_optional.  @>
-@ \§expand optional>.  
-\initials{LDF 2022.04.06.}
-
-\LOG
-\initials{LDF 2022.04.06.}
-Added this type declaration.
-\ENDLOG
-
-@<Type declarations for non-terminal symbols@>=
-@=%type <int_value> expand_optional@>
-
-@q ** (2) expand_optional: EMPTY @>
-@ \§expand optional> $\longrightarrow$ \.{EMPTY}.  
-\initials{LDF 2022.04.06.}
-
-\LOG
-\initials{LDF 2022.04.06.}
-Added this rule
-\ENDLOG 
-
-@<Define rules@>=
-@=expand_optional: /* EMPTY */ @>@/
-{
-   @=$$@> = 0;
-};
-
-@q ** (2) expand_optional: EXPAND @>
-@ \§expand optional> $\longrightarrow$ \.{EXPAND}.  
-\initials{LDF 2022.04.06.}
-
-\LOG
-\initials{LDF 2022.04.06.}
-Added this rule
-\ENDLOG 
-
-@<Define rules@>=
-@=expand_optional: EXPAND @>@/
-{
-   @=$$@> = 1;
-};
-
-@q ** (2) command:  REPLACE CONNECTORS path_variable WITH string_expression expand_optional.  @>
-@ \§command> $\longrightarrow$ \.{REPLACE} \.{CONNECTORS} \§path variable> \.{WITH} 
-\§string expression> \§expand optional> .
-\initials{LDF 2022.04.05.}
-
-\LOG
-\initials{LDF 2022.04.05.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: REPLACE CONNECTORS path_variable WITH string_expression expand_optional@>@/
-{ 
-@q *** (3) @>
-
-   @<Common declarations for rules@>@; 
-
-#if DEBUG_COMPILE
-   DEBUG = false; /* |true| */ @; 
-   if (DEBUG) 
-     {
-         cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTORS path_variable "
-                   << "WITH string_expression expand_optional'."
-                   << endl;
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-
-     }
-#endif /* |DEBUG_COMPILE|  */
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     entry = static_cast<Id_Map_Entry_Node>(@=$3@>);  
-
-     Path *p = static_cast<Path*>(entry->object);
-
-     string *s = static_cast<string*>(@=$5@>);
-
-#if DEBUG_COMPILE
-     if (DEBUG)
-     { 
-
-        cerr << "*s == " << *s << endl;
-
-     }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     status = p->replace_connectors(*s, 0, -1, static_cast<bool>(@=$6@>), scanner_node);
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     if (status != 0)
-     {
-         cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS path_variable "
-                   << "WITH string_expression expand_optional':"
-                   << endl
-                   << "`Path::replace_connectors' failed, returning " << status << "."
-                   << endl
-                   << "Failed to replace connectors on `path'.  Continuing."
-                   << endl;
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-     }
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-#if DEBUG_COMPILE
-     else if (DEBUG)
-     { 
-         cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTORS path_variable "
-                   << "WITH string_expression expand_optional':"
-                   << endl
-                   << "`Path::replace_connectors' succeeded, returning 0."
-                   << endl
-                   << "Replaced connectors on `path'."
-                   << endl;
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-
-     }  
-#endif /* |DEBUG_COMPILE|  */@; 
-        
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     delete s;
-     s = 0;
-
-     @=$$@> = 0;
-
-};
-
-@q ** (2) command:  REPLACE CONNECTOR INTEGER path_variable WITH string_expression expand_optional.  @>
-@ \§command> $\longrightarrow$ \.{REPLACE} \.{CONNECTOR} \.{INTEGER} \§path variable> \.{WITH} 
-\§string expression> \§expand optional>.
-\initials{LDF 2022.04.06.}
-
-\LOG
-\initials{LDF 2022.04.06.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: REPLACE CONNECTOR INTEGER path_variable WITH string_expression expand_optional@>@/
-{ 
-@q *** (3) @>
-
-   @<Common declarations for rules@>@; 
-
-#if DEBUG_COMPILE
-   DEBUG = false; /* |true| */ @; 
-   if (DEBUG) 
-     {
-         cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTOR INTEGER path_variable "
-                   << "WITH string_expression expand_optional'."
-                   << endl;
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-
-     }
-#endif /* |DEBUG_COMPILE|  */
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     entry = static_cast<Id_Map_Entry_Node>(@=$4@>);  
-
-     Path *p = static_cast<Path*>(entry->object);
-
-     string *s = static_cast<string*>(@=$6@>);
-
-     int i = @=$3@>;
-
-#if DEBUG_COMPILE
-     if (DEBUG)
-     { 
-
-        cerr << "i == " << i << endl << "*s == " << *s << endl;
-
-     }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     status = p->replace_connectors(*s, i, i, static_cast<bool>(@=$7@>), scanner_node);
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     if (status != 0)
-     {
-         cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTOR INTEGER path_variable "
-                   << "WITH string_expression expand_optional':"
-                   << endl
-                   << "`Path::replace_connectors' failed, returning " << status << "."
-                   << endl
-                   << "Failed to replace connectors on `path'.  Continuing."
-                   << endl;
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-     }
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-#if DEBUG_COMPILE
-     else if (DEBUG)
-     { 
-         cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTOR INTEGER path_variable "
-                   << "WITH string_expression expand_optional':"
-                   << endl
-                   << "`Path::replace_connectors' succeeded, returning 0."
-                   << endl
-                   << "Replaced connector on `path'."
-                   << endl;
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-
-     }  
-#endif /* |DEBUG_COMPILE|  */@; 
-      
-  
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     delete s;
-     s = 0;
-
-     @=$$@> = 0;
-
-};
-
-@q ** (2) command:  REPLACE CONNECTORS numeric_list path_variable WITH string_expression expand_optional.  @>
-
-@ \§command> $\longrightarrow$ \.{REPLACE} \.{CONNECTORS} \§numeric list> \§path variable> \.{WITH} 
-\§string expression> \§expand optional>.
-\initials{LDF 2022.04.06.}
-
-\LOG
-\initials{LDF 2022.04.06.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: REPLACE CONNECTORS numeric_list path_variable WITH string_expression expand_optional@>@/
-{ 
-@q *** (3) @>
-
-   @<Common declarations for rules@>@; 
-
-#if DEBUG_COMPILE
-   DEBUG = false; /* |true| */ @; 
-   if (DEBUG) 
-     {
-         cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                   << "WITH string_expression expand_optional'."
-                   << endl;
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-
-     }
-#endif /* |DEBUG_COMPILE|  */
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     Pointer_Vector<real>* pv = static_cast<Pointer_Vector<real>*>(@=$3@>);
-
-     entry = static_cast<Id_Map_Entry_Node>(@=$4@>);  
-
-     Path *p = static_cast<Path*>(entry->object);
-
-     string *s = static_cast<string*>(@=$6@>);
- 
-#if DEBUG_COMPILE
-     if (DEBUG)
-     { 
-
-         cerr << "pv->v.size() == " << pv->v.size() << endl;
-
-         cerr << "pv->v:" << endl;
-
-         vector<real*>::iterator iter = pv->v.begin();
-
-         cerr << "(";
-         
-         for (; iter != pv->v.end();)
-         {
-             cerr << **iter;
-
-             ++iter;
-
-             if (iter != pv->v.end())
-                cerr << ", ";
-         }
-
-         cerr << ")" << endl;
-
-     }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     int start;
-     int end;
-
-     if (pv->v.size() == 0)
-     {
-        cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                  << "WITH string_expression expand_optional':"
-                  << endl
-                  << "`numeric_list' is empty.  Can't replace connectors.  Continuing."
-                  << endl;
-
-        log_message(cerr_strm);
-        cerr_message(cerr_strm);
-        cerr_strm.str("");
-
-        goto END_REPLACE_CONNECTORS;
-
-     }
-     else if (pv->v.size() == 1)
-     {
-        start = end = round_real(*(pv->v[0]));
-     }
-     else if (pv->v.size() >= 2)
-     {
-        if (pv->v.size() > 2)
-        {
-            cerr_strm << thread_name << "WARNING!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                      << "WITH string_expression expand_optional':"
-                      << endl 
-                      << "`numeric_list' contains more than 2 elements."
-                      << endl 
-                      << "Using the first and second and ignoring the rest.  Values:" 
-                      << endl   
-                      << "1:  " << *(pv->v[0]) << ", 2:  " << *(pv->v[1]) << endl
-                      << "Continuing."
-                      << endl;
-
-            log_message(cerr_strm);
-            cerr_message(cerr_strm);
-            cerr_strm.str("");
-
-        }
-
-        start = round_real(*(pv->v[0]));
-        end   = round_real(*(pv->v[1]));
-
-     }  /* |else if| */
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     if (start < 0 || end < 0)
-     {
-        cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                  << "WITH string_expression expand_optional':"
-                  << endl
-                  << "`int start' and/or `int end' is negative:" << endl 
-                  << "`start' == " << start << ", `end' == " << end << endl
-                  << "Can't replace connectors.  Continuing."
-                  << endl;
-
-        log_message(cerr_strm);
-        cerr_message(cerr_strm);
-        cerr_strm.str("");
-
-        goto END_REPLACE_CONNECTORS;
-
-     }  /* |if (start < 0 || end < 0)| */
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     if (start > end)
-     {
-@q **** (4) @>
-
-         cerr_strm << thread_name << "WARNING!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                   << "WITH string_expression expand_optional':"
-                   << endl 
-                   << "`int start' == " << start << " > `int end' == " << end << endl
-                   << "Exchanging the values and continuing."
-                   << endl;
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-
-         int i = start;
-         start = end;
-         end = i;
-
-@q **** (4) @>
-
-#if DEBUG_COMPILE
-         if (DEBUG)
-         { 
-            cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                      << "WITH string_expression expand_optional':"
-                      << endl 
-                      << "After exchange:  `int start' == " << start << " > `int end' == " << end
-                      << endl;
-
-            log_message(cerr_strm);
-            cerr_message(cerr_strm);
-            cerr_strm.str("");
-
-         }     
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q **** (4) @>
-
-     } /* |if (start > end)| */
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-     status = p->replace_connectors(*s, start, end, static_cast<bool>(@=$7@>), scanner_node);
-
-     if (status != 0)
-     {
-         cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                   << "WITH string_expression expand_optional':"
-                   << endl
-                   << "`Path::replace_connectors' failed, returning " << status << "."
-                   << endl
-                   << "Failed to replace connectors on `path'.  Continuing."
-                   << endl;
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-     }
-
-@q *** (3) @>
-@
-@<Define rules@>=
-
-#if DEBUG_COMPILE
-     else if (DEBUG)
-     { 
-         cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                   << "WITH string_expression expand_optional':"
-                   << endl
-                   << "`Path::replace_connectors' succeeded, returning 0."
-                   << endl
-                   << "Replaced connectors on `path'."
-                   << endl;
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-
-     }  
-#endif /* |DEBUG_COMPILE|  */@; 
-  
-@q *** (3) @>
-@
-@<Define rules@>=
-
-END_REPLACE_CONNECTORS:
-
-     delete s;
-     s = 0;
-
-     delete pv;
-     pv = 0;
-
-@=$$@> = 0;
-
-};
+@q ** (2) @>
 
 @q * (1) @>
 

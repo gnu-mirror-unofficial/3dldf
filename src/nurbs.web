@@ -185,7 +185,7 @@ This argument isn't used in these functions yet.
 
   virtual Shape* get_copy(void) const  {return 0;}
   virtual void clear(void) {return;}
-  virtual void output(Scanner_Node, unsigned int) {return;}
+  virtual void output(Scanner_Node) {return;}
   virtual vector<Shape*> extract(const Focus&,
                                  const unsigned short proj,
                                  real factor) {vector<Shape*> v;  return v;}
@@ -2021,8 +2021,7 @@ void
 show(string text = "", char coords = 'w',
      const bool do_persp = true, const bool do_apply = true,
      Focus* f = 0, const unsigned short proj = 0,
-     const real factor = 1,
-     int show_connectors = 0) const;
+     const real factor = 1) const;
 
 @q *** (3) Definition.@> 
 
@@ -2035,8 +2034,7 @@ Nurb::show(string text,
            const bool do_apply,
            Focus* f, 
            const unsigned short proj,
-           const real factor,
-           int show_connectors) const
+           const real factor) const
 {
    if (text == "")
       text = "Nurb:";

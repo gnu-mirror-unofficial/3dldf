@@ -511,20 +511,27 @@ Replaced code with a call to |Scan_Parse::show_func|.
    }
 #endif /* |DEBUG_COMPILE|  */
 
+    Picture *p = 0;
+
     Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
 
     if (entry && entry->object)
     {
-       /* Testing LDF 2022.04.15. */
-       Scan_Parse::show_func<Picture>(static_cast<Picture*>(entry->object),
-                                     "picture",
-                                     parameter,
-                                     0,          
-                                     false); 
+       p = static_cast<Picture*>(entry->object);
+       
+       if (p->shapes.size() > 0 || p->labels.size() > 0)
+         p->show("Picture:");
     }
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+      cerr << "Not showing picture." << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
 
     @=$$@> = static_cast<void*>(0);
-
 
 };
 
@@ -702,7 +709,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `command --> SHOW STARS stars_field_list stars_option_list'.";
@@ -788,7 +795,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_list:  EMPTY'.";
@@ -827,7 +834,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_list: stars_field_list stars_field_specifier'.";
@@ -840,7 +847,7 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_list: stars_field_list stars_field_specifier':"
@@ -874,7 +881,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_list: stars_field_list COMMA stars_field_specifier'.";
@@ -887,7 +894,7 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_list: stars_field_list COMMA stars_field_specifier':"
@@ -936,7 +943,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_option_list:  EMPTY'.";
@@ -972,7 +979,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_option_list: stars_option_list order_by stars_order_by_list'.";
@@ -1017,7 +1024,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `order_by: ORDER BY'."
@@ -1049,7 +1056,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `order_by: ORDER_BY'."
@@ -1094,7 +1101,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_element'."
@@ -1110,7 +1117,7 @@ Added this rule.
    scanner_node->stars_get_option_struct->order_by_options.push_back(@=$1@>);
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_element':"
@@ -1142,7 +1149,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_list COMMA stars_order_by_element'.";
@@ -1157,7 +1164,7 @@ Added this rule.
   scanner_node->stars_get_option_struct->order_by_options.push_back(@=$3@>);
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_list COMMA stars_order_by_element'."
@@ -1191,7 +1198,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_order_by_element: stars_field_specifier'.";
@@ -1206,7 +1213,7 @@ Added this rule.
    @=$$@> = @=$1@>;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_order_by_element: stars_field_specifier':"
@@ -1251,7 +1258,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: STAR_CONSTANT_NAME'.";
@@ -1266,7 +1273,7 @@ Added this rule.
    @=$$@> = STARS_STAR_CONSTANT_NAME;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: STAR_CONSTANT_NAME':"
@@ -3038,169 +3045,10 @@ Added this rule.
 
 };
 
-@q ** (2) show_path_option_list.@>
-@*1 \§show path option list>.
-\initials{LDF 2022.04.04.}
+@q **** (4) command --> SHOW path_expression@>
 
-\LOG
-\initials{LDF 2022.04.04.}
-Added this type declaration.
-\ENDLOG
-
-@<Type declarations for non-terminal symbols@>=
-@=%type <int_value> show_path_option_list@>
-
-@q *** (3) show_path_option_list: /* Empty  */@>
-@*2 \§show path option list> $\longrightarrow$ \.{EMPTY}.
-\initials{LDF 2022.04.04.}
-
-\LOG
-\initials{LDF 2022.04.04.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=show_path_option_list: /*  Empty  */@>@/
-{
-  @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: Rule `show_path_option_list: EMPTY'.";
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-   @=$$@> = 0; 
-};
-
-@q *** (3) show_path_option_list: show_path_option_list QUIET @>
-@*2 \§show path option list> $\longrightarrow$ \§show path option list> \.{QUIET}.
-\initials{LDF 2022.04.04.}
-
-\LOG
-\initials{LDF 2022.04.04.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=show_path_option_list: show_path_option_list QUIET @>@/
-{
-  @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: Rule `show_path_option_list: show_path_option_list QUIET'.";
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-   unsigned int i = @=$1@> & ~2U;  /* Turn off ``verbose'' before turning on ``quiet''.  */
-
-   @=$$@> = i | 1;
-};
-
-@q *** (3) show_path_option_list: show_path_option_list VERBOSE @>
-@*2 \§show path option list> $\longrightarrow$ \§show path option list> \.{VERBOSE}.
-\initials{LDF 2022.04.04.}
-
-\LOG
-\initials{LDF 2022.04.04.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=show_path_option_list: show_path_option_list VERBOSE @>@/
-{
-  @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: Rule `show_path_option_list: show_path_option_list VERBOSE'.";
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-   unsigned int i = @=$1@> & ~1U;  /* Turn off ``quiet'' before turning on ``verbose''.  */
-
-   @=$$@> = i | 2;
-
-};
-
-@q *** (3) show_path_option_list: show_path_option_list WITH_CONNECTORS @>
-@*2 \§show path option list> $\longrightarrow$ \.{WITH\_CONNECTORS}.
-\initials{LDF 2022.04.05.}
-
-\LOG
-\initials{LDF 2022.04.05.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=show_path_option_list: show_path_option_list WITH_CONNECTORS@>@/
-{
-  @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: Rule `show_path_option_list: show_path_option_list WITH_CONNECTORS'.";
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-   @=$$@> = @=$1@> | 4;
-
-};
-
-@q *** (3) show_path_option_list: show_path_option_list WITH_CONNECTORS numeric_expression @>
-@*2 \§show path option list> $\longrightarrow$ \.{WITH\_CONNECTORS} \§numeric expression>.
-\initials{LDF 2022.04.05.}
-
-\LOG
-\initials{LDF 2022.04.05.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=show_path_option_list: show_path_option_list WITH_CONNECTORS INTEGER@>@/
-{
-  @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: Rule `show_path_option_list: show_path_option_list "
-                << "WITH_CONNECTORS INTEGER'.";
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-    int i = (@=$3@> <= 0) ? 4 : 8 * min(@=$3@>, 2);
-
-    @=$$@> = @=$1@> | i;
-
-};
-
-@*3 \§command> $\longrightarrow$ \.{SHOW} \§path expression> \§show path option list>.
+@*3 \§command> $\longrightarrow$ \.{SHOW}
+\§path expression>.
 \initials{LDF 2004.11.22.}
 
 \LOG
@@ -3212,78 +3060,17 @@ Added this rule.
 
 \initials{LDF 2005.10.31.}
 Replaced code with a call to |Scan_Parse::show_func|.
-
-\initials{LDF 2022.04.05.}
-Added \§show path option list>.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
 
 @<Define rules@>= 
   
-@=command: SHOW path_expression show_path_option_list@>@/
+@=command: SHOW path_expression@>@/
 {
-
-  @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: Rule `command: SHOW path_expression show_path_option_list.'";
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-
-      cerr << "Option list:  $3 (hex) == " << hex << @=$3@> << dec << endl;
-
-    }
-
-#endif /* |DEBUG_COMPILE|  */@;
-
-    Path *p = static_cast<Path*>(@=$2@>);
-    p->show("path", 'w', true, true, 0, Projections::persp, 1, @=$3@>);
-
-    delete p;
-    p = 0;
-
-    @=$$@> = static_cast<void*>(0);
-};
-
-@*3 \§command> $\longrightarrow$ \.{SHOW} \.{CONNECTORS} \§path expression>.
-\initials{LDF 2022.04.06.}
-
-\LOG
-\initials{LDF 2022.04.06.}
-Added this rule.
-\ENDLOG
-
-@q ****** (6) Definition.@> 
-
-@<Define rules@>= 
-  
-@=command: SHOW CONNECTORS path_expression@>@/
-{
-
-  @<Common declarations for rules@>@;
-
-#if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: Rule `command: SHOW CONNECTORS path_expression.'";
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
-
-#endif /* |DEBUG_COMPILE|  */@;
-
-    Path *p = static_cast<Path*>(@=$3@>);
-    p->show_connectors(0, -1, "Connectors:", scanner_node);
-
-    delete p;
-    p = 0;
+    Scan_Parse::show_func<Path>(static_cast<Path*>(@=$2@>),
+                                      "path",
+                                      parameter);
 
     @=$$@> = static_cast<void*>(0);
 };
@@ -3312,8 +3099,8 @@ Replaced code with a call to |Scan_Parse::show_func|.
 @=command: SHOW ellipse_expression@>@/
 {
     Scan_Parse::show_func<Ellipse>(static_cast<Ellipse*>(@=$2@>),
-                                   "ellipse",
-                                   parameter);
+                                      "ellipse",
+                                      parameter);
 
     @=$$@> = static_cast<void*>(0);
 };
@@ -6736,7 +6523,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-   DEBUG = false; /* |true|  */
+   DEBUG = true; /* |false|  */
 
    if (DEBUG)
    { 
