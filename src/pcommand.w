@@ -557,20 +557,86 @@ Added this rule.
       }   /* |else| (|str_ptr != 0|)  */
 };
 
-@q ** (2) command --> VERBATIM_METAPOST.@> 
-@*1 \§command> $\longrightarrow$ \.{VERBATIM\_METAPOST}.
-\§string expression>.
-\initials{LDF 2004.12.13.}
+@q ** (2) verbatim_command. @>
+
+@ \§verbatim command>.
+\initials{LDF 2022.04.18.}
 
 \LOG
-\initials{LDF 2004.12.13.}
+\initials{LDF 2022.04.18.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> verbatim_command@>
+
+@q ** (2) verbatim_command --> VERBATIM_METAPOST.@> 
+@*1 \§verbatim command> $\longrightarrow$ \.{VERBATIM\_METAPOST}.
+\initials{LDF 2022.04.18.}
+
+\LOG
+\initials{LDF 2022.04.18.}
 Added this rule.
 \ENDLOG
 
 @q *** (3).@> 
 
 @<Define rules@>=
-@=command: VERBATIM_METAPOST string_expression@>@/
+@=verbatim_command: VERBATIM_METAPOST@>@/
+{
+   @=$$@> = Scan_Parse::VERBATIM_METAPOST_COMMAND;
+ 
+};
+
+@q ** (2) verbatim_command --> VERBATIM_TEX.@> 
+@*1 \§verbatim command> $\longrightarrow$ \.{VERBATIM\_TEX}.
+\initials{LDF 2022.04.18.}
+
+\LOG
+\initials{LDF 2022.04.18.}
+Added this rule.
+\ENDLOG
+
+@q *** (3).@> 
+
+@<Define rules@>=
+@=verbatim_command: VERBATIM_TEX@>@/
+{
+   @=$$@> = Scan_Parse::VERBATIM_TEX_COMMAND;
+ 
+};
+
+@q ** (2) verbatim_command --> VERBATIM_METAFONT.@> 
+@*1 \§verbatim command> $\longrightarrow$ \.{VERBATIM\_METAFONT}.
+\initials{LDF 2022.04.18.}
+
+\LOG
+\initials{LDF 2022.04.18.}
+Added this rule.
+\ENDLOG
+
+@q *** (3).@> 
+
+@<Define rules@>=
+@=verbatim_command: VERBATIM_METAFONT@>@/
+{
+   @=$$@> = Scan_Parse::VERBATIM_METAFONT_COMMAND;
+ 
+};
+
+@q ** (2) command --> verbatim_command string_expression.@> 
+@*1 \§command> $\longrightarrow$ \§verbatim command> \§string expression>.
+\initials{LDF 2022.04.18.}
+
+\LOG
+\initials{LDF 2022.04.18.}
+Added this rule.
+\ENDLOG
+
+@q *** (3).@> 
+
+@<Define rules@>=
+@=command: verbatim_command string_expression@>@/
 {
 
    @<Common declarations for rules@>@; 
@@ -599,7 +665,7 @@ Added this rule.
 
    else /* |s != 0|  */
    {
-         int status = verbatim_func(static_cast<Scanner_Node>(parameter), s);
+         int status = verbatim_func(static_cast<Scanner_Node>(parameter), s, @=$1@>);
 
 @q ***** (5) Error handling:  |verbatim_func| failed.@>   
 
@@ -612,8 +678,7 @@ Added this rule.
          {
                 cerr_strm << thread_name 
                           << "ERROR!  In `yyparse()', rule "
-                          << "`verbatim_metapost_command "
-                          << "--> VERBATIM_METAPOST string_expression':"
+                          << "`command: verbatim_command string_expression':"
                           << endl << "`verbatim_func' failed.  "
                           << "Will try to continue.";
 
