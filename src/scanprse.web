@@ -191,6 +191,10 @@ I've replaced them with preprocessor macros of the same name.
 Put |MAX_FILE_ARGS| inside the first pair of square brackets
 in the declaration of 
 |char filename_array[MAX_FILE_ARGS][MAX_FILENAME]|.
+
+\initials{LDF 2022.04.18.}
+Added the |extern const unsigned int| constants |VERBATIM_METAPOST_COMMAND|, 
+|VERBATIM_TEX_COMMAND| and |VERBATIM_METAFONT_COMMAND|.
 \ENDLOG 
 
 @<Declare |namespace Scan_Parse|@>=
@@ -213,9 +217,15 @@ Scan_Parse
   vector<string> in_filename_vector;
   vector<string> out_filename_vector;
 
+  extern const unsigned int VERBATIM_METAPOST_COMMAND = 1;
+  extern const unsigned int VERBATIM_TEX_COMMAND      = 2;
+  extern const unsigned int VERBATIM_METAFONT_COMMAND = 4;
+
   @<|struct Picture_Output_Arg_Type| declaration@>@;
 
   @<Declare |Scan_Parse| functions@>@;
+
+
 
 };
 
@@ -239,6 +249,11 @@ Scan_Parse
 
    extern vector<string> in_filename_vector;
    extern vector<string> out_filename_vector;
+
+   extern const unsigned int VERBATIM_METAPOST_COMMAND;
+   extern const unsigned int VERBATIM_TEX_COMMAND;
+   extern const unsigned int VERBATIM_METAFONT_COMMAND;
+
 
    @<|struct Picture_Output_Arg_Type| declaration@>@;
 
