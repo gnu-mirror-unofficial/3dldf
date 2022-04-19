@@ -2804,6 +2804,9 @@ Added token declarations for |WITH_AMPERSAND| and |WITH_NO_AMPERSAND|.
 
 \initials{LDF 2022.04.04.}
 Added token declarations for |QUIET| and |VERBOSE|.
+
+LDF 2022.04.19.
+Added token declarations for |TEST_PLANAR| and |MAKE_PLANAR|.
 \ENDLOG
 
 @q **** (4) Code.@> 
@@ -2823,6 +2826,8 @@ Added token declarations for |QUIET| and |VERBOSE|.
 @=%token <int_value> WITH_NO_TRANSFORM@>@/
 @=%token <int_value> WITH_AMPERSAND@>@/
 @=%token <int_value> WITH_NO_AMPERSAND@>@/
+@=%token <int_value> TEST_PLANAR@>@/
+@=%token <int_value> MAKE_PLANAR@>@/
 
 @=%token <int_value> WITH_CONNECTORS@>@/
 
