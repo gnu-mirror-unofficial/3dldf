@@ -276,6 +276,9 @@ Added this section.
 \LOG
 \initials{LDF 2005.12.05.}
 Added |unsigned long long ulong_long_value|.
+
+\initials{LDF 2022.04.19.}
+Added |unsigned int uint_value|.
 \ENDLOG 
 
 @<Union declaration for |YYSTYPE|@>=
@@ -285,6 +288,7 @@ Added |unsigned long long ulong_long_value|.
   char string_value[64];
   double real_value;
   signed int int_value;
+  unsigned int uint_value;
   unsigned long long ulong_long_value;
   void* pointer_value;
 };
