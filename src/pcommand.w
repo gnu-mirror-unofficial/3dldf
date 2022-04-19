@@ -225,14 +225,32 @@ getchar();
     cerr_message(cerr_strm);
     cerr_strm.str("");
 
-    cerr << "resolve_option_list == " << @=$10@> << " == 0x" << hex << @=$10@> 
-         << dec << endl;
+
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  bool save             = @=$10@> &  1U; 
+  bool with_transform   = @=$10@> &  2U; 
+  bool with_ampersand   = @=$10@> &  4U; 
+  bool test_planar      = @=$10@> &  8U; 
+  bool make_planar      = @=$10@> & 16U; 
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+  { 
+     cerr << "resolve_option_list == " << @=$10@> << " == 0x" << hex << @=$10@> 
+          << dec << endl
+          << "save == " << save << endl
+          << "with_transform == " << with_transform << endl
+          << "with_ampersand == " << with_ampersand << endl
+          << "test_planar == " << test_planar << endl
+          << "make_planar == " << make_planar << endl;
 
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar();  
 
-  }
-#endif /* |DEBUG_COMPILE|  */@;
+  }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
@@ -240,7 +258,12 @@ getchar();
                               static_cast<int>(@=$9@>), 
                               static_cast<int>(@=$4@>), 
                               static_cast<int>(@=$6@>), 
-                              scanner_node);
+                              scanner_node,
+                              !save,
+                              with_transform,
+                              test_planar,
+                              make_planar,
+                              with_ampersand);
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -251,7 +274,7 @@ getchar();
               << "numeric_expression RIGHT_PARENTHESIS "
               << "TO numeric_expression resolve_option_list:"
               << endl 
-              << "`Path::resolve' returned " << status << "." << endl;
+              << "`Path::resolve' returned " << status << ".";
 
     log_message(cerr_strm);
     cerr_message(cerr_strm);
@@ -335,7 +358,7 @@ Added this type declaration.
 @<Define rules@>= 
 @=resolve_option_list: /* Empty  */@>
 {
-   @=$$@> = 0U;
+   @=$$@> = (2U | 8U | 16U);
 };
 
 @q **** (4) @>
@@ -350,10 +373,39 @@ Added this type declaration.
 @q **** (4) @>
 @
 @<Define rules@>= 
-@=resolve_option_list: resolve_option_list WITH_NO_TRANSFORM@>
+@=resolve_option_list: resolve_option_list NO_SAVE@>
+{
+
+   @=$$@> = @=$1@> &= ~1U;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: resolve_option_list WITH_TRANSFORM@>
 {
 
    @=$$@> = @=$1@> |= 2U;
+};
+
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: resolve_option_list WITH_NO_TRANSFORM@>
+{
+
+   @=$$@> = @=$1@> &= ~2U;
+};
+
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: resolve_option_list WITH_AMPERSAND@>
+{
+
+   @=$$@> = @=$1@> |= 4U;
 };
 
 @q **** (4) @>
@@ -368,28 +420,10 @@ Added this type declaration.
 @q **** (4) @>
 @
 @<Define rules@>= 
-@=resolve_option_list: resolve_option_list WITH_AMPERSAND@>
-{
-
-   @=$$@> = @=$1@> |= 4;
-};
-
-@q **** (4) @>
-@
-@<Define rules@>= 
 @=resolve_option_list: resolve_option_list TEST_PLANAR@>
 {
 
-   @=$$@> = @=$1@> |= 8;
-};
-
-@q **** (4) @>
-@
-@<Define rules@>= 
-@=resolve_option_list: resolve_option_list MAKE_PLANAR@>
-{
-
-   @=$$@> = @=$1@> |= 16;
+   @=$$@> = @=$1@> |= 8U;
 };
 
 @q **** (4) @>
@@ -398,8 +432,18 @@ Added this type declaration.
 @=resolve_option_list: resolve_option_list NO_TEST_PLANAR@>
 {
 
-   @=$$@> = @=$1@> &= ~8;
+   @=$$@> = @=$1@> &= ~8U;
 };
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: resolve_option_list MAKE_PLANAR@>
+{
+
+   @=$$@> = @=$1@> |= 16U;
+};
+
 
 @q **** (4) @>
 @
@@ -407,10 +451,8 @@ Added this type declaration.
 @=resolve_option_list: resolve_option_list NO_MAKE_PLANAR@>
 {
 
-   @=$$@> = @=$1@> &= ~16;
+   @=$$@> = @=$1@> &= ~16U;
 };
-
-
 
 @q ** (2) command --> group_command.  @>
 @*1 \§command> $\longrightarrow$ \§group command>.

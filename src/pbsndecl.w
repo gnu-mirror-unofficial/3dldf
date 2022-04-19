@@ -2563,6 +2563,7 @@ Added token declaration for |SCANNER_NODE|.
 @=%token <int_value> END_GROUP@>@/
 @=%token <int_value> SCANNER_NODE@>@/
 @=%token <int_value> SAVE@>@/
+@=%token <int_value> NO_SAVE@>@/
 @=%token <int_value> RESTORE@>@/
 @=%token <int_value> DATABASE@>@/
 @=%token <int_value> ALL@>@/

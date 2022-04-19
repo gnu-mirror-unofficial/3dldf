@@ -14782,12 +14782,18 @@ Path::resolve(int res_val,
    if (DEBUG)
    { 
        cerr << "Entering `Path::resolve'." << endl
-            << "`res_val'      == " << res_val << endl 
-            << "`begin'        == " << begin << endl 
-            << "`end'          == " << end << endl 
-            << "`do_unlink'    == " << do_unlink << endl 
-            << "`do_transform' == " << do_transform << endl
-            << "`do_ampersand' == " << do_ampersand << endl;
+            << "`res_val'        == " << res_val << endl 
+            << "`begin'          == " << begin << endl 
+            << "`end'            == " << end << endl 
+            << "`do_unlink'      == " << do_unlink << endl 
+            << "`do_transform'   == " << do_transform << endl
+            << "`do_ampersand'   == " << do_ampersand << endl
+            << "`do_test_planar' == " << do_test_planar << endl 
+            << "`do_make_planar' == " << do_make_planar << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -14829,7 +14835,6 @@ Path::resolve(int res_val,
 
       begin = 0;
    }
-   
 
    if (end >= points.size())
    {
@@ -14881,7 +14886,7 @@ Path::resolve(int res_val,
 
     bool b;
 
-    if (do_transform && (b = !is_planar(&normal)))
+    if (do_test_planar && (b = !is_planar(&normal)))
     {
         cerr << "ERROR!  In `Path::resolve':"
              << endl 
@@ -14896,16 +14901,15 @@ Path::resolve(int res_val,
 #if DEBUG_COMPILE
     else if (DEBUG)
     {
-        cerr << "`do_transform' is `false' and/or path is planar." 
+        cerr << "`do_test_planar' is `false' and/or path is planar." 
              << endl
-             << "`do_transform' == " << do_transform << endl;
+             << "`do_test_planar' == " << do_test_planar << endl;
 
-        if (do_transform)
-             cerr << "Path is planar:  " << b << endl;
+        if (do_test_planar)
+           xcerr << "Path is planar:  " << b << endl;
 
         if (b)
         {
-
            normal.show("In `Path::resolve':  normal:");
         }
     }
