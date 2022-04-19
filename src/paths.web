@@ -14761,6 +14761,8 @@ Path::resolve(int res_val,
 
    bool DEBUG = true; /* |false| */ 
 
+   bool do_subpath;
+
    Point p0;
    Point normal;
    Transform t;
@@ -14798,8 +14800,6 @@ Path::resolve(int res_val,
 #endif /* |DEBUG_COMPILE|  */@; 
 
    }  /* |if (end < 0)| */
-
-   return 0;  /* Testing.  LDF 2022.04.19.  */
 
 @q **** (4) @>
 @
@@ -14840,23 +14840,79 @@ Path::resolve(int res_val,
    }
 
 @q **** (4) @>
+
+   if (begin == end)
+   {
+      cerr << "ERROR!  In `Path::resolve':  `begin' == `end' == " << begin 
+           << endl
+           << "A subpath of one point cannot be resolved."
+           << endl
+           << "Exiting function unsuccessfully with return value 1."
+           << endl;
+
+      return 1;
+   }
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+      cerr << "In `Path::resolve':  `begin' == " << begin << ", "
+           << "`end' == " << end << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   do_subpath = (begin > 0 || end < points.size() - 1) ? true : false;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "In `Path::resolve':  `do_subpath' == " << do_subpath
+           << endl;
+   } 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+@q **** (4) @>
 @
 @<Define |Path| functions@>=
 
-    if (!is_planar(&normal))
+    bool b;
+
+    if (do_transform && (b = !is_planar(&normal)))
     {
         cerr << "ERROR!  In `Path::resolve':"
              << endl 
-             << "`Path' is not planar.  Can't resolve it." << endl 
+             << "`do_transform' is `true' and path is not planar."
+             << endl 
+             << "Can't resolve it." << endl 
              << "Exiting function unsuccessfully with return value 1."
              << endl;
 
         return 1;
     }  
+#if DEBUG_COMPILE
     else if (DEBUG)
     {
-        cerr << "Path is planar." << endl;
+        cerr << "`do_transform' is `false' and/or path is planar." 
+             << endl
+             << "`do_transform' == " << do_transform << endl;
+
+        if (do_transform)
+             cerr << "Path is planar:  " << b << endl;
+
+        if (b)
+        {
+
+           normal.show("In `Path::resolve':  normal:");
+        }
     }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+/* !!START HERE:  LDF 2022.04.19.  Add code for optionally testing planarity
+   and also for making path planar if there are small inaccuracies after
+   transferring it to the x-y plane.
+*/ 
+
+    return 0;  /* Testing.  LDF 2022.04.19.  */
 
 @q **** (4) @>
 @
@@ -14871,57 +14927,87 @@ Path::resolve(int res_val,
 
      int i = 0;
 
+     Path q_full(*this);
+
      Path q_begin;
      Path q_middle;
      Path q_end;
 
-     for(;pt_iter != points.end(); ++pt_iter)
+@q **** (4) @>     
+
+     if (do_subpath)
      {
+         for(;pt_iter != points.end(); ++pt_iter)
+         {
 
-        if (i < begin)
-        {
-            q_begin += **pt_iter;          
-            q_begin += **ct_iter;          
-        }
-        else if (i >= begin && i < end)
-        {
-            q_middle += **pt_iter;          
-            q_middle += **ct_iter;          
-        }
-        else if (i == end)
-        {
-            q_middle += **pt_iter;          
-            q_middle += **ct_iter;
-            q_end += **pt_iter;          
-            q_end += **ct_iter;          
-        }
-        else
-        {
-            q_end += **pt_iter;          
-            q_end += **ct_iter;          
-        }
+            if (i < begin)
+            {
+                q_begin += **pt_iter;          
+                q_begin += **ct_iter;          
+            }
+            else if (i >= begin && i < end)
+            {
+                q_middle += **pt_iter;          
+                q_middle += **ct_iter;          
+            }
+            else if (i == end)
+            {
+                q_middle += **pt_iter;          
+                q_middle += **ct_iter;
+                q_end += **pt_iter;          
+                q_end += **ct_iter;          
+            }
+            else
+            {
+                q_end += **pt_iter;          
+                q_end += **ct_iter;          
+            }
 
-        if (ct_iter != connector_type_vector.end())
-           ++ct_iter;
+            if (ct_iter != connector_type_vector.end())
+               ++ct_iter;
 
-        if (ct_iter == connector_type_vector.end())
-           --ct_iter;
+            if (ct_iter == connector_type_vector.end())
+               --ct_iter;
 
-        ++i;
+            ++i;
 
-     } /* |for|  */
+         } /* |for|  */
+
+     }  /* |if (do_subpath)|  */
+
 
 @q **** (4) @>
 
-     if (q_middle.size() ==  0)
+     if (do_subpath && q_middle.size() ==  0)
      {
-        cerr << "ERROR!  In `Path::resolve' (version 2, for subpath):"
+        cerr << "ERROR!  In `Path::resolve':"
              << endl 
-             << "`Path q_middle' is empty.  Exiting function unsuccessfully with return value 1."
+             << "`do_subpath' is `true' and `Path q_middle' is empty."
+             << endl 
+             << "Can't resolve subpath.  "
+             << "Exiting function unsuccessfully with return value 1."
              << endl;
 
         return 1;
      } 
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+       cerr << "In `path::resolve':" << endl
+            << "`do_subpath' == " << do_subpath << endl;
+
+       if (do_subpath)
+       {
+          q_middle.show("q_middle:");
+       }
+       else
+       {
+          q_full.show("q_full:");
+       }
+    }  
+#endif /* |DEBUG_COMPILE|  */@;     
+
 
 @q **** (4) @>
 @
@@ -14930,18 +15016,18 @@ Path::resolve(int res_val,
     if (do_transform)
     {
 @q ***** (5) @>
+  
+       if (do_subpath)
+          p0 = q_middle.get_point(0);
+       else
+          p0 = q_full.get_point(0);
 
-       p0 = q_middle.get_point(0);
-
-       normal = q_middle.get_normal();
+       normal = get_normal();
 
 #if DEBUG_COMPILE
        if (DEBUG)
        { 
-          normal.show("normal:");
-
-          cerr << "`q_middle.is_planar' returned status == " << status << endl;
-
+          normal.show("In `Path::resolve':\nnormal:");
        }    
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -14954,10 +15040,8 @@ Path::resolve(int res_val,
 
        R.set(p0, normal);
 
-       if (do_transform)
-       {
-          t.align_with_axis(p0, normal);
-          R *= t;
+       t.align_with_axis(p0, normal);
+       R *= t;
 
 #if DEBUG_COMPILE
           if (DEBUG)
@@ -14968,27 +15052,28 @@ Path::resolve(int res_val,
           }  
 #endif /* |DEBUG_COMPILE|  */@;
 
-       }
-
-@q ***** (5) @>
-
 #if DEBUG_COMPILE
        if (DEBUG)
        { 
-
-           cerr << "`q_middle' before transform:" << endl;
-           q_middle.show("q_middle:");
+           cerr << "`q_full' before transform:" << endl;
+           q_full.show("q_full:");
 
        }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           q_middle *= t;
+           q_full *= t;
+
+           if (do_subpath)
+           {
+
+           }
+
 
 #if DEBUG_COMPILE
        if (DEBUG)
        { 
-           cerr << "`q_middle' after transform:" << endl;
-           q_middle.show("q_middle:");
+           cerr << "`q_full' after transform:" << endl;
+           q_full.show("q_full:");
        }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -14996,22 +15081,16 @@ Path::resolve(int res_val,
 
 @q **** (4) @>
 
-     /* !!START HERE:  LDF 2022.04.18.  This doesn't work.  
-        It seems to work when the numbers for the subpath are 
-        far enough apart, but it doesn't really work.
 
-        I have to output the whole path and use MP to find the subpath.
-     */
-
-     status = q_middle.resolve(res_val, begin, end, scanner_node, do_unlink, false);
+     status = q_full.resolve(res_val, begin, end, scanner_node, do_unlink, false);
 
      if (status != 0)
      {
-        cerr << "ERROR!  In `Path::resolve' (version 2, for subpath):"
+        cerr << "ERROR!  In `Path::resolve':"
              << endl 
              << "`Path::resolve' (version 1, for entire path) failed, returning " << status << "." 
              << endl
-             << "Failed to resolve `Path q_middle'."
+             << "Failed to resolve `Path q_full'."
              << endl 
              << "Exiting function unsuccessfully with return value 1."
              << endl;
@@ -15025,15 +15104,15 @@ Path::resolve(int res_val,
 #if DEBUG_COMPILE
      else if (DEBUG)
      { 
-          cerr << "In `Path::resolve' (version 2, for subpath):"
+          cerr << "In `Path::resolve':"
                << endl 
                << "`Path::resolve' (version 1, for entire path) succeeded, returning 0."
                << endl
-               << "Resolved `Path q_middle' successfully."
+               << "Resolved `Path q_full' successfully."
                << endl;
 
           q_begin.show("q_begin:"); 
-          q_middle.show("q_middle:"); 
+          q_full.show("q_middle:"); 
           q_end.show("q_end:"); 
 
      }  
@@ -15068,7 +15147,7 @@ Added this section.
 #if DEBUG_COMPILE
         if (DEBUG)
         { 
-          cerr << "In `Path::resolve' (version 2, for subpath):"
+          cerr << "In `Path::resolve':"
                << endl 
                << "`do_ampersand' is `true'." << endl;
         }  
@@ -15085,7 +15164,7 @@ Added this section.
            *this += "..";
         }
 
-        this->append(q_middle, "&");
+        append(q_middle, "&");
 
         if (q_middle.get_last_point() != q_end.get_point(0))
         {
@@ -15093,7 +15172,7 @@ Added this section.
            *this += "..";
         }
 
-        this->append(q_end, "&");
+        append(q_end, "&");
 
 @q ***** (5) @>
 
@@ -15113,7 +15192,7 @@ Added this section.
 #if DEBUG_COMPILE
         if (DEBUG)
         { 
-          cerr << "In `Path::resolve' (version 2, for subpath):"
+          cerr << "In `Path::resolve':"
                << endl 
                << "`do_ampersand' is `false'." << endl;
         }  
@@ -15121,9 +15200,9 @@ Added this section.
 
         *this = q_begin;
 
-        this->append(q_middle, "..");
+        append(q_middle, "..");
 
-        this->append(q_end, "..");
+        append(q_end, "..");
 
      } /* |else| */
 
