@@ -10798,7 +10798,7 @@ bool
 Path::is_planar(Point *normal, bool verbose, string text) const
 {
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */@; 
+  bool DEBUG = true; /* |false| */@; 
 #endif /* |DEBUG_COMPILE|  */@;
 
 if (VERBOSE_GLOBAL)
@@ -14886,15 +14886,18 @@ getchar();
 
     bool b;
 
-    if (do_test_planar && (b = !is_planar(&normal)))
+    if (do_test_planar && !(b = is_planar(&normal)))
     {
         cerr << "ERROR!  In `Path::resolve':"
              << endl 
-             << "`do_transform' is `true' and path is not planar."
+             << "`do_test_planar' is `true' and path is not planar."
              << endl 
              << "Can't resolve it." << endl 
              << "Exiting function unsuccessfully with return value 1."
              << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
         return 1;
     }  
@@ -14906,11 +14909,9 @@ getchar();
              << "`do_test_planar' == " << do_test_planar << endl;
 
         if (do_test_planar)
-           xcerr << "Path is planar:  " << b << endl;
-
-        if (b)
         {
-           normal.show("In `Path::resolve':  normal:");
+            cerr << "Path is planar:  " << b << endl;
+            normal.show("In `Path::resolve':  normal:");
         }
     }
 #endif /* |DEBUG_COMPILE|  */@; 
