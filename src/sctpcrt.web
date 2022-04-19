@@ -3632,6 +3632,10 @@ Added call to |scanner_node->add_entry| for |with_connectors|.
 
 \initials{LDF 2022.04.04.}
 Added calls to |scanner_node->add_entry| for |quiet| and |verbose|.
+
+\initials{LDF 2022.04.19.}
+Added calls to |scanner_node->add_entry| for |TEST_PLANAR| and |MAKE_PLANAR|
+and calls to |scanner_node->add_synonym| for "with_test_planar" and "with_make_planar".
 \ENDLOG
 
 @q ***** (5) Code.@> 
@@ -3657,6 +3661,14 @@ Added calls to |scanner_node->add_entry| for |quiet| and |verbose|.
 
    scanner_node->add_entry("quiet", QUIET, spark);
    scanner_node->add_entry("verbose", VERBOSE, spark);
+
+   scanner_node->add_entry("test_planar", TEST_PLANAR, spark);
+   scanner_node->add_entry("make_planar", MAKE_PLANAR, spark);
+
+   scanner_node->add_synonym("with_test_planar", "test_planar");
+   scanner_node->add_synonym("with_make_planar", "make_planar");
+
+
 
 @q **** (4) Types for macros.@>
 @*3 Types for macros.
