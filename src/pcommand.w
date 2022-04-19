@@ -129,7 +129,7 @@ Removed debugging code.
 
 @q *** (3) command --> RESOLVE path_variable TO numeric_expression.@> 
 @*2 \§command> $\longrightarrow$ \.{RESOLVE} \§path variable> \.{TO} \§numeric expression>.
-\§save temp file optional> \§with no transform optional>.
+\§resolve option list>.
 \initials{LDF 2022.01.18.}
 
 \LOG
@@ -137,41 +137,45 @@ Removed debugging code.
 \ENDLOG
 
 @<Define rules@>=
-@=command: RESOLVE path_variable TO numeric_expression save_temp_file_optional with_no_transform_optional@>@/
+@=command: RESOLVE path_variable TO numeric_expression resolve_option_list@>@/
 {
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
   {
-    cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression"
-              << endl 
-              << "save_temp_file_optional with_no_transform_optional'.";
+    cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression "
+              << "resolve_option_list'."; 
 
     log_message(cerr_strm);
     cerr_message(cerr_strm);
     cerr_strm.str("");
-    
+
+    cerr << "resolve_option_list == " << @=$5@> << " == 0x" << hex << @=$5@> 
+         << dec << endl;
+
+cerr << "YYY Enter <RETURN> to continue: ";
+getchar();  
+
   }
 #endif /* |DEBUG_COMPILE|  */@;
 
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
+/* !!START HERE:  LDF 2022.04.19.  Add arguments.  Must change the way the
+   rule is formulated.  */ 
+
   status = static_cast<Path*>(entry->object)->resolve(static_cast<int>(@=$4@>), 
                                                       0,
                                                       -1,
-                                                      scanner_node, 
-                                                      !static_cast<bool>(@=$5@>),
-                                                      !static_cast<bool>(@=$6@>));
+                                                      scanner_node);
 
 #if DEBUG_COMPILE
-
   if (DEBUG)
   {
-    cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression"
-              << endl 
-              << "save_temp_file_optional with_no_transform_optional':"
+    cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression "
+              << "resolve_option_list':"
               << endl 
               << "`Path::resolve' returned " << status << "." << endl;
 
@@ -186,15 +190,13 @@ Removed debugging code.
 
 };
 
-
-
 @q *** (3) command: RESOLVE path_variable LEFT_PARENTHESIS numeric_expression COMMA   @>
 @q         numeric_expression RIGHT_PARENTHESIS TO numeric_expression                 @>
-@q         save_temp_file_optional with_no_transform_optional with_ampersand_optional @>
+@q         resolve_option_list                                                        @>
 
 @ \§command> $\longrightarrow$ \.{RESOLVE} \§path variable> \.{LEFT\_PARENTHESIS} \§numeric expression> 
 \.{COMMA} \§numeric expression> \.{RIGHT\_PARENTHESIS} \.{TO} \§numeric expression>                 
-\§save temp file optional> \§with no transform optional> \§with ampersand optional>.
+\§resolve option list>.
 \initials{LDF 2022.01.18.}
 
 \LOG
@@ -204,7 +206,7 @@ Removed debugging code.
 @<Define rules@>=
 @=command: RESOLVE path_variable LEFT_PARENTHESIS numeric_expression COMMA   @>
 @=numeric_expression RIGHT_PARENTHESIS TO numeric_expression                 @>
-@=save_temp_file_optional with_no_transform_optional with_ampersand_optional @>@/
+@=resolve_option_list @>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -217,14 +219,18 @@ Removed debugging code.
               << "LEFT_PARENTHESIS numeric_expression COMMA "
               << "numeric_expression RIGHT_PARENTHESIS"
               << endl 
-              << "TO numeric_expression save_temp_file_optional "
-              << "with_no_transform_optional with_ampersand_optional'."
-              << endl;
+              << "TO numeric_expression resolve_option_list'.";
 
     log_message(cerr_strm);
     cerr_message(cerr_strm);
     cerr_strm.str("");
-    
+
+    cerr << "resolve_option_list == " << @=$10@> << " == 0x" << hex << @=$10@> 
+         << dec << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar();  
+
   }
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -234,10 +240,7 @@ Removed debugging code.
                               static_cast<int>(@=$9@>), 
                               static_cast<int>(@=$4@>), 
                               static_cast<int>(@=$6@>), 
-                              scanner_node, 
-                              !static_cast<bool>(@=$10@>),
-                              !static_cast<bool>(@=$11@>),
-                              static_cast<bool>(@=$12@>));
+                              scanner_node);
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -246,9 +249,7 @@ Removed debugging code.
               << "LEFT_PARENTHESIS numeric_expression COMMA"
               << endl 
               << "numeric_expression RIGHT_PARENTHESIS "
-              << "TO numeric_expression save_temp_file_optional"
-              << endl 
-              << "with_no_transform_optional with_ampersand_optional':"
+              << "TO numeric_expression resolve_option_list:"
               << endl 
               << "`Path::resolve' returned " << status << "." << endl;
 
@@ -263,88 +264,9 @@ Removed debugging code.
 
 };
 
-@q *** (3) save_temp_file_optional.  @>
-@
-@<Type declarations for non-terminal symbols@>=
-@=%type <int_value> save_temp_file_optional@>
-
-@q **** (4) @>
-@
-@<Define rules@>= 
-@=save_temp_file_optional: /* Empty  */@>
-{
-
-   @=$$@> = 0;
-};
-
-@q **** (4) @>
-@
-@<Define rules@>= 
-@=save_temp_file_optional: SAVE@>
-{
-
-   @=$$@> = 1;
-};
-
-@q *** (3) with_no_transform_optional.  @>
-@
-@<Type declarations for non-terminal symbols@>=
-@=%type <int_value> with_no_transform_optional@>
-
-@q **** (4) @>
-@
-@<Define rules@>= 
-@=with_no_transform_optional: /* Empty  */@>
-{
-
-   @=$$@> = 0;
-};
-
-@q **** (4) @>
-@
-@<Define rules@>= 
-@=with_no_transform_optional: WITH_NO_TRANSFORM@>
-{
-
-   @=$$@> = 1;
-};
-
-
-@q *** (3) with_ampersand_optional.  @>
-@
-@<Type declarations for non-terminal symbols@>=
-@=%type <int_value> with_ampersand_optional@>
-
-@q **** (4) @>
-@
-@<Define rules@>= 
-@=with_ampersand_optional: /* Empty  */@>
-{
-
-   @=$$@> = 0;
-};
-
-@q **** (4) @>
-@
-@<Define rules@>= 
-@=with_ampersand_optional: WITH_NO_AMPERSAND@>
-{
-
-   @=$$@> = 0;
-};
-
-@q **** (4) @>
-@
-@<Define rules@>= 
-@=with_ampersand_optional: WITH_AMPERSAND@>
-{
-
-   @=$$@> = 1;
-};
-
-@q *** (3) command --> RESOLVE path_vector_variable TO numeric_expression save_temp_file_optional.@> 
+@q *** (3) command --> RESOLVE path_vector_variable TO numeric_expression resolve_option_list.@> 
 @*2 \§command> $\longrightarrow$ \.{RESOLVE} \§path vector variable> \.{TO} \§numeric expression>
-\§save temp file optional> \§with no transform optional>.
+\§resolve option list>.
 \initials{LDF 2022.01.25.}
 
 \LOG
@@ -352,16 +274,16 @@ Removed debugging code.
 \ENDLOG
 
 @<Define rules@>=
-@=command: RESOLVE path_vector_variable TO numeric_expression save_temp_file_optional with_no_transform_optional@>@/
+@=command: RESOLVE path_vector_variable TO numeric_expression resolve_option_list@>@/
 {
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable TO "
-              << "numeric_expression save_temp_file_optional with_no_transform_optional'.";
+              << "numeric_expression resolve_option_list'.";
 
     log_message(cerr_strm);
     cerr_message(cerr_strm);
@@ -376,17 +298,14 @@ Removed debugging code.
                                                                  static_cast<int>(@=$4@>), 
                                                                  0,
                                                                  -1,
-                                                                 scanner_node,
-                                                                 !static_cast<bool>(@=$5@>),
-                                                                 !static_cast<bool>(@=$6@>));
+                                                                 scanner_node);
 
 #if DEBUG_COMPILE
-
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable"
               << endl 
-              << "TO numeric_expression save_temp_file_optional with_no_transform_optional':"
+              << "TO numeric_expression save_temp_file_optional resolve_option_list':"
               << endl 
               << "`Pointer_Vector<Path>::resolve' returned " << status << "." << endl;
 
@@ -400,6 +319,98 @@ Removed debugging code.
   @=$$@> =  static_cast<void*>(0);
 
 };
+
+@q *** (3) resolve_option_list @>
+@
+\LOG
+\initials{LDF 2022.04.19.}
+Added this type declaration.
+\ENDLOG 
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <uint_value> resolve_option_list@>
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: /* Empty  */@>
+{
+   @=$$@> = 0U;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: resolve_option_list SAVE@>
+{
+
+   @=$$@> = @=$1@> |= 1U;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: resolve_option_list WITH_NO_TRANSFORM@>
+{
+
+   @=$$@> = @=$1@> |= 2U;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: resolve_option_list WITH_NO_AMPERSAND@>
+{
+
+   @=$$@> = @=$1@> &= ~4U;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: resolve_option_list WITH_AMPERSAND@>
+{
+
+   @=$$@> = @=$1@> |= 4;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: resolve_option_list TEST_PLANAR@>
+{
+
+   @=$$@> = @=$1@> |= 8;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: resolve_option_list MAKE_PLANAR@>
+{
+
+   @=$$@> = @=$1@> |= 16;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: resolve_option_list NO_TEST_PLANAR@>
+{
+
+   @=$$@> = @=$1@> &= ~8;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=resolve_option_list: resolve_option_list NO_MAKE_PLANAR@>
+{
+
+   @=$$@> = @=$1@> &= ~16;
+};
+
+
 
 @q ** (2) command --> group_command.  @>
 @*1 \§command> $\longrightarrow$ \§group command>.
