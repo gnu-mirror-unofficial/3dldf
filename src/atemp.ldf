@@ -46,12 +46,20 @@ beginfig(1);
 
   draw q0;
   
-  resolve q0 (0, 6) to 20 save with_no_transform;
+endfig with_projection parallel_x_y;
 
-  n := size q0;
+
+resolve q0 to 20 save with_no_transform;
+
+end_mp;
+end;
+
+n := size q0;
   message "n == " & decimal n;
-  pause;
+  %pause;
 
+
+  
 
   for i = 0 upto 10:
     p[i+10] := get_point (i) q0;
@@ -64,10 +72,7 @@ beginfig(1);
   dotlabel.rt("$p_{14}$", p14) with_color red;
   dotlabel.rt("$p_{15}$", p15) with_color red;
   
-endfig with_projection parallel_x_y;
 
-end_mp;
-end;
 
 beginchar("A", 10, 20, 30); %% Don't use units for `wd', `ht' and `dp'!
                             %% LDF 2022.04.18.

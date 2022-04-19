@@ -215,7 +215,7 @@ class Path : public Shape
    friend int yyparse(yyscan_t);
    friend int zzlex(yyscan_t);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
-   friend int Pointer_Vector<Path, Path>::resolve(int, Scanner_Node, bool, bool);
+   friend int Pointer_Vector<Path, Path>::resolve(int, int, int, Scanner_Node, bool, bool);
    friend int Scan_Parse::drawing_command_glyph(Scanner_Node, int, Glyph*);
 
  protected:
@@ -14614,7 +14614,7 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
   string connector;
   connector = "";
 
-  /* !!START HERE:  Account for different connectors and non-cycles.  */ 
+  /* !!START HERE:  LDF 2022.04.19.  Account for different connectors and non-cycles.  */ 
 
   int i = 0;
   for (vector<Point*>::iterator iter = q1.points.begin(); iter != q1.points.end(); ++iter)
@@ -14718,134 +14718,9 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
 
 }  /* End of |Path::get_direction| definition  */
 
-@q ** (2) Resolve (1st version---for entire |Path|).  @>
-@ Resolve (1st version---for entire |Path|).
-\initials{LDF 2022.01.18.}
 
-\LOG
-\initials{LDF 2022.01.18.}
-Added this function.
-\ENDLOG 
-
-@q *** (3) Declaration @>
-
-@<Declare |Path| functions@>=
-virtual
-int
-resolve(int res_val, Scanner_Node scanner_node = 0, bool do_unlink = true, bool do_transform = true);
-
-@q *** (3) Definition  @>
-@
-@<Define |Path| functions@>=
-int
-Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_transform)
-{
-@q **** (4) @>
-
-   bool DEBUG = false; /* |true| */ 
-
-   int status = 0;
-
-#if DEBUG_COMPILE
-
-   if (DEBUG)
-   {
-      cerr << "Entering `Path::resolve' (version 1, for entire path)." << endl;
-
-      show("`*this' before call to `Pointer_Vector<Path>::resolve':");
-
-      cerr << "In `Path::resolve' (first version):"
-           << endl 
-           << "`*this' before call to `Pointer_Vector<Path>::resolve' (see above)." 
-           << endl;
-
-   } /* |if (DEBUG)| */
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-
-   Pointer_Vector<Path> pv;
-
-   pv += create_new<Path>(this);
- 
-   status = pv.resolve(res_val, scanner_node, do_unlink, do_transform);
-        
-   if (status != 0)
-   {
-      cerr << "ERROR!  In `Path::resolve' (version 1, for entire path):" << endl
-           << "`Pointer_Vector<Path, Path>::resolve' failed, returning " << status << "." 
-           << endl
-           << "Exiting function with return value " << status << "." 
-           << endl;
-
-      return status;
-   }
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-
-#if DEBUG_COMPILE
-
-   if (DEBUG)
-   {
-      cerr << "In `Path::resolve' (version 1, for entire path):" << endl
-           << "`Pointer_Vector<Path, Path>::resolve' succeeded, returning 0."  
-           << endl 
-           << "Showing `pv':"
-           << endl;
-
-      pv.show("pv:");  
-
-   } /* |if (DEBUG)| */
-#endif /* |DEBUG_COMPILE|  */@; 
-   
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-
-#if DEBUG_COMPILE
-
-   if (DEBUG)
-   {
-   
-#if 0 
-      cerr << "In `Path::resolve' (version 1, for entire path):" << endl
-           << "Showing `*this':"
-           << endl;
-
-      show("*this:");  
-#endif 
-
-   } /* |if (DEBUG)| */
-#endif /* |DEBUG_COMPILE|  */@; 
-   
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-
-   *this = **(pv.v.begin());
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>= 
- 
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-        cerr << "Exiting `Path::resolve' (1st version) successfully with return value 0."
-             << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   return 0;
-
-} /* End of |Path::resolve| (version 1, for entire path) definition  */
-
-@q ** (2) Resolve (2nd version---for subpath).  @>
-@ Resolve (2nd version---for subpath).
+@q ** (2) Resolve.  @>
+@ Resolve.
 \initials{LDF 2022.01.28.}
 
 The subpath from |points[begin]| to |points[end]| (inclusive) is resolved.
@@ -14862,9 +14737,9 @@ Added this function.
 @<Declare |Path| functions@>=
 virtual
 int
-resolve(int begin, 
+resolve(int res_val,
+        int begin, 
         int end,
-        int res_val,
         Scanner_Node scanner_node = 0,
         bool do_unlink = true, 
         bool do_transform = true,
@@ -14874,9 +14749,9 @@ resolve(int begin,
 @
 @<Define |Path| functions@>=
 int
-Path::resolve(int begin, 
+Path::resolve(int res_val,
+              int begin, 
               int end,
-              int res_val,
               Scanner_Node scanner_node,
               bool do_unlink, 
               bool do_transform,
@@ -14884,7 +14759,7 @@ Path::resolve(int begin,
 {
 @q **** (4) @>
 
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
 
    Point p0;
    Point normal;
@@ -14896,19 +14771,35 @@ Path::resolve(int begin,
    stringstream temp_strm;
 
    int status = 0;
-   
+
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-       cerr << "Entering `Path::resolve' (second version)." << endl
+       cerr << "Entering `Path::resolve'." << endl
+            << "`res_val'      == " << res_val << endl 
             << "`begin'        == " << begin << endl 
             << "`end'          == " << end << endl 
-            << "`res_val'      == " << res_val << endl 
             << "`do_unlink'    == " << do_unlink << endl 
             << "`do_transform' == " << do_transform << endl
             << "`do_ampersand' == " << do_ampersand << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+   if (end < 0)
+   {
+      end = points.size() - 1;
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "In `Path::resolve':" << endl
+               << "`end' is now == " << end << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   }  /* |if (end < 0)| */
+
+   return 0;  /* Testing.  LDF 2022.04.19.  */
 
 @q **** (4) @>
 @
@@ -14954,7 +14845,7 @@ Path::resolve(int begin,
 
     if (!is_planar(&normal))
     {
-        cerr << "ERROR!  In `Path::resolve' (2nd version):"
+        cerr << "ERROR!  In `Path::resolve':"
              << endl 
              << "`Path' is not planar.  Can't resolve it." << endl 
              << "Exiting function unsuccessfully with return value 1."
@@ -15112,7 +15003,7 @@ Path::resolve(int begin,
         I have to output the whole path and use MP to find the subpath.
      */
 
-     status = q_middle.resolve(res_val, scanner_node, do_unlink, false);
+     status = q_middle.resolve(res_val, begin, end, scanner_node, do_unlink, false);
 
      if (status != 0)
      {
@@ -15253,7 +15144,7 @@ Added this section.
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-        cerr << "In ``Path::resolve' (second version):  Showing `*this'." 
+        cerr << "In ``Path::resolve':  Showing `*this'." 
              << endl;
 
         show("*this:");
@@ -15268,14 +15159,14 @@ Added this section.
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-       cerr << "Exiting `Path::resolve' (second version) successfully with return value 0." 
+       cerr << "Exiting `Path::resolve' successfully with return value 0." 
             << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
    return 0;
 
-}  /* End of |Path::resolve| (2nd version) definition  */
+}  /* End of |Path::resolve| definition  */
 
 @q ** (2) Show connector.  @>
 @ Show connector.
@@ -15674,7 +15565,7 @@ class Connector_Type
    friend ostream& operator<<(ostream& o, Connector_Type& c); 
    friend void* Scan_Parse::clip_to_func(void* arg1, void* parameter);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
-   friend int Pointer_Vector<Path, Path>::resolve(int, Scanner_Node, bool, bool);
+   friend int Pointer_Vector<Path, Path>::resolve(int, int, int, Scanner_Node, bool, bool);
 
    int type0;
    int type1;

@@ -159,9 +159,11 @@ Removed debugging code.
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
   status = static_cast<Path*>(entry->object)->resolve(static_cast<int>(@=$4@>), 
-                              scanner_node, 
-                              !static_cast<bool>(@=$5@>),
-                              !static_cast<bool>(@=$6@>));
+                                                      0,
+                                                      -1,
+                                                      scanner_node, 
+                                                      !static_cast<bool>(@=$5@>),
+                                                      !static_cast<bool>(@=$6@>));
 
 #if DEBUG_COMPILE
 
@@ -228,9 +230,10 @@ Removed debugging code.
 
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
-  status = static_cast<Path*>(entry->object)->resolve(static_cast<int>(@=$4@>), 
-                              static_cast<int>(@=$6@>), 
+  status = static_cast<Path*>(entry->object)->resolve(
                               static_cast<int>(@=$9@>), 
+                              static_cast<int>(@=$4@>), 
+                              static_cast<int>(@=$6@>), 
                               scanner_node, 
                               !static_cast<bool>(@=$10@>),
                               !static_cast<bool>(@=$11@>),
@@ -371,6 +374,8 @@ Removed debugging code.
 
   status = static_cast<Pointer_Vector<Path>*>(entry->object)->resolve(
                                                                  static_cast<int>(@=$4@>), 
+                                                                 0,
+                                                                 -1,
                                                                  scanner_node,
                                                                  !static_cast<bool>(@=$5@>),
                                                                  !static_cast<bool>(@=$6@>));
