@@ -15178,6 +15178,21 @@ transferring it to the x-y plane.  Write a function for this.
 
    close(fd_out);
 
+#if 0 
+
+/* !!START HERE:  LDF 2022.04.20.  Change this.  Resolve Q2, then put the paths back together.  */ 
+
+              << "for i = begin_val step k until end_val:" << endl
+              << "  p[j] = point i of Q0;" << endl
+              << "  if i = begin_val:" << endl
+              << "    Q5 = p[j];" << endl
+              << "  else:" << endl
+              << "    Q5 := Q5 .. p[j];" << endl
+              << "  fi;" << endl
+              << "  j := incr j;" << endl
+              << "endfor;" << endl << endl
+#endif 
+
    temp_strm  << "input writemcs.mp;" << endl
               << "numeric begin_val;" << endl
               << "numeric end_val;" << endl
@@ -15192,7 +15207,6 @@ transferring it to the x-y plane.  Write a function for this.
               << "res_val   = " << res_val << ";" << endl 
               << "Q0 = " << q_full << ";" << endl 
               << "n = length Q0 - 1;" << endl
-              << "j = 0;" << endl
               << "k = (end_val - begin_val) / res_val;" << endl
               << "if begin_val > 0:" << endl
               << "   Q1 = subpath (0, begin_val) of Q0;" << endl
@@ -15217,8 +15231,12 @@ transferring it to the x-y plane.  Write a function for this.
               << "elseif known Q3:" << endl
               << "   Q4 = Q3;" << endl
               << "fi;" << endl << endl
-              << "write_path(Q2, \"" << temp_out_filename << "\", false);" << endl
-              << "write_path(Q4, \"" << temp_out_filename << "\", false);" << endl
+              << "j = 0;" << endl
+
+
+              << "write_path(Q5, "mp_output.txt", false);" << endl
+              << "write_path(Q4, "mp_output.txt", false);" << endl
+              << "write_path(Q2, "mp_output.txt", false);" << endl
               << "write \"END\" to \"" << temp_out_filename << "\";" << endl
               << endl
               << "end;" << endl;
