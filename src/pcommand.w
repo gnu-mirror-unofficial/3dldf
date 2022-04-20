@@ -161,15 +161,41 @@ getchar();
   }
 #endif /* |DEBUG_COMPILE|  */@;
 
+
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
-/* !!START HERE:  LDF 2022.04.19.  Add arguments.  Must change the way the
-   rule is formulated.  */ 
+  bool save             = @=$5@> &  1U; 
+  bool with_transform   = @=$5@> &  2U; 
+  bool with_ampersand   = @=$5@> &  4U; 
+  bool test_planar      = @=$5@> &  8U; 
+  bool make_planar      = @=$5@> & 16U; 
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+  { 
+     cerr << "resolve_option_list == " << @=$5@> << " == 0x" << hex << @=$5@> 
+          << dec << endl
+          << "save == " << save << endl
+          << "with_transform == " << with_transform << endl
+          << "with_ampersand == " << with_ampersand << endl
+          << "test_planar == " << test_planar << endl
+          << "make_planar == " << make_planar << endl;
+
+cerr << "ZZZ Enter <RETURN> to continue: ";
+getchar();  
+
+  }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
   status = static_cast<Path*>(entry->object)->resolve(static_cast<int>(@=$4@>), 
-                                                      0,
-                                                      -1,
-                                                      scanner_node);
+                                                 0,
+                                                 -1,
+                                                 scanner_node,
+                                                 !save,
+                                                 with_transform,
+                                                 test_planar,
+                                                 make_planar,
+                                                 with_ampersand);
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -194,9 +220,9 @@ getchar();
 @q         numeric_expression RIGHT_PARENTHESIS TO numeric_expression                 @>
 @q         resolve_option_list                                                        @>
 
-@ \§command> $\longrightarrow$ \.{RESOLVE} \§path variable> \.{LEFT\_PARENTHESIS} \§numeric expression> 
-\.{COMMA} \§numeric expression> \.{RIGHT\_PARENTHESIS} \.{TO} \§numeric expression>                 
-\§resolve option list>.
+@ \§command> $\longrightarrow$ \.{RESOLVE} \§path variable> \.{LEFT\_PARENTHESIS} 
+\§numeric expression> \.{COMMA} \§numeric expression> \.{RIGHT\_PARENTHESIS} 
+\.{TO} \§numeric expression> \§resolve option list>.
 \initials{LDF 2022.01.18.}
 
 \LOG
@@ -208,6 +234,8 @@ getchar();
 @=numeric_expression RIGHT_PARENTHESIS TO numeric_expression                 @>
 @=resolve_option_list @>@/
 {
+@q **** (4) @>
+
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -224,10 +252,10 @@ getchar();
     log_message(cerr_strm);
     cerr_message(cerr_strm);
     cerr_strm.str("");
-
-
   }
 #endif /* |DEBUG_COMPILE|  */@;
+
+@q **** (4) @>
 
   bool save             = @=$10@> &  1U; 
   bool with_transform   = @=$10@> &  2U; 
@@ -252,6 +280,8 @@ getchar();
   }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+@q **** (4) @>
+
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
   status = static_cast<Path*>(entry->object)->resolve(
@@ -264,6 +294,8 @@ getchar();
                               test_planar,
                               make_planar,
                               with_ampersand);
+
+@q **** (4) @>
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -283,6 +315,8 @@ getchar();
   }
 #endif /* |DEBUG_COMPILE|  */@;
 
+@q **** (4) @>
+
   @=$$@> =  static_cast<void*>(0);
 
 };
@@ -292,6 +326,12 @@ getchar();
 \§resolve option list>.
 \initials{LDF 2022.01.25.}
 
+!!PLEASE NOTE:  There is no corresponding ``resolve'' rule
+for a |path_vector| with a pair of |numerical_expressions| as a ``subpath'' argument.
+At the present time, I don't see a use for such a rule.  However, if I ever do, I can
+easily add it.
+\initials{LDF 2022.04.20.}
+
 \LOG
 \initials{LDF 2022.01.25.}
 \ENDLOG
@@ -299,6 +339,8 @@ getchar();
 @<Define rules@>=
 @=command: RESOLVE path_vector_variable TO numeric_expression resolve_option_list@>@/
 {
+@q **** (4) @>
+
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -315,22 +357,60 @@ getchar();
   }
 #endif /* |DEBUG_COMPILE|  */@;
 
+@q **** (4) @>
+
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
+
+  bool save             = @=$5@> &  1U; 
+  bool with_transform   = @=$5@> &  2U; 
+  bool with_ampersand   = @=$5@> &  4U; 
+  bool test_planar      = @=$5@> &  8U; 
+  bool make_planar      = @=$5@> & 16U; 
+
+
+
+@q **** (4) @>
+
 
   status = static_cast<Pointer_Vector<Path>*>(entry->object)->resolve(
                                                                  static_cast<int>(@=$4@>), 
                                                                  0,
                                                                  -1,
-                                                                 scanner_node);
+                                                                 scanner_node,
+                                                                 !save,
+                                                                 with_transform,
+                                                                 test_planar,
+                                                                 make_planar,
+                                                                 with_ampersand);
+
+@q **** (4) @>
+
+  if (status != 0)
+  {
+     cerr_strm << "ERROR!  In parser, rule `command --> RESOLVE path_vector_variable"
+               << endl 
+               << "TO numeric_expression save_temp_file_optional resolve_option_list':"
+               << endl 
+               << "`Pointer_Vector<Path>::resolve' failed, returning " << status << "."
+               << endl
+               << "Failed to resolve `path'.  Continuing.";
+
+     log_message(cerr_strm);
+     cerr_message(cerr_strm);
+     cerr_strm.str("");
+
+  } /* |if (status != 0)| */
+
+@q **** (4) @>
 
 #if DEBUG_COMPILE
-  if (DEBUG)
+  else if (DEBUG)
   {
     cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable"
               << endl 
               << "TO numeric_expression save_temp_file_optional resolve_option_list':"
               << endl 
-              << "`Pointer_Vector<Path>::resolve' returned " << status << "." << endl;
+              << "`Pointer_Vector<Path>::resolve' succeeded, returning 0.";
 
     log_message(cerr_strm);
     cerr_message(cerr_strm);
@@ -338,6 +418,8 @@ getchar();
     
   }
 #endif /* |DEBUG_COMPILE|  */@;
+
+@q **** (4) @>
     
   @=$$@> =  static_cast<void*>(0);
 
