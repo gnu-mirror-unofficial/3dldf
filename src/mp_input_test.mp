@@ -44,15 +44,6 @@ n = length Q0 - 1;
   numeric k;
   k = (end_val - begin_val) / res_val;
 
-  % for i = begin_val step k until end_val:
-  %   %message "i:";
-  %   %show i;
-  %   %message "j:";
-  %   %show j;
-  %   p[j] = point i of Q0;
-  %   j := incr j;
-  % endfor;
-  
   % for i = 0 upto n:
   %   z[i] = point i of Q0;
   % endfor;
@@ -143,6 +134,25 @@ n = length Q0 - 1;
   fi;
   
   write_path(Q2, "mp_output.txt", false);
+
+
+
+  for i = begin_val step k until end_val:
+    %message "i:";
+    %show i;
+    %message "j:";
+    %show j;
+    p[j] = point i of Q0;
+    if i = begin_val:
+      Q5 = p[j];
+    else:
+      Q5 := Q5 .. p[j];
+    fi;
+    j := incr j;
+  endfor;
+
+  
+  write_path(Q5, "mp_output.txt", false);
   write_path(Q4, "mp_output.txt", false);
 
   write "END" to "mp_output.txt";
