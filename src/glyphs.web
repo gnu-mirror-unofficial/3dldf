@@ -826,8 +826,13 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
    errno = 0;
    status = system(temp_strm.str().c_str());
 
+/* !!START HERE:  LDF 2022.04.20.  Add error handling.  */ 
+
+   errno = 0;
    FILE *fp = fopen(temp_filename, "r");
    
+/* !!START HERE:  LDF 2022.04.20.  Add error handling.  */ 
+
    yyscan_t scanner;
    zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner);
    zzset_in(fp, scanner);

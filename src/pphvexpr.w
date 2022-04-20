@@ -345,10 +345,11 @@ getchar();
 
   Path *p = 0;
 
-  Pointer_Vector<Path> *pv = static_cast<Path*>(@=$2@>)->resolve(static_cast<int>(@=$4@>), 
+  Pointer_Vector<Path> *pv = static_cast<Path*>(@=$2@>)->resolve(
+                                                 scanner_node,
+                                                 static_cast<int>(@=$4@>), 
                                                  0,
                                                 -1,
-                                                 scanner_node,
                                                  !save,
                                                  with_transform,
                                                  test_planar,
@@ -480,10 +481,10 @@ getchar();
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
   Pointer_Vector<Path> *pv = static_cast<Path*>(@=$2@>)->resolve(
+                              scanner_node,
                               static_cast<int>(@=$9@>), 
                               static_cast<int>(@=$4@>), 
                               static_cast<int>(@=$6@>), 
-                              scanner_node,
                               !save,
                               with_transform,
                               test_planar,
@@ -535,8 +536,6 @@ getchar();
   @=$$@> =  static_cast<void*>(pv);
 
 };
-
-
 
 @q *** (3) resolve_option_list @>
 @

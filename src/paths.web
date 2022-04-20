@@ -14737,10 +14737,10 @@ Added this function.
 @<Declare |Path| functions@>=
 virtual
 Pointer_Vector<Path, Path>*
-resolve(int res_val,
+resolve(Scanner_Node scanner_node,
+        int res_val,
         int begin = 0, 
         int end = -1,
-        Scanner_Node scanner_node = 0,
         bool do_unlink = true, 
         bool do_transform = true,
         bool do_test_planar = true,
@@ -14751,10 +14751,10 @@ resolve(int res_val,
 @
 @<Define |Path| functions@>=
 Pointer_Vector<Path, Path>*
-Path::resolve(int res_val,
+Path::resolve(Scanner_Node scanner_node,
+              int res_val,
               int begin, 
               int end,
-              Scanner_Node scanner_node,
               bool do_unlink, 
               bool do_transform,
               bool do_test_planar, 
@@ -14777,6 +14777,22 @@ Path::resolve(int res_val,
    stringstream temp_strm;
 
    int status = 0;
+
+@q **** (4) @>
+
+   if (scanner_node == 0)
+   {
+      cerr << "ERROR!  In `Path::resolve':  `Scanner_Node scanner_node' argument is NULL."
+           << endl 
+           << "This isn't permitted." << endl 
+           << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+           << endl;
+
+      return static_cast<Pointer_Vector<Path, Path>*>(0);
+
+   }  /* |if (scanner_node == 0)| */
+
+@q **** (4) @>
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -15207,10 +15223,11 @@ transferring it to the x-y plane.  Write a function for this.
               << endl
               << "end;" << endl;
 
-    cerr << "temp_strm.str() ==" << endl << temp_strm.str() << endl;
+   cerr << "temp_strm.str() ==" << endl << temp_strm.str() << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
 
    status = write(fd_in, temp_strm.str().c_str(), temp_strm.str().size());
 
@@ -15252,8 +15269,110 @@ getchar();
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+  temp_strm.str("");
+
+  temp_strm << "mpost -numbersystem \"double\" " << temp_in_filename;
+
+  cerr << "temp_strm.str() == " << temp_strm.str() << endl;
+
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
+
+  errno = 0;
+  status = system(temp_strm.str().c_str());
+
+  if (status != 0)
+  {
+      cerr << "ERROR!  In ``Path::resolve':  `system' failed, returning `status' == " << status << "." 
+           << endl 
+           << "`errno' == " << errno << " == " << strerror(errno)
+           << endl 
+           << "Failed to execute `mpost' on temporary input file `" << temp_in_filename << "'."
+           << endl 
+           << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+           << endl;
+
+       return static_cast<Pointer_Vector<Path, Path>*>(0);
+
+  } /* |if (status != 0)| */
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+  else if (DEBUG)
+  { 
+      cerr << "In ``Path::resolve':  `system' succeeded, returning 0."
+           << endl 
+           << "Executed `mpost' on temporary input file `" << temp_in_filename << "' successfully."
+           << endl; 
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+  }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+cerr << "Error after here 0." << endl; 
+
+   if (scanner_node->metapost_output_struct == 0)
+      scanner_node->metapost_output_struct = new Metapost_Output_Struct;
+
+   scanner_node->metapost_output_struct->path_vector.clear();
+
+   scanner_node->metapost_output_struct->real_vector.clear();
+
+   errno = 0;   
+   FILE *fp = fopen(temp_out_filename, "r");
+
+  /* !!START HERE:  LDF 2022.04.20.  Add error handling.  */ 
+
+   yyscan_t scanner;
+   zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner);
+   zzset_in(fp, scanner);
+   zzlex(scanner);
+   zzlex_destroy(scanner);
+
+   fclose(fp);
+   fp = 0;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "In `Path::resolve':  After calling zzlex." << endl;
+
+      cerr << "scanner_node->metapost_output_struct->path_vector.size() == " 
+           << scanner_node->metapost_output_struct->path_vector.size() 
+           << endl
+           << "scanner_node->metapost_output_struct->real_vector.size() == " 
+           << scanner_node->metapost_output_struct->real_vector.size() << endl;
+
+      for (vector<Path*>::iterator iter = scanner_node->metapost_output_struct->path_vector.begin();
+           iter != scanner_node->metapost_output_struct->path_vector.end();
+           ++iter)
+      {
+         (**iter).show("**iter:");
+      }
+
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+#if 0 
+   if (!do_unlink)
+      unlink(temp_out_filename);
+#endif 
 
 @q **** (4) @>
 @
@@ -15809,10 +15928,10 @@ class Connector_Type
    friend ostream& operator<<(ostream& o, Connector_Type& c); 
    friend void* Scan_Parse::clip_to_func(void* arg1, void* parameter);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
-   friend int Pointer_Vector<Path, Path>::resolve(int res_val,
+   friend int Pointer_Vector<Path, Path>::resolve(Scanner_Node scanner_node, 
+                                                  int res_val,
                                                   int begin,
                                                   int end,
-                                                  Scanner_Node scanner_node, 
                                                   bool do_unlink, 
                                                   bool do_transform,
                                                   bool do_test_planar, 

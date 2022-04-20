@@ -51,7 +51,14 @@ beginfig(1);
   path_vector pv;
 
   pv := resolve q0 (2, 5) to 20 save with_no_transform;
+
+  for i = 0 upto (size pv0) - 1:
+    dotlabel.top(i, get_point (i) pv0);
+  endfor;  
+
   
+  
+
 endfig with_projection parallel_x_y;
 
 

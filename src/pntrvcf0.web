@@ -648,10 +648,10 @@ Added this function.
 @<Define |Pointer_Vector| specializations@>=
 template<>
 int
-Pointer_Vector<Path, Path>::resolve(int res_val,
+Pointer_Vector<Path, Path>::resolve(Scanner_Node scanner_node, 
+                                    int res_val,
                                     int begin,
                                     int end,
-                                    Scanner_Node scanner_node, 
                                     bool do_unlink, 
                                     bool do_transform,
                                     bool do_test_planar, 
@@ -695,7 +695,8 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
 
 @q *** (3)@> 
 
-   int status = 0;
+   Pointer_Vector<Path> *pv = create_new<Pointer_Vector<Path> >(0);
+   
 
    for (vector<Path*>::iterator iter = v.begin();
         iter != v.end();
@@ -703,17 +704,22 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
    {
 @q **** (4) @>
 
-       status = (*iter)->resolve(res_val,
-                                 begin,
-                                 end,
-                                 scanner_node, 
-                                 do_unlink, 
-                                 do_transform,
-                                 do_test_planar, 
-                                 do_make_planar,         
-                                 do_ampersand);
+/* !!START HERE:  LDF 2022.04.20. */ 
+
+       pv->clear();
+
+       pv = (*iter)->resolve(scanner_node, 
+                              res_val,
+                              begin,
+                              end,
+                              do_unlink, 
+                              do_transform,
+                              do_test_planar, 
+                              do_make_planar,         
+                              do_ampersand);
 
 @q **** (4) @>
+#if 0 
 
        if (status != 0)
        {
@@ -748,6 +754,8 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
            cerr_strm.str("");
        }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+#endif 
 
 @q **** (4) @>
 
