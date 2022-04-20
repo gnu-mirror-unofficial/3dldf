@@ -15085,24 +15085,16 @@ transferring it to the x-y plane.  Write a function for this.
 
     q_full.show("q_full:");
 
-    temp_strm << "numeric begin_val;" << endl << "numeric end_val;" << endl 
-              << "begin_val = " << begin << ";" << endl 
-              << "end_val = " << end << ";" << endl 
-              << " point p[];" << endl << "path Q[];" << endl << "Q0 = " << q_full << ";" << endl 
-              << "for i = 0 upto " << begin << ":" << endl << "" << ";";
-
-    cerr << "temp_strm.str() == " << temp_strm.str() << endl;
-
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
 
-    char temp_filename[] = "mp_input.XXXXXX";
+    char temp_in_filename[] = "mp_input.XXXXXX";
     
     errno = 0;
-    int fd = mkstemp(temp_filename);
+    int fd_in = mkstemp(temp_in_filename);
 
-    if (fd == -1)
+    if (fd_in == -1)
     {
             cerr << "ERROR!  In `Path::resolve':"
                  << endl 
@@ -15117,14 +15109,47 @@ transferring it to the x-y plane.  Write a function for this.
 
             return static_cast<Pointer_Vector<Path, Path>*>(0);
 
-    }  /* |if (fd == -1)|  */
+    }  /* |if (fd_in == -1)|  */
 
 #if DEBUG_COMPILE
     else if (DEBUG)
     {
         cerr << "In `Path::resolve':"
              << endl 
-             << "`mkstemp' succeeded:  `temp_filename' == " << temp_filename 
+             << "`mkstemp' succeeded:  `temp_in_filename' == " << temp_in_filename 
+             << endl;
+
+    }  /* |else if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+    char temp_out_filename[] = "mp_output.XXXXXX";
+    
+    errno = 0;
+    int fd_out = mkstemp(temp_out_filename);
+
+    if (fd_out == -1)
+    {
+            cerr << "ERROR!  In `Path::resolve':"
+                 << endl 
+                 << "`mkstemp' failed, returning -1:"
+                 << endl
+                 << strerror(errno)
+                 << endl 
+                 << "Failed to create temporary file."
+                 << endl 
+                 << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+                 << endl;
+
+            return static_cast<Pointer_Vector<Path, Path>*>(0);
+
+    }  /* |if (fd_out == -1)|  */
+
+#if DEBUG_COMPILE
+    else if (DEBUG)
+    {
+        cerr << "In `Path::resolve':"
+             << endl 
+             << "`mkstemp' succeeded:  `temp_out_filename' == " << temp_out_filename 
              << endl;
 
     }  /* |else if (DEBUG)|  */
@@ -15135,19 +15160,104 @@ transferring it to the x-y plane.  Write a function for this.
 @
 @<Define |Path| functions@>=
 
-   status = write(fd, temp_strm.str().c_str(), temp_strm.str().size());
+   close(fd_out);
 
-   close(fd);
+   temp_strm  << "input writemcs.mp;" << endl
+              << "numeric begin_val;" << endl
+              << "numeric end_val;" << endl
+              << "numeric res_val;" << endl
+              << "numeric j;" << endl
+              << "numeric k;" << endl
+              << "numeric n;" << endl
+              << endl
+              << "path Q[];" << endl
+              << "begin_val = " << begin << ";" << endl 
+              << "end_val   = " << end << ";" << endl 
+              << "res_val   = " << res_val << ";" << endl 
+              << "Q0 = " << q_full << ";" << endl 
+              << "n = length Q0 - 1;" << endl
+              << "j = 0;" << endl
+              << "k = (end_val - begin_val) / res_val;" << endl
+              << "if begin_val > 0:" << endl
+              << "   Q1 = subpath (0, begin_val) of Q0;" << endl
+              << "fi;" << endl
+              << "Q2 = subpath(begin_val, end_val) of Q0;" << endl
+              << "if end_val < n - 1:" << endl
+              << "   Q3 = subpath(end_val, n) of Q0;" << endl
+              << "fi;" << endl
+              << "if known Q1:" << endl
+              << "   Q4 = Q1;" << endl
+              << "   if known Q2:" << endl
+              << "      Q4 := Q4 .. Q2;" << endl
+              << "      if known Q3:" << endl
+              << "         Q4 := Q4 .. Q3;" << endl
+              << "      fi;" << endl
+              << "   fi;" << endl
+              << "elseif known Q2:" << endl
+              << "   Q4 = Q2;" << endl
+              << "   if known Q3:" << endl
+              << "      Q4 := Q4 .. Q3;" << endl
+              << "   fi;" << endl
+              << "elseif known Q3:" << endl
+              << "   Q4 = Q3;" << endl
+              << "fi;" << endl << endl
+              << "write_path(Q2, \"" << temp_out_filename << "\", false);" << endl
+              << "write_path(Q4, \"" << temp_out_filename << "\", false);" << endl
+              << "write \"END\" to \"" << temp_out_filename << "\";" << endl
+              << endl
+              << "end;" << endl;
 
-cerr << "status == " << status << endl;
+    cerr << "temp_strm.str() ==" << endl << temp_strm.str() << endl;
+
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
 
+   status = write(fd_in, temp_strm.str().c_str(), temp_strm.str().size());
+
+   errno = 0;
+
+   if (status == -1)
+   {
+       cerr << "ERROR!  In ``Path::resolve':  `write' failed, returning -1:" 
+            << endl 
+            << "`errno' == " << errno << ":  " << strerror(errno)
+            << endl
+            << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+            << endl;
+
+       return static_cast<Pointer_Vector<Path, Path>*>(0);
+
+   } 
+   else if (status < temp_strm.str().size())
+   {
+       cerr << "ERROR!  In ``Path::resolve':  `write' failed, returning `status' == " << status << ":" 
+            << endl 
+            << "`status < `temp_strm.str().size()' == " << temp_strm.str().size() << ":"
+            << endl
+            << "Failed to write `temp_strm.str()' completely to temporary MetaPost input file"
+            << endl 
+            << "`temp_in_filename' == " << "`" << temp_in_filename << "'."
+            << endl 
+            << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+            << endl;
+
+       return static_cast<Pointer_Vector<Path, Path>*>(0);
+
+   } 
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr << "In ``Path::resolve':  `write' succeeded, returning `status' == " << status << "."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
-
     
    if (do_ampersand)
    {
@@ -15622,6 +15732,8 @@ operator<<(ostream &o, Path &p)
    bool first_time = true;
    string s = "";
 
+   int counter = 0;
+
    for (;;)
    {
        if (p_iter == p.points.end())
@@ -15646,6 +15758,14 @@ operator<<(ostream &o, Path &p)
        {
           s = " ";
           first_time = false;
+       }
+
+       ++counter;
+
+       if (counter > 2)
+       {
+         o << endl;
+         counter = 0;
        }
 
    }  /* |for|  */
