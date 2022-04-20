@@ -226,6 +226,8 @@ class Path : public Shape
                                                   bool do_ampersand);
    friend int Scan_Parse::drawing_command_glyph(Scanner_Node, int, Glyph*);
 
+   friend ostream& operator<<(ostream &o, Path &p);
+
  protected:
   
   bool line_switch;
@@ -15531,6 +15533,11 @@ Path::reset_connectors(string s, int begin, int end, Scanner_Node scanner_node)
 @ |operator<< for |Paths|.  
 \initials{LDF 2022.04.20.}
 
+!!PLEASE NOTE: This function outputs the x and y values from the {\it world\/} coordinates.  
+If another form of output is desired, a different function or possibly a manipulator for 
+this function must be written.
+\initials{LDF 2022.04.20.}
+
 \LOG
 \initials{LDF 2022.04.20.}
 Added this function.
@@ -15550,48 +15557,57 @@ operator<<(ostream &o, Path &p)
    if (DEBUG)
    { 
        cerr << "Entering `operator<<' for `Path'." << endl;
+
+       p.show("p:");
    }  
 #endif /* |DEBUG_COMPILE|  */@;    
 
-   apply_transform();
+   p.apply_transform();
 
-   if (connector_type_vector.size() == 0)
-      connector_type_vector.push_back(new Connector_Type);
+   if (p.points.size() > 1 && p.connector_type_vector.size() == 0)
+   {
+      if (p.points.size() == 2)
+         p.connector_type_vector.push_back(new Connector_Type("--"));
+      else
+         p.connector_type_vector.push_back(new Connector_Type(".."));
+   }
 
-   vector<Point*>::iterator p_iter = points.begin();
-   vector<Connector_Type*>::iterator c_iter = connector_type_vector.begin();
-
-
+   vector<Point*>::iterator p_iter = p.points.begin();
+   vector<Connector_Type*>::iterator c_iter = p.connector_type_vector.begin();
 
    for (;;)
    {
 
-       if (p_iter == points.end())
+       if (p_iter == p.points.end())
           break;
 
-       o << **p_iter++;
+       (*p_iter)->show("**p_iter:");
+ 
 
-       if (c_iter != connector_type_vector.end())
+       o << "(" << (*p_iter)->get_x() << "cm, " << (*p_iter)->get_y() << "cm)";
+
+       ++p_iter;
+
+       if (c_iter != p.connector_type_vector.end())
            o << " " << **c_iter++;
-       else if (p_iter == points.end() && is_cycle())
+       else if (p_iter == p.points.end() && p.is_cycle())
             o << " .. "; 
-
-
-
+       else if (p_iter == p.points.end() && !p.is_cycle())
+          break;
+       else 
+          o << " " << *(p.connector_type_vector.back());
 
    }  /* |for|  */
 
-
+   if (p.is_cycle())
+      o << " cycle";
+ 
 
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
        cerr << "Exiting `operator<<' for `Path' successfully with return value `ostream &o'." 
             << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    }  
 #endif /* |DEBUG_COMPILE|  */@;    
 
@@ -15807,7 +15823,7 @@ Connector_Type::Connector_Type(string s)
    atleast_flag0 = false;
    atleast_flag1 = false;
 
-   if (!(s == ".." || s == "..." s == "--" || s == "---")
+   if (!(s == ".." || s == "..." || s == "--" || s == "---"))
    {
        cerr << "WARNING!  In `Connector_Type::Connector_Type(string s)':" << endl
             << "`string s' argument is invalid:  `s' == " << s << endl
