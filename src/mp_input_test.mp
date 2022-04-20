@@ -1,3 +1,6 @@
+%% mp_input_test.mp
+%% Created by Laurence D. Finston (LDF) Wed 20 Apr 2022 06:05:19 PM CEST
+
 input TEX;
 input writemcs.mp;
 
@@ -141,6 +144,7 @@ beginfig(1);
   write_path(Q2, "mp_output.txt", false);
   write_path(Q4, "mp_output.txt", false);
 
+  write "END" to "mp_output.txt";
 
 endfig;
 

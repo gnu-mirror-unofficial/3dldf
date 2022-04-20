@@ -215,15 +215,6 @@ class Path : public Shape
    friend int yyparse(yyscan_t);
    friend int zzlex(yyscan_t);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
-   friend int Pointer_Vector<Path, Path>::resolve(int res_val,
-                                                  int begin,
-                                                  int end,
-                                                  Scanner_Node scanner_node, 
-                                                  bool do_unlink, 
-                                                  bool do_transform,
-                                                  bool do_test_planar, 
-                                                  bool do_make_planar,         
-                                                  bool do_ampersand);
    friend int Scan_Parse::drawing_command_glyph(Scanner_Node, int, Glyph*);
 
    friend ostream& operator<<(ostream &o, Path &p);
@@ -1958,7 +1949,7 @@ Path::clear()
 #if DEBUG_COMPILE
    if (DEBUG)
       {
-         cerr << "Exiting Path::clear().\n";
+         cerr << "Exiting Path::clear.\n";
       }  /* |if (DEBUG)|  */
 
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -14745,7 +14736,7 @@ Added this function.
 
 @<Declare |Path| functions@>=
 virtual
-int
+Pointer_Vector<Path, Path>*
 resolve(int res_val,
         int begin = 0, 
         int end = -1,
@@ -14759,7 +14750,7 @@ resolve(int res_val,
 @q *** (3) Definition @>
 @
 @<Define |Path| functions@>=
-int
+Pointer_Vector<Path, Path>*
 Path::resolve(int res_val,
               int begin, 
               int end,
@@ -14800,9 +14791,6 @@ Path::resolve(int res_val,
             << "`do_test_planar' == " << do_test_planar << endl 
             << "`do_make_planar' == " << do_make_planar << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -14828,10 +14816,12 @@ getchar();
    {
       cerr << "ERROR!  In `Path::resolve':  Argument `int begin' >= `points.size()'."
            << endl
-           << "Can't resolve subpath.  Exiting unsuccessfully with return value 1."
+           << "Can't resolve subpath."
+           << endl 
+           << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
            << endl;
 
-      return 1;
+      return static_cast<Pointer_Vector<Path, Path>*>(0);
    }
    
    if (begin < 0)
@@ -14865,10 +14855,10 @@ getchar();
            << endl
            << "A subpath of one point cannot be resolved."
            << endl
-           << "Exiting function unsuccessfully with return value 1."
+           << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
            << endl;
 
-      return 1;
+      return static_cast<Pointer_Vector<Path, Path>*>(0);
    }
 #if DEBUG_COMPILE
    else if (DEBUG)
@@ -14902,13 +14892,10 @@ getchar();
              << "`do_test_planar' is `true' and path is not planar."
              << endl 
              << "Can't resolve it." << endl 
-             << "Exiting function unsuccessfully with return value 1."
+             << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
              << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-        return 1;
+        return static_cast<Pointer_Vector<Path, Path>*>(0);
     }  
 #if DEBUG_COMPILE
     else if (DEBUG)
@@ -15004,10 +14991,10 @@ transferring it to the x-y plane.  Write a function for this.
              << "`do_subpath' is `true' and `Path q_middle' is empty."
              << endl 
              << "Can't resolve subpath.  "
-             << "Exiting function unsuccessfully with return value 1."
+             << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
              << endl;
 
-        return 1;
+        return static_cast<Pointer_Vector<Path, Path>*>(0);
      } 
 
 #if DEBUG_COMPILE
@@ -15098,15 +15085,64 @@ transferring it to the x-y plane.  Write a function for this.
 
     q_full.show("q_full:");
 
-    cerr << "XXX Enter <RETURN> to continue: ";
-    getchar(); 
-
-    temp_strm << q_full;
+    temp_strm << "numeric begin_val;" << endl << "numeric end_val;" << endl 
+              << "begin_val = " << begin << ";" << endl 
+              << "end_val = " << end << ";" << endl 
+              << " point p[];" << endl << "path Q[];" << endl << "Q0 = " << q_full << ";" << endl 
+              << "for i = 0 upto " << begin << ":" << endl << "" << ";";
 
     cerr << "temp_strm.str() == " << temp_strm.str() << endl;
 
-    cerr << "XXX Enter <RETURN> to continue: ";
-    getchar(); 
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+    char temp_filename[] = "mp_input.XXXXXX";
+    
+    errno = 0;
+    int fd = mkstemp(temp_filename);
+
+    if (fd == -1)
+    {
+            cerr << "ERROR!  In `Path::resolve':"
+                 << endl 
+                 << "`mkstemp' failed, returning -1:"
+                 << endl
+                 << strerror(errno)
+                 << endl 
+                 << "Failed to create temporary file."
+                 << endl 
+                 << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+                 << endl;
+
+            return static_cast<Pointer_Vector<Path, Path>*>(0);
+
+    }  /* |if (fd == -1)|  */
+
+#if DEBUG_COMPILE
+    else if (DEBUG)
+    {
+        cerr << "In `Path::resolve':"
+             << endl 
+             << "`mkstemp' succeeded:  `temp_filename' == " << temp_filename 
+             << endl;
+
+    }  /* |else if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   status = write(fd, temp_strm.str().c_str(), temp_strm.str().size());
+
+   close(fd);
+
+cerr << "status == " << status << endl;
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
 
 @q **** (4) @>
 @
@@ -15142,12 +15178,16 @@ transferring it to the x-y plane.  Write a function for this.
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-       cerr << "Exiting `Path::resolve' successfully with return value 0." 
+       cerr << "Exiting `Path::resolve' successfully with return value `Pointer_Vector<Path, Path>*'."
             << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   return 0;
+   Pointer_Vector<Path, Path> *pv = create_new<Pointer_Vector<Path, Path> >(0);
+
+   *pv += this;  /* !!START HERE:  LDF 2022.04.20.  Testing.  */ 
+
+   return pv;
 
 }  /* End of |Path::resolve| definition  */
 
@@ -15575,27 +15615,38 @@ operator<<(ostream &o, Path &p)
    vector<Point*>::iterator p_iter = p.points.begin();
    vector<Connector_Type*>::iterator c_iter = p.connector_type_vector.begin();
 
+
+
+   o.precision(7); 
+
+   bool first_time = true;
+   string s = "";
+
    for (;;)
    {
-
        if (p_iter == p.points.end())
           break;
 
        (*p_iter)->show("**p_iter:");
- 
 
-       o << "(" << (*p_iter)->get_x() << "cm, " << (*p_iter)->get_y() << "cm)";
+       o << s << "(" << (*p_iter)->get_x() << "cm, " << (*p_iter)->get_y() << "cm)";
 
        ++p_iter;
 
        if (c_iter != p.connector_type_vector.end())
            o << " " << **c_iter++;
        else if (p_iter == p.points.end() && p.is_cycle())
-            o << " .. "; 
+            o << " .."; 
        else if (p_iter == p.points.end() && !p.is_cycle())
           break;
        else 
           o << " " << *(p.connector_type_vector.back());
+
+       if (first_time)
+       {
+          s = " ";
+          first_time = false;
+       }
 
    }  /* |for|  */
 
