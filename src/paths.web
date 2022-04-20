@@ -10200,8 +10200,7 @@ Made debugging output thread-safe.
 Added this section.
 
 \initials{LDF 2004.11.12.}
-Replaced the code in this section with a call to 
-|operator<<(ostream& o, Pen& p)|.
+Replaced the code in this section with a call to |operator<<(ostream& o, Pen& p)|.
 \ENDLOG 
 
 @<Handle |pen|@>=
@@ -15092,7 +15091,20 @@ transferring it to the x-y plane.  Write a function for this.
      }  /* |if (do_transform)|  */
 
 @q **** (4) @>
+@
+@<Define |Path| functions@>=
 
+    q_full.show("q_full:");
+
+    cerr << "XXX Enter <RETURN> to continue: ";
+    getchar(); 
+
+    temp_strm << q_full;
+
+    cerr << "temp_strm.str() == " << temp_strm.str() << endl;
+
+    cerr << "XXX Enter <RETURN> to continue: ";
+    getchar(); 
 
 @q **** (4) @>
 @
@@ -15514,6 +15526,82 @@ Path::reset_connectors(string s, int begin, int end, Scanner_Node scanner_node)
 
 }  /* End of |Path::reset_connectors| definition  */
 
+@q ** (2) |operator<<| for |Paths|.  @>
+
+@ |operator<< for |Paths|.  
+\initials{LDF 2022.04.20.}
+
+\LOG
+\initials{LDF 2022.04.20.}
+Added this function.
+\ENDLOG
+
+@<Declare non-member non-template functions for |Path|@>=
+ostream& 
+operator<<(ostream& o, Path& c); 
+
+@
+@<Define non-member non-template functions for |Path|@>=
+ostream& 
+operator<<(ostream &o, Path &p)
+{
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+       cerr << "Entering `operator<<' for `Path'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;    
+
+   apply_transform();
+
+   if (connector_type_vector.size() == 0)
+      connector_type_vector.push_back(new Connector_Type);
+
+   vector<Point*>::iterator p_iter = points.begin();
+   vector<Connector_Type*>::iterator c_iter = connector_type_vector.begin();
+
+
+
+   for (;;)
+   {
+
+       if (p_iter == points.end())
+          break;
+
+       o << **p_iter++;
+
+       if (c_iter != connector_type_vector.end())
+           o << " " << **c_iter++;
+       else if (p_iter == points.end() && is_cycle())
+            o << " .. "; 
+
+
+
+
+   }  /* |for|  */
+
+
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `operator<<' for `Path' successfully with return value `ostream &o'." 
+            << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@;    
+
+
+   return o;
+
+}  /* End of |operator<<| for |Path| definition.  */
+
+@q ** (2) @>
+
 @q * (1) class |Connector_Type| declaration. @>
 @ class |Connector_Type| declaration.
 \initials{LDF 2021.12.24.}
@@ -15617,7 +15705,7 @@ Connector_Type::Connector_Type(void)
    atleast_flag0 = false;
    atleast_flag1 = false;
 
-   connector_string = "";
+   connector_string = "..";
 
    pt0 = 0;
    pt1 = 0;
@@ -15693,6 +15781,52 @@ Connector_Type::operator=(const Connector_Type &c)
    return;
            
 }  /* End of |Connector_Type::operator=| definition  */
+
+@q **** (4) Constructor with |string| argument.@>
+@ Constructor with |string| argument.
+\initials{LDF 2022.04.20.}
+
+@q ***** (5) Declaration @>
+
+\LOG
+\initials{LDF 2022.04.20.}
+Added this function.
+\ENDLOG
+
+@<|Connector_Type| function declarations@>=
+Connector_Type(string s);
+
+@q ***** (5) Definition @>
+@
+@<|Connector_Type| function definitions@>=
+Connector_Type::Connector_Type(string s)
+{
+   type0 = PLAIN_TYPE;     
+   type1 = CT_NULL_TYPE;     
+
+   atleast_flag0 = false;
+   atleast_flag1 = false;
+
+   if (!(s == ".." || s == "..." s == "--" || s == "---")
+   {
+       cerr << "WARNING!  In `Connector_Type::Connector_Type(string s)':" << endl
+            << "`string s' argument is invalid:  `s' == " << s << endl
+            << "Setting `connector_string' to `..'." 
+            << endl;
+
+       connector_string = "..";
+   }
+   else 
+      connector_string = s;
+
+   pt0 = 0;
+   pt1 = 0;
+   r0  = 0;
+   r1  = 0;
+
+   return;
+           
+}  /* End of |Connector_Type| constructor with |string| argument definition  */
 
 @q *** (3) Multiplication with assignment operator.@>
 @ Multiplication with assignment operator.
@@ -15947,7 +16081,7 @@ operator<<(ostream& o, Connector_Type& c)
       }
       
       if (c.r0 < .75 && c.r1 < .75)
-      {
+        {
          o << " .. ";
       }
       else if (c.r0 >= .75)
@@ -16845,6 +16979,7 @@ class Glyph;
 @<Declare non-member non-template functions for |Connector_Type|@>@;
 @<Define |class Path|@>@;
 @<Define |static| |class Path| data members@>@;
+@<Declare non-member non-template functions for |Path|@>@;
 @<Define |Transform| functions@>@;
 @<Define |Point| functions@>@;
 @<Define |Focus| functions@>@;
@@ -16853,10 +16988,13 @@ class Glyph;
 @<Define |Line| functions@>@;
 @<Define |draw_axes|@>@;
 @<Declare non-member template functions for |Path|@>@;
+@<Define non-member non-template functions for |Path|@>@;
 @<Declare non-member template functions for |Connector_Type|@>@;
+
 @<Define |Nurb| functions@>@;
 @<|Connector_Type| function definitions@>@;
 @<Define non-member non-template functions for |Connector_Type|@>@;
+
 
 @q ** (2).@> 
 
@@ -16869,6 +17007,7 @@ class Glyph;
 @<Define |class Path|@>@;
 @<Declare |draw_axes|@>@;
 @<Declare non-member template functions for |Path|@>@;
+@<Declare non-member non-template functions for |Path|@>@;
 @<Declare non-member template functions for |Connector_Type|@>@;
 @<Declare non-member non-template functions for |Connector_Type|@>@;
 
