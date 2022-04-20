@@ -215,7 +215,15 @@ class Path : public Shape
    friend int yyparse(yyscan_t);
    friend int zzlex(yyscan_t);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
-   friend int Pointer_Vector<Path, Path>::resolve(int, int, int, Scanner_Node, bool, bool);
+   friend int Pointer_Vector<Path, Path>::resolve(int res_val,
+                                                  int begin,
+                                                  int end,
+                                                  Scanner_Node scanner_node, 
+                                                  bool do_unlink, 
+                                                  bool do_transform,
+                                                  bool do_test_planar, 
+                                                  bool do_make_planar,         
+                                                  bool do_ampersand);
    friend int Scan_Parse::drawing_command_glyph(Scanner_Node, int, Glyph*);
 
  protected:
@@ -14738,8 +14746,8 @@ Added this function.
 virtual
 int
 resolve(int res_val,
-        int begin, 
-        int end,
+        int begin = 0, 
+        int end = -1,
         Scanner_Node scanner_node = 0,
         bool do_unlink = true, 
         bool do_transform = true,
@@ -14916,12 +14924,13 @@ getchar();
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-/* !!START HERE:  LDF 2022.04.19.  Add code for optionally testing planarity
-   and also for making path planar if there are small inaccuracies after
-   transferring it to the x-y plane.
-*/ 
+@q **** (4) @>
 
-    return 0;  /* Testing.  LDF 2022.04.19.  */
+@ !!TODO:  Add code for making path planar if there are small inaccuracies after
+transferring it to the x-y plane.  Write a function for this.
+\initials{LDF 2022.04.20.}
+
+@<Define |Path| functions@>=
 
 @q **** (4) @>
 @
@@ -15072,12 +15081,6 @@ getchar();
 
            q_full *= t;
 
-           if (do_subpath)
-           {
-
-           }
-
-
 #if DEBUG_COMPILE
        if (DEBUG)
        { 
@@ -15091,139 +15094,17 @@ getchar();
 @q **** (4) @>
 
 
-     status = q_full.resolve(res_val, begin, end, scanner_node, do_unlink, false);
-
-     if (status != 0)
-     {
-        cerr << "ERROR!  In `Path::resolve':"
-             << endl 
-             << "`Path::resolve' (version 1, for entire path) failed, returning " << status << "." 
-             << endl
-             << "Failed to resolve `Path q_full'."
-             << endl 
-             << "Exiting function unsuccessfully with return value 1."
-             << endl;
-
-        return 1;
-
-     }
-
-@q **** (4) @>
-
-#if DEBUG_COMPILE
-     else if (DEBUG)
-     { 
-          cerr << "In `Path::resolve':"
-               << endl 
-               << "`Path::resolve' (version 1, for entire path) succeeded, returning 0."
-               << endl
-               << "Resolved `Path q_full' successfully."
-               << endl;
-
-          q_begin.show("q_begin:"); 
-          q_full.show("q_middle:"); 
-          q_end.show("q_end:"); 
-
-     }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
+
     
-     if (do_transform)
-        q_middle *= t.inverse();
+   if (do_ampersand)
+   {
 
-     bool ccycle = is_cycle();
+       /* !! TODO:  LDF 2022.04.20.  Add code.  */
 
-@q **** (4) @>
-
-@ This code may not be completely bullet-proof.  It may fail for complicated |Paths| with different kinds of 
-connectors.  !! TODO:  Test this!
-\initials{LDF 2022.04.04.}
-
-\LOG
-\initials{LDF 2022.04.04.}
-Added this section.
-\ENDLOG 
-
-@<Define |Path| functions@>=
-
-     if (do_ampersand)
-     {
-@q ***** (5) @>
-
-#if DEBUG_COMPILE
-        if (DEBUG)
-        { 
-          cerr << "In `Path::resolve':"
-               << endl 
-               << "`do_ampersand' is `true'." << endl;
-        }  
-
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ***** (5) @>
-
-        *this = q_begin;
-        
-        if (q_begin.get_last_point() != q_middle.get_point(0))
-        {
-           *this += q_middle.get_point(0);
-           *this += "..";
-        }
-
-        append(q_middle, "&");
-
-        if (q_middle.get_last_point() != q_end.get_point(0))
-        {
-           *this += q_end.get_point(0);
-           *this += "..";
-        }
-
-        append(q_end, "&");
-
-@q ***** (5) @>
-
-     } /* |if (do_ampersand)| */
-
-@q **** (4) @>
-@
-\LOG
-\initials{LDF 2022.04.04.}
-Added this section.
-\ENDLOG 
-
-@<Define |Path| functions@>=
-
-     else
-     {
-#if DEBUG_COMPILE
-        if (DEBUG)
-        { 
-          cerr << "In `Path::resolve':"
-               << endl 
-               << "`do_ampersand' is `false'." << endl;
-        }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-        *this = q_begin;
-
-        append(q_middle, "..");
-
-        append(q_end, "..");
-
-     } /* |else| */
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-
-     if (ccycle)
-     {
-        *this += "..";
-        cycle_switch = true;
-     }
+   }  /* |if (do_ampersand)| */
 
 @q **** (4) @>
 @
@@ -15653,7 +15534,15 @@ class Connector_Type
    friend ostream& operator<<(ostream& o, Connector_Type& c); 
    friend void* Scan_Parse::clip_to_func(void* arg1, void* parameter);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
-   friend int Pointer_Vector<Path, Path>::resolve(int, int, int, Scanner_Node, bool, bool);
+   friend int Pointer_Vector<Path, Path>::resolve(int res_val,
+                                                  int begin,
+                                                  int end,
+                                                  Scanner_Node scanner_node, 
+                                                  bool do_unlink, 
+                                                  bool do_transform,
+                                                  bool do_test_planar, 
+                                                  bool do_make_planar,         
+                                                  bool do_ampersand);
 
    int type0;
    int type1;

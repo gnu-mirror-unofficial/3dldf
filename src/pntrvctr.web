@@ -1437,12 +1437,15 @@ it requires types which are not fully defined when this file is compiled.
 
 @<Declare |Pointer_Vector| functions@>=
 int
-resolve(int res_val, 
-        int begin =  0,
-        int end   = -1,
-        Scanner_Node scanner_node = 0, 
+resolve(int res_val,
+        int begin = 0, 
+        int end = -1,
+        Scanner_Node scanner_node = 0,
         bool do_unlink = true, 
-        bool do_transform = true);
+        bool do_transform = true,
+        bool do_test_planar = true,
+        bool do_make_planar = true,
+        bool do_ampersand = false);
 
 @q ***** (5) Get |Conic_Section_Lattice|.@> 
 @ Get {\bf Conic\_Section\_Lattice}.
