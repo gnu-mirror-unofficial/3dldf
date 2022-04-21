@@ -2,7 +2,7 @@
 %% Created by Laurence D. Finston (LDF) Thu 21 Apr 2022 06:01:36 PM CEST
 
 beginfig(1);
-
+  
   k = (end_val - begin_val) / res_val;
 
   n = length Q0 - 1;
@@ -59,10 +59,9 @@ beginfig(1);
     show Q3;
   fi
 
-
-  j = 0;
+  i = begin_val;
   
-  for i = begin_val step k until end_val:
+  for j = 0 step 1 until res_val + 1:
     if extern:
       message "i:";
       show i;
@@ -78,7 +77,7 @@ beginfig(1);
     if extern:
       dotlabel.top(decimal j, r[j]);
     fi
-    j := incr j;
+    i := i + k;
   endfor;
   
   if unknown Q5:
@@ -146,8 +145,21 @@ beginfig(1);
     draw Q3 shifted (0, -1cm) withcolor green;
   fi;
 
-  write_path(Q5, output_filename, false);
-  write_path(Q4, output_filename, false);
+  if known Q5:
+    write_path(Q5, output_filename, false);
+  fi
+
+  % if known Q4:
+  %   write_path(Q4, output_filename, false);
+  % fi
+
+  % if known Q1:
+  %   write_path(Q1, output_filename, false);
+  % fi
+
+  % if known Q3:
+  %   write_path(Q3, output_filename, false);
+  % fi
 
   write "END" to output_filename;
   
