@@ -278,6 +278,9 @@ to {\bf zzlex} can be set here.
    if (DEBUG)
       cerr << "c == " << c << endl;
 
+   x *= 0.0352778;
+   y *= 0.0352778;
+
    ct->pt0 = create_new<Point>(0);
    (ct->pt0)->set(x, y, 0);
 
@@ -308,6 +311,9 @@ to {\bf zzlex} can be set here.
 
    ct->pt1 = create_new<Point>(0);
    
+   x *= 0.0352778;
+   y *= 0.0352778;
+
    (ct->pt1)->set(x, y, 0);
 
    if (DEBUG)
@@ -368,12 +374,14 @@ to {\bf zzlex} can be set here.
    if (DEBUG)
       cerr << "y == " << y << endl;
 
+   x *= 0.0352778;
+   y *= 0.0352778;
+
    ct->pt0 = create_new<Point>(0);
    (ct->pt0)->set(x, y, 0);
 
    ct->pt1 = create_new<Point>(0);
-   
-   (ct->pt0)->set(x, y, 0);
+   (ct->pt1)->set(x, y, 0);
    
    if (DEBUG)
       ct->show("*ct:");
@@ -422,6 +430,9 @@ to {\bf zzlex} can be set here.
    
    if (DEBUG)
       cerr << "y == " << y << endl;
+
+   x *= 0.0352778;
+   y *= 0.0352778;
 
    Point *p = create_new<Point>(0);
    p->set(x, y, 0);

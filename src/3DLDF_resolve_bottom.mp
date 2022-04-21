@@ -39,14 +39,17 @@ beginfig(1);
   endfor;
 
   if begin_val > 0:
-    Q1 = subpath (0, begin_val) of Q0;
+    Q1 = subpath (0, begin_val  + 1) of Q0;
   fi;
   
-  Q2 = subpath(begin_val, end_val) of Q0;
+  Q2 = subpath(begin_val, end_val + 1) of Q0;
 
   if end_val < n - 1:
-    Q3 = subpath(end_val, n) of Q0;
-  fi;
+    if cycle Q0:
+      Q3 = subpath(end_val, n+2) of Q0;
+    else:
+      Q3 = subpath(end_val, n+1) of Q0;
+    fi
 
   if extern:
     message "Q1:";
@@ -85,81 +88,17 @@ beginfig(1);
     scantokens "fi;endfig;end;";
   fi
 
-  if known Q1:
-    if extern:
-      message "Q1 is known.";
-    fi
-    Q4 = Q1;
-    if known Q5:
-      if extern:
-	message "Q5 is known.";
-      fi
-      Q4 := Q4 .. Q5;
-      if known Q3:
-	if extern:
-	  message "Q3 is known.";
-	fi
-	Q4 := Q4 .. Q3;
-      fi;
-    fi;
-  elseif known Q5:
-    if extern:
-      message "Q5 is known.";
-      message "Q1 is unknown.";
-    fi
-    Q4 = Q5;
-    if known Q3:
-      if extern:
-	message "Q3 is known.";
-      fi
-      Q4 := Q4 .. Q3;
-    fi;
-  elseif known Q3:
-    if extern:
-      message "Q1 and Q5 are unknown.";
-      message "Q3 is known.";
-    fi
-    Q4 = Q3;
-  elseif extern:
-    message "Q1, Q5 and Q3 are all unknown.";
-  fi;
-
-  if extern:
-    if known Q4:
-      message "Q4 is known.";
-    else:
-      message "Q4 is unknown.";
-    fi
-  fi
-
-  if known Q1 and extern:
-    draw Q1 shifted (1cm, 0) withcolor blue;
-  fi
-
-  if known Q5 and extern:
-    %draw Q5 withcolor red withpen big_pen;
-    draw Q5 withpen small_pen;
-  fi
-
-  if known Q3 and extern:
-    draw Q3 shifted (0, -1cm) withcolor green;
-  fi;
-
   if known Q5:
     write_path(Q5, output_filename, false);
   fi
 
-  % if known Q4:
-  %   write_path(Q4, output_filename, false);
-  % fi
+  if known Q1:
+    write_path(Q1, output_filename, false);
+  fi
 
-  % if known Q1:
-  %   write_path(Q1, output_filename, false);
-  % fi
-
-  % if known Q3:
-  %   write_path(Q3, output_filename, false);
-  % fi
+  if known Q3:
+    write_path(Q3, output_filename, false);
+  fi
 
   write "END" to output_filename;
   

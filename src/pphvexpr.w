@@ -469,10 +469,6 @@ getchar();
           << "with_ampersand == " << with_ampersand << endl
           << "test_planar == " << test_planar << endl
           << "make_planar == " << make_planar << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar();  
-
   }  
 #endif /* |DEBUG_COMPILE|  */@; 
 

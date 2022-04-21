@@ -1894,7 +1894,7 @@ alhambra_207_original.dvi: alhambra_207_original.tex alhambra_207_original.eps
 
 atemp: atemp001.eps
 
-atemp.mp: atemp.ldf 3dldf$(EXEEXT)
+atemp.mp: atemp.ldf 3DLDF_resolve_top.mp 3DLDF_resolve_bottom.mp 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) atemp.ldf
 
 atemp001.eps: atemp.mp
