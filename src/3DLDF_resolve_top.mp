@@ -4,8 +4,6 @@
 boolean extern;
 
 string output_filename;
-output_filename = "mp_output_test.txt";
-
 input TEX;
 
 prologues := 3;
@@ -30,6 +28,13 @@ big_pen = pencircle scaled 3pt;
 pair p[][];
 path Q[];
 pair r[];
+
+string date_str;
+
+
+  
+
+
 
 endinput;
 

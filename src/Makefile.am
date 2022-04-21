@@ -167,7 +167,8 @@ srtstrin_SOURCES = srtstrin.cxx
 
 # scanner2.web parser2.web
 
-EXTRA_DIST = check_scan_parse_output.sh compile_parser.sh \
+EXTRA_DIST = 3DLDF_resolve_bottom.mp 3DLDF_resolve_top.mp \
+             check_scan_parse_output.sh compile_parser.sh \
              cpyrtcpp.txt cpyrtasc.txt cpyrtcpp.txt cpyrtc.txt cpyrtel.txt \
              cpyrtss.txt cpyrttex.txt cpyrtweb.txt \
              format.web gpl-3.0.txt gpl-3.0_a3.txt patterns.web plain.lmc prelims.web runit \
