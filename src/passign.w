@@ -3368,6 +3368,39 @@ Got this rule to work.
 
 };
 
+@q ***** (5) path_assignment --> path_variable := path_vector_expression.@>   
+
+@*4 \§path assignment> $\longrightarrow$ \§path variable>. 
+\.{ASSIGN} \§path vector expression>. 
+
+\LOG
+\initials{LDF 2022.04.22.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+ 
+@=path_assignment: path_variable ASSIGN path_vector_expression@>
+{
+    Pointer_Vector<Path, Path> *pv = static_cast<Pointer_Vector<Path, Path>*>(@=$3@>);
+
+    Path *p = 0;
+
+    if (pv->v.size() > 0)
+    {
+       p = pv->v[0];
+       pv->v[0] = 0;
+       delete pv;
+    }
+
+    Int_Void_Ptr ivp = assign_simple<Path>(static_cast<Scanner_Node>(parameter),
+                                           "Path",
+                                           @=$1@>,
+                                           p);
+  @=$$@> = ivp.v;
+
+};
+
 @q **** (4) glyph_assignment.  @>
 @*3 \§glyph assignment>. 
 
@@ -4486,6 +4519,9 @@ Added this rule.
   @=$$@> = ivp.v;
 
 };
+
+
+
 
 @q ** (2) Vector types.@> 
 @*1 Vector types.
