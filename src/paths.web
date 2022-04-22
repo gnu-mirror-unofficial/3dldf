@@ -9039,20 +9039,20 @@ Formatting changes.
 @<Declare |Path| functions@>=
 virtual
 void   
-output(Scanner_Node scanner_node);
+output(Scanner_Node scanner_node, bool do_metafont = false);
 
 @q *** (3) Definition.@>
 
 @
 @<Define |Path| functions@>=
 void
-Path::output(Scanner_Node scanner_node)
+Path::output(Scanner_Node scanner_node, bool do_metafont)
 {
 
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9080,10 +9080,19 @@ Path::output(Scanner_Node scanner_node)
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
+
+          cerr << "do_metafont == " << do_metafont << endl;
+
       }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   Output_Struct* os = scanner_node->out[Run_State::METAPOST_RS];
+   Output_Struct* os = 0;
+
+   if (do_metafont)
+      os = scanner_node->out[Run_State::METAFONT_RS];
+   else
+      os = scanner_node->out[Run_State::METAPOST_RS];
+
    ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
    if (do_output == false)
@@ -9170,7 +9179,7 @@ Revised the code that checks the value of |arrow|.
            }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-         status = sub_output_draw(scanner_node, out_stream);
+         status = sub_output_draw(scanner_node, out_stream, do_metafont);
 
          if (status != 0)
             {
@@ -9224,7 +9233,10 @@ Revised the code that checks the value of |arrow|.
           }
 #endif /* |DEBUG_COMPILE|  */@; 
  
-          *out_stream << "fill " << **point_iter++;
+          *out_stream << "fill ";
+
+          (*point_iter)->output_mp_mf(*out_stream, do_metafont);
+          point_iter++;
 
           @<Output |Path|@>@;
 
@@ -9274,7 +9286,10 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 
 @<Define |Path| functions@>=
 
-              *out_stream << "fill " << **point_iter++;
+              *out_stream << "fill ";
+
+              (*point_iter)->output_mp_mf(*out_stream, do_metafont);
+              point_iter++;
 
               @<Output |Path|@>@;
 
@@ -9312,7 +9327,7 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 
               *out_stream << ";" << endl << flush;
                 
-              status = sub_output_draw(scanner_node, out_stream);
+              status = sub_output_draw(scanner_node, out_stream, do_metafont);
 
               if (status != 0)
                  {
@@ -9367,7 +9382,10 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
            } 
 #endif /* |DEBUG_COMPILE| */@;
 
-          *out_stream << "undraw " << **point_iter++;
+          *out_stream << "undraw ";
+
+          (*point_iter)->output_mp_mf(*out_stream, do_metafont);
+          point_iter++;
 
           @<Output |Path|@>@;
 
@@ -9399,7 +9417,9 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
           }
 #endif /* |DEBUG_COMPILE|  */@; 
         
-          *out_stream << "unfill " << **point_iter++;
+          *out_stream << "unfill ";
+          (*point_iter)->output_mp_mf(*out_stream, do_metafont);
+          point_iter++;
 
           @<Output |Path|@>@;
 
@@ -9443,7 +9463,10 @@ Changed |if (draw_color == Colors::background_color)| to
           if (   draw_color_vector == static_cast<Pointer_Vector<Color>*>(0) 
               || draw_color_vector->v.size() == 0)
             {
-                *out_stream << "unfilldraw " << **point_iter++;
+                *out_stream << "unfilldraw ";
+
+                (*point_iter)->output_mp_mf(*out_stream, do_metafont);
+                point_iter++;
 
                 @<Output |Path|@>@;
 
@@ -9466,13 +9489,16 @@ Now calling |Path::sub_output_draw|.
           else  /* |   draw_color_vector != 0 
                     && draw_color_vector->v.size() != 0|  */
             {
-                *out_stream << "unfill " << **point_iter++;
+                *out_stream << "unfill ";
+
+                (*point_iter)->output_mp_mf(*out_stream, do_metafont);
+                point_iter++;
 
                 @<Output |Path|@>@;
 
                 *out_stream << ";" << endl << flush;
                 
-                status = sub_output_draw(scanner_node, out_stream);
+                status = sub_output_draw(scanner_node, out_stream, do_metafont);
 
                 if (status != 0)
                    {
@@ -9574,7 +9600,7 @@ Added this function.  Removed from |Path::output| and put here.
 
 @<Declare |Path| functions@>=
 int
-sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream);
+sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream, bool do_metafont = false);
 
 @q **** (4) Definition.@>   
 
@@ -9582,13 +9608,13 @@ sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream);
 @<Define |Path| functions@>=
 
 int
-Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream)
+Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream, bool do_metafont)
 {
 
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9619,6 +9645,10 @@ Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream)
          log_message(cerr_strm);
          cerr_message(cerr_strm);
          cerr_strm.str("");
+
+#if 0 
+         cerr << "do_metafont == " << do_metafont << endl;
+#endif 
      }
 #endif /* |DEBUG_COMPILE|  */@; 
  
@@ -9765,10 +9795,13 @@ In addition, the first segment also requires special handling if
                        || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN)))  
                    {
 
-                      *out_stream << "drawarrow " << *points[0];
+
+                      *out_stream << "drawarrow ";
+ 
+                      points[0]->output_mp_mf(*out_stream, do_metafont);
 
                       if (do_colors)
-                         *out_stream << "withcolor " << **color_iter;
+                         *out_stream << " withcolor " << **color_iter;
 
                       if (do_pens)
                          *out_stream << " withpen " << **pen_iter;
@@ -9790,14 +9823,19 @@ In addition, the first segment also requires special handling if
 
                {
 
-                   *out_stream << "drawarrow " << *points[1] 
-                               << **connector_type_iter << *points[0]; 
+                   *out_stream << "drawarrow ";
+
+                   points[1]->output_mp_mf(*out_stream, do_metafont); 
+
+                   *out_stream << " " << **connector_type_iter << " ";
+
+                   points[0]->output_mp_mf(*out_stream, do_metafont);
 
                    if (do_colors)
-                      *out_stream << endl << "withcolor " << **color_iter;
+                      *out_stream << endl << " withcolor " << **color_iter;
 
                    if (do_pens)
-                      *out_stream << endl << "withpen " << **pen_iter;
+                      *out_stream << endl << " withpen " << **pen_iter;
 
                    if (do_dash_patterns)
                       *out_stream << endl << **dash_pattern_iter;
@@ -9812,8 +9850,9 @@ In addition, the first segment also requires special handling if
                         && (   !do_pens 
                             || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN)))  
                   {
-                      *out_stream << "draw " 
-                                  << *points[0];
+                      *out_stream << "draw ";
+
+                      points[0]->output_mp_mf(*out_stream, do_metafont);
 
                       if (do_colors)
                          *out_stream << " withcolor " << **color_iter;
@@ -9836,17 +9875,23 @@ In addition, the first segment also requires special handling if
                         || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN))
 
                   {
-                       *out_stream << "draw " << *points[0] 
-                                   << *connector_type_iter << *points[1];
 
-                      if (do_colors)
-                         *out_stream << endl << "withcolor " << **color_iter;
+                       *out_stream << "draw ";
+ 
+                       points[0]->output_mp_mf(*out_stream, do_metafont);
 
-                      if (do_pens)
-                         *out_stream << endl << "withpen " << **pen_iter;
+                       *out_stream << " " << *connector_type_iter << " ";
 
-                      if (do_dash_patterns)
-                         *out_stream << endl << **dash_pattern_iter;
+                       points[1]->output_mp_mf(*out_stream, do_metafont);
+
+                       if (do_colors)
+                          *out_stream << endl << "withcolor " << **color_iter;
+
+                       if (do_pens)
+                          *out_stream << endl << "withpen " << **pen_iter;
+
+                       if (do_dash_patterns)
+                          *out_stream << endl << **dash_pattern_iter;
 
                        *out_stream << ";" << endl << flush;
 
@@ -9892,11 +9937,16 @@ In addition, the first segment also requires special handling if
                           || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN))
 
                          {
-                             *out_stream << "draw " << *points[i]   
-                                         << *connector_type_iter << *points[i + 1];
+                             *out_stream << "draw ";
+
+                             points[i]->output_mp_mf(*out_stream, do_metafont);
+
+                             *out_stream << " " << *connector_type_iter << " ";
+
+                             points[i + 1]->output_mp_mf(*out_stream, do_metafont);
 
                              if (do_colors)
-                                *out_stream << endl << "withcolor " << **color_iter;
+                                *out_stream << endl << " withcolor " << **color_iter;
 
                              if (do_pens)
                                 *out_stream << endl << " withpen " << **pen_iter;
@@ -9939,14 +9989,16 @@ This requires special handling because |arrow| could be equal to
                    || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN))
 
                   {
-       
                       if (arrow == NO_ARROW)
                          *out_stream << "draw ";
                       else
                          *out_stream << "drawarrow ";
 
-                         *out_stream << *points[j] 
-                                     << *connector_type_iter << *points[k];
+                       points[j]->output_mp_mf(*out_stream, do_metafont);
+
+                       *out_stream << " " << *connector_type_iter << " ";
+ 
+                       points[k]->output_mp_mf(*out_stream, do_metafont);
 
                        if (do_colors)
                           *out_stream << endl << "withcolor " << **color_iter;
@@ -10027,11 +10079,23 @@ Added code for suppressing output if the type of the current
 #endif /* |DEBUG_COMPILE|  */@; 
 
                if (arrow == SINGLE_ARROW)
-                 *out_stream << "drawarrow " << **point_iter++;
+               {
+                 *out_stream << "drawarrow ";
+                 (*point_iter)->output_mp_mf(*out_stream, do_metafont);
+                 point_iter++;
+               }
                else if (arrow == DOUBLE_ARROW)
-                 *out_stream << "drawdblarrow " << **point_iter++;
+               {
+                 *out_stream << "drawdblarrow ";
+                 (*point_iter)->output_mp_mf(*out_stream, do_metafont);
+                 point_iter++;
+               }
                else
-                 *out_stream << "draw " << **point_iter++;
+               {
+                 *out_stream << "draw ";
+                 (*point_iter)->output_mp_mf(*out_stream, do_metafont);
+                 point_iter++;
+               }
 
                @<Output |Path|@>@;
 
@@ -10108,6 +10172,9 @@ Made debugging output thread-safe.
 @<Output |Path|@>=
 
 #if DEBUG_COMPILE
+ 
+   DEBUG = true;
+
    if (DEBUG)
       {
          cerr_strm << thread_name << "Entering `@@<Output |Path|@@>'.";
@@ -10140,7 +10207,11 @@ Made debugging output thread-safe.
             *out_stream << "..";
          }
 
-         *out_stream << " " << **point_iter++;
+         *out_stream << " ";
+         
+         (*point_iter)->output_mp_mf(*out_stream, do_metafont);
+
+         point_iter++;
 
          /* This breaks the line and indents after two points */
         

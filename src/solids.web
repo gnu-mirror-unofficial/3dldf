@@ -5872,16 +5872,17 @@ Removed the explicit template argument from the call to
 @<Declare |Solid| functions@>=
 virtual
 void   
-output(Scanner_Node s);
+output(Scanner_Node s, bool do_metafont = false);
 
 @  
 @<Define |Solid| functions@>=
 void
-Solid::output(Scanner_Node s)
+Solid::output(Scanner_Node s, bool do_metafont)
 {
   bool DEBUG = false; /* |true| */ 
+
   if (DEBUG)
-    cerr << "Entering Solid::output().\n";
+    cerr << "Entering `Solid::output'." << endl;
 
   vector <Shape*> v;
 
@@ -5918,13 +5919,16 @@ Solid::output(Scanner_Node s)
   for (vector <Shape*>::iterator iter = v.begin();
        iter != v.end(); ++iter)
     {
-      (**iter).output(s);
+      (**iter).output(s, do_metafont);
       delete (*iter);
     }
 
   if (DEBUG)
-    cerr << "Exiting Solid::output().\n";
-}
+    cerr << "Exiting `Solid::output'." << endl;
+
+  return;
+
+}  /* End of |Solid::output| definition  */
 
 @q * (1) Drawing and filling.@>
 @* Drawing and filling.

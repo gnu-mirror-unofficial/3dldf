@@ -888,14 +888,14 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
                           int fig_num, 
                           bool do_metafont, 
                           string s, 
-                          int wd, 
-                          int ht, 
-                          int dp)
+                          real wd, 
+                          real ht, 
+                          real dp)
 {
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   stringstream cerr_strm;
@@ -913,7 +913,11 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << "Entering `Scan_Parse::beginfig_func'.";
+      cerr_strm << "Entering `Scan_Parse::beginfig_func'."
+                << endl 
+                << "`wd' == " << wd << endl 
+                << "`ht' == " << ht << endl 
+                << "`dp' == " << dp;
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
@@ -944,8 +948,12 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 
   } /* |else|  */
 
+  Output_Struct* os = 0;
 
-  Output_Struct* os = scanner_node->out[Run_State::METAPOST_RS];
+  if (do_metafont)
+     os = scanner_node->out[Run_State::METAFONT_RS];
+  else
+     os = scanner_node->out[Run_State::METAPOST_RS];
 
   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
@@ -1188,8 +1196,8 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 
     if (do_metafont)
     {
-       *out_stream << "beginchar(\"" << s << "\", " << wd 
-                   << "pt#, " << ht << "pt#, " << dp << "pt#);" 
+       *out_stream << "beginchar(\"" << s << "\", " << (wd / 2.54 * 72.27)
+                   << "pt#, " << (ht / 2.54 * 72.27) << "pt#, " << (dp / 2.54 * 72.27) << "pt#);" 
                    << endl;
     }
     else
@@ -1437,7 +1445,7 @@ Scan_Parse::output_func(void* arg)
 {
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@;
 
   Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info(true);
@@ -1451,16 +1459,15 @@ Scan_Parse::output_func(void* arg)
   int* return_value = new int;
   *return_value = 0;
 
-  cerr_strm << thread_name << "Entering `Scan_Parse::output_func'.";
-  log_message(cerr_strm); 
-
 #if DEBUG_COMPILE
   if (DEBUG)
+  {
+     cerr_strm << thread_name << "Entering `Scan_Parse::output_func'.";
+     log_message(cerr_strm); 
       cerr_message(cerr_strm);
-
+      cerr_strm.str("");
+  }
 #endif /* |DEBUG_COMPILE|  */@;
-
-  cerr_strm.str("");
 
 @q ***** (5) Get |Picture_Output_Arg_Type*| argument and check that it's valid.@>
 @ Get |Picture_Output_Arg_Type*| argument and check that it's valid.
@@ -2246,7 +2253,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node, bool do_metafont)
 @<Define |Scan_Parse| functions@>=
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name
@@ -2254,6 +2261,8 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node, bool do_metafont)
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
+
+      cerr << "do_metafont == " << do_metafont << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -2729,6 +2738,10 @@ and increment |scanner_node->output_pending.value_1|.
 
 @<Define |Scan_Parse| functions@>=
 
+/* !!START HERE:  LDF 2022.04.22.  In this case, I'll have to change
+   |output_func| so that it can tell where to send the output.
+*/ 
+
       status = pthread_create(scanner_node->thread_vector.back(),
                               0,
                               output_func,
@@ -2801,7 +2814,6 @@ to |Picture::output|.
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
   else  /* (|!multithread_output|)  */
-
     {
 
 #if DEBUG_COMPILE
@@ -2835,14 +2847,19 @@ to |Picture::output|.
                       p->max_y_proj,
                       p->min_z_proj,
                       p->max_z_proj,
-                      p->surface_hiding_value);
+                      p->surface_hiding_value,
+                      do_metafont);
 
    if (is_endfig)
    {
 
      string s = (do_metafont) ? "endchar;" : "endfig;";
 
-     *(p->scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) 
+     if (do_metafont)
+        *(p->scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) 
+           << s << endl << endl << flush;
+     else
+        *(p->scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) 
            << s << endl << endl << flush;
    }
 

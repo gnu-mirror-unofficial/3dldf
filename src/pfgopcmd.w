@@ -164,7 +164,7 @@ Rewrote this rule.  It now calls |output_command_func|.
   scanner_node->clear_ptr = static_cast<void*>(c); 
   scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
-  Scan_Parse::output_command_func(scanner_node);
+  Scan_Parse::output_command_func(scanner_node, false);
 
   @=$$@> = static_cast<void*>(0);
  
@@ -189,13 +189,17 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @;
+  DEBUG = true; /* |false| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
                 << "*** Parser: `command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA" << endl 
                 << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                << "RIGHT_PARENTHESIS character_comment_optional'." << endl;
+                << "RIGHT_PARENTHESIS character_comment_optional'."
+                << endl 
+                << "$5 (wd) == " << @=$5@> << endl 
+                << "$7 (ht) == " << @=$7@> << endl 
+                << "$9 (dp) == " << @=$9@>;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -205,7 +209,14 @@ Added this rule.
 
    string *s = static_cast<string*>(@=$3@>);
 
-   Scan_Parse::beginfig_func(scanner_node, 0, true, *s, @=$5@>, @=$7@>, @=$9@>);
+
+   Scan_Parse::beginfig_func(scanner_node, 
+                             0, 
+                             true, 
+                             *s, 
+                             @=$5@>, 
+                             @=$7@>, 
+                             @=$9@>);
 
    delete s;
    s = 0;

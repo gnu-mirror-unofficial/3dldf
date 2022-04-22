@@ -5835,10 +5835,54 @@ ostream&
 operator<<(ostream& o, Point& p)
 {
 
+#if 0 
+  cerr << "In operator<< for points." << endl;
+#endif 
+
   o << "(" << p.get_x('p', false, false)
     << Point::measurement_units << ", "
     <<  p.get_y('p', false, false)
     << Point::measurement_units << ")";
+
+    return o;   
+}
+
+@q ** (2) |output_mp_mf|@>
+@*1 |output_mp_mf|.
+
+\LOG 
+\initials{LDF 2022.04.22.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Point| functions@>=
+ostream&
+output_mp_mf(ostream& o, bool do_metafont = true); 
+
+@q *** (3) @>
+@
+@<Define |Point| functions@>=
+ostream&
+Point::output_mp_mf(ostream& o, bool do_metafont)
+{
+
+#if 0
+  cerr << "In `Point:output_mp_mf':" << endl 
+       << "do_metafont == " << do_metafont << endl;
+#endif 
+
+  if (do_metafont)
+     o << "(" << (get_x('p', false, false) / 2.54 * 72.27)
+       << "pt" << ", "
+       << (get_y('p', false, false) / 2.54 * 72.27)
+       << "pt" << ")";
+  else
+     o << "(" << get_x('p', false, false)
+       << Point::measurement_units << ", "
+       <<  get_y('p', false, false)
+       << Point::measurement_units << ")";
+
+
     return o;   
 }
 
@@ -7547,22 +7591,27 @@ Now breaking line and indenting in output file before |withcolor| and
 
 @<Declare |Point| functions@>=
 void 
-output(Scanner_Node s);
+output(Scanner_Node s, bool do_metafont = false);
 
 @q *** (3) Definition.@>
 
 @ 
 @<Define |Point| functions@>=
 void 
-Point::output(Scanner_Node scanner_node) 
+Point::output(Scanner_Node scanner_node, bool do_metafont) 
 {
   bool DEBUG = false; /* |true| */
 
   if (DEBUG)
     cerr << "Entering Point::output().\n";
 
-  Output_Struct* os = scanner_node->out[Run_State::METAPOST_RS];
-  
+   Output_Struct* os = 0;
+
+   if (do_metafont)
+      os = scanner_node->out[Run_State::METAFONT_RS];
+   else
+      os = scanner_node->out[Run_State::METAPOST_RS];
+
   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
   
   if (do_output == false)
@@ -7609,10 +7658,20 @@ Now writing ``{\bf undrawdot}'' to |*out_stream| when
 
     } /* |else| (invalid |DRAWDOT_VALUE|.)  */@;      
 
-  *out_stream << "(" << projective_coordinates[0]
-              << measurement_units
-              << ", " << projective_coordinates[1]
-              << measurement_units << ")";
+  if (do_metafont)
+  {
+     *out_stream << "(" << (projective_coordinates[0] / 2.54 * 72.27)
+                 << "pt"
+                 << ", " << (projective_coordinates[1] / 2.54 * 72.27)
+                 << "pt" << ")";
+  }
+  else
+  {
+     *out_stream << "(" << projective_coordinates[0]
+                 << measurement_units
+                 << ", " << projective_coordinates[1]
+                 << measurement_units << ")";
+  }
 
 @q **** (4) Handle |Color|.  @>
 @ Handle |Color|.

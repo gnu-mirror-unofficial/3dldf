@@ -455,7 +455,7 @@ with the default |false|.
   virtual Shape* get_copy(void) const  = 0;
 
   virtual void clear(void) = 0;
-  virtual void output(Scanner_Node) = 0;
+  virtual void output(Scanner_Node, bool do_metafont = false) = 0;
   virtual vector<Shape*> extract(const Focus&,
                                  const unsigned short proj,
                                  real factor) = 0;

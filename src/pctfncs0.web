@@ -203,7 +203,8 @@ Picture::output(Scanner_Node scanner_node,
                 const real max_y_proj,
                 const real min_z_proj,
                 const real max_z_proj,
-                const unsigned short surface_hiding_value)
+                const unsigned short surface_hiding_value,
+                bool do_metafont)
 {
 
 @q **** (4) Preliminaries.@>   
@@ -239,7 +240,9 @@ Picture::output(Scanner_Node scanner_node,
                     << "max_x_proj == " << max_x_proj << endl
                     << "min_y_proj == " << min_y_proj << endl
                     << "max_y_proj == " << max_y_proj << endl
-                    << "surface_hiding_value == " << surface_hiding_value;
+                    << "surface_hiding_value == " << surface_hiding_value
+                    << endl 
+                    << "do_metafont == " << do_metafont;
 
           log_message(cerr_strm);
           cerr_message(cerr_strm);
@@ -1052,7 +1055,7 @@ while (next_position != shape_list.end())
    valarray<real> temp_valarray(0.0, 6);
 #endif /* |DEBUG_COMPILE|  */@;
 
-for (list<Shape*>::iterator iter = shape_list.begin();
+      for (list<Shape*>::iterator iter = shape_list.begin();
         iter != shape_list.end();
         ++iter)
       {
@@ -1074,7 +1077,7 @@ for (list<Shape*>::iterator iter = shape_list.begin();
             }
 #endif /* |DEBUG_COMPILE|  */@; 
  
-         (**iter).output(scanner_node);
+         (**iter).output(scanner_node, do_metafont);
          (**iter).unsuppress_output(); 
 
       }  /* |for|  */
@@ -1114,22 +1117,19 @@ and then clearing |shape_list|.
 @<Define |Picture| functions@>=
 
    else  /* |surface_hiding_value == 0|  */
-      {
+   {
 
           for(vector<Shape*>::iterator iter = elements.begin();
               iter != elements.end();
               ++iter)
              {
-                 (**iter).output(scanner_node);
+                 (**iter).output(scanner_node, do_metafont);
 
 @q ****** (6).@> 
 
-@ With a different |Focus| or different limiting
-values for the projection, this |Shape| might
-be projectable, so we reset |do_output|
-to |true|.  If it can't be projected the
-next time, |suppress_output| will be 
-invoked again.
+@ With a different |Focus| or different limiting values for the projection, this |Shape| 
+might be projectable, so we reset |do_output| to |true|.  If it can't be projected the
+next time, |suppress_output| will be invoked again.
 \initials{LDF 2002.09.18.}
 
 @<Define |Picture| functions@>=
@@ -1164,6 +1164,9 @@ both the original and the transformed versions are output.
 \initials{LDF 2002.04.25.}  
 
 @<Define |Picture| functions@>= 
+
+  if (do_metafont)
+     do_labels = false;
 
   if (do_labels == true)
   {
