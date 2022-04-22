@@ -245,7 +245,7 @@ Added this rule.
 
    @<Common declarations for rules@>@; 
 
-   DEBUG = true; /* |false|  */
+   DEBUG = false; /* |true|  */
 
    if (DEBUG)
    {
@@ -309,7 +309,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `path_vector_primary --> RESOLVE path_expression"
@@ -424,7 +424,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `path_vector_primary --> RESOLVE path_expression "

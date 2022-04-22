@@ -69,7 +69,7 @@ Created this file.
 @=newwrite_primary: newwrite_variable@>@/
 {
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
    stringstream cerr_strm;
    if (DEBUG)
       {
@@ -149,7 +149,7 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
 @=newwrite_primary: LEFT_PARENTHESIS newwrite_expression RIGHT_PARENTHESIS@>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
   stringstream cerr_strm;
   if (DEBUG)
     {
@@ -236,7 +236,7 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
 @=newwrite_secondary: newwrite_primary@>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
   stringstream cerr_strm;
   if (DEBUG)
     {
@@ -323,7 +323,7 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
 @=newwrite_tertiary: newwrite_secondary@>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
   stringstream cerr_strm;
   if (DEBUG)
     {
@@ -410,7 +410,7 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
 @=newwrite_expression: newwrite_tertiary@>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
   stringstream cerr_strm;
   if (DEBUG)
     {

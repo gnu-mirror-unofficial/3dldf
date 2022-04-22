@@ -9052,7 +9052,8 @@ Path::output(Scanner_Node scanner_node, bool do_metafont)
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
+   bool SAVE_DEBUG;
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9082,7 +9083,6 @@ Path::output(Scanner_Node scanner_node, bool do_metafont)
           cerr_strm.str("");
 
           cerr << "do_metafont == " << do_metafont << endl;
-
       }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -9240,7 +9240,7 @@ Revised the code that checks the value of |arrow|.
 
           @<Output |Path|@>@;
 
-          if (   fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+          if (!do_metafont && fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
               && fill_color_vector->ctr > 0)
             *out_stream << " withcolor " << *(fill_color_vector->v[0]);
 
@@ -9323,7 +9323,8 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 
                   }  /* |if (temp_color == 0)|  */
 
-              *out_stream << " withcolor " << *temp_color;
+              if (!do_metafont)
+                 *out_stream << " withcolor " << *temp_color;
 
               *out_stream << ";" << endl << flush;
                 
@@ -9614,7 +9615,10 @@ Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream, bool do_m
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
+
+   bool SAVE_DEBUG;
+
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9632,6 +9636,10 @@ Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream, bool do_m
 
    int status;
 
+   bool do_colors = (do_metafont) ? false : true;
+   bool do_pens;
+   bool do_dash_patterns;
+
 @q ***** (5).@> 
 @
 @<Define |Path| functions@>=
@@ -9646,7 +9654,7 @@ Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream, bool do_m
          cerr_message(cerr_strm);
          cerr_strm.str("");
 
-#if 0 
+#if 0 /* 1 */
          cerr << "do_metafont == " << do_metafont << endl;
 #endif 
      }
@@ -9712,21 +9720,24 @@ Added code for suppressing output if the type of the current
                vector<Pen*>::const_iterator pen_iter;
                vector<Dash_Pattern*>::const_iterator dash_pattern_iter;
 
-               bool do_colors;
-               bool do_pens;
-               bool do_dash_patterns;
 
 @q ****** (6).@> 
 
-               status = adjust_draw_color_vector();
+               do_colors = false;
 
-               if (status == 0)
+               if (!do_metafont)
+               {
+                  status = adjust_draw_color_vector();
+
+                  if (status == 0)
                   {
                       color_iter = draw_color_vector->v.begin();
                       do_colors = true;
                   }
-               else
-                  do_colors = false;
+                  else 
+                     do_colors = false;
+
+              }
 
 @q ****** (6).@> 
 
@@ -10099,7 +10110,7 @@ Added code for suppressing output if the type of the current
 
                @<Output |Path|@>@;
 
-               if (   draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+               if (do_colors && draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
                    && draw_color_vector->ctr > 0)
                   *out_stream << endl << "withcolor " << *(draw_color_vector->v[0]) << " ";
 
@@ -10173,7 +10184,8 @@ Made debugging output thread-safe.
 
 #if DEBUG_COMPILE
  
-   DEBUG = true;
+   SAVE_DEBUG = DEBUG;
+   DEBUG = false; /* |true| */
 
    if (DEBUG)
       {
@@ -10245,13 +10257,16 @@ Made debugging output thread-safe.
     
 #if DEBUG_COMPILE
    if (DEBUG)
-      {
-          cerr_strm << thread_name << "Exiting `@@<Output |Path|@@>'.";
+   {
+       cerr_strm << thread_name << "Exiting `@@<Output |Path|@@>'.";
 
-          log_message(cerr_strm);
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-      }
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }
+
+   DEBUG = SAVE_DEBUG; 
+
 #endif /* |DEBUG_COMPILE|  */@;
 
 @q **** (4) Handle |pen|.@>
@@ -10868,7 +10883,7 @@ bool
 Path::is_planar(Point *normal, bool verbose, string text) const
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */@; 
+  bool DEBUG = false; /* |true| */@; 
 #endif /* |DEBUG_COMPILE|  */@;
 
 if (VERBOSE_GLOBAL)
@@ -14832,7 +14847,7 @@ Path::resolve(Scanner_Node scanner_node,
 {
 @q **** (4) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    bool do_subpath;
 
@@ -15972,7 +15987,7 @@ ostream&
 operator<<(ostream &o, Path &p)
 {
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
    if (DEBUG)
    { 
        cerr << "Entering `operator<<' for `Path'." << endl;

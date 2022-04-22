@@ -9922,7 +9922,10 @@ and increment |scanner_node->output_pending.value_1|.
 @<Define |Scan_Parse| functions@>= 
 
 #ifdef HAVE_PTHREAD_H  
-   scanner_node->out[Run_State::METAPOST_RS]->lock();
+   if (metapost_output)
+      scanner_node->out[Run_State::METAPOST_RS]->lock();
+   if (metafont_output)
+      scanner_node->out[Run_State::METAFONT_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
   
 #if DEBUG_COMPILE
@@ -9946,7 +9949,10 @@ and increment |scanner_node->output_pending.value_1|.
         *(scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) << *s << endl << flush;
 
 #ifdef HAVE_PTHREAD_H  
-   scanner_node->out[Run_State::METAPOST_RS]->unlock();
+   if (metapost_output)
+      scanner_node->out[Run_State::METAPOST_RS]->unlock();
+   if (metafont_output)
+      scanner_node->out[Run_State::METAFONT_RS]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
    scanner_node->output_pending.value_0 = false;
@@ -10036,7 +10042,10 @@ and increment |scanner_node->output_pending.value_1|.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #ifdef HAVE_PTHREAD_H  
-   scanner_node->out[Run_State::METAPOST_RS]->lock();
+   if (metapost_output)
+      scanner_node->out[Run_State::METAPOST_RS]->lock();
+   if (metafont_output)
+      scanner_node->out[Run_State::METAFONT_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
   
 #if DEBUG_COMPILE
@@ -10061,7 +10070,10 @@ and increment |scanner_node->output_pending.value_1|.
 
 
 #ifdef HAVE_PTHREAD_H  
-   scanner_node->out[Run_State::METAPOST_RS]->unlock();
+   if (metapost_output)
+      scanner_node->out[Run_State::METAPOST_RS]->unlock();
+   if (metafont_output)
+      scanner_node->out[Run_State::METAFONT_RS]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
     }     /* |else | (|!multithread_output|)  */

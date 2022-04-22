@@ -895,7 +895,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   stringstream cerr_strm;
@@ -1445,7 +1445,7 @@ Scan_Parse::output_func(void* arg)
 {
 
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@;
 
   Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info(true);
@@ -2253,7 +2253,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node, bool do_metafont)
 @<Define |Scan_Parse| functions@>=
 
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name
@@ -2263,6 +2263,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node, bool do_metafont)
       cerr_strm.str("");
 
       cerr << "do_metafont == " << do_metafont << endl;
+
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -2463,8 +2464,7 @@ scanner_node->picture_entry_ptr = static_cast<void*>(entry);
 @q ***** (5) If we're using multithreaded output,       @>
 @q ***** (5) create new thread and call |output_func|.@>
 
-@ If we're using multithreading, create new thread and call 
-|output_func|.  
+@ If we're using multithreading, create new thread and call |output_func|.  
 \initials{LDF 2004.07.12.}
 @<Define |Scan_Parse| functions@>=
 
@@ -2832,7 +2832,10 @@ to |Picture::output|.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #ifdef HAVE_PTHREAD_H  
-   p->scanner_node->out[Run_State::METAPOST_RS]->lock();
+   if (metapost_output)
+      p->scanner_node->out[Run_State::METAPOST_RS]->lock();
+   if (metafont_output)
+      p->scanner_node->out[Run_State::METAFONT_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
    p->picture->output(p->scanner_node,
@@ -2864,7 +2867,10 @@ to |Picture::output|.
    }
 
 #ifdef HAVE_PTHREAD_H  
-   p->scanner_node->out[Run_State::METAPOST_RS]->unlock();
+   if (metapost_output)
+      p->scanner_node->out[Run_State::METAPOST_RS]->unlock();
+   if (metafont_output)
+      p->scanner_node->out[Run_State::METAFONT_RS]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
     }     /* |else | (|!multithread_output|)  */
