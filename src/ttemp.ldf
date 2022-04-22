@@ -8,19 +8,51 @@ input "plain.lmc";
 path q[];
 
 path_vector pv;
+path_vector qv;
   
-q0 := origin -- (1, 1) -- (2, 2) -- (3, 3) -- (4, 4) -- (5, 5);
+q0 := origin -- (1, 1) -- (2, 2) -- (3, 3) -- (4, 4) -- (5, 5) -- (6, 6);
 
 message "is_linear q0:";
 show is_linear q0;
 
 %pv := resolve q0 (2, 4) to 10;
 
-q1 := resolve q0 to 10;
+
 
 message "pv:";
 show pv;
 
+beginfig(0);
+
+  draw q0;
+
+  pv := resolve q0 (2, 5) to 10;
+  
+  n := (size q0) - 1; 
+  
+  for i = 0 upto n:
+    dotlabel.top(decimal i, get_point (i) q0);
+  endfor;
+    
+  n := (size pv0) - 1; 
+  
+  for i = 0 upto n:
+    dotlabel.bot(decimal i, get_point (i) pv0) with_color blue;
+  endfor;
+
+  qv := resolve q0 to 12;
+
+  shift qv0 (2cm, 0);
+  
+  draw qv0 with_color red;
+
+  n := (size qv0) - 1; 
+  
+  for i = 0 upto n:
+    dotlabel.top(decimal i, get_point (i) qv0) with_color red;
+  endfor;
+  
+endfig;
 end_mp;
 
 end;
