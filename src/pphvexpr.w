@@ -286,129 +286,6 @@ Added this rule.
 
 };
 
-@q *** (3) path_primary --> RESOLVE path_expression TO numeric_expression.@> 
-@*2 \§path primary> $\longrightarrow$ \.{RESOLVE} \§path expression> \.{TO} \§numeric expression>.
-\§resolve option list>.
-\initials{LDF 2022.01.18.}
-
-\LOG
-\initials{LDF 2022.01.18.}
-\ENDLOG
-
-@<Define rules@>=
-@=path_primary: RESOLVE path_expression TO numeric_expression resolve_option_list@>@/
-{
-  @<Common declarations for rules@>@; 
-
-#if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
-  if (DEBUG)
-  {
-    cerr_strm << "*** Parser: `path_primary --> RESOLVE path_expression TO numeric_expression "
-              << "resolve_option_list'."; 
-
-    log_message(cerr_strm);
-    cerr_message(cerr_strm);
-    cerr_strm.str("");
-
-    cerr << "resolve_option_list == " << @=$5@> << " == 0x" << hex << @=$5@> 
-         << dec << endl;
-  }
-#endif /* |DEBUG_COMPILE|  */@;
-
-  bool save             = @=$5@> &  1U; 
-  bool with_transform   = @=$5@> &  2U; 
-  bool with_ampersand   = @=$5@> &  4U; 
-  bool test_planar      = @=$5@> &  8U; 
-  bool make_planar      = @=$5@> & 16U; 
-
-#if DEBUG_COMPILE
-  if (DEBUG)
-  { 
-     cerr << "resolve_option_list == " << @=$5@> << " == 0x" << hex << @=$5@> 
-          << dec << endl
-          << "save == " << save << endl
-          << "with_transform == " << with_transform << endl
-          << "with_ampersand == " << with_ampersand << endl
-          << "test_planar == " << test_planar << endl
-          << "make_planar == " << make_planar << endl;
-
-
-  }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-  Path *p = 0;
-
-  Pointer_Vector<Path> *pv = static_cast<Path*>(@=$2@>)->resolve(
-                                                 scanner_node,
-                                                 static_cast<int>(@=$4@>), 
-                                                 0,
-                                                -1,
-                                                 !save,
-                                                 with_transform,
-                                                 test_planar,
-                                                 make_planar,
-                                                 with_ampersand);
-
-  if (pv == 0 || pv->v.size() == 0)
-  {
-     cerr_strm << "ERROR!  In parser, rule `path_vector_primary --> RESOLVE path_expression "
-               << "TO numeric_expression resolve_option_list:"
-               << endl 
-               << "`Path::resolve' failed, returning NULL or an empty object."
-               << endl
-               << "Failed to resolve path.  Returning empty path."
-               << endl;
-
-     log_message(cerr_strm);
-     cerr_message(cerr_strm);
-     cerr_strm.str("");
-
-     p = create_new<Path>(0);
-
-  } 
-
-@q **** (4) @>
-
-  else 
-  {
-#if DEBUG_COMPILE
-      if (DEBUG)
-      {
-        cerr_strm << "In parser, rule `path_vector_primary --> RESOLVE path_expression "
-                  << "LEFT_PARENTHESIS numeric_expression COMMA"
-                  << endl 
-                  << "numeric_expression RIGHT_PARENTHESIS "
-                  << "TO numeric_expression resolve_option_list:"
-                  << endl 
-                  << "`Path::resolve' succeeded, returning a `path_vector'.";
-
-        log_message(cerr_strm);
-        cerr_message(cerr_strm);
-        cerr_strm.str("");
-    
-      }
-#endif /* |DEBUG_COMPILE|  */@;
-
-      p = pv->v[0];
-
-      pv->v[0] = 0;
-
-#if 0 
-      delete pv;
-      pv = 0;
-#endif 
-
-@q ***** (5) @>
-
-  }  /* |else|  */
-
-@q **** (4) @>
-
-  @=$$@> =  static_cast<void*>(p); 
-
-};
-
 @q *** (3) path_vector_primary: RESOLVE path_expression LEFT_PARENTHESIS numeric_expression COMMA   @>
 @q         numeric_expression RIGHT_PARENTHESIS TO numeric_expression                               @>
 @q         resolve_option_list                                                                      @>
@@ -420,6 +297,7 @@ Added this rule.
 
 \LOG
 \initials{LDF 2022.01.18.}
+Added this rule.
 \ENDLOG
 
 @<Define rules@>=
@@ -470,8 +348,6 @@ Added this rule.
 
 @q **** (4) @>
 
-  entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
-
   Pointer_Vector<Path> *pv = static_cast<Path*>(@=$2@>)->resolve(
                               scanner_node,
                               static_cast<int>(@=$9@>), 
@@ -512,6 +388,114 @@ Added this rule.
               << "LEFT_PARENTHESIS numeric_expression COMMA"
               << endl 
               << "numeric_expression RIGHT_PARENTHESIS "
+              << "TO numeric_expression resolve_option_list:"
+              << endl 
+              << "`Path::resolve' succeeded, returning a `path_vector'.";
+
+    log_message(cerr_strm);
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+    
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q **** (4) @>
+
+  @=$$@> =  static_cast<void*>(pv);
+
+};
+
+@q *** (3) path_vector_primary: RESOLVE path_expression TO numeric_expression resolve_option_list @>
+
+@ \§path vector primary> $\longrightarrow$ \.{RESOLVE} \§path expression> \.{TO} 
+\§numeric expression> \§resolve option list>.
+\initials{LDF 2022.04.22.}
+
+\LOG
+\initials{LDF 2022.04.22.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=path_vector_primary: RESOLVE path_expression TO numeric_expression resolve_option_list @>@/
+{
+@q **** (4) @>
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+  {
+    cerr_strm << "*** Parser: `path_vector_primary --> RESOLVE path_expression "
+              << "TO numeric_expression resolve_option_list'.";
+
+    log_message(cerr_strm);
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q **** (4) @>
+
+  bool save             = @=$5@> &  1U; 
+  bool with_transform   = @=$5@> &  2U; 
+  bool with_ampersand   = @=$5@> &  4U; 
+  bool test_planar      = @=$5@> &  8U; 
+  bool make_planar      = @=$5@> & 16U; 
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+  { 
+     cerr << "resolve_option_list == " << @=$5@> << " == 0x" << hex << @=$5@> 
+          << dec << endl
+          << "save == " << save << endl
+          << "with_transform == " << with_transform << endl
+          << "with_ampersand == " << with_ampersand << endl
+          << "test_planar == " << test_planar << endl
+          << "make_planar == " << make_planar << endl;
+  }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+
+  Pointer_Vector<Path> *pv = static_cast<Path*>(@=$2@>)->resolve(
+                              scanner_node,
+                              static_cast<int>(@=$4@>), 
+                              0, 
+                              -1,
+                              !save,
+                              with_transform,
+                              test_planar,
+                              make_planar,
+                              with_ampersand);
+  if (pv == 0)
+  {
+     cerr_strm << "ERROR!  In parser, rule `path_vector_primary --> RESOLVE path_expression"
+               << endl 
+               << "TO numeric_expression resolve_option_list:"
+               << endl 
+               << "`Path::resolve' failed, returning " << status << "."
+               << endl 
+               << "Failed to resolve path.  Returning empty `path_vector'."
+               << endl;
+
+     log_message(cerr_strm);
+     cerr_message(cerr_strm);
+     cerr_strm.str("");
+
+     pv = create_new<Pointer_Vector<Path> >(0);
+
+  } 
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+  else if (DEBUG)
+  {
+    cerr_strm << "In parser, rule `path_vector_primary --> RESOLVE path_expression"
+              << endl 
               << "TO numeric_expression resolve_option_list:"
               << endl 
               << "`Path::resolve' succeeded, returning a `path_vector'.";
