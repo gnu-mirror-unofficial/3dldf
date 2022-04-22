@@ -264,11 +264,13 @@ Scanner_Type::create(string str,
   string in_filename;
 
   string out_filename_metapost;
+  string out_filename_metafont;
   string out_filename_png;
   string out_filename_libplot;
   string out_filename;
   ofstream* out_file; 
   ofstream* out_file_metapost; 
+  ofstream* out_file_metafont; 
   ofstream* out_file_png; 
   ofstream* out_file_libplot; 
 
@@ -426,6 +428,16 @@ or more of the formats supported by the GNU plotutils package.
       out_file = 0;
     }  
 
+  if (r.do_output[Run_State::METAFONT_RS])
+    {
+      out_file = 0;
+      out_filename_metafont = out_filename_base + ".mf";
+      out_filename = out_filename_metafont;
+      @<Check |out_filename|, return 0 upon failure@>@;
+      out_file_metafont = out_file;
+      out_file = 0;
+    }  
+
   if (r.do_output[Run_State::PNG])
     {
       out_file = 0;
@@ -482,6 +494,18 @@ code from the parser rules and put it into functions.
 
           @<Check |out_filename|, return 0 upon failure@>@;
           out_file_metapost = out_file;
+          out_file = 0;
+        }  
+
+      if (r.do_output[Run_State::METAFONT_RS])
+        {
+          out_file = 0;
+
+          out_filename_metafont = "3dldfput.mp";
+          out_filename = out_filename_metafont;
+
+          @<Check |out_filename|, return 0 upon failure@>@;
+          out_file_metafont = out_file;
           out_file = 0;
         }  
 
@@ -733,6 +757,30 @@ needed, because this function predefines variables for these |Colors|.
     }
   else
     scanner_node->out[Run_State::METAPOST_RS] = 0;
+
+  if (      scanner_node->in->type 
+         == Io_Struct::FILE_TYPE 
+      && r.do_output[Run_State::METAFONT_RS])
+    {
+      scanner_node->out[Run_State::METAFONT_RS] = new Output_Struct;
+      scanner_node->out[Run_State::METAFONT_RS]->filename = out_filename_metafont;
+      scanner_node->out[Run_State::METAFONT_RS]->stream_ptr
+        = static_cast<ostream*>(out_file_metafont);
+
+      scanner_node->out[Run_State::METAFONT_RS]->type = Io_Struct::FILE_TYPE;
+
+      out_file_metafont->setf(ios::fixed, ios::floatfield);
+  
+      *out_file_metafont << "%%%% " << out_filename_metafont << "." << endl
+                         << "%%%% Generated on " << datestamp << endl 
+                         << "%%%% from " << in_filename << " by "
+                         << "GNU 3DLDF " << VERSION_3DLDF << "."
+                         << endl << endl << flush; 
+
+      out_file_metafont = 0;
+    }
+  else
+    scanner_node->out[Run_State::METAFONT_RS] = 0;
 
   if (   scanner_node->in->type 
       == Io_Struct::FILE_TYPE && r.do_output[Run_State::PNG])
