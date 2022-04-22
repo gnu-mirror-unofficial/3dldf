@@ -3382,23 +3382,51 @@ Added this rule.
  
 @=path_assignment: path_variable ASSIGN path_vector_expression@>
 {
+@q ****** (6) @>
+
+    @<Common declarations for rules@>@;
+
     Pointer_Vector<Path, Path> *pv = static_cast<Pointer_Vector<Path, Path>*>(@=$3@>);
 
     Path *p = 0;
 
-    if (pv->v.size() > 0)
+    if (pv != 0 && pv->v.size() > 0 && pv->v[0] != 0)
     {
        p = pv->v[0];
        pv->v[0] = 0;
-       delete pv;
+
+       Int_Void_Ptr ivp = assign_simple<Path>(static_cast<Scanner_Node>(parameter),
+                                              "Path",
+                                              @=$1@>,
+                                              p);
+       @=$$@> = ivp.v;
+
+    }
+    else
+    {
+       cerr_strm << "WARNING!  In parser, rule `path_assignment: path_variable ASSIGN path_vector_expression':"
+                 << endl;
+
+       if (pv == 0)
+          cerr_strm << "path vector is NULL." << endl;
+       else if (pv->v.size() == 0 || (pv->v.size() > 0 && pv->v[0] == 0))
+          cerr_strm << "path_vector is empty." << endl;
+
+       cerr_strm << "Can't assign to path.  Continuing.";
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+       @=$$@> = static_cast<void*>(0);
     }
 
-    Int_Void_Ptr ivp = assign_simple<Path>(static_cast<Scanner_Node>(parameter),
-                                           "Path",
-                                           @=$1@>,
-                                           p);
-  @=$$@> = ivp.v;
-
+@q ****** (6) @>
+    if (pv)
+    {
+       delete pv;
+       pv = 0;
+    }
 };
 
 @q **** (4) glyph_assignment.  @>
