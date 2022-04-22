@@ -9943,7 +9943,7 @@ and increment |scanner_node->output_pending.value_1|.
         *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << "verbatimtex " << *s << " etex;" 
                                                                  << endl << flush;
      else if (verbatim_command_arg == VERBATIM_METAFONT_COMMAND)
-        *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s << endl << flush;
+        *(scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) << *s << endl << flush;
 
 #ifdef HAVE_PTHREAD_H  
    scanner_node->out[Run_State::METAPOST_RS]->unlock();
@@ -10057,7 +10057,7 @@ and increment |scanner_node->output_pending.value_1|.
         *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << "verbatimtex " << *s << " etex;" 
                                                                  << endl << flush;
      else if (verbatim_command_arg == VERBATIM_METAFONT_COMMAND)
-        *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s << endl << flush;
+        *(scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) << *s << endl << flush;
 
 
 #ifdef HAVE_PTHREAD_H  
