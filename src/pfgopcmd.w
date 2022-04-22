@@ -84,6 +84,8 @@ possible to use |beginfig| in loops.
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
+   scanner_node->beginfig_flag  = true;
+
    int i = static_cast<int>(floor(fabs(@=$3@>) + .5)); 
 
    Scan_Parse::beginfig_func(scanner_node, i);
@@ -154,6 +156,8 @@ Rewrote this rule.  It now calls |output_command_func|.
 {
 
   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+  
+  scanner_node->beginfig_flag  = false;
 
   bool* c = new bool;
   *c = true;
@@ -206,6 +210,8 @@ Added this rule.
       cerr_strm.str("");
     }
 #endif /* |DEBUG_COMPILE|  */@;
+
+   scanner_node->beginchar_flag = true;
 
    string *s = static_cast<string*>(@=$3@>);
 
@@ -303,6 +309,8 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+  scanner_node->beginchar_flag = false;
+
   bool* c = new bool;
   *c = true;
 
@@ -315,12 +323,11 @@ Added this rule.
   Scan_Parse::output_command_func(scanner_node, true);
 
   @=$$@> = static_cast<void*>(0);
-
  
 };
 
 @q **** (4) command --> OUTPUT picture_expression @>
-@q **** (4) with_clause_output_list.                   @>
+@q **** (4) with_clause_output_list.              @>
 
 @*3 \§command> $\longrightarrow$ `\.{OUTPUT}'
 \§picture expression> \§with clause output list>.
@@ -356,14 +363,32 @@ and unnecessary.
   
 @=command: OUTPUT picture_expression with_clause_output_list@>@/
 {
+    /* !!START HERE:  LDF 2022.04.22.  BUG:  Copying the `picture_expression' 
+       is a workaround for the problem that outputting it directly
+       would cause it to be cleared.  I don't know why or where this
+       happens.  !! TODO:  Fix this!
+    */ 
 
     Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
-  
-    scanner_node->picture_entry_ptr = @=$2@>; 
 
-    Scan_Parse::output_command_func(scanner_node);
+    Id_Map_Entry_Node entry = new Id_Map_Entry_Type;
+    *static_cast<Id_Map_Entry_Node>(entry) = *static_cast<Id_Map_Entry_Node>(@=$2@>);
+
+    scanner_node->picture_entry_ptr = entry;
+
+    /* !!START HERE:  LDF 2022.04.22.  Add a |with_clause_output| for setting
+       the type of output, too.  */ 
+
+    bool output_type;
+
+    output_type = scanner_node->beginchar_flag;
+
+    Scan_Parse::output_command_func(scanner_node, output_type);
 
     @=$$@> = static_cast<void*>(0);
+
+    delete entry;
+    entry = 0;
 
 };
 
