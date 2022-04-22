@@ -1516,18 +1516,27 @@ ttemp1.0 ttemp1.1: ttemp1.mp
 	mpost -numbersystem "double" $<
 
 
-.PHONY: tps
+# .PHONY: tps
 
-tps: ttemp.ps
+# tps: ttemp.ps
 
-ttemp.pdf: ttemp.dvi
-	dvipdfmx $<
+# ttemp.pdf: ttemp.dvi
+# 	dvipdfmx $<
 
-ttemp.ps: ttemp.dvi
-	dvips -o $@ $<
+# ttemp.ps: ttemp.dvi
+# 	dvips -o $@ $<
 
-ttemp.dvi: ttemp.txt ttemp.0
-	tex $<
+# ttemp.dvi: ttemp.txt ttemp.0
+# 	tex $<
+
+.PHONY: ttemp
+
+.PHONY: fttemp
+
+fttemp:
+	$(MAKE) fprog ttemp000.eps
+
+ttemp: ttemp000.eps
 
 ttemp000.eps: ttemp.mp writemcs.mp
 	mpost -numbersystem "double" $<
@@ -1550,13 +1559,13 @@ glyph_test000.eps glyph_test001.eps: glyph_test.mp writemcs.mp
 glyph_test.mp: glyph_test.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) glyph_test.ldf
 
-ttemp$(EXEEXT): ttemp.cxx
-	g++ -o ttemp$(EXEEXT) ttemp.cxx
+# ttemp$(EXEEXT): ttemp.cxx
+# 	g++ -o ttemp$(EXEEXT) ttemp.cxx
 
-.PHONY: run-t
+# .PHONY: run-t
 
-run-t: ttemp$(EXEEXT)
-	./ttemp$(EXEEXT)
+# run-t: ttemp$(EXEEXT)
+# 	./ttemp$(EXEEXT)
 
 cnepspng$(EXEEXT): cnepspng.o
 	g++ -o cnepspng$(EXEEXT) cnepspng.o

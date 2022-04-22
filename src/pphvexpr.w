@@ -313,10 +313,6 @@ Added this rule.
 
     cerr << "resolve_option_list == " << @=$5@> << " == 0x" << hex << @=$5@> 
          << dec << endl;
-
-cerr << "YYY Enter <RETURN> to continue: ";
-getchar();  
-
   }
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -337,8 +333,6 @@ getchar();
           << "test_planar == " << test_planar << endl
           << "make_planar == " << make_planar << endl;
 
-cerr << "ZZZ Enter <RETURN> to continue: ";
-getchar();  
 
   }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -356,33 +350,35 @@ getchar();
                                                  make_planar,
                                                  with_ampersand);
 
-  if (pv == 0)
+  if (pv == 0 || pv->v.size() == 0)
   {
-     cerr_strm << "ERROR!  In parser, rule `path_vector --> RESOLVE path_expression "
+     cerr_strm << "ERROR!  In parser, rule `path_vector_primary --> RESOLVE path_expression "
                << "TO numeric_expression resolve_option_list:"
                << endl 
-               << "`Path::resolve' failed, returning " << status << "."
-               << endl 
-               << "Failed to resolve path.  Returning empty `path'."
+               << "`Path::resolve' failed, returning NULL or an empty object."
+               << endl
+               << "Failed to resolve path.  Returning empty path."
                << endl;
 
      log_message(cerr_strm);
      cerr_message(cerr_strm);
      cerr_strm.str("");
 
-     p = static_cast<Path*>(@=$2@>);
-     p->clear(); 
+     p = create_new<Path>(0);
+
   } 
 
 @q **** (4) @>
-  else
-  {
-@q ***** (5) @>
 
+  else 
+  {
 #if DEBUG_COMPILE
-    if (DEBUG)
-    {
+      if (DEBUG)
+      {
         cerr_strm << "In parser, rule `path_vector_primary --> RESOLVE path_expression "
+                  << "LEFT_PARENTHESIS numeric_expression COMMA"
+                  << endl 
+                  << "numeric_expression RIGHT_PARENTHESIS "
                   << "TO numeric_expression resolve_option_list:"
                   << endl 
                   << "`Path::resolve' succeeded, returning a `path_vector'.";
@@ -391,17 +387,17 @@ getchar();
         cerr_message(cerr_strm);
         cerr_strm.str("");
     
-    } 
+      }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) @>
+      p = pv->v[0];
 
-    p = static_cast<Path*>(@=$2@>);
+      pv->v[0] = 0;
 
-    *p = *(pv->v[0]);
-
-    delete pv;
-    pv = 0;
+#if 0 
+      delete pv;
+      pv = 0;
+#endif 
 
 @q ***** (5) @>
 

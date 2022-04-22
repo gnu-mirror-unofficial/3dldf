@@ -3359,10 +3359,9 @@ Path::rotate(const Point& p0, const Point& p1, const real angle)
 to |rotate|.  This function now overloads |rotate| with three
 |real| arguments.
 
-\initials{LDF 2003.07.13.}  Changed, so that |is_linear| is used instead of
-checking the return value of\newline
-|get_line_switch|.  Also,
-|get_last_point| passed as the second argument to |rotate|,
+\initials{LDF 2003.07.13.}  
+Changed, so that |is_linear| is used instead of checking the return value of\newline
+|get_line_switch|.  Also, |get_last_point| passed as the second argument to |rotate|,
 instead of |get_point(1)|. 
 \ENDLOG 
 
@@ -12002,9 +12001,8 @@ Added error handling code.
 Please note that |start| and |end| cannot be made |const|.
 
 \initials{LDF 2003.08.27.}  
-Changed |int i| to |size_t i| in the |for| loops that
-compare |i| to |start| and |end|.  The way it was before caused GCC
-with the ``{\tt -Wall}'' option to issue a warning.
+Changed |int i| to |size_t i| in the |for| loops that compare |i| to |start| and |end|.  
+The way it was before caused GCC with the ``{\tt -Wall}'' option to issue a warning.
 \ENDLOG 
 
 @<Declare |Path| functions@>=
@@ -14763,15 +14761,17 @@ Path::resolve(Scanner_Node scanner_node,
 {
 @q **** (4) @>
 
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
 
    bool do_subpath;
 
    Point p0;
    Point normal;
    Transform t;
+   Path p;
    Path R;
 
+   Pointer_Vector<Path, Path> *pv = 0;
    Connector_Type *c = 0;
 
    stringstream temp_strm;
@@ -14784,10 +14784,12 @@ Path::resolve(Scanner_Node scanner_node,
    memset(buffer, '\0', 64);
 
 @q **** (4) @>
+@
+@<Define |Path| functions@>=
 
-   if (scanner_node == 0)
+   if (!is_linear() && scanner_node == 0)
    {
-      cerr << "ERROR!  In `Path::resolve':  `Scanner_Node scanner_node' argument is NULL."
+      cerr << "ERROR!  In `Path::resolve':  Path is not linear and `Scanner_Node scanner_node' argument is NULL."
            << endl 
            << "This isn't permitted." << endl 
            << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
@@ -14899,6 +14901,39 @@ Path::resolve(Scanner_Node scanner_node,
    } 
 #endif /* |DEBUG_COMPILE|  */@; 
 
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   if (is_linear())
+   {
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << "In `Path::resolve':  `Path' is linear." << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+       }      
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+
+       
+
+       pv = create_new<Pointer_Vector<Path, Path> >(0);
+
+           
+       return pv;       
+
+
+@q ***** (5) @>
+
+   }  /* |if (is_linear)|  */
 
 @q **** (4) @>
 @
@@ -15400,9 +15435,8 @@ transferring it to the x-y plane.  Write a function for this.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   Pointer_Vector<Path, Path> *pv = create_new<Pointer_Vector<Path, Path> >(0);
+   pv = create_new<Pointer_Vector<Path, Path> >(0);
 
-   Path p;
    p = *(scanner_node->metapost_output_struct->path_vector[1]);
    p += "..";
    p.append(*(scanner_node->metapost_output_struct->path_vector[0]));

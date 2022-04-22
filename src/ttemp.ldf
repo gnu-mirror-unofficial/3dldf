@@ -1,62 +1,29 @@
-string s[];
-s0 := "abc;";
-s1 := "def;";
-s2 := "ghi;";
+%% ttemp.ldf
 
-verbatim_metafont s0;
-verbatim_tex s1;
-verbatim_metapost s2;
+verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
 
-end;
-
-verbatim_metapost s1;
-verbatim_tex  s2;
+input "plain.lmc";
 
 
+path q[];
 
+path_vector pv;
+  
+q0 := origin -- (1, 1) -- (2, 2) -- (3, 3) -- (4, 4) -- (5, 5);
 
+message "is_linear q0:";
+show is_linear q0;
 
-drawdot origin;
-draw (1, 1) -- (2, 2);
-output current_picture;
+%pv := resolve q0 (2, 4) to 10;
 
-end;
+q1 := resolve q0 to 10;
 
-%no_clear
-% beginfig(1) no_clear;
-%   message "In fig.:";
-%   show current_picture;
-% endfig with_projection parallel_x_y;
-% end;
+message "pv:";
+show pv;
 
-beginchar("A", 1cm, 1cm, 0) no_clear;
-  drawdot origin;
-  draw (2, 2) -- (3, 3);
-endchar with_projection parallel_x_y;
-
+end_mp;
 
 end;
-
-beginfig(2);
-drawdot origin;
-show currentpicture;
-endfig;
-
-end;
-
-
-drawdot origin;
-circle c;
-c := unit_circle scaled (1cm, 0, 1cm);
-fill c;
-endchar;
-
-
-end;
-
-
-
-
 
 %% ** (2) End of 3DLDF code.
 
