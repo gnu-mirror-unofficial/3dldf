@@ -174,7 +174,52 @@ Rewrote this rule.  It now calls |output_command_func|.
  
 };
 
-@*3 \§command> $\longrightarrow$ \.{BEGINCHAR} $\ldots$.
+
+@q *** (3) string_or_number @>
+@ \§string or number>-
+\initials{LDF 2022.04.23.}
+
+\LOG
+\initials{LDF 2022.04.23.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> string_or_number@>
+
+@q **** (4) string_or_number: INTEGER @>
+@ \§string or number> $\longrightarrow$ \.{INTEGER}.
+@<Define rules@>= 
+  
+@=string_or_number: INTEGER@>@/
+{
+   @=$$@> = @=$1@>;
+};
+
+@q **** (4) string_or_number: STRING @>
+@ \§string or number> $\longrightarrow$ \.{STRING}.
+
+@<Define rules@>= 
+@=string_or_number: string_expression@>@/
+{
+   int i;
+   stringstream temp_strm;
+
+   string *s = static_cast<string*>(@=$1@>);
+
+   i = static_cast<int>((*s)[0]);
+
+   delete s;
+   s = 0;
+
+   @=$$@> = i;
+};
+
+
+@*3 \§command> $\longrightarrow$ \.{BEGINCHAR} 
+\.{LEFT\_PARENTHESIS} \.{STRING} \.{COMMA} \§numeric expression> \.{COMMA} 
+\§numeric expression> \.{COMMA} \§numeric expression> \.{RIGHT\_PARENTHESIS} 
+\§character comment optional>.
 \initials{LDF 2005.06.11.}
 
 \LOG
@@ -186,7 +231,7 @@ Added this rule.
  
 @<Define rules@>= 
   
-@=command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA@>@/
+@=command: BEGINCHAR LEFT_PARENTHESIS string_or_number COMMA@>@/
 @=numeric_expression COMMA numeric_expression COMMA numeric_expression@>@/ 
 @=RIGHT_PARENTHESIS character_comment_optional@>@/
 {
@@ -197,8 +242,10 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "*** Parser: `command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA" << endl 
-                << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
+                << "*** Parser: `command: BEGINCHAR LEFT_PARENTHESIS string_or_number COMMA" 
+                << endl 
+                << "numeric_expression COMMA numeric_expression COMMA numeric_expression" 
+                << endl 
                 << "RIGHT_PARENTHESIS character_comment_optional'."
                 << endl 
                 << "$5 (wd) == " << @=$5@> << endl 
@@ -213,19 +260,15 @@ Added this rule.
 
    scanner_node->beginchar_flag = true;
 
-   string *s = static_cast<string*>(@=$3@>);
-
+   int char_number = @=$3@>;
 
    Scan_Parse::beginfig_func(scanner_node, 
                              0, 
                              true, 
-                             *s, 
+                             char_number,
                              @=$5@>, 
                              @=$7@>, 
                              @=$9@>);
-
-   delete s;
-   s = 0;
 
    @=$$@> = static_cast<void*>(0);
 
