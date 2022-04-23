@@ -58,6 +58,26 @@ Free Software Foundation/GNU Project server:
 ftp://ftp.gnu.org/gnu/3dldf
 http://ftp.gnu.org/gnu/3dldf
 
+Git repository:  https://git.savannah.gnu.org/cgit/3dldf.git
+
+To clone, use one of these URLs:
+
+git://git.savannah.gnu.org/3dldf.git
+https://git.savannah.gnu.org/git/3dldf.git
+ssh://git.savannah.gnu.org/srv/git/3dldf.git
+
+Call `configure' like this:
+
+configure --prefix=`pwd` CPPFLAGS=-I/usr/include/mysql --disable-shared LIBS="-lgsl -lgslcblas -lm -lmysqlclient" 
+
+Change to directory /src.
+
+make chprog
+
+When building for the first time, the header files must be created, so
+the target `chprog' must be called with `make'.  After this, if the
+program has to be rebuilt, it should normally suffice to call `make prog'.
+
 * Mailing lists
 
 The following mailing lists are available:
