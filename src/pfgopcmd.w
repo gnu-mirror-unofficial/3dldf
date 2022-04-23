@@ -174,7 +174,6 @@ Rewrote this rule.  It now calls |output_command_func|.
  
 };
 
-
 @q *** (3) string_or_number @>
 @ \§string or number>-
 \initials{LDF 2022.04.23.}
@@ -214,7 +213,6 @@ Added this type declaration.
 
    @=$$@> = i;
 };
-
 
 @*3 \§command> $\longrightarrow$ \.{BEGINCHAR} 
 \.{LEFT\_PARENTHESIS} \.{STRING} \.{COMMA} \§numeric expression> \.{COMMA} 
@@ -328,7 +326,6 @@ Added this rule.
 @*3 \§command> $\longrightarrow$ 
 \.{ENDCHAR} \§with clause output list>.
 \initials{LDF 2022.01.29.}
-
 
 @q ***** (5) Definition.@>
  
