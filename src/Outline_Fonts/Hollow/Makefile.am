@@ -1,7 +1,46 @@
 #### Makefile.am
 #### Created by Laurence D. Finston (LDF) Sat 23 Apr 2022 05:09:47 PM CEST
 
+hollow165.eps: hollow.mp
+	mpost -numbersystem "double" hollow.mp
+
+hollow.mp: hollow.ldf
+
+hollow.mp: hollow.ldf
+	3dldf hollow.ldf
+
+hollow.mf: hollow.ldf
+	3dldf --metafont hollow.ldf
+
+.PHONY: dvi
+
+hdvi: hollow_test.dvi
+
+
+.PHONY: hps
+
+hps: hollow_test.ps
+
+hollow_test.ps: hollow_test.dvi
+	dvips -o hollow_test.ps hollow_test.dvi
+
+hpdf: hollow_test.pdf
+
+hollow_test.pdf: hollow_test.dvi
+	dvipdfmx hollow_test.dvi
+
+.PHONY: htd
+
+htd: hollow_test.dvi
+
+hollow_test.dvi: hollow_test.tex hollow.600pk
+	tex hollow_test.tex
+
+
+
+
 #### * (1) hollow.ldf, etc.
+
 
 #### ** (2) mode == ultre (1200dpi)
 
@@ -97,69 +136,26 @@ hollow.%pk: hollow.%gf
 
 #### *** (3) 
 
-.PHONY: mf gf
-
-mf: hollow.mf
-
-gf: hollow.1200gf hollow.1315gf hollow.1440gf hollow.1728gf hollow.2074gf hollow.2488gf hollow.2986gf
+gf: hollow.1200gf hollow.1315gf hollow.1440gf hollow.1728gf hollow.2074gf \
+    hollow.2488gf hollow.2986gf
 
 
-.PHONY: ahf
+hollow.mf hollow.mp: hollow.ldf
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) hollow.ldf
 
-ahf:
-	3dldf --metafont hollow.ldf
-	mf hollow.mf
-	gftodvi hollow.2602gf
+hollow065.eps hollow165.eps: hollow.mp
 
+hollow.ps: hollow.dvi
+	dvips -o hollow.ps hollow.dvi
 
-.PHONY: ahp
+hollow.pdf: hollow.dvi
+	dvipdfmx hollow.dvi
 
-ahp:
-	3dldf hollow.ldf
+hollow065.eps hollow165.eps: hollow.mp
 	mpost -numbersystem "double" hollow.mp
 
-.PHONY: amf
-
-amf:
-	3dldf --metafont hollow.ldf
-
-.PHONY: amp
-
-
-
-amp:
-	3dldf hollow.ldf
-
-
-hollow.mp: hollow.ldf
-	3dldf hollow.ldf
-
-hollow.mf: hollow.ldf
-	3dldf --metafont hollow.ldf
-
-.PHONY: dvi
-
-hdvi: hollow_test.dvi
-
-
-.PHONY: hps
-
-hps: hollow_test.ps
-
-hollow_test.ps: hollow_test.dvi
-	dvips -o hollow_test.ps hollow_test.dvi
-
-hpdf: hollow_test.pdf
-
-hollow_test.pdf: hollow_test.dvi
-	dvipdfmx hollow_test.dvi
-
-.PHONY: htd
-
-htd: hollow_test.dvi
-
-hollow_test.dvi: hollow_test.tex hollow.600pk
-	tex hollow_test.tex
+hollow.dvi: hollow.tex hollow.600pk hollow065.eps hollow165.eps
+	tex hollow.tex
 
 #### * (1) hollow bit-map fonts
 
@@ -207,9 +203,6 @@ hollow.1792pk: hollow.1792gf
 hollow.2602pk: hollow.2602gf
 	gftopk hollow.2602gf
 
-hollow.dvi: hollow.2602gf
-	gftodvi hollow.2602gf
 
-hollow065.eps: hollow.mp
-	mpost -numbersystem "double" hollow.mp
+
 
