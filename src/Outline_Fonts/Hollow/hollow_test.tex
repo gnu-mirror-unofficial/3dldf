@@ -1,0 +1,112 @@
+%% hollow_test.tex
+%% Created by Laurence D. Finston (LDF) Mon 11 Apr 2022 01:04:07 PM CEST
+
+\special{papersize=297mm, 420mm} %% DIN A3 Portrait
+\hsize=297mm
+\vsize=420mm
+
+\input epsf
+\input eplain
+\input colordvi
+
+%% ** (2)
+
+\font\small=cmr8
+\font\smalltt=cmtt8
+\font\medium=cmr10
+\font\largemed=cmr11
+\font\large=cmr12
+\font\largebx=cmbx12
+\font\Large=cmr17
+\font\huge=cmr17 scaled \magstep1
+
+\font\hollow=hollow
+\font\hollowtwothousand=hollow scaled 2000
+
+
+\font\hollowhalf=hollow  scaled        \magstephalf
+\font\hollowone=hollow   scaled        \magstep1
+\font\hollowtwo=hollow   scaled        \magstep2
+\font\hollowthree=hollow scaled        \magstep3
+\font\hollowfour=hollow  scaled 2074 % magstep4
+\font\hollowfive=hollow  scaled 2488 % magstep5
+\font\hollowsix=hollow   scaled 2986 % magstep6  %% This fails with localmode := ultre.
+                                                 %% LDF 2022.04.12.
+
+%% ** (2)
+
+\headline={\hfil}
+
+\advance\voffset by -1in
+\advance\voffset by 2cm
+
+\advance\hoffset by -1in
+\advance\hoffset by 1cm
+
+\parindent=0pt
+\parskip=0pt
+
+\def\epsfsize#1#2{#1}
+
+\nopagenumbers
+
+
+%% ** (2)
+
+\vbox{}
+\vskip4cm
+\leftline{\hskip3cm {\hollow A}}
+\vfil\eject
+
+\vbox{}
+\vskip4cm
+\leftline{\hskip3cm {\hollow \char200 \hskip8cm\char201}}
+\vskip8cm
+\leftline{\hskip3cm {\hollow \char202\hskip8cm\char203}}
+\vskip8cm
+\leftline{\hskip3cm {\hollow \char204\hskip8cm\char205}}
+\vfil\eject
+
+\vbox{}
+\vskip4cm
+\leftline{\hskip3cm {\hollow \char206 \hskip8cm\char207}}
+\vskip8cm
+\leftline{\hskip3cm {\hollow \char208\hskip8cm\char209}}
+\vskip8cm
+\leftline{\hskip3cm {\hollow \char210\hskip8cm\char211}}
+\vfil\eject
+
+
+
+\bye
+
+
+
+
+\hbox to 0pt{{\hollow A}\hskip3cm {\hollowhalf A}\hskip3cm {\hollowone A}\hss}\hfil\break
+\vskip1cm
+\hbox to 0pt{{\hollowtwo A}\hskip3cm {\hollowthree A}\hskip3cm {\hollowfour A}\hss}\hfil\break
+\vskip1cm
+\hbox to 0pt{{\hollowfive A}\hskip3cm
+%%
+%% magstep6 doesn't work for mode == ultre.
+%% LDF 2022.04.12.
+%%
+{\hollowsix A}\hss}\hfil\break
+
+\vfil\eject
+
+%% * (1) End here
+
+\bye
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:plain-TeX
+%% eval:(local-set-key "\"" 'self-insert-command)
+%% eval:(outline-minor-mode t)
+%% auto-fill-function:nil
+%% outline-regexp:"%% [*\f]+"
+%% End:
+
