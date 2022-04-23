@@ -1,0 +1,685 @@
+%% hollow.ldf
+%% Created by Laurence D. Finston (LDF) Sun 10 Apr 2022 09:30:39 PM CEST
+
+%% * (1) Top
+
+input "plain.lmc";
+
+verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
+verbatim_metapost   "verbatimtex \font\eurm=eurm10 scaled 16000"
+                  & "\font\cmssbx=cmssbx10 scaled 8000 etex;";
+
+%% * (1) Global variables
+
+point p[][];
+path q[];
+glyph g[];
+path_vector pv;
+point a[][];
+
+color dark_grey;
+dark_grey := (.5, .5, .5);
+
+let dark_gray := dark_grey;
+
+pen small_pen;
+pen medium_pen;
+pen big_pen;
+pen huge_pen;
+pen dot_pen;
+
+small_pen := pencircle scaled (.075mm, .075mm, .075mm);
+medium_pen := pencircle scaled (.15mm, .15mm, .15mm);
+big_pen := pencircle scaled (2pt, 2pt, 2pt);
+huge_pen := pencircle scaled (3pt, 3pt, 3pt);
+dot_pen := pencircle scaled (3pt, 3pt, 3pt);
+
+let large_pen = big_pen;
+
+pickup medium_pen;
+
+path r[][];
+
+point p[][][];
+
+
+string S;
+S := "";
+
+%bboxmargin := 0;
+
+boolean do_black;
+boolean do_labels;
+boolean do_rounded_corners;
+
+do_labels          := true;  % false;
+do_black           := false; % true;
+do_rounded_corners := false; % true;
+
+numeric coeff_left_diag;
+numeric coeff_right_diag;
+numeric coeff_lower_horiz;
+numeric coeff_upper_horiz;
+
+coeff_left_diag   := .25;
+coeff_right_diag  := .25; 
+coeff_lower_horiz := .25;
+coeff_upper_horiz := .25;
+
+point z[];
+
+picture v[];
+picture dot_picture[];
+
+
+%% * (1) Fig. 165.  "A" with guidelines
+
+beginfig(165);
+
+%% ** (2)  
+  
+  do_labels := true; % false
+
+  path q[];
+
+  numeric frame_wd;
+  numeric frame_ht;
+
+  frame_wd := 10cm;
+  frame_ht := 10cm;
+
+  path frame;
+
+  frame :=    ((-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht)
+            -- (.5frame_wd, .5frame_ht) -- (-.5frame_wd, .5frame_ht)
+            -- cycle) shifted (.475frame_wd, .5frame_ht-.825cm);
+
+  draw frame;
+
+  %drawdot (1cm, 1cm) withpen pencircle scaled (1cm, 1cm, 1cm);
+
+  g65 := get_glyph 65 from "cmssbx10";
+
+  scale g65 by 9;
+  
+  % message "g65:";
+  % show g65;
+
+  pv := get_paths from g65;
+  
+  numeric n;
+
+  n := length pv0 - 1;
+
+  for i = 0 upto n:
+    a[0][i] := get_point (i) pv0;
+  endfor;
+
+  % message "n:";
+  % show n;
+
+  % message "a[0][0]";
+  % show a[0][0];
+
+  % message "a[0][9]";
+  % show a[0][9];
+
+  n := length pv1 - 1;
+
+  for i = 0 upto n:
+    a[1][i] := get_point (i) pv1;
+  endfor;
+
+  %draw pv0;
+  %draw pv1;
+
+  z0 := mediate(a[0][6], a[0][7]);
+
+  % message "z0:";
+  % show z0;
+
+  z1 := (a[0][3] - a[0][4]) shifted z0;
+
+%% ** (2)  
+
+  z2 := mediate(z0, z1, 1.25);
+
+  z3 := (z0 -- z2) intersectionpoint (a[0][2] -- a[0][1]);
+  
+  draw z0 -- z3 withcolor dark_grey;
+
+  z4 := mediate(a[0][12], a[0][13]);
+  
+  z5 := (a[0][10] - a[0][11]) shifted z4;
+
+  z6 := mediate(z4, z5, 7.5);
+  
+  z7 := (z5 -- z6) intersectionpoint (a[0][2] -- a[0][1]);
+
+  draw z4 -- z7 withcolor dark_grey;
+
+  %% !! todo: ldf 2022.04.11.  fix the way multiplication works.
+  %% i couldn't use .5(xx... ) or .5 * (xx...) or mediate(...);
+
+  xx := xpart a[0][9];
+  xx += xpart a[0][10];
+  xx *= .5;
+
+  yy := ypart a[1][1];
+  yy += ypart a[0][2];  
+
+  yy *= .5;
+
+  z8 := (xx, yy);
+  dotlabel.rt("$z_8$", z8) with_color blue on_picture dot_picture0;   
+
+  z9 := z8 shifted (1cm, 0);
+
+  z10 := mediate(z8, z9, 2);
+
+  z11 := z10 rotatedaround (z8, z8 shifted (0, 1)) 180;
+
+  z12 := (a[0][4] -- a[0][3]) intersectionpoint (z11 -- z10);
+
+
+  z13 := (a[0][14] -- a[0][0]) intersectionpoint (z11 -- z10);
+
+  draw z12 -- z13 withcolor dark_grey;
+
+  xx := xpart a[1][5];
+  xx += xpart a[1][4];
+  xx += .5;
+
+  yy := ypart a[0][9];
+  yy += ypart a[1][5];
+  yy *= .5;
+  
+  z14 := (xx, yy);
+
+  z15 := z14 shifted (6.75cm, 0);
+
+
+  z16 := z15 rotatedaround (z14, z14 shifted (0, 1)) 180;
+
+  %dotlabel.rt("$z_{15}$", z15) on_picture dot_picture0;
+  dotlabel.top("$z_{16}$", z16) on_picture dot_picture0;
+
+  z17 := (a[0][4] -- a[0][3]) intersectionpoint (z16 -- z15);
+  z18 := (a[0][14] -- a[0][0]) intersectionpoint (z16 -- z15);
+
+  dotlabel.lft("$z_{17}$", z17) on_picture dot_picture0;
+  dotlabel.rt("$z_{18}$", z18) on_picture dot_picture0;
+
+  draw z17 -- z18 withcolor dark_grey;
+
+  z19 := (a[0][9] -- a[1][5]) intersectionpoint (z17 -- z18);
+  dotlabel.bot("$z_{19}$", z19) on_picture dot_picture0;
+
+%% ** (2) inner stripe, lower horizontal
+  
+  z20 := (z17 -- z19) intersectionpoint (z0 -- z1);
+
+
+  z21 := (z20 -- z18) intersectionpoint (z4 -- z7);
+
+  z22 := (xpart z14, ypart a[0][9]);
+
+  z23 := (xpart z14, ypart a[1][5]);
+
+  dotlabel.bot("$z_{20}$", z20) with_color blue on_picture dot_picture0;
+  dotlabel.lrt("$z_{21}$", z21) with_color red on_picture dot_picture0;
+  dotlabel.bot("$z_{22}$", z22) on_picture dot_picture0;
+  dotlabel.top("$z_{23}$", z23) on_picture dot_picture0;
+
+  z24 := mediate(z22, z23, coeff_lower_horiz); %% the coefficient for the mediation
+                                               %% operation determines
+                                               %% the width of the lower horizontal inside stripe.
+                                               %% ldf 2022.01.08.
+
+  z25 := z24 rotatedaround (z14, z14 shifted (0, 0, 1)) 180;
+  
+  dotlabel.rt("$z_{24}$", z24) on_picture dot_picture0;
+  dotlabel.rt("$z_{25}$", z25) on_picture dot_picture0;
+
+  z26 := (a[0][9] -- a[0][10]) intersection_point (z0 -- z20);
+  dotlabel.bot("$z_{26}$", z26) on_picture dot_picture0;
+
+  z27 := (a[1][4] -- a[1][5]) intersectionpoint (z0 -- z20);
+  dotlabel.rt("$z_{27}$", z27) on_picture dot_picture0;
+
+  z28 := (z25 -- z25 shifted (-10, 0)) intersectionpoint (a[0][4] --  z12);
+  dotlabel.lft("$z_{28}$", z28) on_picture dot_picture0;
+
+  z29 := (a[0][4] -- z12) intersectionpoint (z24 -- z24 shifted (-10cm, 0));
+  dotlabel.lft("$z_{29}$", z29) on_picture dot_picture0;
+
+  z30 := (a[0][10] --  a[1][4]) intersectionpoint (z25 -- z25 shifted (-10cm, 0));
+  dotlabel.lft("$z_{30}$", z30) with_color dark_green on_picture dot_picture0;
+
+  z31 := (a[0][10] -- a[1][4]) intersectionpoint (z24 -- z24 shifted (-10cm, 0));
+
+  z32 := (z18 -- z13) intersection_point (z25 -- z25 shifted (-10cm, 0));
+  z33 := (z18 -- z13) intersection_point (z24 -- z24 shifted (-10cm, 0));
+
+  dotlabel.rt("$z_{32}$", z32) on_picture dot_picture0;
+  dotlabel.rt("$z_{33}$", z33) on_picture dot_picture0;
+
+  draw z29 -- z33 withcolor dark_grey;
+  draw z28 -- z32 withcolor dark_grey;
+
+%% ** (2) Inner stripe, upper horizontal
+
+  z60 := (xpart z8, ypart z7);
+  drawdot z60 with_pen dot_pen on_picture dot_picture0;
+  label.top("$z_{60}$", z60 shifted (0cm, .5cm)) on_picture dot_picture0;
+  draw z60 -- z60 shifted (0cm, .525cm) with_pen small_pen on_picture dot_picture0;  
+  
+  z61 := (xpart z60, ypart a[1][1]);  
+
+  z62 := mediate(z61, z60, coeff_upper_horiz);  %% The coefficient for the mediation
+                                                %% operation determines the width
+                                                %% of the upper horizontal.
+                                                %% LDF 2022.04.10.
+  
+  dotlabel.top("$z_{61}$", z61) on_picture dot_picture0;
+  dotlabel.rt("$z_{62}$", z62) on_picture dot_picture0;
+
+  z63 := (z12 -- z29) intersection_point (z62 -- z62 shifted (-10cm, 0));
+  dotlabel.lft("$z_{63}$", z63) on_picture dot_picture0;
+
+  z64 := (z13 -- z32) intersection_point (z62 -- z62 shifted (10cm, 0));
+  dotlabel.rt("$z_{64}$", z64) on_picture dot_picture0;
+
+  draw z63 -- z64 withcolor dark_grey;
+
+  z65 := z62 rotatedaround (z8, z8 shifted (0, 0, 1)) 180;
+  dotlabel.rt("$z_{65}$", z65) on_picture dot_picture0;
+
+  z66 := (z64 -- z32) intersection_point (z65 -- z65 shifted (10cm, 0));
+  dotlabel.rt("$z_{66}$", z66) on_picture dot_picture0;
+
+  z67 := (z12 -- z28) intersection_point (z65 -- z65 shifted (-10cm, 0));
+  dotlabel.lft("$z_{67}$", z67) on_picture dot_picture0;
+
+  draw z66 -- z67 withcolor dark_grey;
+
+%% ** (2) Straighten out rounded corners (optionally)
+
+%% *** (3) Bottom left
+  
+  z41 := (z28 -- z12) intersection_point (z0 -- z0 shifted (-5cm, 0));  %% Left diagonal,
+
+  dotlabel.bot("$z_{41}$", z41) on_picture dot_picture0; 
+
+  if not do_rounded_corners:
+    draw a[0][4] -- z41 -- a[0][6];
+  fi
+
+
+  z42 := (a[0][8] -- a[0][9]) intersectionpoint (z41 -- z0);  %% Left diagonal, right side
+
+  dotlabel.rt("$z_{42}$", z42) on_picture dot_picture0;
+  
+  if not do_rounded_corners:
+    draw a[0][8] -- z42 -- a[0][7];
+  fi
+
+
+%% ** (2) Bottom right, right diagonal
+
+  z43 := (a[0][10] -- a[0][11]) intersectionpoint (z41 -- z42);
+  dotlabel.lft("$z_{43}$", z43) on_picture dot_picture0;
+  
+  if not do_rounded_corners:
+    draw a[0][11] -- z43 -- a[0][12];
+  fi
+
+  z44 := (z13 -- z33) intersectionpoint (z43 -- z4); 
+  dotlabel.rt("$z_{44}$", z44) on_picture dot_picture0;
+  
+  if not do_rounded_corners:
+    draw a[0][14] -- z44 -- a[0][13];
+  fi
+  
+%% *** (3) Top left
+  
+  z45 := (z12, z29) intersection_point (z3, z7);
+
+  dotlabel.top("$z_{45}$", z45) on_picture dot_picture0;
+  
+  
+  if not do_rounded_corners:
+    draw a[0][3] -- z45 -- a[0][2];
+  fi
+
+%% *** (3) Top right
+  
+  z46 := (z13, z33) intersection_point (z45, z7);
+  dotlabel.top("$z_{46}$", z46) on_picture dot_picture0;
+
+    
+  if not do_rounded_corners:
+    draw a[0][0] -- z46 -- z7;
+  fi
+
+
+%% ** (2) Draw outlines.
+
+
+  %undraw pv0;
+  draw    z44 -- z46 -- z45 -- z41 -- z42 -- a[0][9] -- a[0][10]
+       -- z43 -- cycle withcolor blue;
+
+  %% This is okay.  LDF 2022.04.12.
+  undraw pv1;
+  draw  a[1][4] -- z61 -- a[1][5] -- cycle;
+  
+  %draw pv1;
+  % draw a[1][0] -- a[1][1] -- a[1][2]  -- a[1][3] -- a[1][4] --  a[1][5] -- cycle
+  %   withpen pencircle scaled (1mm, 1mm, 1mm);
+  % undraw a[1][4] -- a[1][1];
+
+  %% Do something about bpath.
+
+  %draw bpath A with_color red;
+
+%% ** (2) Left diagonal
+
+%% The coefficient for the mediation operation determines the width of
+%% the left diagonal inside stripe.
+%% LDF 2022.01.08.
+
+  z34 := mediate(z0, a[0][5], coeff_left_diag) shifted (0, ypart a[0][8]);
+  dotlabel.bot("$z_{34}$", z34) on_picture dot_picture0;
+
+  z35 := (z26 - z0) shifted z34;
+  dotlabel.bot("$z_{35}$", z35) on_picture dot_picture0;  
+
+  z38 := (z34, z35) intersection_point (z3, z7);
+  dotlabel.top("$z_{38}$", z38) withcolor red on_picture dot_picture0;
+
+  z39 := (z41, z42) intersectionpoint (z34, z38);
+  dotlabel.bot("$z_{39}$", z39) on_picture dot_picture0;
+
+  z40 := z34 shifted (2cm, 0);
+  dotlabel.rt("$z_{40}$", z40) on_picture dot_picture0;
+
+  z50 := (z34, z40) intersectionpoint (z0, z27);
+  dotlabel.bot("$z_{50}$", z50) on_picture dot_picture0;
+
+  z51 := z34 rotatedaround (z50, z50 shifted (0, 1)) 180;
+  dotlabel.bot("$z_{51}$", z51) on_picture dot_picture0;
+
+  z52 := z35 shifted by (z51 - z34);
+  dotlabel.bot("$z_{52}$", z52) on_picture dot_picture0;
+
+  z53 := (z34, z35) intersectionpoint (z67, z65);
+  dotlabel.top("$z_{53}$", z53) on_picture dot_picture0;
+
+  z54 := (z51, z52) intersectionpoint (z67, z65);
+  dotlabel.top("$z_{54}$", z54) with_color red on_picture dot_picture0;
+
+  draw z51 -- z34 -- z53 -- z54 -- cycle with_color blue;
+
+%% ** (2) Inner stripe, right diagonal
+
+  z70 := (z34, z51) intersection_point (z4, z7);
+  dotlabel.bot("$z_{70}$", z70) on_picture dot_picture0;
+
+  z71 := mediate(z44, z43, coeff_right_diag) shifted by (z70 - z4);
+  dotlabel.bot("$z_{71}$", z71) on_picture dot_picture0;
+
+  z72 := z71 rotatedaround (z70, z70 shifted (0, 1)) 180;
+  dotlabel.bot("$z_{72}$", z72) on_picture dot_picture0;
+
+  z73 := (z21 - z70) shifted by z72;
+  dotlabel.lft("$z_{73}$", z73) on_picture dot_picture0;
+
+  z74 := (z21 - z70) shifted by z71;
+  dotlabel.rt("$z_{74}$", z74) with_color dark_green on_picture dot_picture0;
+
+  z75 := (z72, z73) intersectionpoint (z67, z66);
+  dotlabel.top("$z_{75}$", z75) on_picture dot_picture0;
+
+  z76 := z75 shifted by (z71 - z72);
+  dotlabel.top("$z_{76}$", z76) on_picture dot_picture0;
+  
+  draw z71 -- z76 -- z75 -- z72 -- cycle with_color blue;
+  
+%% ** (2) Additional points on the stripe paths.
+
+  z80 := (z34, z35) intersectionpoint (z29, z33);
+  dotlabel.llft("$z_{80}$", z80) with_color red on_picture dot_picture0;
+
+  z81 := (z52, z54) intersectionpoint (z29, z33);
+  dotlabel.lrt("$z_{81}$", z81) with_color red on_picture dot_picture0;
+
+  z82 := (z51, z52) intersectionpoint (z63, z64);
+  dotlabel.ulft("$z_{82}$", z82) with_color red on_picture dot_picture0;
+
+  z83 := (z72, z75) intersectionpoint (z63, z64);
+  dotlabel.urt("$z_{83}$", z83) with_color red on_picture dot_picture0;
+
+  z84 := (z51, z52) intersectionpoint (z28, z30);
+  dotlabel.rt("$z_{84}$", z84) with_color red on_picture dot_picture0;
+
+  z85 := (z34, z35) intersectionpoint (z28, z30);
+  dotlabel.ulft("$z_{85}$", z85) with_color red on_picture dot_picture0;
+
+  z86 := (z34, z35) intersectionpoint (z63, z64);
+  dotlabel.bot("$z_{86}$", z86) on_picture dot_picture0; % with_color red 
+  
+  z87 := (z72, z83) intersectionpoint (z29, z33);
+  dotlabel.lft("$z_{87}$", z87) on_picture dot_picture0;
+
+  z88 := (z72, z83) intersectionpoint (z30, z32);
+  dotlabel.ulft("$z_{88}$", z88) on_picture dot_picture0;
+
+  z89 := (z71, z76) intersectionpoint (z29, z33);
+  dotlabel.lrt("$z_{89}$", z89) on_picture dot_picture0;
+
+  z90 := (z71, z76) intersectionpoint (z30, z32);
+  dotlabel.urt("$z_{90}$", z90) on_picture dot_picture0;
+
+  z91 := (z71, z76) intersectionpoint (z62, z64);
+  dotlabel.lrt("$z_{91}$", z91) on_picture dot_picture0;
+
+  q0 := z81 -- z51 -- z34 -- z53 -- z76 -- z71 -- z72 -- z83 -- z82 -- cycle;
+
+  draw q0 withcolor red;
+  %fill q0 withcolor red;
+
+  q1 := z87 -- z81 -- z84 -- z88 -- cycle;
+
+  draw q1 with_color red;
+
+  %% The outer outline
+  q2 := z44 -- z43 -- a[0][10] -- a[0][9] -- z42 -- z41 -- z45 -- z46 -- cycle;
+  draw q2;
+
+  %% The inner triangle
+  q3 := a[1][4] -- a[1][5] -- z61 -- cycle;
+
+  draw q3;
+
+  v1 := current_picture;
+  
+%% ** (2) Labels
+
+%% *** (3)
+
+  if do_labels:
+    dotlabel.lft("$a_0^0$", a[0][0]) with_color blue on_picture dot_picture1;
+    dotlabel.top("$a_0^2$", a[0][2]) on_picture dot_picture1;
+    label("$a_0^3$", a[0][3] shifted (-.375cm, .5cm)) on_picture dot_picture1;
+    drawdot a[0][3] with_pen dot_pen on_picture dot_picture1;
+    draw a[0][3] -- a[0][3] shifted (-.2cm, .333cm) with_pen small_pen on_picture dot_picture1;
+    dotlabel.top("$a_0^4$", a[0][4]) on_picture dot_picture1;
+    dotlabel.ulft("$a_0^5$", a[0][5]) on_picture dot_picture1;
+    label.bot("$a_0^7$", a[0][7] shifted (0, -.25cm)) on_picture dot_picture1;
+    drawdot a[0][7] with_pen dot_pen on_picture dot_picture1;
+    draw a[0][7] -- a[0][7] shifted (0, -.45cm) with_pen small_pen on_picture dot_picture1;
+    dotlabel.rt("$a_0^8$", a[0][8]) on_picture dot_picture1;
+    dotlabel.lrt("$a_0^9$", a[0][9]) on_picture dot_picture1;
+    dotlabel.llft("$a_0^{10}$", a[0][10]) on_picture dot_picture1;
+    dotlabel.lft("$a_0^{11}$", a[0][11]) on_picture dot_picture1;
+    dotlabel.bot("$a_0^{13}$", a[0][13]) on_picture dot_picture1;
+    dotlabel.rt("$a_0^{14}$", a[0][14]) on_picture dot_picture1;
+
+    dotlabel.lrt("$a_1^1$", a[1][1]) on_picture dot_picture1;
+    dotlabel.llft("$a_1^2$", a[1][2]) on_picture dot_picture1;
+    dotlabel.ulft("$a_1^4$", a[1][4]) on_picture dot_picture1;
+    dotlabel.urt("$a_1^5$", a[1][5]) on_picture dot_picture1;
+
+    dotlabel.bot("$z_0$", z0) on_picture dot_picture0; 
+    dotlabel.rt("$z_1$", z1) on_picture dot_picture0; 
+    %dotlabel.top("$z_2$", z2) on_picture dot_picture0; 
+    dotlabel.top("$z_3$", z3) on_picture dot_picture0; 
+    dotlabel.bot("$z_4$", z4) on_picture dot_picture0; 
+    %dotlabel.rt("$z_5$", z5) on_picture dot_picture0; 
+    dotlabel.top("$z_7$", z7) on_picture dot_picture0;   
+    dotlabel.rt("$z_{10}$", z10) on_picture dot_picture0; 
+    dotlabel.lft("$z_{11}$", z11) on_picture dot_picture0;   
+    dotlabel.lft("$z_{12}$", z12) on_picture dot_picture0; 
+    dotlabel.rt("$z_{13}$", z13) on_picture dot_picture0;   
+    dotlabel.rt("$z_{14}$", z14) on_picture dot_picture0;
+
+    current_picture += dot_picture0;
+    current_picture += dot_picture1;
+
+  fi;
+
+%% ** (2)
+
+endfig with_projection parallel_x_y no_sort;
+
+%% * (1)
+
+%% * (1) Fig. 65.  "A", hollow, without guidelines
+
+beginfig(65);
+  current_picture := v3;
+  
+endfig with_projection parallel_x_y no_sort;
+
+
+%% * (1) "A" 
+
+%% ** (2) Char 65.  Hollow.
+verbatim_metafont "font_size := 2cm#;";
+beginchar("A", 2cm, 2cm, 0);
+
+  transform t;
+
+  t := identity scaled (.125, .125, .125);
+
+  q0 *= q1 *= q2 *= q3 *= t;
+
+  fill q2;
+  unfill q0;
+  unfill q1;
+  unfill q3;
+
+endchar with_projection parallel_x_y;
+
+
+%% ** (2)
+
+% message "a[0][7]:";
+% show a[0][7];
+% pause;
+
+
+focus f;
+set f with_position (0, 2, -50) 
+       with_direction (0, 2, 10) with_distance 45; 
+
+transform t[];
+
+
+
+end_mf;
+end;
+
+
+
+%% ** (2) "A" rotated in space and output in multiple characters.
+%% LDF 2022.04.23.
+
+numeric j;
+j := 5;
+numeric k;
+k := 0;
+
+i := 200;
+for i = 200 upto 210:
+  beginchar(i, 4cm, 4cm, 0);
+    draw frame scaled (1.125, 1.125, 1.125) with_pen big_pen;
+    output current_picture with_projection parallel_x_y no_sort;
+    clear current_picture;
+
+    path Q[];
+    point P[];
+    
+    P200 := a[0][7];
+    Q200 := q0;
+    Q201 := q1;
+    Q202 := q2;
+    Q203 := q3;
+
+
+
+    %t := identity;
+    
+    t0 := ((identity rotated (45, (-35+k*j), 0))
+    	scaled (1.25, 1.25, 1.25)) shifted (3.25cm, 2cm);
+
+    P200 *= Q200 *= Q201 *= Q202 *= Q203 *= t0;
+
+    if i == 200:
+      t200 := identity shifted (-1.5cm, 0cm, 0cm);
+      P200 *= Q200 *= Q201 *= Q202 *= Q203 *= t200;
+    fi;
+    
+    % if i == 201:
+    %   t201 := (identity shifted (3cm, 3cm, 15cm)) scaled (.9, .9, .9);
+    %   P200 *= Q200 *= Q201 *= Q202 *= Q203 *= t201;
+    % fi;
+    
+    % if i == 202:
+    %   t202 := ((identity rotated (-20, 0, 0)) shifted (0cm, -2cm, 30cm))
+    % 	scaled (.875, .875, .875);
+    %   P200 *= Q200 *= Q201 *= Q202 *= Q203 *= t202;
+    % fi;
+
+    
+    fill Q202;
+    unfill Q200;
+    unfill Q201;
+    unfill Q203;
+  endchar with_focus f no_sort;
+  k += 1;
+ 
+endfor;
+
+%% ** (2)
+
+%% * (1)
+
+end_mp;
+end_mf;
+
+%% * (1) End of 3DLDF code
+
+end;
+
+
+
+
+%% * (1) Local variables for Emacs
+
+%% Local Variables:
+%% mode: MetaPost
+%% eval:(outline-minor-mode t)
+%% outline-regexp:"%% [*\f]+"
+%% End:
