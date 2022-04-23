@@ -374,7 +374,8 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 THREEDFONTDIR := Cmssbxldf_3D
-SUBDIRS = $(THREEDFONTDIR)
+HOLLOWDIR := Hollow
+SUBDIRS = $(THREEDFONTDIR) $(HOLLOWDIR)
 all: all-recursive
 
 .SUFFIXES:
@@ -683,6 +684,7 @@ uninstall-am:
 .PRECIOUS: Makefile
 
 export THREEDFONTDIR
+export HOLLOWDIR
 
 .PHONY: eps
 .PHONY: dvi
