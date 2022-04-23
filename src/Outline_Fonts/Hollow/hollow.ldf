@@ -553,17 +553,74 @@ beginfig(165);
 
 endfig with_projection parallel_x_y no_sort;
 
-%% * (1)
-
 %% * (1) Fig. 65.  "A", hollow, without guidelines
 
 beginfig(65);
-  current_picture := v3;
-  
+  draw frame;
+  fill q2;
+  unfill q0;
+  unfill q1;
+  unfill q3;
 endfig with_projection parallel_x_y no_sort;
 
 
-%% * (1) "A" 
+%% ** (2)
+
+focus f;
+set f with_position (0cm, 2cm, -50) 
+       with_direction (0cm, 2cm, 10) with_distance 45; 
+
+
+%% ** (2)
+
+transform t[];
+
+beginfig(66);
+
+%% *** (3)
+
+
+
+  draw frame shifted (-1cm, -2cm);
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+
+%% *** (3)
+  
+  dotlabel.lft("origin", origin);
+  
+  
+  t0 := (identity rotated (70, 0, 0)) shifted (.5cm, 0);
+  
+  dotlabel.bot("$z_{41}$", z41 transformed t0);
+  dotlabel.bot("$z_{42}$", z42 transformed t0);
+  dotlabel.bot("$z_{43}$", z43 transformed t0);
+  dotlabel.bot("$z_{44}$", z44 transformed t0);
+
+  dotlabel.top("$z_{45}$", z45 transformed t0);
+  dotlabel.top("$z_{46}$", z46 transformed t0);
+  dotlabel.top("$z_{61}$", z61 transformed t0);
+
+  dotlabel.lrt("$a_0^{9}$", a[0][9] transformed t0);
+
+  draw q2 transformed t0 with_pen big_pen;
+  draw q3 transformed t0 with_pen big_pen;
+
+  t1 := t0 shifted (0, 1cm);
+
+  %unfill q2 transformed t1;
+  %unfill q3 transformed t1;
+  %draw q2 transformed t1 with_pen big_pen;
+  %draw q3 transformed t1 with_pen big_pen;
+  
+endfig with_focus f no_sort;
+
+
+
+
+%% ** (2)
+
+%% * (1) MF:  "A" 
 
 %% ** (2) Char 65.  Hollow.
 verbatim_metafont "font_size := 2cm#;";
@@ -571,7 +628,7 @@ beginchar("A", 2cm, 2cm, 0);
 
   transform t;
 
-  t := identity scaled (.125, .125, .125);
+  t := identity; % 
 
   q0 *= q1 *= q2 *= q3 *= t;
 
@@ -590,15 +647,13 @@ endchar with_projection parallel_x_y;
 % pause;
 
 
-focus f;
-set f with_position (0, 2, -50) 
-       with_direction (0, 2, 10) with_distance 45; 
 
 transform t[];
 
 
 
 end_mf;
+end_mp;
 end;
 
 
