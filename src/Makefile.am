@@ -1365,6 +1365,7 @@ sample1.mp : sample1.ldf
 
 prog: 
 	-rm -f *.h *.c
+	./create_headers.sh
 	$(MAKE) 3dldf$(EXEEXT)
 
 conveps$(EXEEXT): conveps.o
