@@ -58,6 +58,8 @@ Free Software Foundation/GNU Project server:
 ftp://ftp.gnu.org/gnu/3dldf
 http://ftp.gnu.org/gnu/3dldf
 
+* Git repository
+
 Git repository:  https://git.savannah.gnu.org/cgit/3dldf.git
 
 To clone, use one of these URLs:
@@ -77,6 +79,12 @@ make chprog
 When building for the first time, the header files must be created, so
 the target `chprog' must be called with `make'.  After this, if the
 program has to be rebuilt, it should normally suffice to call `make prog'.
+
+The header files in /src are not checked into the Git repository.
+They should be included in the compressed archive files ("tarballs")
+containing the distribution made available on GNU servers and mirrors,
+so that when using a distribution, `make' and `make install' from the
+top directory should work.
 
 * Mailing lists
 
