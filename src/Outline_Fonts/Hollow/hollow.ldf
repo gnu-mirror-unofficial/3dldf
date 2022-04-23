@@ -592,26 +592,58 @@ beginfig(66);
   
   t0 := (identity rotated (70, 0, 0)) shifted (.5cm, 0);
   
-  dotlabel.bot("$z_{41}$", z41 transformed t0);
-  dotlabel.bot("$z_{42}$", z42 transformed t0);
-  dotlabel.bot("$z_{43}$", z43 transformed t0);
-  dotlabel.bot("$z_{44}$", z44 transformed t0);
+  t1 := t0 shifted (0, 1cm);
 
-  dotlabel.top("$z_{45}$", z45 transformed t0);
-  dotlabel.top("$z_{46}$", z46 transformed t0);
+  for i = 1 upto 6:
+    z[140+i] := z[40+i] transformed t0;
+    z[240+i] := z[40+i] transformed t1;
+  endfor;
+
+  %% !! START HERE: LDF 2022.04.23.  Make new points for z61 and the "a" points.
+  
+
+  dotlabel.bot("$z_{141}$", z141);
+  dotlabel.bot("$z_{142}$", z142);
+  dotlabel.bot("$z_{143}$", z143);
+  dotlabel.bot("$z_{144}$", z144);
+
+  dotlabel.top("$z_{145}$", z145);
+  dotlabel.top("$z_{146}$", z146);
+
+
   dotlabel.top("$z_{61}$", z61 transformed t0);
 
   dotlabel.lrt("$a_0^{9}$", a[0][9] transformed t0);
+  dotlabel.llft("$a_0^{10}$", a[0][10] transformed t0);
+  dotlabel.urt("$a_1^{4}$", a[1][4] transformed t0);
+  dotlabel.ulft("$a_1^{5}$", a[1][5] transformed t0);
+  
 
   draw q2 transformed t0 with_pen big_pen;
   draw q3 transformed t0 with_pen big_pen;
 
-  t1 := t0 shifted (0, 1cm);
+
+  draw q2 transformed t1 with_pen big_pen;
+
+  
+  dotlabel.bot("$z_{241}$", z241);
+  dotlabel.bot("$z_{242}$", z242);
+  dotlabel.bot("$z_{243}$", z243);
+  dotlabel.bot("$z_{244}$", z244);
+
+  dotlabel.top("$z_{245}$", z245);
+  dotlabel.top("$z_{246}$", z246);
+
+  
+
+
+
+
 
   %unfill q2 transformed t1;
   %unfill q3 transformed t1;
-  %draw q2 transformed t1 with_pen big_pen;
-  %draw q3 transformed t1 with_pen big_pen;
+
+  draw q3 transformed t1 with_pen big_pen;
   
 endfig with_focus f no_sort;
 
