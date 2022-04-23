@@ -1,0 +1,74 @@
+%% hollow_test_ps.tex
+%% Created by Laurence D. Finston (LDF) Sat 23 Apr 2022 04:05:14 PM CEST
+
+\special{papersize=297mm, 420mm} %% DIN A3 Portrait
+\hsize=297mm
+\vsize=420mm
+
+\input epsf
+\input eplain
+\input colordvi
+
+%% ** (2)
+
+\font\small=cmr8
+\font\smalltt=cmtt8
+\font\medium=cmr10
+\font\largemed=cmr11
+\font\large=cmr12
+\font\largebx=cmbx12
+\font\Large=cmr17
+\font\huge=cmr17 scaled \magstep1
+
+\font\hollowtest=hollowtest
+\font\hollowtestlarge=hollowtest scaled 8000
+\font\hollowtestLarge=hollowtest scaled 16000
+\font\hollowtestLARGE=hollowtest scaled 20000
+\font\hollowtesthuge=hollowtest scaled  30000
+
+\headline={\hfil}
+
+\advance\voffset by -1in
+\advance\voffset by 2cm
+
+\advance\hoffset by -1in
+\advance\hoffset by 1cm
+
+\parindent=0pt
+\parskip=0pt
+
+\def\epsfsize#1#2{#1}
+
+\nopagenumbers
+
+
+%% ** (2)
+
+\vbox{}
+\vskip4cm
+\leftline{\hskip3cm {\hollowtest A}\hskip2cm{\hollowtestlarge A}}
+\vskip4cm
+\leftline{\hskip3cm {\hollowtestLarge A}}
+\vfil\eject
+
+\vbox{}
+\vskip-1cm
+\leftline{\hskip3cm {\hollowtestLARGE A}}
+\vskip4cm
+\leftline{\hskip3cm {\hollowtesthuge A}}
+
+
+%% * (1) End here
+
+\bye
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:plain-TeX
+%% eval:(local-set-key "\"" 'self-insert-command)
+%% eval:(outline-minor-mode t)
+%% auto-fill-function:nil
+%% outline-regexp:"%% [*\f]+"
+%% End:
+
