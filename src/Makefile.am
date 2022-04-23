@@ -1361,9 +1361,13 @@ sample1.mp : sample1.ldf
 	@cat YYY.mp >> sample1.mp
 	@rm -f YYY.mp
 
-.PHONY: prog
+.PHONY: prog chprog
 
 prog: 
+	-rm -f *.h *.c
+	$(MAKE) 3dldf$(EXEEXT)
+
+chprog: 
 	-rm -f *.h *.c
 	./create_headers.sh
 	$(MAKE) 3dldf$(EXEEXT)
