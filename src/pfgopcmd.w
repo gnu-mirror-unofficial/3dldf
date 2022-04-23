@@ -186,13 +186,17 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> string_or_number@>
 
-@q **** (4) string_or_number: INTEGER @>
-@ \§string or number> $\longrightarrow$ \.{INTEGER}.
+@q **** (4) string_or_number: numeric_expression @>
+@ \§string or number> $\longrightarrow$ \§numeric expression>.
 @<Define rules@>= 
   
-@=string_or_number: INTEGER@>@/
+@=string_or_number: numeric_expression@>@/
 {
-   @=$$@> = @=$1@>;
+#if LDF_REAL_DOUBLE
+   @=$$@> = static_cast<int>(fabs(round(@=$1@>)));
+#else
+   @=$$@> = static_cast<int>(fabsf(roundf(@=$1@>)));
+#endif 
 };
 
 @q **** (4) string_or_number: STRING @>
