@@ -15388,7 +15388,7 @@ transferring it to the x-y plane.  Write a function for this.
             << endl
             << "input 3DLDF_resolve_top.mp;" << endl 
             << endl 
-            << "extern = true; % false  " << endl 
+            << "extern = false; % true " << endl 
             << endl 
             << "if extern:" << endl 
             << "  tracingonline := 1;" << endl 
@@ -15474,7 +15474,7 @@ transferring it to the x-y plane.  Write a function for this.
 
   temp_strm.str("");
 
-  temp_strm << "mpost -numbersystem \"double\" " << temp_in_filename;
+  temp_strm << "mpost -numbersystem \"double\" " << temp_in_filename << " >/dev/null 2>/dev/null";
 
   cerr << "temp_strm.str() == " << temp_strm.str() << endl;
 
