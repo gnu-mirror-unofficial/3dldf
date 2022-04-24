@@ -975,22 +975,21 @@ beginfig(103);
   dotlabel.lft("$a_2^{3}$", a[2][3]);
   dotlabel.top("$a_2^{4}$", a[2][4]);		  
 
-  q0 := resolve pv1 (0, 1) to 3 with_no_transform;
+  q0 := pv0 scaled (.8, .8, .8);
+
 
   
-  n := size q0 - 1;
-
-  message "n:";
-  show n;
-  pause;
+  point z[];
   
-  % for i = 0 upto (size q0 - 1):
-  %   drawdot get_point (i) q0 with_pen dot_pen;
-  % endfor;
+  z0 := mediate(a[1][1], a[1][3]);
+  z1 := z0 scaled (.8, .8, .8);
 
+  dotlabel.top("$z_0$", z0);
+  dotlabel.top("$z_1$", z1);
+
+  shift q0 by (z0 - z1);
   
-
-
+  draw q0 with_color red;
   		  
 endfig with_projection parallel_x_y;
 		  
