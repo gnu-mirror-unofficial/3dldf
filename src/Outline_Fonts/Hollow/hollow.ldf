@@ -733,12 +733,28 @@ beginfig(68);
 
 endfig with_focus f no_sort;
 
+
+%% ** (2)
+
+beginfig(68);
+
+  draw frame shifted (-1cm, -2cm);
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+
+  v3 := v2;
+
+  rotate v3 (-10, 5);
+
+  current_picture := v3;
+
+endfig with_focus f no_sort;
+
 %% ** (2)
 
 %% * (1) MF:  "A" 
 
 %% ** (2) Char 65.  Hollow
-
 
 beginchar("A", 2cm, 2cm, 0);
 
@@ -754,7 +770,6 @@ beginchar("A", 2cm, 2cm, 0);
   unfill q3;
 
 endchar with_projection parallel_x_y no_sort;
-
 
 %% ** (2) Char 67.  3D
 
@@ -789,6 +804,22 @@ beginchar(68, 2cm, 2cm, 0);
 endchar with_projection parallel_x_y no_sort;
 
 %% ** (2)
+
+%% ** (2) Char 69.  3D
+
+beginchar(69, 2cm, 2cm, 0);
+
+  transform t;
+
+  t := (identity scaled (.25, .25, .25)) rotated (-20, -22);
+
+  v6 := v3;
+
+  v6 *= t;
+
+  current_picture := v6;
+
+endchar with_projection parallel_x_y no_sort;
 
 %% * (1)
 
