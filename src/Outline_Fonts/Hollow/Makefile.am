@@ -1,22 +1,6 @@
 #### Makefile.am
 #### Created by Laurence D. Finston (LDF) Sat 23 Apr 2022 05:09:47 PM CEST
 
-hollow165.eps: hollow.mp
-	mpost -numbersystem "double" hollow.mp
-
-hollow.mp: hollow.ldf
-
-hollow.mp: hollow.ldf
-	3dldf hollow.ldf
-
-hollow.mf: hollow.ldf
-	3dldf --metafont hollow.ldf
-
-.PHONY: dvi
-
-hdvi: hollow_test.dvi
-
-
 .PHONY: hps
 
 hps: hollow_test.ps
