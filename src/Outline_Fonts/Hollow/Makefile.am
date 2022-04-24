@@ -203,6 +203,25 @@ hollow.1792pk: hollow.1792gf
 hollow.2602pk: hollow.2602gf
 	gftopk hollow.2602gf
 
+#### * (1) Font hollowmftest and TeX file hollow_mf_test.tex
 
+.PHONY: hmt
 
+hmt: hollow_mf_test.pdf
 
+hollowmftest.600gf hollowmftest.tfm: hollowmftest.mf
+	mf hollowmftest.mf
+
+hollowmftest.600pk: hollowmftest.600gf
+	gftopk hollowmftest.600gf 
+
+hollow_mf_test.dvi: hollow_mf_test.tex hollowmftest.600pk hollowmftest.tfm
+	tex hollow_mf_test.tex
+
+hollow_mf_test.ps: hollow_mf_test.dvi
+	dvips -o hollow_mf_test.ps hollow_mf_test.dvi
+
+hollow_mf_test.pdf: hollow_mf_test.dvi
+	dvipdfmx hollow_mf_test.dvi
+
+#### * (1) 
