@@ -14931,7 +14931,8 @@ Path::resolve(Scanner_Node scanner_node,
       cerr << "ERROR!  In `Path::resolve':  Path is not linear and `Scanner_Node scanner_node' argument is NULL."
            << endl 
            << "This isn't permitted." << endl 
-           << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+           << "Exiting function unsuccessfully with return value "
+           << "`static_cast<Pointer_Vector<Path, Path>*>(0)'."
            << endl;
 
       return static_cast<Pointer_Vector<Path, Path>*>(0);
@@ -14958,7 +14959,10 @@ Path::resolve(Scanner_Node scanner_node,
 
    if (end < 0)
    {
-      end = points.size() - 1;
+      end = points.size();
+
+      if (!is_cycle())
+         --end;
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -14980,7 +14984,8 @@ Path::resolve(Scanner_Node scanner_node,
            << endl
            << "Can't resolve subpath."
            << endl 
-           << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+           << "Exiting function unsuccessfully with return value "
+           << "`static_cast<Pointer_Vector<Path, Path>*>(0)'."
            << endl;
 
       return static_cast<Pointer_Vector<Path, Path>*>(0);
@@ -14997,12 +15002,27 @@ Path::resolve(Scanner_Node scanner_node,
       begin = 0;
    }
 
-   if (end >= points.size())
+   if (end > points.size())
    {
       if (DEBUG)
-         cerr << "In `Path::resolve':  Argument `int end' == " << end << " is >= `points.size()'."
+         cerr << "In `Path::resolve':  Argument `int end' > `points.size()'."
               << endl
-              << "Reducing `end' to `points.size() - 1' and continuing."
+              << "Reducing `end' to `points.size()' and continuing."
+              << endl;
+
+       end = points.size();
+
+   }
+
+   if (end == points.size() && !is_cycle())
+   {
+      if (DEBUG)
+         cerr << "In `Path::resolve':"
+              << endl 
+              << "Argument `int end' == `points.size()' "
+              << "and path isn't a cycle."
+              << endl 
+              << "Reducing `end' to `points.size()' -1 and continuing."
               << endl;
 
        end = points.size() - 1;
@@ -15017,7 +15037,8 @@ Path::resolve(Scanner_Node scanner_node,
            << endl
            << "A subpath of one point cannot be resolved."
            << endl
-           << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+           << "Exiting function unsuccessfully with return value "
+           << "`static_cast<Pointer_Vector<Path, Path>*>(0)'."
            << endl;
 
       return static_cast<Pointer_Vector<Path, Path>*>(0);
@@ -15473,7 +15494,8 @@ transferring it to the x-y plane.  Write a function for this.
 #if DEBUG_COMPILE
    else if (DEBUG)
    { 
-       cerr << "In ``Path::resolve':  `write' succeeded, returning `status' == " << status << "."
+       cerr << "In ``Path::resolve':  `write' succeeded, returning `status' == " 
+            << status << "."
             << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -15487,22 +15509,35 @@ transferring it to the x-y plane.  Write a function for this.
 
   temp_strm.str("");
 
-  temp_strm << "mpost -numbersystem \"double\" " << temp_in_filename << " >/dev/null 2>/dev/null";
+  temp_strm << "mpost -numbersystem \"double\" " << temp_in_filename; 
+  //  << " >/dev/null 2>/dev/null";
 
   cerr << "temp_strm.str() == " << temp_strm.str() << endl;
 
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
   errno = 0;
+
+cerr << "Error after here 0." << endl; 
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
   status = system(temp_strm.str().c_str());
 
   if (status != 0)
   {
-      cerr << "ERROR!  In ``Path::resolve':  `system' failed, returning `status' == " << status << "." 
+      cerr << "ERROR!  In ``Path::resolve':  `system' failed, returning `status' == " 
+           << status << "." 
            << endl 
            << "`errno' == " << errno << " == " << strerror(errno)
            << endl 
-           << "Failed to execute `mpost' on temporary input file `" << temp_in_filename << "'."
+           << "Failed to execute `mpost' on temporary input file "
+           << "`" << temp_in_filename << "'."
            << endl 
-           << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+           << "Exiting function unsuccessfully with return value "
+           << "`static_cast<Pointer_Vector<Path, Path>*>(0)'."
            << endl;
 
        return static_cast<Pointer_Vector<Path, Path>*>(0);
@@ -15516,11 +15551,15 @@ transferring it to the x-y plane.  Write a function for this.
   { 
       cerr << "In ``Path::resolve':  `system' succeeded, returning 0."
            << endl 
-           << "Executed `mpost' on temporary input file `" << temp_in_filename << "' successfully."
+           << "Executed `mpost' on temporary input file `" << temp_in_filename 
+           << "' successfully."
            << endl; 
 
   }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+
+cerr << "Error after here 1." << endl; 
 
 @q **** (4) @>
 @
@@ -15530,13 +15569,16 @@ transferring it to the x-y plane.  Write a function for this.
    fp = 0 ;
    fp = fopen(temp_out_filename, "r");
 
+cerr << "Error after here 2." << endl; 
+
    if (fp == 0)
    {
       cerr << "ERROR!  In `Path::resolve':  `fopen' failed, returning 0:"
            << endl
            << "`errno' == " << errno << ":  " << strerror(errno)
            << endl
-           << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+           << "Exiting function unsuccessfully with return value "
+           << "`static_cast<Pointer_Vector<Path, Path>*>(0)'."
            << endl;
 
             return static_cast<Pointer_Vector<Path, Path>*>(0);
@@ -15552,6 +15594,8 @@ transferring it to the x-y plane.  Write a function for this.
            << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+cerr << "Error after here 4." << endl; 
 
    if (scanner_node->metapost_output_struct == 0)
       scanner_node->metapost_output_struct = new Metapost_Output_Struct;

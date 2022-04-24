@@ -44,13 +44,14 @@ beginfig(1);
   
   Q2 = subpath(begin_val, end_val + 1) of Q0;
 
-  if end_val < n - 1:
+  if end_val < (n - 1):
     if cycle Q0:
       Q3 = subpath(end_val, n+2) of Q0;
     else:
       Q3 = subpath(end_val, n+1) of Q0;
     fi
-
+  fi
+  
   if extern:
     message "Q1:";
     show Q1;
@@ -62,6 +63,7 @@ beginfig(1);
     show Q3;
   fi
 
+    
   i = begin_val;
   
   for j = 0 step 1 until res_val + 1:
@@ -80,7 +82,7 @@ beginfig(1);
     if extern:
       dotlabel.top(decimal j, r[j]);
     fi
-    i := i + k;
+      i := i + k;
   endfor;
   
   if unknown Q5:
