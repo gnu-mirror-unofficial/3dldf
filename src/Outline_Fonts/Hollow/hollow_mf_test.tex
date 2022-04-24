@@ -1,0 +1,73 @@
+%% hollow_mf_test.tex
+%% Created by Laurence D. Finston (LDF) Sun 24 Apr 2022 05:09:02 AM CEST
+
+\special{papersize=297mm, 420mm} %% DIN A3 Portrait
+\hsize=297mm
+\vsize=420mm
+
+\input epsf
+\input eplain
+\input colordvi
+
+%% ** (2)
+
+\font\small=cmr8
+\font\smalltt=cmtt8
+\font\medium=cmr10
+\font\large=cmr12
+\font\largebx=cmbx12
+\font\Large=cmr17
+\font\huge=cmr17 scaled \magstep1
+
+\font\hollow=hollowmftest
+
+%% ** (2)
+
+\headline={\hfil}
+
+\advance\voffset by -1in
+\advance\voffset by 2cm
+
+\advance\hoffset by -1in
+\advance\hoffset by 1cm
+
+\parindent=0pt
+\parskip=0pt
+
+\def\epsfsize#1#2{#1}
+
+\nopagenumbers
+
+%% ** (2)
+
+\vbox{}
+\vskip4cm
+\leftline{\hskip3cm {\hollow\char65\hskip1cm\char67}}
+\vfil\eject
+
+%% ** (2)
+
+%% \vbox{}
+%% \vskip4cm
+%% \leftline{{\hollow\hskip1cm\char65\hskip1cm\char67\hskip1cm\char68}}
+%% \vfil\eject
+
+
+
+\bye
+
+
+%% * (1) End here
+
+\bye
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:plain-TeX
+%% eval:(local-set-key "\"" 'self-insert-command)
+%% eval:(outline-minor-mode t)
+%% auto-fill-function:nil
+%% outline-regexp:"%% [*\f]+"
+%% End:
+
