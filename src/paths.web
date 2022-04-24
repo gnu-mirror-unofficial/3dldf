@@ -4977,10 +4977,10 @@ append(const Path& pa, string connector = "--", bool assign = true);
 @
 @<Define |Path| functions@>=
 Path
-Path::append(const Path& p, string connector, bool assign)
+Path::append(const Path& p, string connector_str, bool assign)
 {
 
-  bool DEBUG = false; /* |true| */ 
+  bool DEBUG = true; /* |false| */ 
 
   int i = 0;
   int j = 0;
@@ -5019,7 +5019,11 @@ will be at the wrong place.
     last_connector_type->connector_string = "--";
   }
   else
-    last_connector_type = r.connector_type_vector.back();
+  {
+     last_connector_type = r.connector_type_vector.back();
+  }
+
+  last_connector_type->show("*last_connector_type:");
 
 @q **** (4) @>
 @
@@ -5079,9 +5083,12 @@ will be at the wrong place.
 @q **** (4) @>
 
   r.connector_type_vector.push_back(create_new<Connector_Type>(0));
+
   r.connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
+
   r.connector_type_vector.back()->type1 = Connector_Type::CT_NULL_TYPE;
-  r.connector_type_vector.back()->connector_string = connector;
+
+  r.connector_type_vector.back()->connector_string = connector_str;
 
 @q **** (4) @>   
 
@@ -5090,11 +5097,18 @@ will be at the wrong place.
 
 @<Define |Path| functions@>=
 
-
   for(vector<Point*>::const_iterator iter = p.points.begin();
       iter != p.points.end();
       iter++)
-    r.points.push_back(create_new<Point>(*iter));
+  {
+
+     if (*iter)
+     {
+
+        r.points.push_back(create_new<Point>(*iter));
+     }
+
+  }
 
 @q **** (4) @>   
    
@@ -14841,7 +14855,6 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
 
 }  /* End of |Path::get_direction| definition  */
 
-
 @q ** (2) Resolve.  @>
 @ Resolve.
 \initials{LDF 2022.01.28.}
@@ -14886,7 +14899,7 @@ Path::resolve(Scanner_Node scanner_node,
 {
 @q **** (4) @>
 
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
 
    bool do_subpath;
 
@@ -15590,25 +15603,29 @@ transferring it to the x-y plane.  Write a function for this.
 @
 @<Define |Path| functions@>=
 
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-       cerr << "Exiting `Path::resolve' successfully with return value `Pointer_Vector<Path, Path>*'."
-            << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
 
    pv = create_new<Pointer_Vector<Path, Path> >(0);
 
-   p = *(scanner_node->metapost_output_struct->path_vector[1]);
-   p += "..";
-   p.append(*(scanner_node->metapost_output_struct->path_vector[0]));
-   p += "..";
-   p.append(*(scanner_node->metapost_output_struct->path_vector[2]));
-   p += "..";
-   p.set_cycle();
+#if 0 
+
+/* !!START HERE:  LDF 2022.04.24.  Testing.  This puts the full path with the resolved part
+   onto pv.  However, I think it should be the second element, not the first.
+*/ 
+
+   for (vector<Path*>::iterator iter = scanner_node->metapost_output_struct->path_vector.begin();
+        iter != scanner_node->metapost_output_struct->path_vector.end();
+        ++iter)
+   {
+      p = **iter;
+      p += "..";
+
+   }  /* |for| */
+
+   if (is_cycle())
+      p.set_cycle();
 
    *pv += create_new<Path>(p);
+#endif 
 
    for (vector<Path*>::iterator iter = scanner_node->metapost_output_struct->path_vector.begin();
         iter != scanner_node->metapost_output_struct->path_vector.end();
@@ -15619,6 +15636,15 @@ transferring it to the x-y plane.  Write a function for this.
 
    scanner_node->metapost_output_struct->path_vector.clear();
    scanner_node->metapost_output_struct->real_vector.clear();
+
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Path::resolve' successfully with return value `Pointer_Vector<Path, Path>*'."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
    return pv;
 
