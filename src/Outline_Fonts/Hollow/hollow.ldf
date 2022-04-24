@@ -62,7 +62,6 @@ verbatim_metafont "displaying := -1;\nfont_size := 2cm#;";
 
 %% * (1) Global variables
 
-point p[][];
 path q[];
 glyph g[];
 path_vector pv;
@@ -89,11 +88,6 @@ let large_pen = big_pen;
 
 pickup medium_pen;
 
-path r[][];
-
-point p[][][];
-
-
 string S;
 S := "";
 
@@ -118,7 +112,6 @@ coeff_lower_horiz := .25;
 coeff_upper_horiz := .25;
 
 point z[];
-
 picture v[];
 picture dot_picture[];
 
@@ -869,6 +862,139 @@ beginchar(69, 2cm, 2cm, 0);
   current_picture := v6;
 
 endchar with_projection parallel_x_y no_sort;
+
+%% * (1) The letter g.
+
+
+
+
+point a[][];  % Redeclaring.
+
+%% ** (2) Fig. 103 ("g" == 103 == 0147 == 0x67)
+
+dot_pen := pencircle scaled (.75mm, .75mm, .75mm);
+
+beginfig(103);
+
+%% *** (3)  
+
+  path q[];
+  
+  pickup medium_pen;
+
+  draw frame shifted (-1cm, -2.5cm);
+  
+  clear pv;
+  g103 := get_glyph 103 from "cmssbx10";
+
+  scale g103 by 9;
+  
+  pv := get_paths from g103;
+
+  message "size pv:";
+  show size pv;
+  
+  draw pv0;
+  draw pv1;
+  draw pv2;
+
+%% *** (3)    
+  
+  numeric n;
+
+  n := (size pv0) - 1;
+
+  message "n:";
+  show n;
+  
+  for i = 0 upto n:
+    a[0][i] := get_point (i) pv0;
+  endfor;
+
+  dotlabel.top("$a_0^{0}$", a[0][0]);
+  dotlabel.rt("$a_0^{1}$", a[0][1]);
+  dotlabel.rt("$a_0^{2}$", a[0][2]);
+  dotlabel.top("$a_0^{3}$", a[0][3]);
+  dotlabel.rt("$a_0^{4}$", a[0][4]);
+  dotlabel.rt("$a_0^{5}$", a[0][5]);
+  dotlabel.lrt("$a_0^{6}$", a[0][6]);
+  dotlabel.llft("$a_0^{7}$", a[0][7]);
+  dotlabel.bot("$a_0^{8}$", a[0][8]);
+  dotlabel.rt("$a_0^{9}$", a[0][9]);
+  dotlabel.rt("$a_0^{10}$", a[0][10]);
+  dotlabel.top("$a_0^{11}$", a[0][11]);
+  dotlabel.top("$a_0^{12}$", a[0][12]);
+  dotlabel.top("$a_0^{13}$", a[0][13]);
+  dotlabel.lft("$a_0^{14}$", a[0][14]);
+  dotlabel.lft("$a_0^{15}$", a[0][15]);
+  dotlabel.lft("$a_0^{16}$", a[0][16]);
+  dotlabel.lft("$a_0^{17}$", a[0][17]);
+  dotlabel.lft("$a_0^{18}$", a[0][18]);
+  dotlabel.bot("$a_0^{19}$", a[0][19]);
+  dotlabel.bot("$a_0^{20}$", a[0][20]);
+  dotlabel.rt("$a_0^{21}$", a[0][21]);
+  dotlabel.rt("$a_0^{22}$", a[0][22]);
+
+%% *** (3)    
+  
+  n := (size pv1) - 1;
+
+  message "n:";
+  show n;
+
+  show pv1;
+
+  %pause;
+  
+  for i = 0 upto n:
+    a[1][i] := get_point (i) pv1;
+  endfor;
+		  
+  dotlabel.top("$a_1^{0}$", a[1][0]);
+  dotlabel.rt("$a_1^{1}$", a[1][1]);
+  dotlabel.bot("$a_1^{2}$", a[1][2]);
+  dotlabel.lft("$a_1^{3}$", a[1][3]);
+  dotlabel.lft("$a_1^{4}$", a[1][4]);		  
+
+%% *** (3)    
+  
+  n := (size pv2) - 1;
+
+  message "n:";
+  show n;
+
+
+  
+  for i = 0 upto n:
+    a[2][i] := get_point (i) pv2;
+  endfor;
+		  
+  dotlabel.top("$a_2^{0}$", a[2][0]);
+  dotlabel.rt("$a_2^{1}$", a[2][1]);
+  dotlabel.bot("$a_2^{2}$", a[2][2]);
+  dotlabel.lft("$a_2^{3}$", a[2][3]);
+  dotlabel.top("$a_2^{4}$", a[2][4]);		  
+
+  q0 := resolve pv1 (0, 1) to 3 with_no_transform;
+
+  
+  n := size q0 - 1;
+
+  message "n:";
+  show n;
+  pause;
+  
+  % for i = 0 upto (size q0 - 1):
+  %   drawdot get_point (i) q0 with_pen dot_pen;
+  % endfor;
+
+  
+
+
+  		  
+endfig with_projection parallel_x_y;
+		  
+
 
 %% * (1)
 
