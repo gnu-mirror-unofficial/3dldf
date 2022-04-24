@@ -14774,7 +14774,7 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
      s << "write \\\"0\\\" to \\\"" << temp_filename << "\\\"; ";
 
   s << "end;\" "
-    << "| mpost -numbersystem \"double\" -interaction=\"batchmode\" >/dev/null; cat " << temp_filename;
+    << "| mpost -interaction=\"batchmode\" >/dev/null; cat " << temp_filename;
 
 #if 1 /* 0 */
   cerr << "s.str() == " << s.str() << endl;
@@ -15509,20 +15509,12 @@ transferring it to the x-y plane.  Write a function for this.
 
   temp_strm.str("");
 
-  temp_strm << "mpost -numbersystem \"double\" " << temp_in_filename; 
+  temp_strm << "mpost " << temp_in_filename; 
   //  << " >/dev/null 2>/dev/null";
 
   cerr << "temp_strm.str() == " << temp_strm.str() << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
   errno = 0;
-
-cerr << "Error after here 0." << endl; 
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
   status = system(temp_strm.str().c_str());
 
@@ -15559,8 +15551,6 @@ getchar();
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
-cerr << "Error after here 1." << endl; 
-
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
@@ -15568,8 +15558,6 @@ cerr << "Error after here 1." << endl;
    errno = 0;   
    fp = 0 ;
    fp = fopen(temp_out_filename, "r");
-
-cerr << "Error after here 2." << endl; 
 
    if (fp == 0)
    {
@@ -15594,8 +15582,6 @@ cerr << "Error after here 2." << endl;
            << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
-
-cerr << "Error after here 4." << endl; 
 
    if (scanner_node->metapost_output_struct == 0)
       scanner_node->metapost_output_struct = new Metapost_Output_Struct;
@@ -15646,7 +15632,6 @@ cerr << "Error after here 4." << endl;
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
-
 
    pv = create_new<Pointer_Vector<Path, Path> >(0);
 
