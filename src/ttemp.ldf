@@ -52,7 +52,7 @@ beginfig(0);
 
   message "size pv:";
   show size pv;
-  pause;
+  %pause;
   
   for i = 0 upto (size pv0 - 1):
     p[10+i] := get_point (i) pv0;
@@ -61,7 +61,7 @@ beginfig(0);
 
   message "size pv0:";
   show size pv0;
-  pause;
+  %pause;
 
   
   dotlabel.rt("$p_{10}$", p10);
@@ -79,26 +79,6 @@ beginfig(0);
   
   
   
-endfig with_projection parallel_x_y;
-
-end_mp;
-end;
-
-
-  message "size pv:";
-  show size pv;
-  pause;
-  
-  for i = 0 upto (size pv0 - 1):
-    drawdot get_point (i) pv0 with_pen dot_pen with_color blue;
-  endfor;
-
-  % for i = 0 upto (size pv1 - 1):
-  %   drawdot get_point (i) pv1 with_pen dot_pen with_color red;
-  % endfor;
-  
-
-
 endfig with_projection parallel_x_y;
 
 end_mp;
