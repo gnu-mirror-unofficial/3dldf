@@ -4,19 +4,42 @@ verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
 
 input "plain.lmc";
 
-
 path q[];
 
-q0 := origin -- (1, 1);
-q1 := (2pt, 2pt) -- (30pt, 30pt);
+pen dot_pen;
+dot_pen := pencircle scaled (2mm, 2mm, 2mm);
+
+pen medium_pen;
+
+medium_pen := pencircle scaled (.5mm, .5mm, .5mm);
 
 beginfig(0);
-draw q0 withcolor blue;
-endfig with_projection parallel_x_y;
 
-beginchar("A", 10pt, 10pt, 0pt);
-  draw q1;
-endchar with_projection parallel_x_y;
+  pickup medium_pen;
+  
+  q0 := (unit_circle scaled (6cm, 0, 6cm)) rotated (90, 0);
+
+  draw q0;
+  
+  path_vector pv;
+  
+  pv := resolve q0 (0, 2) to 5 with_no_transform save;
+
+  message "size pv:";
+  show size pv;
+  pause;
+  
+  for i = 0 upto (size pv0 - 1):
+    drawdot get_point (i) pv0 with_pen dot_pen with_color blue;
+  endfor;
+
+  for i = 0 upto (size pv1 - 1):
+    drawdot get_point (i) pv1 with_pen dot_pen with_color red;
+  endfor;
+  
+
+
+endfig with_projection parallel_x_y;
 
 end_mp;
 end;
