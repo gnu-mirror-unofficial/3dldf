@@ -9246,6 +9246,9 @@ Revised the code that checks the value of |arrow|.
 
         *out_stream << ";" << endl << flush;
 
+        if (do_metafont)
+           *out_stream << "cullit;\n" << flush; 
+
     }  /* |else if (fill_draw_value == FILL_VALUE) |  */
 
 @q **** (4) Filldraw.@>
@@ -9327,6 +9330,9 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
                  *out_stream << " withcolor " << *temp_color;
 
               *out_stream << ";" << endl << flush;
+ 
+              if (do_metafont)
+                 *out_stream << "cullit;\n" << flush;
                 
               status = sub_output_draw(scanner_node, out_stream, do_metafont);
 
