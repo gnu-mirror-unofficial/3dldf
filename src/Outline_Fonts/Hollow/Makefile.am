@@ -174,15 +174,13 @@ gf: hollow.1200gf hollow.1315gf hollow.1440gf hollow.1728gf hollow.2074gf \
 hollow.mf hollow.mp: hollow.ldf
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) hollow.ldf
 
-hollow065.eps hollow165.eps: hollow.mp
-
 hollow.ps: hollow.dvi
 	dvips -o hollow.ps hollow.dvi
 
 hollow.pdf: hollow.dvi
 	dvipdfmx hollow.dvi
 
-hollow065.eps hollow165.eps: hollow.mp
+hollow065.eps hollow165.eps hollow103.eps: hollow.mp
 	mpost -numbersystem "double" hollow.mp
 
 hollow.dvi: hollow.tex hollow.600pk hollow065.eps hollow165.eps
