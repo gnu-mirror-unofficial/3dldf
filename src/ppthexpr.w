@@ -1919,19 +1919,247 @@ Added this rule.
 
 };
 
-@q *** (3) path primary: SUPERELLIPSE numeric_list with_center_optional >
+@q *** (3) path primary: SUPERELLIPSE numeric_list @>
 
-@*2 \§path primary> $\longrightarrow$ \.{SUPERELLIPSE} \§numeric list>
-\§with center optional>.
+@*2 \§path primary> $\longrightarrow$ \.{SUPERELLIPSE} \§numeric list>.
+\initials{LDF 2022.04.25.}
 
-@=path primary: SUPERELLIPSE numeric_list with_center_optional@>=
+\LOG
+\initials{LDF 2022.04.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=path_primary: SUPERELLIPSE numeric_list@>@/
 {
-   Path *p = create_new<Path>(0);
+@q **** (4) @>
+        
+   @<Common declarations for rules@>@; 
 
-   @=$$@> = static_cast<void*> p;
+#if DEBUG_COMPILE
+
+   DEBUG = true; /* |false| */
+
+   if (DEBUG)
+   { 
+      cerr << "*** Parser:  Rule `path_primary: SUPERELLIPSE numeric_list'."
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+   Path *p = 0;
+
+   Pointer_Vector<real> *pv = static_cast<Pointer_Vector<real>*>(@=$2@>);
+
+@q **** (4) @>
+
+   if (pv != 0 && pv->v.size() >= 3)
+   {
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << "pv:" << endl;
+
+           for (vector<real*>::iterator iter = pv->v.begin();
+                iter != pv->v.end();
+                ++iter)
+           {
+               cerr << **iter << endl;
+           }
+       }   
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+       p = create_new<Path>(0);
+       status = p->get_superellipse(*(pv->v[0]), *(pv->v[1]), *(pv->v[2]), scanner_node);
  
+       if (status != 0)
+       {
+          cerr_strm << thread_name << "ERROR!  In parser, rule "
+                    << "`path_primary: SUPERELLIPSE numeric_list':"
+                    << endl 
+                    << "`Path::get_superellipse' failed, returning " << status << "."
+                    << endl 
+                    << "Failed to create superellipse.  Continuing.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+
+       }  /* |if (status != 0)|  */
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+      else if (DEBUG)
+      { 
+          cerr_strm << thread_name << "In parser, rule "
+                    << "`path_primary: SUPERELLIPSE numeric_list':"
+                    << endl 
+                    << "`Path::get_superellipse' succeeded, returning 0.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+      @=$$@> = static_cast<void*>(p);
+
+   } /* |if (pv != 0 && pv->v.size() >= 3)| */
+
+@q **** (4) @>
+
+   else if (pv == 0)
+   {
+      cerr_strm << thread_name << "ERROR!  In parser, rule "
+                << "`path_primary: SUPERELLIPSE numeric_list':"
+                << endl 
+                << "`numeric_list' is NULL.  Can't create superellipse.  Continuing.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+      @=$$@> = static_cast<void*>(0);
+
+   }
+
+@q **** (4) @>
+
+   else if (pv->v.size() < 3)
+   {
+      cerr_strm << thread_name << "ERROR!  In parser, rule "
+                << "`path_primary: SUPERELLIPSE numeric_list':"
+                << endl 
+                << "`numeric_list' has " << pv->v.size() << " elements (< 3)."
+                << endl 
+                << "Can't create superellipse.  Continuing.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+      @=$$@> = static_cast<void*>(0);
+
+   }
+
+@q **** (4) @>
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
 };
 
+@q *** (3) path primary: SUPERELLIPSE rectangle_primary @>
+
+@*2 \§path primary> $\longrightarrow$ \.{SUPERELLIPSE} \§rectangle primary>.
+\initials{LDF 2022.04.25.}
+
+\LOG
+\initials{LDF 2022.04.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=path_primary: SUPERELLIPSE rectangle_primary@>
+{
+@q **** (4) @>
+        
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+
+   DEBUG = true; /* |false| */
+
+   if (DEBUG)
+   { 
+      cerr << "*** Parser:  Rule `path_primary: SUPERELLIPSE rectangle_primary'."
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+   Rectangle *r = static_cast<Rectangle*>(@=$2@>);
+   Path *p = 0;
+
+   if (r != 0)
+   {
+@q ***** (5) @>
+
+       p = create_new<Path>(0);
+       status = p->get_superellipse(*r, scanner_node);
+ 
+       if (status != 0)
+       {
+          cerr_strm << thread_name << "ERROR!  In parser, rule "
+                    << "`path_primary: SUPERELLIPSE rectangle_primary':"
+                    << endl 
+                    << "`Path::get_superellipse' failed, returning " << status << "."
+                    << endl 
+                    << "Failed to create superellipse.  Continuing.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+
+       }  /* |if (status != 0)|  */
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+      else if (DEBUG)
+      { 
+          cerr_strm << thread_name << "In parser, rule "
+                    << "`path_primary: SUPERELLIPSE rectangle_primary':"
+                    << endl 
+                    << "`Path::get_superellipse' succeeded, returning 0.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+      delete r;
+      r = 0;
+
+      @=$$@> = static_cast<void*>(p);
+
+   } /* |if (r != 0)| */
+
+@q **** (4) @>
+
+   else 
+   {
+      cerr_strm << thread_name << "ERROR!  In parser, rule "
+                << "`path_primary: SUPERELLIPSE rectangle_primary':"
+                << endl 
+                << "`rectangle_primary' is NULL.  Can't create superellipse.  Continuing.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+      @=$$@> = static_cast<void*>(0);
+
+   }
+
+@q **** (4) @>
+ 
+};
 
 @q ** (2) path secondary.  @>
 @*1 \§path secondary>.
