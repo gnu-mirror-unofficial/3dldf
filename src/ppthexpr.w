@@ -1919,6 +1919,20 @@ Added this rule.
 
 };
 
+@q *** (3) path primary: SUPERELLIPSE numeric_list with_center_optional >
+
+@*2 \§path primary> $\longrightarrow$ \.{SUPERELLIPSE} \§numeric list>
+\§with center optional>.
+
+@=path primary: SUPERELLIPSE numeric_list with_center_optional@>=
+{
+   Path *p = create_new<Path>(0);
+
+   @=$$@> = static_cast<void*> p;
+ 
+};
+
+
 @q ** (2) path secondary.  @>
 @*1 \§path secondary>.
 
