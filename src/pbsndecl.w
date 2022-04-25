@@ -578,6 +578,8 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> SPHERE@>@/
 @=%token <pointer_value> SPHERE_DEVELOPMENT@>@/
 
+@=%token <int_value>     SUPERELLIPSE@>@/
+
 @=%token <pointer_value> PARABOLA@>@/
 @=%token <pointer_value> HYPERBOLA@>@/
 
