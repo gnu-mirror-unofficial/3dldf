@@ -16074,13 +16074,13 @@ Added this function.
 
 @<Declare |Path| functions@>=
 int
-get_superellipse(Path r, Scanner_Node scanner_node = 0);
+get_superellipse(Path r, real beta, Scanner_Node scanner_node = 0);
 
 @q **** (4) Definition @>
 @
 @<Define |Path| functions@>=
 int
-Path::get_superellipse(Path r, Scanner_Node scanner_node)
+Path::get_superellipse(Path r, real beta, Scanner_Node scanner_node)
 {
 @q ***** (5) @>
 
@@ -16120,17 +16120,31 @@ Path::get_superellipse(Path r, Scanner_Node scanner_node)
 #endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) @>
-  
+
+  /* !!START HERE:  LDF 2022.04.25.  Align rectangle along x-axis.  */ 
+
+  Point origin(0, 0, 0);  
+
+  Point p0 = r.get_point(0);
+  Point p1;
+  Point p2;
+  Point p3;
+
+
   Point center = r.get_point(0).mediate(r.get_point(2));
-
-  center.show("center:");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-
   Point normal = r.get_normal();
-  normal.show("normal:");
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      center.show("center:");
+      normal.show("normal:");
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
 
   Point up(       0.0,  1.0,  0.0);
   Point down(     0.0, -1.0,  0.0);    
@@ -16140,7 +16154,6 @@ getchar();
   Point backwards(0.0,  0.0, -1.0);
 
   Transform t;
-
 
   /* !!START HERE:  LDF 2022.04.25.  Test this.  Make sure all cases work right.  */
 
@@ -16153,35 +16166,36 @@ getchar();
   {
       cerr << "`normal' == `down'.  `r' lies up-side-down in the x-z plane." << endl;
       t.rotate(180, 0);
-      r *= t;
+      center *= r *= t;
+     
   }
 
   else if (normal == left)
   {
       cerr << "`normal' == `left'.  `r' lies in the y-z plane, facing left." << endl;
       t.rotate(0, 0, 90);
-      r *= t;
+      center *= r *= t;
   }
 
   else if (normal == right)
   {
       cerr << "`normal' == `right'.  `r' lies in the y-z plane, facing right." << endl;
       t.rotate(0, 0, -90);
-      r *= t;
+      center *= r *= t;
   }
 
   else if (normal == forwards)
   {
       cerr << "`normal' == `forwards'.  `r' lies in the x-y plane, facing forwards." << endl;
       t.rotate(-90, 0, 0);
-      r *= t;
+      center *= r *= t;
   }
 
   else if (normal == backwards)
   {
       cerr << "`normal' == `backwards'.  `r' lies in the x-y plane, facing backwards." << endl;
       t.rotate(90, 0, 0);
-      r *= t;
+      center *= r *= t;
   }
   else
   {
@@ -16194,7 +16208,7 @@ getchar();
      axis += "--";
 
      t = axis.align_with_axis('y', scanner_node);
-     r *= t;
+     center *= r *= t;
   }
 
   normal = r.get_normal();
@@ -16232,6 +16246,60 @@ getchar();
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
+
+   if (center != origin)
+   {
+       cerr << "In `Path::get_superellipse' with `Path' argument:"
+            << endl
+            << "`center' != `origin'.  Shifting." << endl;
+
+       center *= r *= t.shift(-center);
+
+       center.show("center after shift:");
+       r.show("r after shift:");
+
+   }  
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr << "In `Path::get_superellipse' with `Path' argument:"
+            << endl
+            << "`center' == `origin'.  Not shifting." << endl;
+       
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
+
+    float x;
+    float z;
+
+
+
+    real a = 2.0;
+    real b = 3.0;
+ 
+    Point p;
+
+
+    for (float f = 0.0; f <= 1; f += .1)
+    {
+       x = a * powf(cosf(f), (2.0F / beta));
+       cerr << "x == " << x << endl;
+       z = b * powf(sinf(f), (2.0F / beta));
+       cerr << "z == " << z << endl << endl;
+
+       
+
+      
+
+    }
 
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
