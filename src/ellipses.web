@@ -4855,9 +4855,16 @@ class Superellipse : public Ellipse
 
    protected:
 
-      real superness_beta; real superness_gamma; real beta; real
-      gamma; int resolution; real x_semiaxis_length; real
-      z_semiaxis_length;
+      real beta; 
+      real gamma; 
+
+      real superness_beta; 
+      real superness_gamma; 
+
+      int resolution; 
+  
+      real x_semiaxis_length; 
+      real z_semiaxis_length;
 
       Path *bounding_path;
 
@@ -4882,15 +4889,63 @@ Added this section.
 @ Default constructor.
 \initials{LDF 2022.04.26.}
 
+The values for |beta|, |gamma|, |superness_beta| and |superness_gamma| are negative
+in order to be able to test whether they've been set by a parser rule.
+As of 2022.04.26, the only parser rule that creates a |Superellipse| is 
+\§path primary> $\longrightarrow$ \.{SUPERELLIPSE} \§superellipse option list>.
+\par
+If one of these data members is not set by an option, then it's reset to its absolute value, 
+which is therefore it's default value.  The values chosen correspond to the superellipse
+popularized by by Piet Hein and used, among other things, for his ``superegg'' toy.
+See {\it The METAFONTbook}, p.~126 and Gardner, Martin, {\it Mathematical Carnival\/} 
+(New York: Knopf, 1975), pp.~240--254.
+
+The following is Emacs-Lisp code for calculating $\beta$ and $\superness$ 
+when the other quantity is known.
+\initials{LDF 2022.04.26.}
+
+\begingroup
+\obeylines
+\obeyspaces
+\tt 
+;; set beta with superness known.
+(progn
+   ;; (setq superness 0.0)
+   ;; (setq superness 2.5)
+   ;; (setq superness 0.5)
+    (setq superness 0.75)
+   ;; (setq superness 0.757858283255199) ;; --> beta == 2.5, Piet Hein's value for the superegg.
+   ;; (setq superness 1.0)               ;; --> beta == infinity (rectangle)
+   (setq beta (/ -1 (/ (log superness) (log 2))))
+)
+
+;; set superness with beta known.
+(progn
+   (setq beta 0.757858283255199)
+   (setq superness (/ -1 (/ (log beta) (log 2))))
+)
+\endgroup
+
+!!START HERE:  LDF 2022.04.26.  Add explanation of result of different values for $\beta$.
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this function.
+\ENDLOG 
+
 @<Declare |Superellipse| functions@>=
 Superellipse(void) 
 {
-   superness_beta = superness_gamma = beta = gamma = x_semiaxis_length 
-      = z_semiaxis_length = 0.0;
+   beta              = -0.757858283255199; 
+   gamma             = -0.757858283255199;
+   superness_beta    = -2.5;
+   superness_gamma   = -2.5;
+   x_semiaxis_length = 1;
+   z_semiaxis_length = 1;
 
-   resolution = 0;
+   resolution        = 16;
 
-   bounding_path = 0;
+   bounding_path = static_cast<Path*>(0);
    
    return;
 }
@@ -5103,6 +5158,47 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5) @>
+@
+@<Define |Superellipse| functions@>=
+
+#if LDF_REAL_DOUBLE
+    if (beta < 0)
+       beta = fabs(beta);
+
+    if (gamma < 0)
+       gamma = fabs(gamma);
+
+    if (superness_beta < 0)
+       superness_beta = fabs(superness_beta);
+
+    if (superness_gamma < 0)
+       superness_gamma = fabs(superness_gamma);
+#else 
+    if (beta < 0)
+       beta = fabsf(beta);
+
+    if (gamma < 0)
+       gamma = fabsf(gamma);
+
+    if (superness_beta < 0)
+       superness_beta = fabsf(superness_beta);
+
+    if (superness_gamma < 0)
+       superness_gamma = fabsf(superness_gamma);
+#endif
+
+@q ***** (5) @>
+@
+@<Define |Superellipse| functions@>=
+
+   show("*this:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+@q ***** (5) @>
+@
+@<Define |Superellipse| functions@>=
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -5168,6 +5264,34 @@ Superellipse::show(string text, char coords,
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5) @>
+@
+@<Define |Superellipse| functions@>=
+
+   cerr << "beta               == " << beta << endl
+        << "gamma              == " << gamma << endl
+        << "superness_beta     == " << superness_beta << endl
+        << "superness_gamma    == " << superness_gamma << endl
+        << "x_semiaxis_length  == " << x_semiaxis_length  << endl
+        << "z_semiaxis_length  == " << z_semiaxis_length  << endl
+        << "resolution         == " << resolution << endl
+        << "x_semiaxis_length  == " << x_semiaxis_length << endl
+        << "z_semiaxis_length  == " << z_semiaxis_length << endl;
+
+   Path::show("Path:");
+
+   if (bounding_path == 0)
+      cerr << "bounding_path is NULL." << endl;
+   else 
+   {
+      cerr << "bounding_path is non-NULL:" << endl;
+      bounding_path->show("bounding_path:");
+   }
+  
+   cerr << endl;
+
+@q ***** (5) @>
+@
+@<Define |Superellipse| functions@>=
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -5185,9 +5309,6 @@ getchar();
    return;
 
 } /* End of |Superellipse::show| definition  */
-
-
-
 
 @q * (1) Putting Ellipse together.@>
 @* Putting {\bf Ellipse} together.

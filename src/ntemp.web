@@ -43,6 +43,7 @@ when the other quantity is known.
 \obeylines
 \obeyspaces
 \tt 
+;; set beta with superness known.
 (progn
    ;; (setq superness 0.0)
    ;; (setq superness 2.5)
@@ -53,18 +54,11 @@ when the other quantity is known.
    (setq beta (/ -1 (/ (log superness) (log 2))))
 )
 
+;; set superness with beta known.
 (progn
-   ;; (setq superness 0.0)
-   ;; (setq superness 2.5)
-   ;; (setq superness 0.5)
-    (setq superness 0.75)
-   ;; (setq superness 0.757858283255199) ;; --> beta == 2.5, Piet Hein's value for the superegg.
-   ;; (setq superness 1.0)               ;; --> beta == infinity (rectangle)
-   (setq beta (/ -1 (/ (log superness) (log 2))))
+   (setq beta 0.757858283255199)
+   (setq superness (/ -1 (/ (log beta) (log 2))))
 )
-
-
-
 \endgroup
 
 @<Define |Path| functions@>=

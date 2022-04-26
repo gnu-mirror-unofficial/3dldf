@@ -1949,13 +1949,7 @@ Added this rule.
 
 @q **** (4) @>
 
-    Superellipse *s = static_cast<Superellipse*>(@=$2@>);
-
-    s->show("s:");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
+   Superellipse *s = static_cast<Superellipse*>(@=$2@>);
 
    status = s->generate_path(scanner_node); 
  
@@ -1988,9 +1982,7 @@ getchar();
        cerr_message(cerr_strm);
        cerr_strm.str("");
 
-       s->show("s:");
-
-   }  
+    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5) @>
@@ -2065,14 +2057,14 @@ Added this rule.
 
   Superellipse *s = static_cast<Superellipse*>(@=$1@>);
 
-  s->bounding_path = @=$2@>;
+  s->bounding_path = static_cast<Path*>(@=$2@>);
 
   @=$$@> = @=$1@>;
 
 };
 
 @q *** (3) superellipse_option_list: superellipse_option_list path_expression @>
-@
+@ 
 \LOG
 \initials{LDF 2022.04.26.}
 Added this rule.
@@ -2093,7 +2085,7 @@ Added this rule.
 
   Superellipse *s = static_cast<Superellipse*>(@=$1@>);
 
-  s->bounding_path = @=$2@>;
+  s->bounding_path = static_cast<Path*>(@=$2@>);
 
   @=$$@> = @=$1@>;
 
