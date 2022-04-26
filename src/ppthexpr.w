@@ -1919,9 +1919,9 @@ Added this rule.
 
 };
 
-@q *** (3) path primary: SUPERELLIPSE numeric_list @>
+@q *** (3) path primary: SUPERELLIPSE superellipse_option_list @>
 
-@*2 \§path primary> $\longrightarrow$ \.{SUPERELLIPSE} \§numeric list>.
+@*2 \§path primary> $\longrightarrow$ \.{SUPERELLIPSE} \§superellipse option list>.
 \initials{LDF 2022.04.25.}
 
 \LOG
@@ -1930,7 +1930,7 @@ Added this rule.
 \ENDLOG
 
 @<Define rules@>= 
-@=path_primary: SUPERELLIPSE numeric_list@>@/
+@=path_primary: SUPERELLIPSE superellipse_option_list@>
 {
 @q **** (4) @>
         
@@ -1942,156 +1942,14 @@ Added this rule.
 
    if (DEBUG)
    { 
-      cerr << "*** Parser:  Rule `path_primary: SUPERELLIPSE numeric_list'."
+      cerr << "*** Parser:  Rule `path_primary: SUPERELLIPSE superellipse_option_list'."
            << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4) @>
 
-   Path *p = 0;
-
-   Pointer_Vector<real> *pv = static_cast<Pointer_Vector<real>*>(@=$2@>);
-
-@q **** (4) @>
-
-   if (pv != 0 && pv->v.size() >= 3)
-   {
-@q ***** (5) @>
-
-#if DEBUG_COMPILE
-       if (DEBUG)
-       { 
-           cerr << "pv:" << endl;
-
-           for (vector<real*>::iterator iter = pv->v.begin();
-                iter != pv->v.end();
-                ++iter)
-           {
-               cerr << **iter << endl;
-           }
-       }   
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q **** (4) @>
-
-       p = create_new<Path>(0);
-       status = p->get_superellipse(*(pv->v[0]), *(pv->v[1]), *(pv->v[2]), scanner_node);
- 
-       if (status != 0)
-       {
-          cerr_strm << thread_name << "ERROR!  In parser, rule "
-                    << "`path_primary: SUPERELLIPSE numeric_list':"
-                    << endl 
-                    << "`Path::get_superellipse' failed, returning " << status << "."
-                    << endl 
-                    << "Failed to create superellipse.  Continuing.";
-
-          log_message(cerr_strm);
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-
-       }  /* |if (status != 0)|  */
-
-@q ***** (5) @>
-
-#if DEBUG_COMPILE
-      else if (DEBUG)
-      { 
-          cerr_strm << thread_name << "In parser, rule "
-                    << "`path_primary: SUPERELLIPSE numeric_list':"
-                    << endl 
-                    << "`Path::get_superellipse' succeeded, returning 0.";
-
-          log_message(cerr_strm);
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-
-      }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ***** (5) @>
-
-      @=$$@> = static_cast<void*>(p);
-
-   } /* |if (pv != 0 && pv->v.size() >= 3)| */
-
-@q **** (4) @>
-
-   else if (pv == 0)
-   {
-      cerr_strm << thread_name << "ERROR!  In parser, rule "
-                << "`path_primary: SUPERELLIPSE numeric_list':"
-                << endl 
-                << "`numeric_list' is NULL.  Can't create superellipse.  Continuing.";
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-
-      @=$$@> = static_cast<void*>(0);
-
-   }
-
-@q **** (4) @>
-
-   else if (pv->v.size() < 3)
-   {
-      cerr_strm << thread_name << "ERROR!  In parser, rule "
-                << "`path_primary: SUPERELLIPSE numeric_list':"
-                << endl 
-                << "`numeric_list' has " << pv->v.size() << " elements (< 3)."
-                << endl 
-                << "Can't create superellipse.  Continuing.";
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-
-      @=$$@> = static_cast<void*>(0);
-
-   }
-
-@q **** (4) @>
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-};
-
-@q *** (3) path primary: SUPERELLIPSE rectangle_primary COMMA numeric_expression @>
-
-@*2 \§path primary> $\longrightarrow$ \.{SUPERELLIPSE} \§rectangle primary>
-\.{COMMA} \§numeric expression>. 
-\initials{LDF 2022.04.25.}
-
-\LOG
-\initials{LDF 2022.04.25.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>= 
-@=path_primary: SUPERELLIPSE rectangle_primary COMMA numeric_expression@>
-{
-@q **** (4) @>
-        
-   @<Common declarations for rules@>@; 
-
-#if DEBUG_COMPILE
-
-   DEBUG = true; /* |false| */
-
-   if (DEBUG)
-   { 
-      cerr << "*** Parser:  Rule `path_primary: SUPERELLIPSE rectangle_primary "
-           << "COMMA numeric_expression'."
-           << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q **** (4) @>
-
-   Rectangle *r = static_cast<Rectangle*>(@=$2@>);
+   Rectangle *r = create_new<Rectangle>(0);
    Path *p = 0;
 
    if (r != 0)
@@ -2104,8 +1962,7 @@ Added this rule.
        if (status != 0)
        {
           cerr_strm << thread_name << "ERROR!  In parser, rule "
-                    << "`path_primary: SUPERELLIPSE rectangle_primary "
-                    << "COMMA numeric_expression':"
+                    << "`path_primary: SUPERELLIPSE superellipse_option_list':"
                     << endl 
                     << "`Path::get_superellipse' failed, returning " << status << "."
                     << endl 
@@ -2123,8 +1980,7 @@ Added this rule.
       else if (DEBUG)
       { 
           cerr_strm << thread_name << "In parser, rule "
-                    << "`path_primary: SUPERELLIPSE rectangle_primary "
-                    << "COMMA numeric_expression':"
+                    << "`path_primary: SUPERELLIPSE superellipse_option_list':"
                     << endl 
                     << "`Path::get_superellipse' succeeded, returning 0.";
 
@@ -2149,7 +2005,7 @@ Added this rule.
    else 
    {
       cerr_strm << thread_name << "ERROR!  In parser, rule "
-                << "`path_primary: SUPERELLIPSE rectangle_primary COMMA numeric_expression':"
+                << "`path_primary: SUPERELLIPSE superellipse_option_list':"
                 << endl 
                 << "`rectangle_primary' is NULL.  Can't create superellipse.  Continuing.";
 
@@ -2168,6 +2024,38 @@ Added this rule.
 
 
 };
+
+@q ** (2) superellipse_option_list@>
+
+@ \§superellipse option list>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> superellipse_option_list@>
+
+@q *** (3) superellipse_option_list: /* EMPTY */ @>
+@
+@<Define rules@>=
+@=superellipse_option_list: /* Empty  */@>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr << "*** Parser: `superellipse_option_list: /* Empty */'."
+           << endl;
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  @=$$@> = static_cast<void*>(0);
+
+};
+
 
 @q ** (2) path secondary.  @>
 @*1 \§path secondary>.
