@@ -60,5 +60,5 @@ make arc.h++ circles.h++ cncsctlt.h++ cnepspng.h++ colors.h++ \
      points.h++ polygons.h++ polyhed.h++ predctes.h++ primes.h++ \
      prrfnc0.h++ pspglb.h++ rectangs.h++ rhtchdrn.h++ scanner2.h++ \
      scanprse.h++ scanprsf.h++ scan.h++ sctpcrt.h++ sctpfncs.h++ shapes.h++ \
-     solfaced.h++ solids.h++ spheres.h++ sphrdevl.h++ transfor.h++ \
+     solfaced.h++ solids.h++ spheres.h++ sphrdevl.h++ sprellps.h++ transfor.h++ \
      triangle.h++ utility.h++
