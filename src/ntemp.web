@@ -1,108 +1,242 @@
 
-@q *** (3) path_vector_primary --> RESOLVE path_vector_variable TO numeric_expression resolve_option_list.@> 
-@*2 \§path_vector_primary> $\longrightarrow$ \.{RESOLVE} \§path vector variable> \.{TO} \§numeric expression>
-\§resolve option list>.
-\initials{LDF 2022.01.25.}
+@q ***** (5) @>
 
-!!PLEASE NOTE:  There is no corresponding ``resolve'' rule
-for a |path_vector| with a pair of |numerical_expressions| as a ``subpath'' argument.
-At the present time, I don't see a use for such a rule.  However, if I ever do, I can
-easily add it.
-\initials{LDF 2022.04.20.}
+   if (!r.is_rectangular())
+   {
+       cerr << "ERROR!  In `Superellipse::generate_path' with `Path' argument:"
+            << endl
+            << "`r.is_rectangular' failed.  `Path r' isn't rectangular."
+            << endl 
+            << "Exiting function unsuccessfully with return value 1."
+            << endl;
 
-\LOG
-\initials{LDF 2022.01.25.}
-\ENDLOG
-
-@<Define rules@>=
-@=path_vector_primary: RESOLVE path_vector_variable TO numeric_expression resolve_option_list@>@/
-{
-@q **** (4) @>
-
-  @<Common declarations for rules@>@; 
+       return 1;
+   }
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
-  if (DEBUG)
-  {
-    cerr_strm << "*** Parser: `path_vector_primary --> RESOLVE path_vector_variable TO "
-              << "numeric_expression resolve_option_list'.";
+   else if (DEBUG)
+   { 
+       cerr << "In `Superellipse::generate_path' with `Path' argument:"
+            << endl
+            << "`r.is_rectangular' succeeded.  `Path r' is rectangular."
+            << endl;
 
-    log_message(cerr_strm);
-    cerr_message(cerr_strm);
-    cerr_strm.str("");
-    
-  }
+   }  
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q **** (4) @>
-
-  entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
-
-  bool save             = @=$5@> &  1U; 
-  bool with_transform   = @=$5@> &  2U; 
-  bool with_ampersand   = @=$5@> &  4U; 
-  bool test_planar      = @=$5@> &  8U; 
-  bool make_planar      = @=$5@> & 16U; 
+@q ***** (5) @>
 
 
+@ Calculations of |beta| and |superness| in Emacs-Lisp:
+{\tt (setq beta (expt 2 (/ -1 2.5))) 
+(setq superness (/ -1 (/ (log 0.757858283255199) (log 2))))}
+\initials{LDF 2022.04.26.}
 
-@q **** (4) @>
+@<Define |Path| functions@>=
 
 
-  status = static_cast<Pointer_Vector<Path>*>(entry->object)->resolve(
-                                                                 static_cast<int>(@=$4@>), 
-                                                                 0,
-                                                                 -1,
-                                                                 scanner_node,
-                                                                 !save,
-                                                                 with_transform,
-                                                                 test_planar,
-                                                                 make_planar,
-                                                                 with_ampersand);
 
-@q **** (4) @>
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
 
-  if (status != 0)
-  {
-     cerr_strm << "ERROR!  In parser, rule `path_vector_primary --> RESOLVE path_vector_variable"
-               << endl 
-               << "TO numeric_expression save_temp_file_optional resolve_option_list':"
-               << endl 
-               << "`Pointer_Vector<Path>::resolve' failed, returning " << status << "."
-               << endl
-               << "Failed to resolve `path'.  Continuing.";
 
-     log_message(cerr_strm);
-     cerr_message(cerr_strm);
-     cerr_strm.str("");
+  /* !!START HERE:  LDF 2022.04.25.  Align rectangle along x-axis.  */ 
 
-  } /* |if (status != 0)| */
+  Point origin(0, 0, 0);  
 
-@q **** (4) @>
+  Point center = r.get_point(0).mediate(r.get_point(2));
+  Point normal = r.get_normal();
 
 #if DEBUG_COMPILE
-  else if (DEBUG)
+   if (DEBUG)
+   { 
+      center.show("center:");
+      normal.show("normal:");
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
+
+  Point up(       0.0,  1.0,  0.0);
+  Point down(     0.0, -1.0,  0.0);    
+  Point left(    -1.0,  0.0,  0.0);         
+  Point right(    1.0,  0.0,  0.0);
+  Point forwards( 0.0,  0.0,  1.0);
+  Point backwards(0.0,  0.0, -1.0);
+
+  Transform t;
+
+  /* !!START HERE:  LDF 2022.04.25.  Test this.  Make sure all cases work right.  */
+
+  if (normal == up)
   {
-    cerr_strm << "*** Parser: `path_vector_primary --> RESOLVE path_vector_variable"
-              << endl 
-              << "TO numeric_expression save_temp_file_optional resolve_option_list':"
-              << endl 
-              << "`Pointer_Vector<Path>::resolve' succeeded, returning 0.";
-
-    log_message(cerr_strm);
-    cerr_message(cerr_strm);
-    cerr_strm.str("");
-    
+      cerr << "`normal' == `up'.  `r' lies right-side-up in the x-z plane." << endl;
   }
-#endif /* |DEBUG_COMPILE|  */@;
 
-@q **** (4) @>
-    
-  Pointer_Vector<Path> *pv = create_new<Pointer_Vector<Path> >(0);
+  else if (normal == down)
+  {
+      cerr << "`normal' == `down'.  `r' lies up-side-down in the x-z plane." << endl;
+      t.rotate(180, 0);
+      center *= r *= t;
+     
+  }
 
-  @=$$@> =  static_cast<void*>(pv);
+  else if (normal == left)
+  {
+      cerr << "`normal' == `left'.  `r' lies in the y-z plane, facing left." << endl;
+      t.rotate(0, 0, 90);
+      center *= r *= t;
+  }
+
+  else if (normal == right)
+  {
+      cerr << "`normal' == `right'.  `r' lies in the y-z plane, facing right." << endl;
+      t.rotate(0, 0, -90);
+      center *= r *= t;
+  }
+
+  else if (normal == forwards)
+  {
+      cerr << "`normal' == `forwards'.  `r' lies in the x-y plane, facing forwards." << endl;
+      t.rotate(-90, 0, 0);
+      center *= r *= t;
+  }
+
+  else if (normal == backwards)
+  {
+      cerr << "`normal' == `backwards'.  `r' lies in the x-y plane, facing backwards." << endl;
+      t.rotate(90, 0, 0);
+      center *= r *= t;
+  }
+  else
+  {
+     cerr << "`r' doesn't lie in one of the major planes." << endl;
+     Path axis;
+     Point s = normal;
+     s.shift(center);
+     axis += center;
+     axis += s;
+     axis += "--";
+
+     t = axis.align_with_axis('y', scanner_node);
+     center *= r *= t;
+  }
+
+  normal = r.get_normal();
+
+  normal.show("normal after transformation, if any:");
+
+  if (normal != up)
+  {
+       cerr << "ERROR!  In `Superellipse::generate_path' with `Path' argument:"
+            << endl
+            << "`normal' is not equal to `up' after `r' has been transformed."
+            << endl  
+            << "`r' does not now lie right-side-up in the x-z plane."
+            << endl 
+            << "Can't generate superellipse."
+            << endl 
+            << "Exiting function unsuccessfully with return value 1."
+            << endl;
+
+       return 1;
+
+  }
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr << "In `Superellipse::generate_path' with `Path' argument:"
+            << endl
+            << "`normal' == `up' after `r' has been transformed."
+            << endl  
+            << "`r' now lies right-side-up in the x-z plane."
+            << endl 
+            << "Will generate superellipse."
+            << endl;
+   
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
+
+   if (center != origin)
+   {
+       cerr << "In `Superellipse::generate_path' with `Path' argument:"
+            << endl
+            << "`center' != `origin'.  Shifting." << endl;
+
+       center *= r *= t.shift(-center);
+
+       center.show("center after shift:");
+       r.show("r after shift:");
+
+   }  
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr << "In `Superellipse::generate_path' with `Path' argument:"
+            << endl
+            << "`center' == `origin'.  Not shifting." << endl;
+       
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) Align rectangle along the x-axis.  @>
+
+@ Align rectangle along the x-axis.  
+\initials{LDF 2022.04.26.}
+
+@<Define |Path| functions@>=
+
+  Point p0 = r.get_point(0);
+  Point p1 = r.get_point(1);
+  Point p2 = r.get_point(2);
+  Point p3 = r.get_point(3);
+
+  Point p4 = p1 - p0;
+  p4.unit_vector(true);
+
+  r.show("r:");
+  p4.show("p4:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 
-};
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
+
+    float x;
+    float z;
+
+
+
+    real a = 2.0;
+    real b = 3.0;
+ 
+
+
+
+    for (float f = 0.0; f <= 1; f += .1)
+    {
+       x = a * powf(cosf(f), (2.0F / beta));
+       cerr << "x == " << x << endl;
+       z = b * powf(sinf(f), (2.0F / beta));
+       cerr << "z == " << z << endl << endl;
+
+       
+
+      
+
+    }
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
 

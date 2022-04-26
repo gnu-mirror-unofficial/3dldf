@@ -582,12 +582,12 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     WITH_A@>@/
 @=%token <int_value>     WITH_B@>@/
 @=%token <int_value>     WITH_BETA@>@/
+@=%token <int_value>     WITH_GAMMA@>@/
 @=%token <int_value>     WITH_SIGMA@>@/
 @=%token <int_value>     WITH_SUPERNESS@>@/
-@=%token <int_value>     WITH_X_AXIS_HALF_LENGTH@>@/
-@=%token <int_value>     WITH_Y_AXIS_HALF_LENGTH@>@/
-@=%token <int_value>     WITH_Z_AXIS_HALF_LENGTH@>@/
-
+@=%token <int_value>     WITH_X_SEMIAXIS@>@/
+@=%token <int_value>     WITH_Y_SEMIAXIS@>@/
+@=%token <int_value>     WITH_Z_SEMIAXIS@>@/
 
 @=%token <pointer_value> PARABOLA@>@/
 @=%token <pointer_value> HYPERBOLA@>@/

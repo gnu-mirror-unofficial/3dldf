@@ -1949,22 +1949,24 @@ Added this rule.
 
 @q **** (4) @>
 
-   Path *p = 0;
+    Superellipse *s = static_cast<Superellipse*>(@=$2@>);
 
-   p = create_new<Path>(0);
+    s->show("s:");
 
-#if 0    
-       @q status = p->get_superellipse(*r, scanner_node); @>
-#endif 
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
+   status = s->generate_path(scanner_node); 
  
    if (status != 0)
    {
       cerr_strm << thread_name << "ERROR!  In parser, rule "
                 << "`path_primary: SUPERELLIPSE superellipse_option_list':"
                 << endl 
-                << "`Path::get_superellipse' failed, returning " << status << "."
+                << "`Superellipse::generate_path' failed, returning " << status << "."
                 << endl 
-                << "Failed to create superellipse.  Continuing.";
+                << "Failed to generate superellipse path.  Continuing.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1980,18 +1982,20 @@ Added this rule.
        cerr_strm << thread_name << "In parser, rule "
                  << "`path_primary: SUPERELLIPSE superellipse_option_list':"
                  << endl 
-                 << "`Path::get_superellipse' succeeded, returning 0.";
+                 << "`Superellipse::generate_path' succeeded, returning 0.";
 
        log_message(cerr_strm);
        cerr_message(cerr_strm);
        cerr_strm.str("");
+
+       s->show("s:");
 
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5) @>
 
-   @=$$@> = static_cast<void*>(p);
+   @=$$@> = static_cast<void*>(s);
 
 @q **** (4) @>
 
@@ -2012,10 +2016,14 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> superellipse_option_list@>
-@=%type <int_value> superellipse_option@>
 
 @q *** (3) superellipse_option_list: /* EMPTY */ @>
 @
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
 @<Define rules@>=
 @=superellipse_option_list: /* Empty  */@>@/
 {
@@ -2035,40 +2043,175 @@ Added this type declaration.
 
 };
 
-@q *** (3) superellipse_option_list: superellipse_option_list superellipse_option @>
+@q *** (3) superellipse_option_list: superellipse_option_list rectangle_expression @>
 @
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
 @<Define rules@>=
-@=superellipse_option_list: superellipse_option_list superellipse_option @>@/
+@=superellipse_option_list: superellipse_option_list rectangle_expression @>@/
 {
 #if DEBUG_COMPILE
   bool DEBUG = true; /* |false| */ @; 
 
   if (DEBUG)
   {
-      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list superellipse_option'."
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list rectangle_expression'."
            << endl;
   }
 #endif /* |DEBUG_COMPILE|  */@;
 
   Superellipse *s = static_cast<Superellipse*>(@=$1@>);
 
-  @=$$@> = static_cast<void*>(s);
+  s->bounding_path = @=$2@>;
+
+  @=$$@> = @=$1@>;
 
 };
 
-@q *** (3) superellipse_option: numeric_expression @>
+@q *** (3) superellipse_option_list: superellipse_option_list path_expression @>
 @
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
 @<Define rules@>=
-@=superellipse_option: numeric_expression @>@/
+@=superellipse_option_list: superellipse_option_list path_expression @>@/
 {
 #if DEBUG_COMPILE
   bool DEBUG = true; /* |false| */ @; 
 
   if (DEBUG)
   {
-      cerr << "*** Parser: `superellipse_option: numeric_expression'."
-           << endl
-           << "`numeric_expression' == " << @=$1@>
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list path_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->bounding_path = @=$2@>;
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_A numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_A} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_A numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_A numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->x_semiaxis_length = @=$3@>;
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_B numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_B} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_B numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_B numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->z_semiaxis_length = @=$3@>;
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_BETA numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_BETA} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_BETA numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_BETA numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_GAMMA numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_GAMMA} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_GAMMA numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_GAMMA "
+           << "numeric_expression'."
            << endl;
   }
 #endif /* |DEBUG_COMPILE|  */@;

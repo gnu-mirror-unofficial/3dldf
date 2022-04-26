@@ -797,8 +797,9 @@ Added this rule.
  
 };
 
-@q ** (2) boolean_primary --> IS_SUPERELLIPTICAL path_expression.@>
-@*1 \§boolean primary> $\longrightarrow$ \.{IS\_SUPERELLIPTICAL} \§path expression>.
+@q ** (2) boolean_primary --> IS_SUPERELLIPTICAL path_expression superellipse_option_list.@>
+@*1 \§boolean primary> $\longrightarrow$ \.{IS\_SUPERELLIPTICAL} \§path expression>
+\§superellipse option list>.
 \initials{LDF 2022.04.26.}
 
 \LOG
@@ -809,13 +810,14 @@ Added this rule.
 @q *** (3) Definition.@> 
 
 @<Define rules@>=
-@=boolean_primary: IS_SUPERELLIPTICAL path_expression@>@/
+@=boolean_primary: IS_SUPERELLIPTICAL path_expression superellipse_option_list@>@/
 {
 #if DEBUG_COMPILE
   bool DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr << "*** Parser: `boolean_primary: IS_SUPERELLIPTICAL path_expression'." 
+      cerr << "*** Parser: `boolean_primary: IS_SUPERELLIPTICAL path_expression "
+           << "superellipse_option_list'." 
            << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@;

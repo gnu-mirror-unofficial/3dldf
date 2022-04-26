@@ -4851,13 +4851,15 @@ Added this class declaration.
 
 class Superellipse : public Ellipse
 {
+   friend int yyparse(yyscan_t);
+
    protected:
 
-      real superness;
-      real beta;
-      int  resolution;
-      real x_half_axis_length;
-      real y_half_axis_length;
+      real superness_beta; real superness_gamma; real beta; real
+      gamma; int resolution; real x_semiaxis_length; real
+      z_semiaxis_length;
+
+      Path *bounding_path;
 
     public:
 
@@ -4881,9 +4883,17 @@ Added this section.
 \initials{LDF 2022.04.26.}
 
 @<Declare |Superellipse| functions@>=
-Superellipse(void) {superness = beta = x_half_axis_length = y_half_axis_length = 0.0;
-                    resolution = 0;
-                    return;}
+Superellipse(void) 
+{
+   superness_beta = superness_gamma = beta = gamma = x_semiaxis_length 
+      = z_semiaxis_length = 0.0;
+
+   resolution = 0;
+
+   bounding_path = 0;
+   
+   return;
+}
 
 @q *** (3) Is |Superellipse|.@> 
 @  Is {\bf Superellipse}.
@@ -4916,14 +4926,19 @@ Added this function.
 @<Declare |Superellipse| functions@>=
 virtual
 bool
-is_superelliptical(real x_val = 0.0, real y_val = 0.0) const;
+is_superelliptical(real x_val = 0.0, 
+                   real y_val = 0.0,
+                   real beta  = 0.0,
+                   real gamma = 0.0) const;
 
 @q *** (3) @>
 @
 @<Define |Superellipse| functions@>=
 bool
 Superellipse::is_superelliptical(real x_val, 
-                                 real y_val) const
+                                 real y_val,
+                                 real beta,
+                                 real gamma) const
 {
 @q **** (4) @>
 
@@ -5050,6 +5065,128 @@ Added this function.
 @<Declare non-member template functions for |Superellipse|@>=
 Superellipse* 
 create_new(const Superellipse& e, Scanner_Node scanner_node);
+
+
+
+@q ** (2) Generate path.  @>
+
+@ Generate path.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration @>
+
+@<Declare |Superellipse| functions@>=
+int
+generate_path(Scanner_Node scanner_node = 0);
+
+@q **** (4) Definition @>
+@
+@<Define |Superellipse| functions@>=
+int
+Superellipse::generate_path(Scanner_Node scanner_node)
+{
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr << "Entering `Superellipse::generate_path'."
+           << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Superellipse::generate_path' successfully "
+           << "with return value 0."
+           << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+} /* End of |Superellipse::generate_path| definition  */
+
+@q ** (2) Show.  @>
+
+@ Show.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration @>
+
+@<Declare |Superellipse| functions@>=
+virtual 
+void 
+show(string text = "", 
+     char coords = 'w',
+     const bool do_persp = true, 
+     const bool do_apply = true,
+     Focus* f = 0, 
+     const unsigned short proj = 0,
+     const real factor = 1,
+     int show_connectors = 0) const;
+
+@q **** (4) Definition @>
+@
+@<Define |Superellipse| functions@>=
+void 
+Superellipse::show(string text, char coords,
+                   const bool do_persp, const bool do_apply,
+                   Focus* f, const unsigned short proj,
+                   const real factor,
+                   int show_connectors) const
+{
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr << "Entering `Superellipse::show'."
+           << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Superellipse::show' successfully "
+           << "with return value 0."
+           << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return;
+
+} /* End of |Superellipse::show| definition  */
+
+
 
 
 @q * (1) Putting Ellipse together.@>
