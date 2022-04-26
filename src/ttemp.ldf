@@ -4,7 +4,6 @@ verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
 
 input "plain.lmc";
 
-
 pen medium_pen;
 medium_pen := pencircle scaled (.5mm, .5mm, .5mm);
 pickup medium_pen;
@@ -44,6 +43,11 @@ beginfig(0);
   dotlabel.top("$p_3$", p3);
 
   q0 := superellipse;
+
+  message "q0:";
+  pause;
+  show q0;
+  pause;
   
 endfig with_projection parallel_x_z;
 

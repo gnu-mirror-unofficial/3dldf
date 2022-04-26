@@ -4837,7 +4837,7 @@ Rectangle::draw_in_ellipse(Pointer_Vector<Color>* ddraw_color_vector,
   return e;
 }
 
-@q * (1) class Superellipse.  @>
+@q * (1) |class Superellipse|.  @>
 
 @ |class Superellipse|.
 \initials{LDF 2022.04.26.}
@@ -4936,6 +4936,14 @@ Added this function.
 @<Declare |Superellipse| functions@>=
 Superellipse(void) 
 {
+   shape_type = SUPERELLIPSE_TYPE;
+   surface_hiding_ctr = 0;
+   decomposition_level = 0;
+   line_switch = false;
+   cycle_switch = true;
+   pen_vector = 0; 
+   dash_pattern_vector = 0;
+
    beta              = -0.757858283255199; 
    gamma             = -0.757858283255199;
    superness_beta    = -2.5;
@@ -5309,6 +5317,113 @@ getchar();
    return;
 
 } /* End of |Superellipse::show| definition  */
+
+@q * (1) Returning elements and information.@>
+@* Returning elements and information.
+\initials{LDF 2022.04.26.}
+
+@q ** (2) Get |Shape| type.@> 
+@*1 Get {\bf Shape} type.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this function.
+\ENDLOG
+
+@q *** (3) Declaration.@> 
+
+@<Declare |Superellipse| functions@>=
+virtual 
+inline
+unsigned short 
+get_shape_type(void) const
+{
+   return SUPERELLIPSE_TYPE;
+}
+
+@q ** Is cubic.@>
+@ Is cubic.
+@^\cfunc{Superellipse}{is\_cubic}@>
+\LOG
+\initials{LDF 2003.07.27.}  Made |virtual| and non-inline.
+\ENDLOG
+@<Declare |Superellipse| functions@>=
+virtual
+bool
+is_cubic() const;
+
+@
+@<Define |Superellipse| functions@>=
+bool
+Superellipse::is_cubic() const
+{
+  return false;
+}
+
+@q ** Is quartic.@>
+@ Is quartic.
+@^\cfunc{Superellipse}{is\_quartic}@>
+\LOG
+\initials{LDF 2003.07.27.}  Made |virtual| and non-inline.
+\ENDLOG
+@<Declare |Superellipse| functions@>=
+virtual
+bool
+is_quartic() const;
+
+@
+@<Define |Superellipse| functions@>=
+bool
+Superellipse::is_quartic() const
+{
+  return false;
+}
+
+
+@q ** (2) Is |Ellipse|.@> 
+@*1 Is {\bf Ellipse}.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this function.
+\ENDLOG
+
+@<Declare |Superellipse| functions@>=
+virtual
+inline
+bool
+is_ellipse(void) const 
+{
+   return true;
+}
+
+@q ** (2) Is elliptical.@>
+@*1 Is elliptical.
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this function.
+\ENDLOG
+
+@<Declare |Superellipse| functions@>=
+virtual
+bool
+is_elliptical(Scanner_Node scanner_node) const;
+
+@q **** (4) Definition.@> 
+  
+@
+@<Define |Superellipse| functions@>=
+bool
+Superellipse::is_elliptical(Scanner_Node scanner_node) const
+{
+   return false;
+
+} /* End of |Superellipse::is_elliptical| definition.  */
+
+
 
 @q * (1) Putting Ellipse together.@>
 @* Putting {\bf Ellipse} together.
