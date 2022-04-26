@@ -773,10 +773,41 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+    /* !!START HERE:  LDF 2022.04.26.  */ 
+
     @=$$@> = static_cast<void>(0);         
  
 };
 
+@q ** (2) boolean_primary --> IS_SUPERELLIPTICAL path_expression.@>
+@*1 \§boolean primary> $\longrightarrow$ \.{IS\_SUPERELLIPTICAL} \§path expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define rules@>=
+@=boolean_primary: IS_SUPERELLIPTICAL path_expression@>@/
+{
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr << "*** Parser: `boolean_primary: IS_SUPERELLIPTICAL path_expression'." 
+           << endl;
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = static_cast<void>(0);        
+
+    /* !!START HERE:  LDF 2022.04.26.  */  
+ 
+};
 
 @q ** (2) boolean_primary --> IS_BIG_ENDIAN.@>
 @*1 \§boolean primary> $\longrightarrow$ \§type predicate> 
