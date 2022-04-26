@@ -200,6 +200,8 @@ class Point: protected Shape
   friend int Scanner_Type::show_database(void);
   friend int yyparse(yyscan_t);
 
+  friend class Path;
+
   private:
 
     Transform transform;
@@ -9194,11 +9196,14 @@ Point::unit_vector(const bool assign, const bool silent)
     {
       if (!silent)
         {
-          cerr << "WARNING! In Point::unit_vector():\n"
-               << "Don't call this function with false as its argument.\n"
-               << "Use unit_vector() without an argument instead.\n"
-               << "Calling unit_vector() without an argument.\n\n";
-
+          cerr << "WARNING! In `Point::unit_vector':" 
+               << endl 
+               << "Don't call this function with false as its argument." 
+               << endl 
+               << "Use unit_vector() without an argument instead."
+               << endl 
+               << "Calling `Point::unit_vector' without an argument."
+               << endl;
         }
       return unit_vector();
     }

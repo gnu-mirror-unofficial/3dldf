@@ -2365,13 +2365,13 @@ Added this rule.
 @=with_center_optional: /* Empty.  */@>@/
 {
 
-      Point* p;
+    Point* p;
 
-           p = create_new<Point>(0);
+    p = create_new<Point>(0);
 
-     p->set(0, 0, 0);
+    p->set(0, 0, 0);
 
-     @=$$@> = static_cast<void*>(p); 
+    @=$$@> = static_cast<void*>(p); 
  
 };
 

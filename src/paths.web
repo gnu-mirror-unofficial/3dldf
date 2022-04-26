@@ -16125,12 +16125,6 @@ Path::get_superellipse(Path r, real beta, Scanner_Node scanner_node)
 
   Point origin(0, 0, 0);  
 
-  Point p0 = r.get_point(0);
-  Point p1;
-  Point p2;
-  Point p3;
-
-
   Point center = r.get_point(0).mediate(r.get_point(2));
   Point normal = r.get_normal();
 
@@ -16272,6 +16266,27 @@ Path::get_superellipse(Path r, real beta, Scanner_Node scanner_node)
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+@q ***** (5) Align rectangle along the x-axis.  @>
+
+@ Align rectangle along the x-axis.  
+\initials{LDF 2022.04.26.}
+
+@<Define |Path| functions@>=
+
+  Point p0 = r.get_point(0);
+  Point p1 = r.get_point(1);
+  Point p2 = r.get_point(2);
+  Point p3 = r.get_point(3);
+
+  Point p4 = p1 - p0;
+  p4.unit_vector(true);
+
+  r.show("r:");
+  p4.show("p4:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
 
 @q ***** (5) @>
 @
@@ -16285,7 +16300,7 @@ Path::get_superellipse(Path r, real beta, Scanner_Node scanner_node)
     real a = 2.0;
     real b = 3.0;
  
-    Point p;
+
 
 
     for (float f = 0.0; f <= 1; f += .1)

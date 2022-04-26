@@ -2059,9 +2059,10 @@ getchar();
 
 };
 
-@q *** (3) path primary: SUPERELLIPSE rectangle_primary @>
+@q *** (3) path primary: SUPERELLIPSE rectangle_primary COMMA numeric_expression @>
 
-@*2 \§path primary> $\longrightarrow$ \.{SUPERELLIPSE} \§rectangle primary>.
+@*2 \§path primary> $\longrightarrow$ \.{SUPERELLIPSE} \§rectangle primary>
+\.{COMMA} \§numeric expression>. 
 \initials{LDF 2022.04.25.}
 
 \LOG
@@ -2070,7 +2071,7 @@ Added this rule.
 \ENDLOG
 
 @<Define rules@>= 
-@=path_primary: SUPERELLIPSE rectangle_primary@>
+@=path_primary: SUPERELLIPSE rectangle_primary COMMA numeric_expression@>
 {
 @q **** (4) @>
         
@@ -2082,7 +2083,8 @@ Added this rule.
 
    if (DEBUG)
    { 
-      cerr << "*** Parser:  Rule `path_primary: SUPERELLIPSE rectangle_primary'."
+      cerr << "*** Parser:  Rule `path_primary: SUPERELLIPSE rectangle_primary "
+           << "COMMA numeric_expression'."
            << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -2097,12 +2099,13 @@ Added this rule.
 @q ***** (5) @>
 
        p = create_new<Path>(0);
-       status = p->get_superellipse(*r, scanner_node);
+       status = p->get_superellipse(*r, @=$4@>, scanner_node);
  
        if (status != 0)
        {
           cerr_strm << thread_name << "ERROR!  In parser, rule "
-                    << "`path_primary: SUPERELLIPSE rectangle_primary':"
+                    << "`path_primary: SUPERELLIPSE rectangle_primary "
+                    << "COMMA numeric_expression':"
                     << endl 
                     << "`Path::get_superellipse' failed, returning " << status << "."
                     << endl 
@@ -2120,7 +2123,8 @@ Added this rule.
       else if (DEBUG)
       { 
           cerr_strm << thread_name << "In parser, rule "
-                    << "`path_primary: SUPERELLIPSE rectangle_primary':"
+                    << "`path_primary: SUPERELLIPSE rectangle_primary "
+                    << "COMMA numeric_expression':"
                     << endl 
                     << "`Path::get_superellipse' succeeded, returning 0.";
 
@@ -2145,7 +2149,7 @@ Added this rule.
    else 
    {
       cerr_strm << thread_name << "ERROR!  In parser, rule "
-                << "`path_primary: SUPERELLIPSE rectangle_primary':"
+                << "`path_primary: SUPERELLIPSE rectangle_primary COMMA numeric_expression':"
                 << endl 
                 << "`rectangle_primary' is NULL.  Can't create superellipse.  Continuing.";
 
