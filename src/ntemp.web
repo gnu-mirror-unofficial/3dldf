@@ -32,6 +32,41 @@
 (setq superness (/ -1 (/ (log 0.757858283255199) (log 2))))}
 \initials{LDF 2022.04.26.}
 
+
+(setq superness (expt 2 (/ -1 2.5))) 
+
+@ The following is Emacs-Lisp code for calculating $\beta$ and $\superness$ 
+when the other quantity is known.
+\initials{LDF 2022.04.26.}
+
+\begingroup
+\obeylines
+\obeyspaces
+\tt 
+(progn
+   ;; (setq superness 0.0)
+   ;; (setq superness 2.5)
+   ;; (setq superness 0.5)
+    (setq superness 0.75)
+   ;; (setq superness 0.757858283255199) ;; --> beta == 2.5, Piet Hein's value for the superegg.
+   ;; (setq superness 1.0)               ;; --> beta == infinity (rectangle)
+   (setq beta (/ -1 (/ (log superness) (log 2))))
+)
+
+(progn
+   ;; (setq superness 0.0)
+   ;; (setq superness 2.5)
+   ;; (setq superness 0.5)
+    (setq superness 0.75)
+   ;; (setq superness 0.757858283255199) ;; --> beta == 2.5, Piet Hein's value for the superegg.
+   ;; (setq superness 1.0)               ;; --> beta == infinity (rectangle)
+   (setq beta (/ -1 (/ (log superness) (log 2))))
+)
+
+
+
+\endgroup
+
 @<Define |Path| functions@>=
 
 
