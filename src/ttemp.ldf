@@ -27,7 +27,7 @@ beginfig(0);
   path q[];
   rectangle r[];
 
-  r0 := unit_rectangle scaled (3cm, 0, 3cm);
+  r0 := unit_rectangle scaled (6cm, 0, 6cm);
 
   point p[];
 
@@ -44,10 +44,21 @@ beginfig(0);
 
   q0 := superellipse;
 
-  message "q0:";
-  pause;
-  show q0;
-  pause;
+  scale q0 (5, 0 , 6);
+
+  draw q0 with_color red;
+
+  numeric n;
+  n := size q0 - 1;
+
+  for i = 0 upto n:
+    dotlabel.top(decimal i, get_point (i) q0);
+  endfor;
+  
+  % message "q0:";
+  % pause;
+  % show q0;
+  % pause;
   
 endfig with_projection parallel_x_z;
 

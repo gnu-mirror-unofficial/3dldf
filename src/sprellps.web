@@ -1,4 +1,4 @@
-@q ellipses.web @>
+@q sprellps.web @>
     
 @q * Copyright and License.@>
 
@@ -453,29 +453,51 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 @<Define |Superellipse| functions@>=
 
     Point p;
-    real step = 1.0 / resolution;
 
-    cerr << "step == " << step << endl;
+    real pi = 3.141592653589793;
 
-    for (float f = 0.0; f <= 1; f += step)
+    real step = (2*pi) / resolution;
+
+
+
+    real x;
+    real z;
+
+    real a = x_semiaxis_length; 
+    real b = z_semiaxis_length;
+
+    cerr << "a              == " << a << endl
+         << "b              == " << b << endl 
+         << "beta           == " << beta << endl 
+         << "superness_beta == " << superness_beta << endl 
+         << "resolution     == " << resolution << endl 
+         << "step           == " << step << endl
+         << endl;
+
+
+
+
+    Path::clear();
+
+
+
+    for (float f = -(.5 * pi); f <= .5*pi; f += step)
     {
+       cerr << "f == " << f << endl;
+
        x = a * powf(cosf(f), (2.0F / beta));
        cerr << "x == " << x << endl;
        z = b * powf(sinf(f), (2.0F / beta));
        cerr << "z == " << z << endl << endl;
 
-       
-
-      
-
+       p.set(x, 0, z);
+  
+       operator+=(p);
     }
 
-
-
+#if 0 
    show("*this:");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+#endif 
 
 @q ***** (5) @>
 @
@@ -487,10 +509,6 @@ getchar();
       cerr << "Exiting `Superellipse::generate_path' successfully "
            << "with return value 0."
            << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -580,10 +598,6 @@ Superellipse::show(string text, char coords,
       cerr << "Exiting `Superellipse::show' successfully "
            << "with return value 0."
            << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 

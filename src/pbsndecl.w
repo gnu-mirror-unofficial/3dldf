@@ -111,6 +111,7 @@ when I tried to build 3DLDF from scratch.
 #include "rectangs.h++"
 #include "conicsct.h++"
 #include "ellipses.h++"
+#include "sprellps.h++"
 #include "circles.h++"
 #include "ellpsslc.h++"
 #include "crclslc.h++"

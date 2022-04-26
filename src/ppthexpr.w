@@ -1991,9 +1991,6 @@ Added this rule.
 
 @q **** (4) @>
 
-   cerr << "XXX Enter <RETURN> to continue: ";
-   getchar(); 
-
 };
 
 @q ** (2) superellipse_option_list@>
