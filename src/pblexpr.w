@@ -749,6 +749,35 @@ Added this rule.
 
 };
 
+@q ** (2) boolean_primary --> IS_SUPERELLIPSE path_expression.@>
+@*1 \§boolean primary> $\longrightarrow$ \.{IS\_SUPERELLIPSE} \§path expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define rules@>=
+@=boolean_primary: IS_SUPERELLIPSE path_expression@>@/
+{
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr << "*** Parser: `boolean_primary: IS_SUPERELLIPSE path_expression'." 
+           << endl;
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = static_cast<void>(0);         
+ 
+};
+
+
 @q ** (2) boolean_primary --> IS_BIG_ENDIAN.@>
 @*1 \§boolean primary> $\longrightarrow$ \§type predicate> 
 \§IS\_BIG\_ENDIAN>. 
@@ -1441,6 +1470,7 @@ Added this rule.
   @=$$@> = ELLIPSE_VECTOR;
 
 };
+
 
 @q ** (2) type_predicate --> IS_CIRCLE.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_CIRCLE}.
