@@ -1601,6 +1601,7 @@ Added token declarations for
 @=%token <int_value> IS_REG_POLYGON@>@/
 @=%token <int_value> IS_RECTANGLE@>@/
 @=%token <int_value> IS_ELLIPSE@>@/
+@=%token <int_value> IS_SUPERELLIPSE@>@/
 @=%token <int_value> IS_CIRCLE@>@/
 @=%token <int_value> IS_CONIC_SECTION_LATTICE@>@/
 @=%token <int_value> IS_HELIX@>@/
@@ -1697,6 +1698,7 @@ Added token declarations for
 @=%token <int_value> IS_PLANAR@>@/
 @=%token <int_value> IS_SQUARE@>@/
 @=%token <int_value> IS_ELLIPTICAL@>@/
+@=%token <int_value> IS_SUPERELLIPTICAL@>@/
 @=%token <int_value> IS_CIRCULAR@>@/
 @=%token <int_value> IS_HELICAL@>@/
 @=%token <int_value> IS_POLYGONAL@>@/

@@ -763,9 +763,8 @@ Added this rule.
 @<Define rules@>=
 @=boolean_primary: IS_SUPERELLIPSE path_expression@>@/
 {
-
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr << "*** Parser: `boolean_primary: IS_SUPERELLIPSE path_expression'." 
@@ -773,9 +772,28 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    /* !!START HERE:  LDF 2022.04.26.  */ 
+    bool *b = new bool;
 
-    @=$$@> = static_cast<void>(0);         
+    *b = false;
+
+    Path *p = static_cast<Path*>(@=$2@>);
+
+    if (p != 0)
+    {
+       *b = p->is_superellipse();
+
+       delete p;
+       p = 0;
+    }
+    else
+    {
+      cerr << "WARNING!  In parser, rule `boolean_primary: IS_SUPERELLIPSE path_expression':" 
+           << endl  
+           << "`path' is NULL.  Can't test.  Setting `boolean' to `false' and continuing."
+           << endl;
+    }
+
+    @=$$@> = static_cast<void*>(b);         
  
 };
 
@@ -793,9 +811,8 @@ Added this rule.
 @<Define rules@>=
 @=boolean_primary: IS_SUPERELLIPTICAL path_expression@>@/
 {
-
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr << "*** Parser: `boolean_primary: IS_SUPERELLIPTICAL path_expression'." 
@@ -803,7 +820,11 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    @=$$@> = static_cast<void>(0);        
+    bool *b = new bool;
+
+    *b = false;
+
+    @=$$@> = static_cast<void*>(b);        
 
     /* !!START HERE:  LDF 2022.04.26.  */  
  

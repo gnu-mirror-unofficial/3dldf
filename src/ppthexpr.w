@@ -1949,79 +1949,52 @@ Added this rule.
 
 @q **** (4) @>
 
-   Rectangle *r = create_new<Rectangle>(0);
    Path *p = 0;
 
-   if (r != 0)
-   {
-@q ***** (5) @>
-
-       p = create_new<Path>(0);
+   p = create_new<Path>(0);
 
 #if 0    
        @q status = p->get_superellipse(*r, scanner_node); @>
 #endif 
  
-       if (status != 0)
-       {
-          cerr_strm << thread_name << "ERROR!  In parser, rule "
-                    << "`path_primary: SUPERELLIPSE superellipse_option_list':"
-                    << endl 
-                    << "`Path::get_superellipse' failed, returning " << status << "."
-                    << endl 
-                    << "Failed to create superellipse.  Continuing.";
-
-          log_message(cerr_strm);
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-
-       }  /* |if (status != 0)|  */
-
-@q ***** (5) @>
-
-#if DEBUG_COMPILE
-      else if (DEBUG)
-      { 
-          cerr_strm << thread_name << "In parser, rule "
-                    << "`path_primary: SUPERELLIPSE superellipse_option_list':"
-                    << endl 
-                    << "`Path::get_superellipse' succeeded, returning 0.";
-
-          log_message(cerr_strm);
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-
-      }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ***** (5) @>
-
-      delete r;
-      r = 0;
-
-      @=$$@> = static_cast<void*>(p);
-
-   } /* |if (r != 0)| */
-
-@q **** (4) @>
-
-   else 
+   if (status != 0)
    {
       cerr_strm << thread_name << "ERROR!  In parser, rule "
                 << "`path_primary: SUPERELLIPSE superellipse_option_list':"
                 << endl 
-                << "`rectangle_primary' is NULL.  Can't create superellipse.  Continuing.";
+                << "`Path::get_superellipse' failed, returning " << status << "."
+                << endl 
+                << "Failed to create superellipse.  Continuing.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
 
-      @=$$@> = static_cast<void*>(0);
+   }  /* |if (status != 0)|  */
 
-   }
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr_strm << thread_name << "In parser, rule "
+                 << "`path_primary: SUPERELLIPSE superellipse_option_list':"
+                 << endl 
+                 << "`Path::get_superellipse' succeeded, returning 0.";
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+   @=$$@> = static_cast<void*>(p);
 
 @q **** (4) @>
- 
+
    cerr << "XXX Enter <RETURN> to continue: ";
    getchar(); 
 
@@ -2039,6 +2012,7 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> superellipse_option_list@>
+@=%type <int_value> superellipse_option@>
 
 @q *** (3) superellipse_option_list: /* EMPTY */ @>
 @
@@ -2047,17 +2021,61 @@ Added this type declaration.
 {
 #if DEBUG_COMPILE
   bool DEBUG = true; /* |false| */ @; 
+
   if (DEBUG)
-    {
+  {
       cerr << "*** Parser: `superellipse_option_list: /* Empty */'."
            << endl;
-    }
+  }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  @=$$@> = static_cast<void*>(0);
+  Superellipse *s = create_new<Superellipse>(0);   
+
+  @=$$@> = static_cast<void*>(s);
 
 };
 
+@q *** (3) superellipse_option_list: superellipse_option_list superellipse_option @>
+@
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list superellipse_option @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list superellipse_option'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option: numeric_expression @>
+@
+@<Define rules@>=
+@=superellipse_option: numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option: numeric_expression'."
+           << endl
+           << "`numeric_expression' == " << @=$1@>
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  @=$$@> = @=$1@>;
+
+};
 
 @q ** (2) path secondary.  @>
 @*1 \§path secondary>.
