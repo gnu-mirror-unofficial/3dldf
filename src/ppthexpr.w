@@ -1957,7 +1957,10 @@ Added this rule.
 @q ***** (5) @>
 
        p = create_new<Path>(0);
-       status = p->get_superellipse(*r, @=$4@>, scanner_node);
+
+#if 0    
+       @q status = p->get_superellipse(*r, scanner_node); @>
+#endif 
  
        if (status != 0)
        {
@@ -2021,7 +2024,6 @@ Added this rule.
  
    cerr << "XXX Enter <RETURN> to continue: ";
    getchar(); 
-
 
 };
 

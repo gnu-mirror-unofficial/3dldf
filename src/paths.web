@@ -16100,7 +16100,7 @@ Path::get_superellipse(Path r, real beta, Scanner_Node scanner_node)
    {
        cerr << "ERROR!  In `Path::get_superellipse' with `Path' argument:"
             << endl
-            << "`r.is_rectangular()' failed.  `Path r' isn't rectangular."
+            << "`r.is_rectangular' failed.  `Path r' isn't rectangular."
             << endl 
             << "Exiting function unsuccessfully with return value 1."
             << endl;
@@ -16113,13 +16113,28 @@ Path::get_superellipse(Path r, real beta, Scanner_Node scanner_node)
    { 
        cerr << "In `Path::get_superellipse' with `Path' argument:"
             << endl
-            << "`r.is_rectangular()' succeeded.  `Path r' is rectangular."
+            << "`r.is_rectangular' succeeded.  `Path r' is rectangular."
             << endl;
 
    }  
 #endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) @>
+
+
+@ Calculations of |beta| and |superness| in Emacs-Lisp:
+{\tt (setq beta (expt 2 (/ -1 2.5))) 
+(setq superness (/ -1 (/ (log 0.757858283255199) (log 2))))}
+\initials{LDF 2022.04.26.}
+
+@<Define |Path| functions@>=
+
+
+
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
+
 
   /* !!START HERE:  LDF 2022.04.25.  Align rectangle along x-axis.  */ 
 
