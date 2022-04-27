@@ -2715,10 +2715,16 @@ Added this function.
 
 @<Declare |Path| functions@>=
 virtual
-inline
 bool
-is_superellipse(void) const
+is_superellipse(void) const;
+
+@
+@<Define |Path| functions@>=
+bool
+Path::is_superellipse(void) const
 {
+   cerr << "In Path::is_superellipse." << endl;
+
    return false;
 }
 
