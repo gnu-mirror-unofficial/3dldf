@@ -493,6 +493,52 @@ Removed \§optional of> from this rule.
 
 };
 
+@q ***** (5) numeric_primary --> LENGTH superellipse_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{LENGTH} \§superellipse primary>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=numeric_primary: LENGTH superellipse_primary@>@/
+{
+   Superellipse* e = static_cast<Superellipse*>(@=$2@>);
+
+   if (e)
+     @=$$@> = e->size();
+   else
+     @=$$@> = ZERO_REAL;
+
+   delete e;
+
+};
+
+@q ***** (5) numeric_primary --> SIZE superellipse_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{SIZE} \§superellipse primary>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=numeric_primary: SIZE superellipse_primary@>@/
+{
+   Superellipse* e = static_cast<Superellipse*>(@=$2@>);
+
+   if (e)
+     @=$$@> = e->size();
+   else
+     @=$$@> = ZERO_REAL;
+
+   delete e;
+
+};
+
 @q ***** (5) numeric_primary --> LENGTH circle_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{LENGTH} \§circle primary>.

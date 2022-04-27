@@ -18,6 +18,11 @@ frame_ht := 14cm;
 frame :=    (-.5frame_wd, 0, -.5frame_ht) -- (.5frame_wd, 0, -.5frame_ht) -- (.5frame_wd, 0, .5frame_ht)
          -- (-.5frame_wd, 0, .5frame_ht) -- cycle;
 
+path q[];
+rectangle r[];
+
+
+
 beginfig(0);
 
   numeric n;
@@ -25,40 +30,122 @@ beginfig(0);
   pickup medium_pen;
 
   draw frame;
-  
-
 
   rectangle r[];
   superellipse s[];
 
-
-
   point p[];
 
-  s0 := get_superellipse with_resolution 64 with_superness .75 with_a 2 with_b 3;
+  s0 := get_superellipse with_resolution 64 with_superness .75 with_a 2 with_b 3 with_arc (10, 20);
 
-  rectangle r[];
+  
+  %rotate s0 (10, 5, 13);
+
   r0 := get_rectangle s0;
 
-  message "r0:";
-  show r0;
+  draw r0 with_color blue;
+
+  for i = 0 upto 1:
+    dotlabel.bot(decimal i, get_point(i) r0);
+  endfor;
+
+  for i = 2 upto 3:
+    dotlabel.top(decimal i, get_point(i) r0) with_color blue;
+  endfor;
   
-endfig with_projection parallel_x_z;
-end_mp;
-end;
+  % message "r0:";
+  %show r0;
 
-%% !! START HERE: Define rules for these commands.
-
+  
   n := size s0 - 1;
 
-  %draw s0 with_color red;
-
-
+  
+  draw s0 with_color red;
 
   for i = 0 step 4 until n:
     label.top(decimal i, get_point (i) s0);
   endfor;
-  
+
+  % s1 := get_superellipse with_resolution 64 with_superness .25 with_a 2 with_b 3;
+  % draw s1 with_color blue;
+
+  % s2 := get_superellipse with_resolution 64 with_superness 2 with_a 2 with_b 3;
+  % draw s2 with_color green;
+
+  % s4 := get_superellipse with_resolution 64 with_superness 1 with_a 2 with_b 3;
+  % draw s4 with_color magenta;
+
+  dotlabel.bot("(0, 0, 0)", origin);
+
+endfig with_projection parallel_x_z;    
+end_mp;
+end;
+
+%% ** (2) Fig. 1
+
+beginfig(1);
+
+  s5 := get_superellipse with_resolution 64 with_superness .05 with_a 2 with_b 3;
+  draw s5;
+
+  n := size s5 - 1;
+
+  for i = 0 step 8 until n:
+    dotlabel.top(decimal i, get_point (i) s5);
+  endfor;
+
+endfig with_projection parallel_x_z;
+
+
+
+%% ** (2) Fig. 2
+
+beginfig(2);
+
+  s6 := get_superellipse with_resolution 64 with_superness_beta .70 with_superness_gamma .80 with_a 2 with_b 3;
+  draw s6;
+
+  n := size s6 - 1;
+
+  for i = 0 step 8 until n:
+    dotlabel.top(decimal i, get_point (i) s6);
+  endfor;
+
+  n := size s7 - 1;
+  s7 := get_superellipse with_resolution 64 with_superness_beta .25 with_superness_gamma .75 with_a 2 with_b 3;
+  draw s7 with_color blue;
+
+
+  n := size s8 - 1;
+  s8 := get_superellipse with_resolution 64 with_superness_beta .125 with_superness_gamma .825 with_a 2 with_b 3;
+  draw s8 with_color red;
+
+  n := size s9 - 1;
+  s9 := get_superellipse with_resolution 64 with_superness_beta .80 with_superness_gamma .10 with_a 2 with_b 3;
+  draw s9 with_color green;
+
+endfig with_projection parallel_x_z;
+
+
+
+%% ** (2) Fig. 3
+
+focus f;
+
+set f with_position (0, 20, -50) 
+       with_direction (0, 20, 10) with_distance 70; 
+
+
+beginfig(3); 
+
+  draw frame;
+
+  q0 := s0;
+  draw q0;  
+
+endfig with_focus f; % with_projection parallel_x_z;    
+end_mp;
+end;
 
 
 

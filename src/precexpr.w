@@ -579,9 +579,9 @@ Added this rule.
 
   Rectangle *r = create_new<Rectangle>(0);
 
-  Superellipse *p = static_cast<Superellipse*>(@=$2@>);
+  Superellipse *s = static_cast<Superellipse*>(@=$2@>);
 
-  if (p == 0)
+  if (s == 0)
   {
       cerr_strm << thread_name << "WARNING:  In parser, rule"
                 << endl 
@@ -596,56 +596,19 @@ Added this rule.
      goto END_GET_RECTANGLE_RULE;
   }
 
-  if (p->is_superellipse() || p->is_superelliptical())
-  {
-      if (DEBUG) 
-      {
-          cerr_strm << thread_name << "In parser, rule"
-                    << endl 
-                    << "'rectangle_primary: GET_RECTANGLE superellipse_expression':"
-                    << endl;
-
-          if (p->is_superellipse()) 
-             cerr_strm << "`superellipse' is `superellipse'." << endl;
-          else 
-             cerr_strm << "`superellipse' is not `superellipse'." << endl;
-
-          if (p->is_superelliptical()) 
-             cerr_strm << "`superellipse' is \"superelliptical\"." << endl;
-          else 
-             cerr_strm << "`superellipse' is not \"superelliptical\"." << endl;
-            	          
-          log_message(cerr_strm);
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-      }   
-
-  }  /* |if| */
-
 @q **** (4) @>
-  else 
-  {
-      if (DEBUG) 
-      {
-          cerr_strm << thread_name << "In parser, rule"
-                    << endl 
-                    << "'rectangle_primary: GET_RECTANGLE superellipse_expression':"
-                    << endl 
-                    << "`superellipse' is neither `superellipse' nor \"superelliptical\".";
-            	          
-          log_message(cerr_strm);
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-      }   
 
-  }  /* |else| */
+  status = s->get_rectangle(r, scanner_node);
+
+  cerr << "status == " << status << endl;
 
 @q **** (4) @>
 
-  delete p;
-  p = 0;
+  delete s;
+  s = 0;
 
 END_GET_RECTANGLE_RULE:
+
 
   @=$$@> = static_cast<void*>(r); 
 

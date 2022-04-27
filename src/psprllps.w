@@ -655,6 +655,60 @@ Added this rule.
 
 };
 
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_ARC numeric_list @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_ARC} \§numeric list>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_ARC numeric_list @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_ARC "
+           << "numeric_list'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  Pointer_Vector<real> *pv = static_cast<Pointer_Vector<real>*>(@=$3@>);
+
+  cerr << "pv->v.size() == " << pv->v.size() << endl;
+
+  if (pv->v.size() < 2)
+  {
+      cerr << "WARNING!  In parser, rule `superellipse_option_list:'"
+           << endl 
+           << "superellipse_option_list WITH_ARC numeric_list':"
+           << endl 
+           << "`pv->v.size()' == " << pv->v.size() << " (< 2)" << endl
+           << "Can't set arc length.  Continuing." << endl; 
+
+  }
+
+/* !!START HERE:  LDF 2022.04.27.  */ 
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+
+
 
 
 

@@ -137,6 +137,34 @@ in the call to |Scan_Parse::drawing_command_path|.
 };
 
 @q * (1) command --> basic_drawing_command   @>
+@q * (1) superellipse_expression with_clause_draw_list. @>
+
+@* \§command> $\longrightarrow$ \§basic drawing command> 
+\§superellipse expression> \§with clause list>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG
+
+@q ** (2) Definition.@> 
+@
+@<Define rules@>= 
+  
+@=command: basic_drawing_command superellipse_expression @>
+@=with_clause_draw_list@>
+{
+
+    drawing_command_path(static_cast<Scanner_Node>(parameter),
+                         @=$1@>,
+                         static_cast<Superellipse*>(@=$2@>), true);
+
+    @=$$@> = static_cast<void*>(0);
+
+};
+
+@q * (1) command --> basic_drawing_command   @>
 @q * (1) circle_expression with_clause_draw_list. @>
 
 @* \§command> $\longrightarrow$ \§basic drawing command> 

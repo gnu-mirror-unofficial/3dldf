@@ -2618,6 +2618,13 @@ Added code for handling the case that
       object = static_cast<void*>(o); 
     }
 
+  else if (type == SUPERELLIPSE && i.object != static_cast<void*>(0))
+    {
+      Superellipse* o = new Superellipse;
+      *o = *static_cast<Superellipse*>(i.object);
+      object = static_cast<void*>(o); 
+    }
+
   else if (type == CIRCLE && i.object != static_cast<void*>(0))
     {
       Circle* o = new Circle;
@@ -4001,6 +4008,7 @@ Id_Map_Entry_Type::is_shape(void) const
       || type == RECTANGLE
       || type == SQUARE
       || type == ELLIPSE
+      || type == SUPERELLIPSE
       || type == CIRCLE
       || type == PARABOLA
       || type == HYPERBOLA
@@ -4805,6 +4813,14 @@ cerr_strm << ((*static_cast<bool*>(get_object()))
         {
           static_cast<Ellipse*>(object)->show("ellipse:");
         }
+
+@q ***** (5)@>
+
+      else if (type == SUPERELLIPSE)
+        {
+          static_cast<Superellipse*>(object)->show("superellipse:");
+        }
+
 
 @q ***** (5)@>
 

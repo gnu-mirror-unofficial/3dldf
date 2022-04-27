@@ -932,6 +932,30 @@ Removed code.  Replaced it with a call to |Scan_Parse::get_point_func|.
                                                  parameter);
 };
 
+@q ** (2) point_primary --> GET_POINT numeric_secondary superellipse_primary@>
+@*1 \§point primary> $\longrightarrow$ \.{GET\_POINT} 
+\§numeric secondary> \§superellipse primary>. 
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define rules@>=
+
+@=point_primary: GET_POINT numeric_secondary superellipse_primary@>@/
+{
+
+    @=$$@> = Scan_Parse::get_point_func<Superellipse>(@=$2@>, 
+                                                 static_cast<Superellipse*>(@=$3@>), 
+                                                 parameter);
+};
+
+
+
 @q ** (2) point_primary --> GET_POINT numeric_secondary circle_primary@>
 @*1 \§point primary> $\longrightarrow$ \.{GET\_POINT} 
 \§numeric secondary> \§circle primary>. 

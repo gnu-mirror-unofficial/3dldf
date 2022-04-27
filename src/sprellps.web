@@ -118,7 +118,8 @@ class Superellipse : public Ellipse
       real x_semiaxis_length; 
       real z_semiaxis_length;
 
-      Path *bounding_path;
+      real arc_begin;
+      real arc_end;
 
     public:
 
@@ -207,8 +208,9 @@ Superellipse(void)
 
    resolution        = 32;
 
-   bounding_path = static_cast<Path*>(0);
-   
+   arc_begin = -1;
+   arc_end   = -1;
+
    return;
 }
 
@@ -506,6 +508,8 @@ Superellipse::generate_path(Scanner_Node scanner_node)
              << "superness_gamma == " << superness_gamma << endl 
              << "resolution      == " << resolution << endl 
              << "step            == " << step << endl
+             << "arc_begin       == " << arc_begin << endl 
+             << "arc_end         == " << arc_end << endl 
              << endl;
     }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -809,18 +813,13 @@ Superellipse::show(string text, char coords,
         << "z_semiaxis_length  == " << z_semiaxis_length  << endl
         << "resolution         == " << resolution << endl
         << "x_semiaxis_length  == " << x_semiaxis_length << endl
-        << "z_semiaxis_length  == " << z_semiaxis_length << endl;
+        << "z_semiaxis_length  == " << z_semiaxis_length << endl
+        << "arc_begin          == " << arc_begin << endl 
+        << "arc_end            == " << arc_end << endl;
+
 
    Path::show("Path:");
 
-   if (bounding_path == 0)
-      cerr << "bounding_path is NULL." << endl;
-   else 
-   {
-      cerr << "bounding_path is non-NULL:" << endl;
-      bounding_path->show("bounding_path:");
-   }
-  
    cerr << endl;
 
 @q ***** (5) @>

@@ -191,6 +191,39 @@ Added this rule.
 };
 
 @q ** (2) command --> ROTATE @>
+@q ** (2) superellipse_variable BY numeric_primary. @>
+@*1 \§command> $\longrightarrow$ 
+\.{ROTATE} \§superellipse variable> \.{BY} \§numeric primary>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+@
+@<Define rules@>=
+  
+@=command: ROTATE superellipse_variable BY numeric_primary@>@/
+{
+
+   Pointer_Vector<real>* pv = new Pointer_Vector<real>;
+
+   real* r = new real(@=$4@>);
+
+   *pv += r;
+
+   transformation_command_func(static_cast<Scanner_Node>(parameter),
+                               ROTATE,
+                               static_cast<Id_Map_Entry_Node>(@=$2@>),
+                               pv, false);
+
+  @=$$@> = static_cast<void*>(0);
+
+};
+
+@q ** (2) command --> ROTATE @>
 @q ** (2) circle_variable BY numeric_primary. @>
 @*1 \§command> $\longrightarrow$ 
 \.{ROTATE} \§circle variable> \.{BY} \§numeric primary>.
@@ -1342,6 +1375,32 @@ Added this rule.
     @=$$@> = static_cast<void*>(0);
 
 };
+@q **** (4) command: ROTATE superellipse_variable numeric_list.@> 
+
+@*3 \§command> $\longrightarrow$ \.{ROTATE} \§superellipse variable> 
+\§numeric list>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=command: ROTATE superellipse_variable numeric_list@>@/
+{
+
+    transformation_command_func(static_cast<Scanner_Node>(parameter),
+                                ROTATE,
+                                static_cast<Id_Map_Entry_Node>(@=$2@>),
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), 
+                                false);
+
+    @=$$@> = static_cast<void*>(0);
+
+};
+
+
 
 @q **** (4) command: ROTATE circle_variable numeric_list.@> 
 
