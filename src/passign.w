@@ -3170,7 +3170,6 @@ Removed all debugging code.
 \ENDLOG 
 
 @<Define rules@>= 
- 
 @=path_assignment: path_variable ASSIGN path_expression@>
 {
   
