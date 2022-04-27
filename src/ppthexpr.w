@@ -2182,8 +2182,19 @@ Added this rule.
 
   s->beta = @=$3@>;
 
-  @=$$@> = static_cast<void*>(s);
+#if LDF_REAL_DOUBLE
+  s->superness_beta = -1.0 / (log(beta) / log(2));
+#else
+  s->superness_beta = -1.0 / (logf(beta) / logf(2));
+#endif 
 
+  if (s->gamma < 0.0)
+     s->gamma = s->beta;
+
+  if (s->gamma_superness < 0.0)
+     s->gamma_superness = s->beta_superness;
+
+  @=$$@> = static_cast<void*>(s);
 
 };
 
@@ -2216,6 +2227,135 @@ Added this rule.
 
   s->gamma = @=$3@>;
 
+#if LDF_REAL_DOUBLE
+  s->superness_gamma = -1.0 / (log(gamma) / log(2));
+#else
+  s->superness_gamma = -1.0 / (logf(gamma) / logf(2));
+#endif 
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_SUPERNESS numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_SUPERNESS} \§numeric expression>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_SUPERNESS numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list "
+           << "WITH_SUPERNESS numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->superness_gamma = s->superness_beta = @=$3@>;
+
+#if LDF_REAL_DOUBLE
+  s->gamma = s->beta = -1.0 / (log(s->superness_beta) / (log(2.0)));
+#else
+  s->gamma = s->beta = -1.0 / (logf(s->superness_beta) / (logf(2.0)));
+#endif 
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_SUPERNESS_BETA numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_SUPERNESS\_BETA} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_SUPERNESS_BETA numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list "
+           << "WITH_SUPERNESS_BETA numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->superness_beta = @=$3@>;
+
+#if LDF_REAL_DOUBLE
+  s->beta = -1.0 / (log(s->superness_beta) / (log(2.0)));
+#else
+  s->beta = -1.0 / (logf(s->superness_beta) / (logf(2.0)));
+#endif 
+
+  if (s->superness_gamma < 0.0)
+    s->superness_gamma = s->superness_beta;
+
+  if (s->gamma < 0.0)
+    s->gamma = s->beta;
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_SUPERNESS_GAMMA numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_SUPERNESS\_GAMMA} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_SUPERNESS_GAMMA numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list "
+           << "WITH_SUPERNESS_GAMMA numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->superness_gamma = @=$3@>;
+
+#if LDF_REAL_DOUBLE
+  s->gamma = -1.0 / (log(s->superness_gamma) / (log(2.0)));
+#else
+  s->gamma = -1.0 / (logf(s->superness_gamma) / (logf(2.0)));
+#endif 
+
   @=$$@> = static_cast<void*>(s);
 
 };
@@ -2224,10 +2364,10 @@ Added this rule.
 
 @ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
 \.{WITH\_RESOLUTION} \§numeric expression>.
-\initials{LDF 2022.04.26.}
+\initials{LDF 2022.04.27.}
 
 \LOG
-\initials{LDF 2022.04.26.}
+\initials{LDF 2022.04.27.}
 Added this rule.
 \ENDLOG 
 
