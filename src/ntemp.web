@@ -1,273 +1,486 @@
+@q *** (3) path primary: SUPERELLIPSE superellipse_option_list @>
 
-@q ***** (5) @>
+@*2 \§path primary> $\longrightarrow$ \.{SUPERELLIPSE} \§superellipse option list>.
+\initials{LDF 2022.04.25.}
 
-   if (!r.is_rectangular())
-   {
-       cerr << "ERROR!  In `Superellipse::generate_path' with `Path' argument:"
-            << endl
-            << "`r.is_rectangular' failed.  `Path r' isn't rectangular."
-            << endl 
-            << "Exiting function unsuccessfully with return value 1."
-            << endl;
+\LOG
+\initials{LDF 2022.04.25.}
+Added this rule.
+\ENDLOG
 
-       return 1;
-   }
-
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-       cerr << "In `Superellipse::generate_path' with `Path' argument:"
-            << endl
-            << "`r.is_rectangular' succeeded.  `Path r' is rectangular."
-            << endl;
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-@q ***** (5) @>
-
-
-@ Calculations of |beta| and |superness| in Emacs-Lisp:
-{\tt (setq beta (expt 2 (/ -1 2.5))) 
-(setq superness (/ -1 (/ (log 0.757858283255199) (log 2))))}
-\initials{LDF 2022.04.26.}
-
-
-(setq superness (expt 2 (/ -1 2.5))) 
-
-@ The following is Emacs-Lisp code for calculating $\beta$ and $\superness$ 
-when the other quantity is known.
-\initials{LDF 2022.04.26.}
-
-\begingroup
-\obeylines
-\obeyspaces
-\tt 
-;; set beta with superness known.
-(progn
-   ;; (setq superness 0.0)
-   ;; (setq superness 2.5)
-   ;; (setq superness 0.5)
-    (setq superness 0.75)
-   ;; (setq superness 0.757858283255199) ;; --> beta == 2.5, Piet Hein's value for the superegg.
-   ;; (setq superness 1.0)               ;; --> beta == infinity (rectangle)
-   (setq beta (/ -1 (/ (log superness) (log 2))))
-)
-
-;; set superness with beta known.
-(progn
-   (setq beta 0.757858283255199)
-   (setq superness (/ -1 (/ (log beta) (log 2))))
-)
-\endgroup
-
-@<Define |Path| functions@>=
-
-
-
-@q ***** (5) @>
-@
-@<Define |Path| functions@>=
-
-
-  /* !!START HERE:  LDF 2022.04.25.  Align rectangle along x-axis.  */ 
-
-  Point origin(0, 0, 0);  
-
-  Point center = r.get_point(0).mediate(r.get_point(2));
-  Point normal = r.get_normal();
+@<Define rules@>= 
+@=path_primary: SUPERELLIPSE superellipse_option_list@>
+{
+@q **** (4) @>
+        
+   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
+
+   DEBUG = true; /* |false| */
+
    if (DEBUG)
    { 
-      center.show("center:");
-      normal.show("normal:");
+      cerr << "*** Parser:  Rule `path_primary: SUPERELLIPSE superellipse_option_list'."
+           << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q ***** (5) @>
-@
-@<Define |Path| functions@>=
+@q **** (4) @>
 
-  Point up(       0.0,  1.0,  0.0);
-  Point down(     0.0, -1.0,  0.0);    
-  Point left(    -1.0,  0.0,  0.0);         
-  Point right(    1.0,  0.0,  0.0);
-  Point forwards( 0.0,  0.0,  1.0);
-  Point backwards(0.0,  0.0, -1.0);
+   Superellipse *s = static_cast<Superellipse*>(@=$2@>);
 
-  Transform t;
-
-  /* !!START HERE:  LDF 2022.04.25.  Test this.  Make sure all cases work right.  */
-
-  if (normal == up)
-  {
-      cerr << "`normal' == `up'.  `r' lies right-side-up in the x-z plane." << endl;
-  }
-
-  else if (normal == down)
-  {
-      cerr << "`normal' == `down'.  `r' lies up-side-down in the x-z plane." << endl;
-      t.rotate(180, 0);
-      center *= r *= t;
-     
-  }
-
-  else if (normal == left)
-  {
-      cerr << "`normal' == `left'.  `r' lies in the y-z plane, facing left." << endl;
-      t.rotate(0, 0, 90);
-      center *= r *= t;
-  }
-
-  else if (normal == right)
-  {
-      cerr << "`normal' == `right'.  `r' lies in the y-z plane, facing right." << endl;
-      t.rotate(0, 0, -90);
-      center *= r *= t;
-  }
-
-  else if (normal == forwards)
-  {
-      cerr << "`normal' == `forwards'.  `r' lies in the x-y plane, facing forwards." << endl;
-      t.rotate(-90, 0, 0);
-      center *= r *= t;
-  }
-
-  else if (normal == backwards)
-  {
-      cerr << "`normal' == `backwards'.  `r' lies in the x-y plane, facing backwards." << endl;
-      t.rotate(90, 0, 0);
-      center *= r *= t;
-  }
-  else
-  {
-     cerr << "`r' doesn't lie in one of the major planes." << endl;
-     Path axis;
-     Point s = normal;
-     s.shift(center);
-     axis += center;
-     axis += s;
-     axis += "--";
-
-     t = axis.align_with_axis('y', scanner_node);
-     center *= r *= t;
-  }
-
-  normal = r.get_normal();
-
-  normal.show("normal after transformation, if any:");
-
-  if (normal != up)
-  {
-       cerr << "ERROR!  In `Superellipse::generate_path' with `Path' argument:"
-            << endl
-            << "`normal' is not equal to `up' after `r' has been transformed."
-            << endl  
-            << "`r' does not now lie right-side-up in the x-z plane."
-            << endl 
-            << "Can't generate superellipse."
-            << endl 
-            << "Exiting function unsuccessfully with return value 1."
-            << endl;
-
-       return 1;
-
-  }
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-       cerr << "In `Superellipse::generate_path' with `Path' argument:"
-            << endl
-            << "`normal' == `up' after `r' has been transformed."
-            << endl  
-            << "`r' now lies right-side-up in the x-z plane."
-            << endl 
-            << "Will generate superellipse."
-            << endl;
-   
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ***** (5) @>
-@
-@<Define |Path| functions@>=
-
-   if (center != origin)
+   status = s->generate_path(scanner_node); 
+ 
+   if (status != 0)
    {
-       cerr << "In `Superellipse::generate_path' with `Path' argument:"
-            << endl
-            << "`center' != `origin'.  Shifting." << endl;
+      cerr_strm << thread_name << "ERROR!  In parser, rule "
+                << "`path_primary: SUPERELLIPSE superellipse_option_list':"
+                << endl 
+                << "`Superellipse::generate_path' failed, returning " << status << "."
+                << endl 
+                << "Failed to generate superellipse path.  Continuing.";
 
-       center *= r *= t.shift(-center);
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
 
-       center.show("center after shift:");
-       r.show("r after shift:");
+   }  /* |if (status != 0)|  */
 
-   }  
+@q ***** (5) @>
+
 #if DEBUG_COMPILE
    else if (DEBUG)
    { 
-       cerr << "In `Superellipse::generate_path' with `Path' argument:"
-            << endl
-            << "`center' == `origin'.  Not shifting." << endl;
-       
-   }  
+       cerr_strm << thread_name << "In parser, rule "
+                 << "`path_primary: SUPERELLIPSE superellipse_option_list':"
+                 << endl 
+                 << "`Superellipse::generate_path' succeeded, returning 0.";
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q ***** (5) Align rectangle along the x-axis.  @>
+@q ***** (5) @>
 
-@ Align rectangle along the x-axis.  
+   @=$$@> = static_cast<void*>(s);
+
+@q **** (4) @>
+
+};
+
+@q ** (2) superellipse_option_list@>
+
+@ \§superellipse option list>.
 \initials{LDF 2022.04.26.}
 
-@<Define |Path| functions@>=
+\LOG
+\initials{LDF 2022.04.26.}
+Added this type declaration.
+\ENDLOG
 
-  Point p0 = r.get_point(0);
-  Point p1 = r.get_point(1);
-  Point p2 = r.get_point(2);
-  Point p3 = r.get_point(3);
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> superellipse_option_list@>
 
-  Point p4 = p1 - p0;
-  p4.unit_vector(true);
-
-  r.show("r:");
-  p4.show("p4:");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-
-@q ***** (5) @>
+@q *** (3) superellipse_option_list: /* EMPTY */ @>
 @
-@<Define |Path| functions@>=
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
 
-    float x;
-    float z;
+@<Define rules@>=
+@=superellipse_option_list: /* Empty  */@>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
 
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: /* Empty */'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
 
+  Superellipse *s = create_new<Superellipse>(0);   
 
-    real a = 2.0;
-    real b = 3.0;
- 
+  @=$$@> = static_cast<void*>(s);
 
+};
 
+@q *** (3) superellipse_option_list: superellipse_option_list rectangle_expression @>
+@
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
 
-    for (float f = 0.0; f <= 1; f += .1)
-    {
-       x = a * powf(cosf(f), (2.0F / beta));
-       cerr << "x == " << x << endl;
-       z = b * powf(sinf(f), (2.0F / beta));
-       cerr << "z == " << z << endl << endl;
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list rectangle_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
 
-       
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list rectangle_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
 
-      
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
 
-    }
+  s->bounding_path = static_cast<Path*>(@=$2@>);
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+  @=$$@> = @=$1@>;
 
+};
 
+@q *** (3) superellipse_option_list: superellipse_option_list path_expression @>
+@ 
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list path_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list path_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->bounding_path = static_cast<Path*>(@=$2@>);
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_A numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_A} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_A numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_A numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->x_semiaxis_length = @=$3@>;
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_B numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_B} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_B numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_B numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->z_semiaxis_length = @=$3@>;
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_BETA numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_BETA} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_BETA numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list "
+           << "WITH_BETA numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->beta = @=$3@>;
+
+#if LDF_REAL_DOUBLE
+  s->superness_beta = -1.0 / (log(s->beta) / log(2));
+#else
+  s->superness_beta = -1.0 / (logf(s->beta) / logf(2));
+#endif 
+
+  if (s->gamma < 0.0)
+     s->gamma = s->beta;
+
+  if (s->superness_gamma < 0.0)
+     s->superness_gamma = s->superness_beta;
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_GAMMA numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_GAMMA} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_GAMMA numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_GAMMA "
+           << "numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->gamma = @=$3@>;
+
+/* !!START HERE:  LDF 2022.04.27.  Use natural logs and the mathematical constant for
+   ln(2).  Check if it's defined first.
+*/ 
+
+#if LDF_REAL_DOUBLE
+  s->superness_gamma = -1.0 / (log(s->gamma) / log(2));
+#else
+  s->superness_gamma = -1.0 / (logf(s->gamma) / logf(2));
+#endif 
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_SUPERNESS numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_SUPERNESS} \§numeric expression>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_SUPERNESS numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list "
+           << "WITH_SUPERNESS numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->superness_gamma = s->superness_beta = @=$3@>;
+
+#if LDF_REAL_DOUBLE
+  s->gamma = s->beta = -1.0 / (log(s->superness_beta) / (log(2.0)));
+#else
+  s->gamma = s->beta = -1.0 / (logf(s->superness_beta) / (logf(2.0)));
+#endif 
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_SUPERNESS_BETA numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_SUPERNESS\_BETA} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_SUPERNESS_BETA numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list "
+           << "WITH_SUPERNESS_BETA numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->superness_beta = @=$3@>;
+
+#if LDF_REAL_DOUBLE
+  s->beta = -1.0 / (log(s->superness_beta) / (log(2.0)));
+#else
+  s->beta = -1.0 / (logf(s->superness_beta) / (logf(2.0)));
+#endif 
+
+  if (s->superness_gamma < 0.0)
+    s->superness_gamma = s->superness_beta;
+
+  if (s->gamma < 0.0)
+    s->gamma = s->beta;
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_SUPERNESS_GAMMA numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_SUPERNESS\_GAMMA} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_SUPERNESS_GAMMA numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list "
+           << "WITH_SUPERNESS_GAMMA numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->superness_gamma = @=$3@>;
+
+#if LDF_REAL_DOUBLE
+  s->gamma = -1.0 / (log(s->superness_gamma) / (log(2.0)));
+#else
+  s->gamma = -1.0 / (logf(s->superness_gamma) / (logf(2.0)));
+#endif 
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_RESOLUTION numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_RESOLUTION} \§numeric expression>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_RESOLUTION numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_RESOLUTION "
+           << "numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  int res;
+
+#if LDF_REAL_DOUBLE
+  res = static_cast<int>(round(abs(@=$3@>)));
+#else
+  res = static_cast<int>(roundf(fabs(@=$3@>)));
+#endif 
+
+  s->resolution = res;
+
+  @=$$@> = static_cast<void*>(s);
+
+};
 
 
