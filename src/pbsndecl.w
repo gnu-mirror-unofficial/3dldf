@@ -586,6 +586,8 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     WITH_GAMMA@>@/
 @=%token <int_value>     WITH_SIGMA@>@/
 @=%token <int_value>     WITH_SUPERNESS@>@/
+@=%token <int_value>     WITH_SUPERNESS_BETA@>@/
+@=%token <int_value>     WITH_SUPERNESS_GAMMA@>@/
 @=%token <int_value>     WITH_X_SEMIAXIS@>@/
 @=%token <int_value>     WITH_Y_SEMIAXIS@>@/
 @=%token <int_value>     WITH_Z_SEMIAXIS@>@/

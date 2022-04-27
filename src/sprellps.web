@@ -203,7 +203,7 @@ Superellipse(void)
    x_semiaxis_length = 1;
    z_semiaxis_length = 1;
 
-   resolution        = 16;
+   resolution        = 32;
 
    bounding_path = static_cast<Path*>(0);
    
@@ -415,6 +415,9 @@ Superellipse::generate_path(Scanner_Node scanner_node)
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+   int status = 0;
+   int status1 = 0;
+
 @q ***** (5) @>
 @
 @<Define |Superellipse| functions@>=
@@ -454,11 +457,9 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 
     Point p;
 
-    real pi = 3.141592653589793;
+    real step = 2 * PI / resolution;
 
-    real step = (2*pi) / resolution;
-
-
+    float two_over_beta = (2.0F / beta);
 
     real x;
     real z;
@@ -466,34 +467,154 @@ Superellipse::generate_path(Scanner_Node scanner_node)
     real a = x_semiaxis_length; 
     real b = z_semiaxis_length;
 
+
     cerr << "a              == " << a << endl
          << "b              == " << b << endl 
          << "beta           == " << beta << endl 
+         << "two_over_beta  == " << two_over_beta << endl
          << "superness_beta == " << superness_beta << endl 
          << "resolution     == " << resolution << endl 
          << "step           == " << step << endl
          << endl;
 
-
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 
     Path::clear();
 
+    bool first_time = true;
 
+    int sign_x =  1;
+    int sign_z = -1;
+  
+    real cos_f;
+    real sin_f;
 
-    for (float f = -(.5 * pi); f <= .5*pi; f += step)
+    for (float f = -(1 * PI); f <= 1 * PI; f += step)
     {
+       if (!first_time)
+       {
+          operator+=("..");
+       }
+       else
+          first_time = false;
+
        cerr << "f == " << f << endl;
 
-       x = a * powf(cosf(f), (2.0F / beta));
-       cerr << "x == " << x << endl;
-       z = b * powf(sinf(f), (2.0F / beta));
-       cerr << "z == " << z << endl << endl;
+       cerr << "cosf(f) == " << cosf(f) << endl
+            << "sinf(f) == " << sinf(f) << endl
+            << "(powf(cosf(f), two_over_beta)) == " << (powf(cosf(f), two_over_beta)) << endl
+            << "powf(sinf(f), two_over_beta) == " << powf(sinf(f), two_over_beta) << endl
+            << "two_over_beta == " << two_over_beta << endl;
+
+       cos_f = cosf(f);
+    
+       if (cos_f < 0)
+       {
+          sign_x = -1;
+          cos_f *= -1;
+       }
+       else
+          sign_x = 1;
+
+       sin_f = sinf(f);
+    
+       if (sin_f < 0)
+       {
+          sign_z = -1;
+          sin_f *= -1;
+       }
+       else
+          sign_z = 1;
+
+       x = sign_x * a * powf(cos_f, two_over_beta);
+       z = sign_z * b * powf(sin_f, two_over_beta);
+
+       cerr << "x == " << x << endl
+            << "z == " << z << endl;
+  
+       status = fpclassify(static_cast<float>(x));
+       status1 = fpclassify(static_cast<float>(z));
+
+       if (   (status  == FP_NORMAL || status  == FP_ZERO) 
+           && (status1 == FP_NORMAL || status1 == FP_ZERO))
+       {
+          cerr << "x and z are both normal or zero." << endl;
+          p.set(x, 0, z);
+       }
+       else if ((status == FP_NORMAL || status == FP_ZERO) && status1 == FP_SUBNORMAL)
+       {
+          cerr << "x is normal or zero but z is subnormal.  Setting z-coordinate to 0." << endl;
+          p.set(x, 0, 0);
+       }
+       else if (status == FP_SUBNORMAL && (status1 == FP_NORMAL || status1 == FP_ZERO))
+       {
+          cerr << "z is normal or zero but x is subnormal.  Setting x-coordinate to 0." << endl;
+          p.set(0, 0, z);
+       }
+       else if (status == FP_SUBNORMAL || status == FP_SUBNORMAL)
+       {
+          cerr << "x and z are subnormal.  Setting x- and z-coordinates to 0." << endl;
+
+          p.set(0, 0, 0);
+
+       }
+       else if (status == FP_NAN && (1 - sinf(f)) < .1)
+       {
+          cerr << "status == FP_NAN but (1 - sinf(f)) < .1.  Setting x to 0." << endl;
+          p.set(0, 0, z);
+       }
+       else if (status1 == FP_NAN && (1 - cosf(f)) < .1)
+       {
+          cerr << "status1 == FP_NAN but (1 - cost(f)) < .1.  Setting z to 0." << endl;
+          p.set(x, 0, 0);
+       }
+       else if (fabs(x) < .00001 || fabs(z) < .00001)
+       {
+          cerr << "Absolute value of x and/or z is < .00001."
+               << "Setting the small cooordinate or coordinatess to 0.0." 
+               << endl;
+
+          if (fabs(x) < .00001)
+             x = 0.0;
+
+          if (fabs(z) < .00001)
+             z = 0.0;
+
+          p.set(x, 0, z);
+
+       }
+       else
+       {
+           cerr << "WARNING!  In `Superellipse::generate_path':" << endl 
+                << "x- and/or z-coordinate is not normal, subnormal or zero:" << endl;
+
+           if (status == FP_NAN)
+              cerr << "x is not a number." << endl;
+           else if (status == FP_INFINITE)
+              cerr << "x is positive or negative infinity." << endl;
+
+           cerr << "Skipping and continuing." << endl << endl; 
+
+           continue;
+       }
 
        p.set(x, 0, z);
-  
        operator+=(p);
-    }
+
+       cerr << endl;
+       
+
+    } /* |for| */
+
+@q ***** (5) @>
+@
+@<Define |Superellipse| functions@>=
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
 
 #if 0 
    show("*this:");

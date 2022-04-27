@@ -2172,12 +2172,18 @@ Added this rule.
 
   if (DEBUG)
   {
-      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_BETA numeric_expression'."
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list "
+           << "WITH_BETA numeric_expression'."
            << endl;
   }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  @=$$@> = @=$1@>;
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->beta = @=$3@>;
+
+  @=$$@> = static_cast<void*>(s);
+
 
 };
 
@@ -2206,9 +2212,55 @@ Added this rule.
   }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  @=$$@> = @=$1@>;
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->gamma = @=$3@>;
+
+  @=$$@> = static_cast<void*>(s);
 
 };
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_RESOLUTION numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_RESOLUTION} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_RESOLUTION numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_RESOLUTION "
+           << "numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  int res;
+
+#if LDF_REAL_DOUBLE
+  res = static_cast<int>(round(abs(@=$3@>)));
+#else
+  res = static_cast<int>(roundf(fabs(@=$3@>)));
+#endif 
+
+  s->resolution = res;
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
 
 @q ** (2) path secondary.  @>
 @*1 \§path secondary>.
