@@ -920,6 +920,51 @@ Superellipse::is_elliptical(Scanner_Node scanner_node) const
 
 } /* End of |Superellipse::is_elliptical| definition.  */
 
+@q ** (2) Get rectangle.  @>
+@ Get rectangle.
+@q *** (3) Declaration @>
+int
+get_rectangle(Rectangle *r, Scanner_Node scanner_node = 0);
+
+@<Declare |Superellipse| functions@>=
+
+@q *** (3) Definition @>
+@
+@<Define |Superellipse| functions@>=
+int
+Superellipse::get_rectangle(Rectangle *r, Scanner_Node scanner_node = 0)
+{
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr << "Entering `Superellipse::get_rectangle'." << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define |Superellipse| functions@>=
+
+   r = create_new<Rectangle>(0);
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Superellipse::get_rectangle' successfully with return value 0." 
+           << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return r;
+
+} /* End of |Superellipse::get_rectangle| definition */
 
 @q * (1) Putting Superellipse together.@>
 @* Putting {\bf Superellipse} together.
