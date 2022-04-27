@@ -244,6 +244,10 @@
 
 @i pcrclslc.w
 
+@q *** (3) superellipse expressions.  'psprllps.w'.  @>
+
+@i psprllps.w
+
 @q *** (3) parabola expressions.  `pprbexpr.w'.  @>
 
 @i pprbexpr.w
