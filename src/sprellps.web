@@ -458,8 +458,8 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 
     real step = 2 * PI / resolution;
 
-    float two_over_beta = (2.0F / beta);
-    float two_over_gamma = (2.0F / gamma);
+    real two_over_beta = (2.0F / beta);
+    real two_over_gamma = (2.0F / gamma);
 
     real x;
     real z;
@@ -503,7 +503,7 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 @
 @<Define |Superellipse| functions@>=
 
-    for (float t = -PI; t <= PI; t += step)
+    for (real t = -PI; t <= PI; t += step)
     {
 @q ****** (6) @>
 
@@ -540,9 +540,13 @@ Superellipse::generate_path(Scanner_Node scanner_node)
        }
        else
           sign_z = 1;
-
-       x = sign_x * a * powf(cos_t, two_over_beta);
-       z = sign_z * b * powf(sin_t, two_over_gamma);
+#if LDF_REAL_DOUBLE
+       x = sign_x * a * sgn(cos_t) * pow(fabs(cos_t), two_over_beta);
+       z = sign_z * b * sgn(sin_t) * pow(fabs(sin_t), two_over_gamma);
+#else
+       x = sign_x * a * sgn(cos_t) * powf(fabsf(cos_t), two_over_beta);
+       z = sign_z * b * sgn(sin_t) * powf(fabsf(sin_t), two_over_gamma);
+#endif 
 
 #if DEBUG_COMPILE
        if (DEBUG)
@@ -551,10 +555,9 @@ Superellipse::generate_path(Scanner_Node scanner_node)
                << "z == " << z << endl;
        }  
 #endif /* |DEBUG_COMPILE|  */@; 
-
   
-       status = fpclassify(static_cast<float>(x));
-       status1 = fpclassify(static_cast<float>(z));
+       status = fpclassify(x);
+       status1 = fpclassify(z);
 
        if (   (status  == FP_NORMAL || status  == FP_ZERO) 
            && (status1 == FP_NORMAL || status1 == FP_ZERO))
@@ -690,6 +693,38 @@ Superellipse::generate_path(Scanner_Node scanner_node)
    return 0;
 
 } /* End of |Superellipse::generate_path| definition  */
+
+@q ** (2) Sgn.  @>
+
+@ Sgn.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration @>
+
+@<Declare |Superellipse| functions@>=
+static
+int 
+sgn(real r);
+
+@q **** (4) Definition @>
+@
+@<Define |Superellipse| functions@>=
+int 
+Superellipse::sgn(real r)
+{
+   if (r < 0)
+      return -1;
+   else if (r == 0)
+      return 0;
+   else
+      return 1;
+}
+
 
 @q ** (2) Show.  @>
 
