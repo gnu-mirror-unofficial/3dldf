@@ -3251,6 +3251,34 @@ Added this rule.
 
 };
 
+@q ***** (5) path_assignment --> path_variable := superellipse_expression.@>   
+
+@*4 \§path assignment> $\longrightarrow$ \§path variable> 
+\.{:=} \§superellipse expression>. 
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+ 
+@=path_assignment: path_variable ASSIGN superellipse_expression@>
+{
+  
+  Path* p = static_cast<Path*>(@=$3@>);
+
+  Int_Void_Ptr ivp = assign_simple<Path>(static_cast<Scanner_Node>(parameter),
+                                         "Path",
+                                         @=$1@>,
+                                         p);
+
+  @=$$@> = ivp.v;
+
+};
+
+
 @q ***** (5) path_assignment --> path_variable := rectangle_expression.@>   
 
 @*4 \§path assignment> $\longrightarrow$ \§path variable> 
