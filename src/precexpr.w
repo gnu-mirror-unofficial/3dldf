@@ -545,9 +545,9 @@ Added this rule.
 
 };
 
-@q *** (3) rectangle_primary --> GET_RECTANGLE path_expression  @>
+@q *** (3) rectangle_primary --> GET_RECTANGLE superellipse_expression  @>
 
-@*2 \§rectangle primary> $\longrightarrow$ \.{GET\_RECTANGLE} \§path expression>.
+@*2 \§rectangle primary> $\longrightarrow$ \.{GET\_RECTANGLE} \§superellipse expression>.
 \initials{LDF 2022.04.27.}
 
 \LOG
@@ -556,7 +556,7 @@ Added this rule.
 \ENDLOG
 
 @<Define rules@>=
-@=rectangle_primary: GET_RECTANGLE path_expression@>@/
+@=rectangle_primary: GET_RECTANGLE superellipse_expression@>@/
 {
 @q **** (4) @>
 
@@ -567,7 +567,7 @@ Added this rule.
   if (DEBUG) 
   {
       cerr_strm << thread_name << "*** Parser:  "
-                << "'rectangle_primary: GET_RECTANGLE path_expression'.";
+                << "'rectangle_primary: GET_RECTANGLE superellipse_expression'.";
 		          
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -579,15 +579,15 @@ Added this rule.
 
   Rectangle *r = create_new<Rectangle>(0);
 
-  Path *p = static_cast<Path*>(@=$2@>);
+  Superellipse *p = static_cast<Superellipse*>(@=$2@>);
 
   if (p == 0)
   {
       cerr_strm << thread_name << "WARNING:  In parser, rule"
                 << endl 
-                << "'rectangle_primary: GET_RECTANGLE path_expression':"
+                << "'rectangle_primary: GET_RECTANGLE superellipse_expression':"
                 << endl 
-                << "`path' is NULL.  Can't get `rectangle'.  Continuing.";
+                << "`superellipse' is NULL.  Can't get `rectangle'.  Continuing.";
         	          
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -602,18 +602,18 @@ Added this rule.
       {
           cerr_strm << thread_name << "In parser, rule"
                     << endl 
-                    << "'rectangle_primary: GET_RECTANGLE path_expression':"
+                    << "'rectangle_primary: GET_RECTANGLE superellipse_expression':"
                     << endl;
 
           if (p->is_superellipse()) 
-             cerr_strm << "`path' is `superellipse'." << endl;
+             cerr_strm << "`superellipse' is `superellipse'." << endl;
           else 
-             cerr_strm << "`path' is not `superellipse'." << endl;
+             cerr_strm << "`superellipse' is not `superellipse'." << endl;
 
           if (p->is_superelliptical()) 
-             cerr_strm << "`path' is \"superelliptical\"." << endl;
+             cerr_strm << "`superellipse' is \"superelliptical\"." << endl;
           else 
-             cerr_strm << "`path' is not \"superelliptical\"." << endl;
+             cerr_strm << "`superellipse' is not \"superelliptical\"." << endl;
             	          
           log_message(cerr_strm);
           cerr_message(cerr_strm);
@@ -629,9 +629,9 @@ Added this rule.
       {
           cerr_strm << thread_name << "In parser, rule"
                     << endl 
-                    << "'rectangle_primary: GET_RECTANGLE path_expression':"
+                    << "'rectangle_primary: GET_RECTANGLE superellipse_expression':"
                     << endl 
-                    << "`path' is neither `superellipse' nor \"superelliptical\".";
+                    << "`superellipse' is neither `superellipse' nor \"superelliptical\".";
             	          
           log_message(cerr_strm);
           cerr_message(cerr_strm);

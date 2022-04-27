@@ -4,16 +4,6 @@ verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
 
 input "plain.lmc";
 
-path q[];
-
-q2 := superellipse with_resolution 64 with_beta .5 with_gamma 1.5 with_a 2 with_b 3;
-
-rectangle r[];
-
-r2 := get_rectangle q2;
-
-end;
-
 pen medium_pen;
 medium_pen := pencircle scaled (.5mm, .5mm, .5mm);
 pickup medium_pen;
@@ -30,94 +20,49 @@ frame :=    (-.5frame_wd, 0, -.5frame_ht) -- (.5frame_wd, 0, -.5frame_ht) -- (.5
 
 beginfig(0);
 
-
-
-  
   numeric n;
   
   pickup medium_pen;
 
   draw frame;
   
-  path q[];
+
+
   rectangle r[];
+  superellipse s[];
 
-  %dotlabel.bot("(0, 0)", origin);
 
-  r0 := unit_rectangle scaled (6cm, 0, 6cm);
 
   point p[];
 
-%  draw r0;
-
-  for i = 0 upto 3:
-    p[i] := get_point (i) r0;
-  endfor;
-  
-
-
-
-% dotlabel.bot("$p_0$", p0);
-  % dotlabel.bot("$p_1$", p1);
-  % dotlabel.top("$p_2$", p2);
-  % dotlabel.top("$p_3$", p3);
-
-  n := pi / 16;
-
-
-  for i = -180 step 10 until 180:
-    q0 += ((i / 50), 0, cosd i);
-    q1 += ((i / 50), 0, sind i);
-  endfor;
-
-  q0 += ..;
-  q1 += ..;
-  
-  n := size q0 - 1;
-
-  % for i = 0 step 4 until n:
-  %   dotlabel.top(decimal i, get_point (i) q0);
-  % endfor;
-  
-  %draw q0 with_color blue;
-
-  n := size q1 - 1;
-
-  % for i = 0 step 4 until n:
-  %   dotlabel.top(decimal i, get_point (i) q1);
-  % endfor;
-  
-  %draw q1 with_color green;
-  
-  %q2 := superellipse with_resolution 64 with_superness .75 with_a 2 with_b 3;
-
-  q2 := superellipse with_resolution 64 with_beta .5 with_gamma 1.5 with_a 2 with_b 3;
-
-  draw q2 with_color red;
-
-
-  n := size q2 - 1;
-
-  for i = 0 step 4 until n:
-    label.top(decimal i, get_point (i) q2);
-  endfor;
-  
-  % message "q2:";
-  % pause;
-  % show q2;
-  % pause;
+  s0 := get_superellipse with_resolution 64 with_superness .75 with_a 2 with_b 3;
 
   rectangle r[];
-  r1 := get_rectangle q2;
+  r0 := get_rectangle s0;
 
-  message "r1:";
-  show r1;
-
+  message "r0:";
+  show r0;
   
 endfig with_projection parallel_x_z;
-
 end_mp;
 end;
+
+%% !! START HERE: Define rules for these commands.
+
+  n := size s0 - 1;
+
+  %draw s0 with_color red;
+
+
+
+  for i = 0 step 4 until n:
+    label.top(decimal i, get_point (i) s0);
+  endfor;
+  
+
+
+
+
 
 %r := (unit_rectangle rotated (45, 45)) shifted (2, 1, 3);
 
