@@ -452,7 +452,7 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 @
 @<Define |Superellipse| functions@>=
 
-    Point p;
+    Point p0;
 
     real step = 2 * PI / resolution;
 
@@ -464,19 +464,21 @@ Superellipse::generate_path(Scanner_Node scanner_node)
     real a = x_semiaxis_length; 
     real b = z_semiaxis_length;
 
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+        cerr << "a              == " << a << endl
+             << "b              == " << b << endl 
+             << "beta           == " << beta << endl 
+             << "two_over_beta  == " << two_over_beta << endl
+             << "superness_beta == " << superness_beta << endl 
+             << "resolution     == " << resolution << endl 
+             << "step           == " << step << endl
+             << endl;
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
-    cerr << "a              == " << a << endl
-         << "b              == " << b << endl 
-         << "beta           == " << beta << endl 
-         << "two_over_beta  == " << two_over_beta << endl
-         << "superness_beta == " << superness_beta << endl 
-         << "resolution     == " << resolution << endl 
-         << "step           == " << step << endl
-         << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
+@q ***** (5) @>
 
     Path::clear();
 
@@ -488,22 +490,28 @@ getchar();
     real cos_f;
     real sin_f;
 
-    for (float f = -(1 * PI); f <= 1 * PI; f += step)
+    operator+=("..");
+
+@q ***** (5) @>
+@
+@<Define |Superellipse| functions@>=
+
+    for (float f = -PI; f <= PI; f += step)
     {
-       if (!first_time)
-       {
-          operator+=("..");
-       }
-       else
-          first_time = false;
+@q ****** (6) @>
 
-       cerr << "f == " << f << endl;
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << "f == " << f << endl
+                << "cosf(f) == " << cosf(f) << endl
+                << "sinf(f) == " << sinf(f) << endl
+                << "(powf(cosf(f), two_over_beta)) == " << (powf(cosf(f), two_over_beta)) << endl
+                << "powf(sinf(f), two_over_beta) == " << powf(sinf(f), two_over_beta) << endl
+                << "two_over_beta == " << two_over_beta << endl;
 
-       cerr << "cosf(f) == " << cosf(f) << endl
-            << "sinf(f) == " << sinf(f) << endl
-            << "(powf(cosf(f), two_over_beta)) == " << (powf(cosf(f), two_over_beta)) << endl
-            << "powf(sinf(f), two_over_beta) == " << powf(sinf(f), two_over_beta) << endl
-            << "two_over_beta == " << two_over_beta << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
        cos_f = cosf(f);
     
@@ -528,8 +536,14 @@ getchar();
        x = sign_x * a * powf(cos_f, two_over_beta);
        z = sign_z * b * powf(sin_f, two_over_beta);
 
-       cerr << "x == " << x << endl
-            << "z == " << z << endl;
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          cerr << "x == " << x << endl
+               << "z == " << z << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
   
        status = fpclassify(static_cast<float>(x));
        status1 = fpclassify(static_cast<float>(z));
@@ -537,50 +551,81 @@ getchar();
        if (   (status  == FP_NORMAL || status  == FP_ZERO) 
            && (status1 == FP_NORMAL || status1 == FP_ZERO))
        {
-          cerr << "x and z are both normal or zero." << endl;
-          p.set(x, 0, z);
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+             cerr << "x and z are both normal or zero." << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
        }
        else if ((status == FP_NORMAL || status == FP_ZERO) && status1 == FP_SUBNORMAL)
        {
-          cerr << "x is normal or zero but z is subnormal.  Setting z-coordinate to 0." << endl;
-          p.set(x, 0, 0);
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+             cerr << "x is normal or zero but z is subnormal.  Setting z to 0.0." << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+          z = 0.0;
        }
        else if (status == FP_SUBNORMAL && (status1 == FP_NORMAL || status1 == FP_ZERO))
        {
-          cerr << "z is normal or zero but x is subnormal.  Setting x-coordinate to 0." << endl;
-          p.set(0, 0, z);
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+             cerr << "z is normal or zero but x is subnormal.  Setting x-coordinate to 0.0." << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
+          x = 0.0;
        }
        else if (status == FP_SUBNORMAL || status == FP_SUBNORMAL)
        {
-          cerr << "x and z are subnormal.  Setting x- and z-coordinates to 0." << endl;
+#if DEBUG_COMPILE
+          if (DEBUG) 
+          { 
+             cerr << "x and z are subnormal.  Setting x- and z-coordinates to 0.0." << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
 
-          p.set(0, 0, 0);
-
+          x = z = 0.0;
        }
        else if (status == FP_NAN && (1 - sinf(f)) < .1)
        {
-          cerr << "status == FP_NAN but (1 - sinf(f)) < .1.  Setting x to 0." << endl;
-          p.set(0, 0, z);
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+             cerr << "status == FP_NAN but (1 - sinf(f)) < .1.  Setting x to 0.0." << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
+          x = 0.0;
        }
        else if (status1 == FP_NAN && (1 - cosf(f)) < .1)
        {
-          cerr << "status1 == FP_NAN but (1 - cost(f)) < .1.  Setting z to 0." << endl;
-          p.set(x, 0, 0);
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+             cerr << "status1 == FP_NAN but (1 - cost(f)) < .1.  Setting z to 0.0." << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
+          z = 0.0;
        }
        else if (fabs(x) < .00001 || fabs(z) < .00001)
        {
-          cerr << "Absolute value of x and/or z is < .00001."
-               << "Setting the small cooordinate or coordinatess to 0.0." 
-               << endl;
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+             cerr << "Absolute value of x and/or z is < .00001."
+                  << "Setting the small cooordinate or coordinatess to 0.0." 
+                  << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
 
           if (fabs(x) < .00001)
              x = 0.0;
 
           if (fabs(z) < .00001)
              z = 0.0;
-
-          p.set(x, 0, z);
-
        }
        else
        {
@@ -597,21 +642,25 @@ getchar();
            continue;
        }
 
-       p.set(x, 0, z);
-       operator+=(p);
+       p0.set(x, 0, z);
+       operator+=(p0); 
+       set_cycle();
 
-       cerr << endl;
-       
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@;   
+
+@q ****** (6) @>
 
     } /* |for| */
+
 
 @q ***** (5) @>
 @
 @<Define |Superellipse| functions@>=
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
 
 #if 0 
    show("*this:");
