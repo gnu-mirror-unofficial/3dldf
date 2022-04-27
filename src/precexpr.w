@@ -151,7 +151,7 @@ Changed \§numeric expression> to \§numeric secondary> and
 
   @<Common declarations for rules@>@; 
 
-  #if DEBUG_COMPILE
+#if DEBUG_COMPILE
   DEBUG = false; /* |true| */ @; 
     if (DEBUG) 
       {
@@ -544,6 +544,105 @@ Added this rule.
    delete p3;
 
 };
+
+@q *** (3) rectangle_primary --> GET_RECTANGLE path_expression  @>
+
+@*2 \§rectangle primary> $\longrightarrow$ \.{GET\_RECTANGLE} \§path expression>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=rectangle_primary: GET_RECTANGLE path_expression@>@/
+{
+@q **** (4) @>
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG) 
+  {
+      cerr_strm << thread_name << "*** Parser:  "
+                << "'rectangle_primary: GET_RECTANGLE path_expression'.";
+		          
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+  }
+#endif /* |DEBUG_COMPILE|  */
+
+@q **** (4) @>
+
+  Rectangle *r = 0;
+
+  Path *p = static_cast<Path*>(@=$2@>);
+
+  if (p == 0)
+  {
+      cerr_strm << thread_name << "WARNING:  In parser, rule"
+                << endl 
+                << "'rectangle_primary: GET_RECTANGLE path_expression':"
+                << endl 
+                << "`path' is NULL.  Can't get `rectangle'.  Continuing.";
+        	          
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+     goto END_GET_RECTANGLE_RULE;
+  }
+
+  if (p->is_superellipse())
+  {
+      if (DEBUG) 
+      {
+          cerr_strm << thread_name << "In parser, rule"
+                    << endl 
+                    << "'rectangle_primary: GET_RECTANGLE path_expression':"
+                    << endl 
+                    << "`path' is `superellipse'.";
+            	          
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+      }   
+
+  }  /* |if (p->is_superellipse())| */
+
+@q **** (4) @>
+
+  else
+  {
+      if (DEBUG) 
+      {
+          cerr_strm << thread_name << "In parser, rule"
+                    << endl 
+                    << "'rectangle_primary: GET_RECTANGLE path_expression':"
+                    << endl 
+                    << "`path' is not `superellipse'.";
+            	          
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+      }   
+
+  }  /* |else| */
+  
+@q **** (4) @>
+
+  delete p;
+  p = 0;
+
+END_GET_RECTANGLE_RULE:
+
+  @=$$@> = static_cast<void*>(r); 
+
+};
+
 
 @q ** (2) rectangle secondary.  @>
 @*1 \§rectangle secondary>.
