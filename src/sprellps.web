@@ -433,7 +433,7 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 @q ***** (5) @>
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
    if (DEBUG)
    { 
       cerr << "Entering `Superellipse::generate_path'."
@@ -788,7 +788,7 @@ Superellipse::show(string text, char coords,
 @q ***** (5) @>
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
    if (DEBUG)
    { 
       cerr << "Entering `Superellipse::show'."
@@ -976,9 +976,59 @@ Superellipse::get_rectangle(Rectangle *r, Scanner_Node scanner_node)
 @
 @<Define |Superellipse| functions@>=
 
-   r = create_new<Rectangle>(0);
+   int s = points.size();
+
+   if (s < 4)
+   {
+       cerr << "ERROR!  In `Superellipse::get_rectangle':" << endl 
+            << "`points.size()' < 4:  `points.size()' == " << s
+            << endl 
+            << "Can't get `Rectangle'." << endl 
+            << "Exiting function unsuccessfully with return value 1."
+            << endl;
+
+       return 1;
+   }
 
 @q **** (4) @>
+@
+@<Define |Superellipse| functions@>=
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr << "`points.size()' == " << s << " (>= 4)" 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+@q **** (4) @>
+@
+@<Define |Superellipse| functions@>=
+
+   Point p0 = *points[0];
+   Point p1 = *points[s/4];
+   Point p2 = *points[s/2];
+   Point p3 = *points[3*s/4];
+
+   Point p4 = (p0 - center);
+   p4.shift(p1);
+
+   Point p5 = (p1 - center);
+   p5.shift(p2);
+
+   Point p6 = p5;
+   p6.rotate(p0, p2, 180);
+
+   Point p7 = p6;
+   p7.rotate(p1, p3, 180);
+
+   r->set(p4, p5, p6, p7);
+
+@q **** (4) @>
+@
+@<Define |Superellipse| functions@>=
 
 #if DEBUG_COMPILE
    if (DEBUG)
