@@ -3789,6 +3789,29 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
+@q *** (3) superellipse variable --> variable SUPERELLIPSE.@>
+@*2 \§superellipse variable> $\longrightarrow$ \§variable> 
+\.{SUPERELLIPSE}.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> superellipse_variable@>@/
+
+@
+@<Define rules@>= 
+@=superellipse_variable: variable SUPERELLIPSE@>
+{
+   @=$$@> = variable_decl_func(@=$1@>, 
+                               @=$2@>, 
+                               SUPERELLIPSE,
+                               parameter);
+};
+
 @q ***  (3) rectangle variable --> variable RECTANGLE.  @>
 @*2 \§rectangle variable> $\longrightarrow$ \§variable> 
 `\.{rectangle}'.

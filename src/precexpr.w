@@ -577,7 +577,7 @@ Added this rule.
 
 @q **** (4) @>
 
-  Rectangle *r = 0;
+  Rectangle *r = create_new<Rectangle>(0);
 
   Path *p = static_cast<Path*>(@=$2@>);
 
@@ -596,26 +596,34 @@ Added this rule.
      goto END_GET_RECTANGLE_RULE;
   }
 
-  if (p->is_superellipse())
+  if (p->is_superellipse() || p->is_superelliptical())
   {
       if (DEBUG) 
       {
           cerr_strm << thread_name << "In parser, rule"
                     << endl 
                     << "'rectangle_primary: GET_RECTANGLE path_expression':"
-                    << endl 
-                    << "`path' is `superellipse'.";
+                    << endl;
+
+          if (p->is_superellipse()) 
+             cerr_strm << "`path' is `superellipse'." << endl;
+          else 
+             cerr_strm << "`path' is not `superellipse'." << endl;
+
+          if (p->is_superelliptical()) 
+             cerr_strm << "`path' is \"superelliptical\"." << endl;
+          else 
+             cerr_strm << "`path' is not \"superelliptical\"." << endl;
             	          
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
       }   
 
-  }  /* |if (p->is_superellipse())| */
+  }  /* |if| */
 
 @q **** (4) @>
-
-  else
+  else 
   {
       if (DEBUG) 
       {
@@ -623,7 +631,7 @@ Added this rule.
                     << endl 
                     << "'rectangle_primary: GET_RECTANGLE path_expression':"
                     << endl 
-                    << "`path' is not `superellipse'.";
+                    << "`path' is neither `superellipse' nor \"superelliptical\".";
             	          
           log_message(cerr_strm);
           cerr_message(cerr_strm);
@@ -631,7 +639,7 @@ Added this rule.
       }   
 
   }  /* |else| */
-  
+
 @q **** (4) @>
 
   delete p;

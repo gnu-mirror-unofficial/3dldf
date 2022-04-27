@@ -3109,6 +3109,9 @@ int
 shape_decl_func(Scanner_Node, int, Helix* dummy = 0);
 
 int
+shape_decl_func(Scanner_Node, int, Superellipse* dummy = 0);
+
+int
 shape_decl_func(Scanner_Node, int, Cone* dummy = 0);
 
 int
@@ -3568,6 +3571,12 @@ assign_simple(Scanner_Node scanner_node,
               const string type_name,
               void* var,
               const Ellipse* expr);
+
+Int_Void_Ptr
+assign_simple(Scanner_Node scanner_node,
+              const string type_name,
+              void* var,
+              const Superellipse* expr);
 
 Int_Void_Ptr
 assign_simple(Scanner_Node scanner_node,
@@ -8394,6 +8403,9 @@ int
 reverse_func(void* v, void* parameter, Helix* c);
 
 int
+reverse_func(void* v, void* parameter, Superellipse* c);
+
+int
 reverse_func(void* v, void* parameter, Cuboid* c);
 
 int
@@ -11562,6 +11574,10 @@ show_func(Cone* c, string text = "cone", void* parameter = 0);
 
 int
 show_func(Helix* c, string text = "helix", void* parameter = 0);
+
+
+int
+show_func(Superellipse* c, string text = "superellipse", void* parameter = 0);
 
 int
 show_func(Nurb* c, string text = "nurb", void* parameter = 0);

@@ -1631,6 +1631,30 @@ Ellipse::is_quartic() const
   return false;
 }
 
+@q ** (2) Is |Superellipse|.@> 
+@  Is {\bf Superellipse}.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this function.
+\ENDLOG
+
+@<Declare |Ellipse| functions@>=
+virtual
+bool
+is_superellipse(void) const;
+
+@
+@<Define |Ellipse| functions@>=
+bool
+Ellipse::is_superellipse(void) const
+{
+   cerr << "In Ellipse::is_superellipse." << endl;
+
+   return false;
+}
+
 @q ** Solve.@>
 @*1 Solve.
 @^\cfunc{Ellipse}{solve}@>

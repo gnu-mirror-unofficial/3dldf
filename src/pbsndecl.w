@@ -571,6 +571,7 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> CIRCLE@>@/
 @=%token <pointer_value> CONIC_SECTION_LATTICE@>@/
 @=%token <pointer_value> HELIX@>@/
+@=%token <pointer_value> SUPERELLIPSE@>@/
 @=%token <pointer_value> CUBOID@>@/
 @=%token <pointer_value> POLYHEDRON@>@/
 @=%token <pointer_value> CONE@>@/
@@ -579,7 +580,7 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> SPHERE@>@/
 @=%token <pointer_value> SPHERE_DEVELOPMENT@>@/
 
-@=%token <int_value>     SUPERELLIPSE@>@/
+@=%token <int_value>     GET_SUPERELLIPSE@>@/
 @=%token <int_value>     WITH_A@>@/
 @=%token <int_value>     WITH_B@>@/
 @=%token <int_value>     WITH_BETA@>@/
@@ -897,6 +898,7 @@ Added token declaration for |SPHERE_DEVELOPMENT_DECLARATOR|
 @=%token <string_value> CIRCLE_DECLARATOR@>@/
 @=%token <string_value> CONIC_SECTION_LATTICE_DECLARATOR@>@/
 @=%token <string_value> HELIX_DECLARATOR@>@/
+@=%token <string_value> SUPERELLIPSE_DECLARATOR@>@/
 @=%token <string_value> CUBOID_DECLARATOR@>@/
 @=%token <string_value> POLYHEDRON_DECLARATOR@>@/
 @=%token <string_value> CONE_DECLARATOR@>@/
@@ -1613,10 +1615,10 @@ Added token declarations for
 @=%token <int_value> IS_REG_POLYGON@>@/
 @=%token <int_value> IS_RECTANGLE@>@/
 @=%token <int_value> IS_ELLIPSE@>@/
-@=%token <int_value> IS_SUPERELLIPSE@>@/
 @=%token <int_value> IS_CIRCLE@>@/
 @=%token <int_value> IS_CONIC_SECTION_LATTICE@>@/
 @=%token <int_value> IS_HELIX@>@/
+@=%token <int_value> IS_SUPERELLIPSE@>@/
 @=%token <int_value> IS_CUBOID@>@/
 @=%token <int_value> IS_POLYHEDRON@>@/
 

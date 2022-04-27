@@ -3268,6 +3268,34 @@ Replaced code with a call to |Scan_Parse::show_func|.
     @=$$@> = static_cast<void*>(0);
 };
 
+
+@q **** (4) command --> SHOW superellipse_expression@>
+
+@*3 \§command> $\longrightarrow$ \.{SHOW}
+\§superellipse expression>.
+\initials{LDF 2005.05.19.}
+
+\LOG
+\initials{LDF 2005.05.19.}
+Added this rule.
+
+\initials{LDF 2005.10.31.}
+Replaced code with a call to |Scan_Parse::show_func|.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: SHOW superellipse_expression@>@/
+{
+    Scan_Parse::show_func<Superellipse>(static_cast<Superellipse*>(@=$2@>),
+                                      "superellipse",
+                                      parameter);
+
+    @=$$@> = static_cast<void*>(0);
+};
+
 @q **** (4) command --> SHOW rectangle_expression@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}

@@ -1,6 +1,6 @@
-@q *** (3) path primary: SUPERELLIPSE superellipse_option_list @>
+@q *** (3) superellipse primary: SUPERELLIPSE superellipse_option_list @>
 
-@*2 \§path primary> $\longrightarrow$ \.{SUPERELLIPSE} \§superellipse option list>.
+@*2 \§superellipse primary> $\longrightarrow$ \.{SUPERELLIPSE} \§superellipse option list>.
 \initials{LDF 2022.04.25.}
 
 \LOG
@@ -9,7 +9,7 @@ Added this rule.
 \ENDLOG
 
 @<Define rules@>= 
-@=path_primary: SUPERELLIPSE superellipse_option_list@>
+@=superellipse_primary: SUPERELLIPSE superellipse_option_list@>
 {
 @q **** (4) @>
         
@@ -21,7 +21,7 @@ Added this rule.
 
    if (DEBUG)
    { 
-      cerr << "*** Parser:  Rule `path_primary: SUPERELLIPSE superellipse_option_list'."
+      cerr << "*** Parser:  Rule `superellipse_primary: SUPERELLIPSE superellipse_option_list'."
            << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -35,7 +35,7 @@ Added this rule.
    if (status != 0)
    {
       cerr_strm << thread_name << "ERROR!  In parser, rule "
-                << "`path_primary: SUPERELLIPSE superellipse_option_list':"
+                << "`superellipse_primary: SUPERELLIPSE superellipse_option_list':"
                 << endl 
                 << "`Superellipse::generate_path' failed, returning " << status << "."
                 << endl 
@@ -53,7 +53,7 @@ Added this rule.
    else if (DEBUG)
    { 
        cerr_strm << thread_name << "In parser, rule "
-                 << "`path_primary: SUPERELLIPSE superellipse_option_list':"
+                 << "`superellipse_primary: SUPERELLIPSE superellipse_option_list':"
                  << endl 
                  << "`Superellipse::generate_path' succeeded, returning 0.";
 
@@ -108,62 +108,6 @@ Added this rule.
   Superellipse *s = create_new<Superellipse>(0);   
 
   @=$$@> = static_cast<void*>(s);
-
-};
-
-@q *** (3) superellipse_option_list: superellipse_option_list rectangle_expression @>
-@
-\LOG
-\initials{LDF 2022.04.26.}
-Added this rule.
-\ENDLOG 
-
-@<Define rules@>=
-@=superellipse_option_list: superellipse_option_list rectangle_expression @>@/
-{
-#if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
-
-  if (DEBUG)
-  {
-      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list rectangle_expression'."
-           << endl;
-  }
-#endif /* |DEBUG_COMPILE|  */@;
-
-  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
-
-  s->bounding_path = static_cast<Path*>(@=$2@>);
-
-  @=$$@> = @=$1@>;
-
-};
-
-@q *** (3) superellipse_option_list: superellipse_option_list path_expression @>
-@ 
-\LOG
-\initials{LDF 2022.04.26.}
-Added this rule.
-\ENDLOG 
-
-@<Define rules@>=
-@=superellipse_option_list: superellipse_option_list path_expression @>@/
-{
-#if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
-
-  if (DEBUG)
-  {
-      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list path_expression'."
-           << endl;
-  }
-#endif /* |DEBUG_COMPILE|  */@;
-
-  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
-
-  s->bounding_path = static_cast<Path*>(@=$2@>);
-
-  @=$$@> = @=$1@>;
 
 };
 

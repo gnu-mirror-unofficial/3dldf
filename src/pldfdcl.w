@@ -552,6 +552,19 @@ Removed debugging code.
 @=declaration: helix_declaration@>
 ;
 
+
+@q *** (3) declaration --> superellipse declaration.  @>
+@*2 \§declaration> $\longrightarrow$ |superellipse_declaration|.  
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=declaration: superellipse_declaration@>
+;
+
 @q *** (3) declaration --> triangle_declaration.  @>
 @*2 \§declaration> $\longrightarrow$ |triangle_declaration|.  
 
@@ -2945,6 +2958,22 @@ Removed debugging code.
  
 };
 
+@q ***** (5) superellipse_declaration.  @>
+@*4 {\bf superellipse\_declaration}.
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=superellipse_declaration: SUPERELLIPSE_DECLARATOR declaration_list@>
+{
+     Scan_Parse::shape_decl_func<Superellipse>(static_cast<Scanner_Node>(parameter), SUPERELLIPSE);
+ 
+};
+
+
 @q ***** (5) cone_declaration.  @>
 @*4 {\bf cone\_declaration}.
 \initials{LDF 2005.05.25.}
@@ -5286,6 +5315,23 @@ Removed debugging code.
 {
 
    @=$$@> = HELIX_VECTOR_DECLARATOR;
+
+};
+
+@q ** (2) any_declarator --> SUPERELLIPSE_DECLARATOR.@> 
+@*1 \§any declarator> $\longrightarrow$ \.{SUPERELLIPSE\_DECLARATOR}.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=any_declarator: SUPERELLIPSE_DECLARATOR@>
+{
+
+   @=$$@> = SUPERELLIPSE_DECLARATOR;
 
 };
 

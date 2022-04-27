@@ -212,6 +212,19 @@ Superellipse(void)
    return;
 }
 
+@q ** (2) Destructor.  @>
+@
+@<Declare |Superellipse| functions@>=
+~Superellipse(void);
+
+
+@
+@<Define |Superellipse| functions@>=
+Superellipse::~Superellipse(void)
+{
+   return;
+}
+
 @q *** (3) Is |Superellipse|.@> 
 @  Is {\bf Superellipse}.
 \initials{LDF 2022.04.26.}
@@ -223,11 +236,23 @@ Added this function.
 
 @q *** (3) @>
 
+@q **** (4) @>
+
 @<Declare |Superellipse| functions@>=
 virtual
-inline
 bool
-is_superellipse(void) const {return true;}
+is_superellipse(void) const;
+
+@q **** (4) @>
+@
+@<Define |Superellipse| functions@>=
+bool
+Superellipse::is_superellipse(void) const
+{
+   cerr << "In Superellipse::is_superellipse." << endl;
+
+   return true;
+}
 
 @q ** (2) Is |Superelliptical|.@> 
 @  Is {\bf Superelliptical}.
@@ -922,17 +947,19 @@ Superellipse::is_elliptical(Scanner_Node scanner_node) const
 
 @q ** (2) Get rectangle.  @>
 @ Get rectangle.
+
 @q *** (3) Declaration @>
+
+@<Declare |Superellipse| functions@>=
 int
 get_rectangle(Rectangle *r, Scanner_Node scanner_node = 0);
 
-@<Declare |Superellipse| functions@>=
 
 @q *** (3) Definition @>
 @
 @<Define |Superellipse| functions@>=
 int
-Superellipse::get_rectangle(Rectangle *r, Scanner_Node scanner_node = 0)
+Superellipse::get_rectangle(Rectangle *r, Scanner_Node scanner_node)
 {
 @q **** (4) @>
 
@@ -962,7 +989,7 @@ Superellipse::get_rectangle(Rectangle *r, Scanner_Node scanner_node = 0)
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   return r;
+   return 0;
 
 } /* End of |Superellipse::get_rectangle| definition */
 

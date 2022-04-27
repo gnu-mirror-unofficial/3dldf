@@ -617,6 +617,21 @@ and defined |Nurb::clear|.
 
        }  /* |else if (type == NURB)|  */
 
+
+@
+@<Define |Id_Map_Entry_Type| functions@>=
+
+   else if (type == SUPERELLIPSE)
+       {
+        Superellipse* n = static_cast<Superellipse*>(object);
+        if (n != static_cast<Superellipse*>(0))
+          {
+            delete n;
+            n = static_cast<Superellipse*>(0);
+          }
+
+       }  /* |else if (type == SUPERELLIPSE)|  */
+
 @q ****** (6) Handle |Conic_Section_Lattices|.@>  
 @ Handle |Conic_Section_Lattices|.
 \initials{LDF 2007.07.29.}

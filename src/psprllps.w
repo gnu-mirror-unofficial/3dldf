@@ -226,6 +226,439 @@ Added this rule.
 
 };
 
+@q *** (3) superellipse primary: GET_SUPERELLIPSE superellipse_option_list @>
+
+@*2 \§superellipse primary> $\longrightarrow$ \.{GET\_SUPERELLIPSE} \§superellipse option list>.
+\initials{LDF 2022.04.25.}
+
+\LOG
+\initials{LDF 2022.04.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=superellipse_primary: GET_SUPERELLIPSE superellipse_option_list@>
+{
+@q **** (4) @>
+        
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+
+   DEBUG = true; /* |false| */
+
+   if (DEBUG)
+   { 
+      cerr << "*** Parser:  Rule `superellipse_primary: GET_SUPERELLIPSE superellipse_option_list'."
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+   Superellipse *s = static_cast<Superellipse*>(@=$2@>);
+
+   status = s->generate_path(scanner_node); 
+ 
+   if (status != 0)
+   {
+      cerr_strm << thread_name << "ERROR!  In parser, rule "
+                << "`superellipse_primary: GET_SUPERELLIPSE superellipse_option_list':"
+                << endl 
+                << "`Superellipse::generate_path' failed, returning " << status << "."
+                << endl 
+                << "Failed to generate superellipse path.  Continuing.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  /* |if (status != 0)|  */
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr_strm << thread_name << "In parser, rule "
+                 << "`superellipse_primary: GET_SUPERELLIPSE superellipse_option_list':"
+                 << endl 
+                 << "`Superellipse::generate_path' succeeded, returning 0.";
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+   @=$$@> = static_cast<void*>(s);
+
+@q **** (4) @>
+
+};
+
+@q ** (2) superellipse_option_list@>
+
+@ \§superellipse option list>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> superellipse_option_list@>
+
+@q *** (3) superellipse_option_list: /* EMPTY */ @>
+@
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: /* Empty  */@>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: /* Empty */'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = create_new<Superellipse>(0);   
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_A numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_A} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_A numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_A numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->x_semiaxis_length = @=$3@>;
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_B numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_B} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_B numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_B numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->z_semiaxis_length = @=$3@>;
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_BETA numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_BETA} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_BETA numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list "
+           << "WITH_BETA numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->beta = @=$3@>;
+
+#if LDF_REAL_DOUBLE
+  s->superness_beta = -1.0 / (log(s->beta) / log(2));
+#else
+  s->superness_beta = -1.0 / (logf(s->beta) / logf(2));
+#endif 
+
+  if (s->gamma < 0.0)
+     s->gamma = s->beta;
+
+  if (s->superness_gamma < 0.0)
+     s->superness_gamma = s->superness_beta;
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_GAMMA numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_GAMMA} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_GAMMA numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_GAMMA "
+           << "numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->gamma = @=$3@>;
+
+/* !!START HERE:  LDF 2022.04.27.  Use natural logs and the mathematical constant for
+   ln(2).  Check if it's defined first.
+*/ 
+
+#if LDF_REAL_DOUBLE
+  s->superness_gamma = -1.0 / (log(s->gamma) / log(2));
+#else
+  s->superness_gamma = -1.0 / (logf(s->gamma) / logf(2));
+#endif 
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_SUPERNESS numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_SUPERNESS} \§numeric expression>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_SUPERNESS numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list "
+           << "WITH_SUPERNESS numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->superness_gamma = s->superness_beta = @=$3@>;
+
+#if LDF_REAL_DOUBLE
+  s->gamma = s->beta = -1.0 / (log(s->superness_beta) / (log(2.0)));
+#else
+  s->gamma = s->beta = -1.0 / (logf(s->superness_beta) / (logf(2.0)));
+#endif 
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_SUPERNESS_BETA numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_SUPERNESS\_BETA} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_SUPERNESS_BETA numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list "
+           << "WITH_SUPERNESS_BETA numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->superness_beta = @=$3@>;
+
+#if LDF_REAL_DOUBLE
+  s->beta = -1.0 / (log(s->superness_beta) / (log(2.0)));
+#else
+  s->beta = -1.0 / (logf(s->superness_beta) / (logf(2.0)));
+#endif 
+
+  if (s->superness_gamma < 0.0)
+    s->superness_gamma = s->superness_beta;
+
+  if (s->gamma < 0.0)
+    s->gamma = s->beta;
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_SUPERNESS_GAMMA numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_SUPERNESS\_GAMMA} \§numeric expression>.
+\initials{LDF 2022.04.26.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_SUPERNESS_GAMMA numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list "
+           << "WITH_SUPERNESS_GAMMA numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  s->superness_gamma = @=$3@>;
+
+#if LDF_REAL_DOUBLE
+  s->gamma = -1.0 / (log(s->superness_gamma) / (log(2.0)));
+#else
+  s->gamma = -1.0 / (logf(s->superness_gamma) / (logf(2.0)));
+#endif 
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+@q *** (3) superellipse_option_list: superellipse_option_list WITH_RESOLUTION numeric_expression @>
+
+@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
+\.{WITH\_RESOLUTION} \§numeric expression>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=superellipse_option_list: superellipse_option_list WITH_RESOLUTION numeric_expression @>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_RESOLUTION "
+           << "numeric_expression'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
+
+  int res;
+
+#if LDF_REAL_DOUBLE
+  res = static_cast<int>(round(abs(@=$3@>)));
+#else
+  res = static_cast<int>(roundf(fabs(@=$3@>)));
+#endif 
+
+  s->resolution = res;
+
+  @=$$@> = static_cast<void*>(s);
+
+};
+
+
+
+
+
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>

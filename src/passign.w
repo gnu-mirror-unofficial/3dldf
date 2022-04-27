@@ -410,6 +410,22 @@ Added this rule.
   @=$$@> = @=$1@>;
 }; 
 
+@q **** (4) assignment --> superellipse_assignment.@>
+
+@*3 \§assignment> $\longrightarrow$ \§superellipse assignment>.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=assignment: superellipse_assignment@>
+{
+  @=$$@> = @=$1@>;
+}; 
+
 @q **** (4) assignment --> rectangle_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§rectangle assignment>.
 
@@ -3827,6 +3843,46 @@ Removed debugging code.
 
   Int_Void_Ptr ivp = Scan_Parse::assign_simple<Helix>(static_cast<Scanner_Node>(parameter),
                                                       "Helix",
+                                                      @=$1@>,
+                                                      f);
+
+  @=$$@> = ivp.v;
+
+};
+
+@q **** (4) superellipse_assignment.@>
+@*3 \§superellipse assignment>. 
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> superellipse_assignment@>@/
+
+@q ***** (5) superellipse_assignment --> superellipse_variable := superellipse_expression.@>   
+@*4 \§superellipse assignment> $\longrightarrow$ \§superellipse variable> 
+\.{:=} \§superellipse expression>. 
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>= 
+ 
+@=superellipse_assignment: superellipse_variable ASSIGN superellipse_expression@>
+{
+
+  Superellipse* f = static_cast<Superellipse*>(@=$3@>);
+
+  Int_Void_Ptr ivp = Scan_Parse::assign_simple<Superellipse>(static_cast<Scanner_Node>(parameter),
+                                                      "Superellipse",
                                                       @=$1@>,
                                                       f);
 
