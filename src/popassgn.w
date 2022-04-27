@@ -1613,7 +1613,7 @@ Added this section.
 \ENDLOG
 
 @q **** (4) operation_assignment --> path_variable PLUS_ASSIGN @>
-@q **** (4) point_expression.                                       @>
+@q **** (4) point_expression.                                  @>
 
 @*3 \§operation assignment> $\longrightarrow$ \§path variable> 
 \.{PLUS\_ASSIGN} \§point expression>.

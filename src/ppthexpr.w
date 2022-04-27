@@ -2183,16 +2183,16 @@ Added this rule.
   s->beta = @=$3@>;
 
 #if LDF_REAL_DOUBLE
-  s->superness_beta = -1.0 / (log(beta) / log(2));
+  s->superness_beta = -1.0 / (log(s->beta) / log(2));
 #else
-  s->superness_beta = -1.0 / (logf(beta) / logf(2));
+  s->superness_beta = -1.0 / (logf(s->beta) / logf(2));
 #endif 
 
   if (s->gamma < 0.0)
      s->gamma = s->beta;
 
-  if (s->gamma_superness < 0.0)
-     s->gamma_superness = s->beta_superness;
+  if (s->superness_gamma < 0.0)
+     s->superness_gamma = s->superness_beta;
 
   @=$$@> = static_cast<void*>(s);
 
@@ -2228,9 +2228,9 @@ Added this rule.
   s->gamma = @=$3@>;
 
 #if LDF_REAL_DOUBLE
-  s->superness_gamma = -1.0 / (log(gamma) / log(2));
+  s->superness_gamma = -1.0 / (log(s->gamma) / log(2));
 #else
-  s->superness_gamma = -1.0 / (logf(gamma) / logf(2));
+  s->superness_gamma = -1.0 / (logf(s->gamma) / logf(2));
 #endif 
 
   @=$$@> = static_cast<void*>(s);
