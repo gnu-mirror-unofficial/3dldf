@@ -2227,6 +2227,10 @@ Added this rule.
 
   s->gamma = @=$3@>;
 
+/* !!START HERE:  LDF 2022.04.27.  Use natural logs and the mathematical constant for
+   ln(2).  Check if it's defined first.
+*/ 
+
 #if LDF_REAL_DOUBLE
   s->superness_gamma = -1.0 / (log(s->gamma) / log(2));
 #else
