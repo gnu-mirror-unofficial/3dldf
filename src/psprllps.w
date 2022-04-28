@@ -673,9 +673,10 @@ Added this rule.
 {
 @q ***** (5) @>
 
-  real begin = 0;
-  real end   = 0;
-  real temp  = 0;
+  int status = 0;
+
+  real begin = 0.0;
+  real end   = 0.0;
 
 #if DEBUG_COMPILE
   bool DEBUG = true; /* |false| */ @; 
@@ -695,7 +696,7 @@ Added this rule.
 
   if (pv == 0)
   {
-      cerr << "ERROR!  In parser, rule `superellipse_option_list:'"
+      cerr << "ERROR!  In parser, rule `superellipse_option_list:"
            << endl 
            << "superellipse_option_list WITH_ARC numeric_list':"
            << endl 
@@ -712,7 +713,7 @@ Added this rule.
 
   if (pv->v.size() < 2)
   {
-      cerr << "ERROR!  In parser, rule `superellipse_option_list:'"
+      cerr << "ERROR!  In parser, rule `superellipse_option_list:"
            << endl 
            << "superellipse_option_list WITH_ARC numeric_list':"
            << endl 
@@ -730,7 +731,7 @@ Added this rule.
 #if DEBUG_COMPILE
    else if (DEBUG)
    { 
-      cerr << "In parser, rule `superellipse_option_list:'"
+      cerr << "In parser, rule `superellipse_option_list:"
            << endl 
            << "superellipse_option_list WITH_ARC numeric_list':"
            << endl 
@@ -739,101 +740,45 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q ***** (5) @>
 @
 @<Define rules@>=
 
-   begin = fabs(*pv->v[0]);
-   end = fabs(*pv->v[1]);
+   begin = *(pv->v[0]);
+   end   = *(pv->v[1]);
 
-   if (begin < 0.0)
-   { 
-      cerr << "WARNING!  In parser, rule `superellipse_option_list:'"
-           << endl 
-           << "superellipse_option_list WITH_ARC numeric_list':"
-           << endl 
-           << "`begin' == " << begin << " (< 0)" << endl
-           << "Adding 360.0 to `begin'." << endl; 
+   status = Superellipse::fix_arc_boundaries(begin, end);
 
-      begin += 360.0;
-   }
+   if (status != 0)
+   {
+       cerr << "ERROR!  In parser, rule `superellipse_option_list:"
+            << endl 
+            << "superellipse_option_list WITH_ARC numeric_list':"
+            << endl 
+            << "`Superellipse::fix_arc_boundaries' failed, returning " << status << "." 
+            << endl 
+            << "Can't set arc length.  Continuing." << endl; 
 
-   if (end < 0.0)
-   { 
-      cerr << "WARNING!  In parser, rule `superellipse_option_list:'"
-           << endl 
-           << "superellipse_option_list WITH_ARC numeric_list':"
-           << endl 
-           << "`end' == " << end << " (< 0)" << endl
-           << "Adding 360.0 to `end'." << endl; 
-
-      end += 360.0;
-   }
-
-@q ***** (5) @>
-@
-@<Define rules@>=
-
-  if (begin == end)
-  {
-      cerr << "ERROR!  In parser, rule `superellipse_option_list:'"
-           << endl 
-           << "superellipse_option_list WITH_ARC numeric_list':"
-           << endl 
-           << "`begin' and `end' are equal:  `begin' == `end' == " << begin
-           << endl
-           << "Can't set arc length.  Continuing." << endl; 
-
-      goto END_SUPERELLIPSE_WITH_ARC_RULE;
-
-  }
-
-@q ***** (5) @>
-
-  if (begin > end)
-  {
-      cerr << "WARNING!  In parser, rule `superellipse_option_list:'"
-           << endl 
-           << "superellipse_option_list WITH_ARC numeric_list':"
-           << endl 
-           << "`begin' > `end':  `begin' == " << begin 
-           << ", `end' == " << end
-           << endl
-           << "Switching values and continuing." << endl; 
-
-
-      temp  = begin;
-      begin = end;
-      end   = temp;
-
-  }
+       goto END_SUPERELLIPSE_WITH_ARC_RULE;
+      
+   }  /* |if (status != 0)| */
 
 @q ***** (5) @>
 @
 @<Define rules@>=
 
 #if DEBUG_COMPILE
-   if (DEBUG)
+   else if (DEBUG)
    { 
-      cerr << "Before conversion:" << endl 
-           << "`begin' == " << begin << endl 
-           << "`end' == " << end << endl;
+       cerr << "In parser, rule `superellipse_option_list:"
+            << endl 
+            << "superellipse_option_list WITH_ARC numeric_list':"
+            << endl 
+            << "`Superellipse::fix_arc_boundaries' succeeded, returning 0."
+            << endl
+            << "Will set arc length." << endl; 
    }  
-#endif /* |DEBUG_COMPILE|  */@;   
-
-   begin *= PI/180.0;
-   end *= PI/180.0;
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "After conversion:" << endl 
-           << "`begin' == " << begin << endl 
-           << "`end' == " << end << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@;   
-
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5) @>
 @

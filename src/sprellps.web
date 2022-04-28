@@ -1220,7 +1220,7 @@ Added this function.
 @<Declare |Superellipse| functions@>=
 static
 int
-fix_arc_boundaries(real &begin, real &end, Scanner_Node scanner_node);
+fix_arc_boundaries(real &begin, real &end, Scanner_Node scanner_node = 0);
 
 @q ** (2) Definition  @>
 @
@@ -1242,24 +1242,46 @@ Superellipse::fix_arc_boundaries(real &begin, real &end, Scanner_Node scanner_no
 
 @q *** (3) @>
 
-   if (begin < 0.0)
+   while (begin <= -360.0)
    { 
       cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
            << endl 
-           << "`begin' == " << begin << " (< 0)" << endl
+           << "`begin' == " << begin << " (<= -360.0)" << endl
            << "Adding 360.0 to `begin'." << endl; 
 
       begin += 360.0;
    }
 
-   if (end < 0.0)
+   while (end < -360.0)
    { 
       cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
            << endl 
-           << "`end' == " << end << " (< 0)" << endl
+           << "`end' == " << end << " (<= -360.0)" << endl
            << "Adding 360.0 to `end'." << endl; 
 
       end += 360.0;
+   }
+
+@q *** (3) @>
+
+   while (begin > 360.0)
+   { 
+      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
+           << endl 
+           << "`begin' == " << begin << " (> 360.0)" << endl
+           << "Subtracting 360.0 from `begin'." << endl; 
+
+      begin -= 360.0;
+   }
+
+   while (end > 360.0)
+   { 
+      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
+           << endl 
+           << "`end' == " << end << " (> 360.0)" << endl
+           << "Subtracting 360.0 from `end'." << endl; 
+
+      end -= 360.0;
    }
 
 @q *** (3) @>

@@ -1,67 +1,133 @@
-@q ** (2) Reset arc.  @>
-@ Reset arc.
+@q * (1) Fix arc boundaries.  @>
+@ Fix arc boundaries.
 \initials{LDF 2022.04.28.}
 
 \LOG
 \initials{LDF 2022.04.28.}
-Added this funtion.
-\ENDLOG 
+Added this function.
+\ENDLOG
 
-@q *** (3) Declaration @>
+@q ** (2) Declaration @>
 
 @<Declare |Superellipse| functions@>=
+static
 int
-reset_arc(real begin = -1, 
-          real end = -1, 
-          real resolution = -1, 
-          Scanner_Node scanner_node = 0);
+fix_arc_boundaries(real &begin, real &end, Scanner_Node scanner_node);
 
-
-@q *** (3) Definition @>
+@q ** (2) Definition  @>
 @
 @<Define |Superellipse| functions@>=
 int
-Superellipse::reset_arc(real begin, 
-                        real end, 
-                        real resolution, 
-                        Scanner_Node scanner_node);
-{
-@q **** (4) @>
+Superellipse::fix_arc_boundaries(real &begin, real &end, Scanner_Node scanner_node)
+{ 
+@q *** (3) @>
 
 #if DEBUG_COMPILE
    bool DEBUG = true; /* |false| */ 
    if (DEBUG)
    { 
-      cerr << "Entering `Superellipse::reset_arc'." << endl
-           << "`begin' == " << begin << endl 
-           << "`end' == " << end << endl 
-           << "`resolution' == " << resolution << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
+       cerr << "Entering `Superellipse::fix_arc_boundaries'." << endl;
    }  
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-@q **** (4) @>
-@
-@<Define |Superellipse| functions@>=
+   real temp = 0.0;
 
-@q **** (4) @>
-@
-@<Define |Superellipse| functions@>=
+@q *** (3) @>
 
-#if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ 
-   if (DEBUG)
+   if (begin < 0.0)
    { 
-      cerr << "Exiting `Superellipse::reset_arc' successfully with return value 0." 
+      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
+           << endl 
+           << "`begin' == " << begin << " (< 0)" << endl
+           << "Adding 360.0 to `begin'." << endl; 
+
+      begin += 360.0;
+   }
+
+   if (end < 0.0)
+   { 
+      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
+           << endl 
+           << "`end' == " << end << " (< 0)" << endl
+           << "Adding 360.0 to `end'." << endl; 
+
+      end += 360.0;
+   }
+
+@q *** (3) @>
+@
+@<Define |Superellipse| functions@>=
+
+  if (begin == end)
+  {
+      cerr << "ERROR!  In `Superellipse::fix_arc_boundaries':'"
+           << endl 
+           << "`begin' and `end' are equal:  `begin' == `end' == " << begin
+           << endl
+           << "Can't set arc length." << endl
+           << "Exiting function unsuccessfully with return value 1."
            << endl;
 
+      return 1;
+
+  }
+
+@q ***** (5) @>
+
+  if (begin > end)
+  {
+      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
+           << endl 
+           << "`begin' > `end':  `begin' == " << begin 
+           << ", `end' == " << end
+           << endl
+           << "Switching values and continuing." << endl; 
+
+
+      temp  = begin;
+      begin = end;
+      end   = temp;
+
+  }
+
+@q ***** (5) @>
+@
+@<Define |Superellipse| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Before conversion:" << endl 
+           << "`begin' == " << begin << endl 
+           << "`end' == " << end << endl;
    }  
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;   
+
+   begin *= PI/180.0;
+   end *= PI/180.0;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "After conversion:" << endl 
+           << "`begin' == " << begin << endl 
+           << "`end' == " << end << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;   
+
+@q *** (3) @>
+@
+@<Define |Superellipse| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Superellipse::fix_arc_boundaries' successfully "
+            << "with return value 0." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;
 
    return 0;
 
-} /* End of |Superellipse::reset_arc| definition */
-
+} /* End of |Superellipse::fix_arc_boundaries| definition  */

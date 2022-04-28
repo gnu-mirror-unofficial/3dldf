@@ -907,8 +907,15 @@ Added this rule.
 
    @<Common declarations for rules@>@; 
 
+   real begin       = -180;
+   real end         =  180;
+   real resolution  =   32;
+
+   Superellipse *s = 0;
+   Pointer_Vector<real> *pv = 0;
+
 #if DEBUG_COMPILE
-   DEBUG = false; /* |true| */ @; 
+   DEBUG = true; /* |false| */ @; 
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `command --> RESET_ARC "
@@ -923,21 +930,65 @@ Added this rule.
 
      entry = static_cast<Id_Map_Entry_Node>(@=$2@>);  
 
-     Superellipse *s = static_cast<Superellipse*>(entry->object);
+     s = static_cast<Superellipse*>(entry->object);
 
-     Pointer_Vector<real> *pv = static_cast<Pointer_Vector<real>*>(@=$3@>);
+     pv = static_cast<Pointer_Vector<real>*>(@=$3@>);
 
-     real begin       = -PI;
-     real end         =  PI;
-     real resolution  =  32;
-
-     if (s != 0)
+     if (pv)
      {
-        status = s->reset_arc(begin, end, resolution, scanner_node);
+         if (pv->v.size() > 0)
+            begin = *(pv->v[0]);
+         if (pv->v.size() > 1)
+             end   = *(pv->v[1]);
+         if (pv->v.size() > 2)
+             resolution   = *(pv->v[2]);
+     }
+
+     status = Superellipse::fix_arc_boundaries(begin, end, scanner_node);
+
+     if (status != 0)
+     {
+         cerr << "ERROR!  In parser, rule `command: RESET_ARC superellipse_variable"
+              << endl 
+              << "numeric_list_optional':"
+              << endl 
+              << "`Superellipse::fix_arc_boundaries' failed, returning " << status << "." 
+              << endl 
+              << "Can't set arc length.  Continuing." << endl; 
+
+         goto END_RESET_ARC_RULE;
+      
+    }  /* |if (status != 0)| */
+
+@q ***** (5) @>
+@
+@<Define rules@>=
 
 #if DEBUG_COMPILE
-        if (DEBUG)
-        { 
+    else if (DEBUG)
+    { 
+       cerr << "In parser, rule `command --> RESET_ARC "
+            << "superellipse_variable numeric_list_optional':"
+            << endl 
+            << "`Superellipse::fix_arc_boundaries' succeeded, returning 0."
+            << endl
+            << "Will set arc length." << endl
+            << "`begin' == " << begin << endl 
+            << "`end' == " << end << endl;
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+@
+@<Define rules@>=
+
+    if (s != 0)
+    {
+       status = s->reset_arc(begin, end, resolution, scanner_node);
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
             cerr_strm << thread_name << "In parser, rule `command --> RESET_ARC "
                       << "superellipse_variable numeric_list_optional':"
                       << endl
@@ -950,13 +1001,14 @@ Added this rule.
 
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
-        }  
+       }  
 #endif /* |DEBUG_COMPILE|  */@;         
 
+    }
 
-     }
+END_RESET_ARC_RULE:
 
-     @=$$@> = 0;
+    @=$$@> = 0;
 
 @q **** (4) @>
 
