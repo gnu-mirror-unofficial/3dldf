@@ -914,8 +914,13 @@ Added this rule.
    Superellipse *s = 0;
    Pointer_Vector<real> *pv = 0;
 
+   Point up(0, 1, 0);
+   Point right(1, 0, 0);
+ 
+@q **** (4) @>
+
 #if DEBUG_COMPILE
-   DEBUG = false; /* |true| */ @; 
+   DEBUG = true; /* |false| */ @; 
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `command --> RESET_ARC "
@@ -960,7 +965,136 @@ Added this rule.
 @
 @<Define rules@>=
 
-       status = s->generate_path(scanner_node);
+       Transform t;
+
+       Point normal;
+
+
+       if (s->points.size() > 0) 
+       {
+@q ******* (7) @>
+
+          normal = s->get_normal();
+
+          normal.show("normal:");
+          s->center.show("s->center:");
+          s->get_point(0).show("s->get_point(0):");
+          s->get_last_point().show("s->get_last_point():");
+
+          if (normal == INVALID_POINT)
+          {
+            cerr_strm << thread_name << "ERROR!  In parser, rule `command --> RESET_ARC "
+                      << "superellipse_variable numeric_list_optional':"
+                      << endl
+                      << "`s->points.size()' > 0 but `Path::get_normal' failed, "
+                      << "returning `INVALID_POINT'." 
+                      << endl
+                      << "Failed to get normal for `path'.  Can't reset arc."
+                      << endl 
+                      << "Continuing.";
+
+            log_message(cerr_strm);
+            cerr_message(cerr_strm, true);
+            cerr_strm.str("");
+
+            goto END_RESET_ARC_RULE;
+
+          } /* |if (!INVALID_POINT)| */
+
+@q ******* (7) @>
+
+#if DEBUG_COMPILE
+          else if (DEBUG)
+          { 
+            cerr_strm << thread_name << "In parser, rule `command --> RESET_ARC "
+                      << "superellipse_variable numeric_list_optional':"
+                      << endl
+                      << "``Path::get_normal' succeeded, returning `Point':";
+
+            log_message(cerr_strm);
+            cerr_message(cerr_strm);
+            cerr_strm.str("");
+
+            normal.show("normal:");
+ 
+          }      
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @>
+
+          if (normal == up)
+          {
+@q ******** (8) @>
+
+#if DEBUG_COMPILE
+             if (DEBUG)
+             { 
+                cerr_strm << thread_name << "In parser, rule `command --> RESET_ARC "
+                          << "superellipse_variable numeric_list_optional':"
+                          << endl
+                          << "`normal' == (0, 1, 0).  No transformation necessary.";
+
+                log_message(cerr_strm);
+                cerr_message(cerr_strm);
+                cerr_strm.str("");
+
+             }           
+#endif /* |DEBUG_COMPILE|  */@;           
+
+@q ******** (8) @>
+
+          }  /* |if (normal == up && s->get_point(0) == right)|  */
+
+@q ******* (7) @>
+
+          else
+          {
+@q ******** (8) @>
+
+#if DEBUG_COMPILE
+             if (DEBUG)
+             { 
+                cerr_strm << thread_name << "In parser, rule `command --> RESET_ARC "
+                          << "superellipse_variable numeric_list_optional':"
+                          << endl
+                          << "`normal' != (0, 1, 0)"
+                          << endl
+                          << "Transformation necessary:";
+
+                log_message(cerr_strm);
+                cerr_message(cerr_strm);
+                cerr_strm.str("");
+
+                cerr << "Before transformation:" << endl;
+
+                normal.show("normal:");
+
+             }           
+#endif /* |DEBUG_COMPILE|  */@;           
+
+@q ******** (8) @>
+
+             normal.shift(s->get_center());
+
+             normal.show("normal after shifting to center:");
+
+             t.align_with_axis(s->center, normal, 'y');
+
+             t.show("t:");
+
+@q ******** (8) @>
+
+          }
+
+@q ******* (7) @>
+
+       }  /* |if (s->points.size() > 0)| */
+
+@q ****** (6) @>
+@
+@<Define rules@>=
+
+       status = s->generate_path(t, normal, scanner_node);
 
        if (status != 0)
        {

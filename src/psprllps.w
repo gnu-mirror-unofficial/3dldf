@@ -163,6 +163,9 @@ Added this rule.
 
   *p *= *t;
 
+   
+
+
   @=$$@> = static_cast<void*>(p); 
 
   delete t;
@@ -258,7 +261,11 @@ Added this rule.
 
    Superellipse *s = static_cast<Superellipse*>(@=$2@>);
 
-   status = s->generate_path(scanner_node); 
+   Transform t;
+
+   Point normal(0, 1, 0);
+
+   status = s->generate_path(t, normal, scanner_node); 
  
    if (status != 0)
    {

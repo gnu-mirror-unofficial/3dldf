@@ -486,17 +486,15 @@ Added this function.
 
 @<Declare |Superellipse| functions@>=
 int
-generate_path(Scanner_Node scanner_node = 0);
+generate_path(Transform &t, Point &normal, Scanner_Node scanner_node = 0);
 
 @q **** (4) Definition @>
 @
 @<Define |Superellipse| functions@>=
 int
-Superellipse::generate_path(Scanner_Node scanner_node)
+Superellipse::generate_path(Transform &t, Point &normal, Scanner_Node scanner_node)
 {
 @q ***** (5) @>
-
-/* !!START HERE:  LDF 2022.04.28.  Use center--normal for rotation, if present!   */ 
 
 #if DEBUG_COMPILE
    bool DEBUG = false; /* |true| */ 
@@ -592,9 +590,6 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 @
 @<Define |Superellipse| functions@>=
 
-    Point origin(0, 0, 0);
-    Point up(0, 1, 0);
-
 #if DEBUG_COMPILE
     if (DEBUG)
     { 
@@ -615,6 +610,63 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5) @>
+@
+@<Define |Superellipse| functions@>=
+
+    if (!t.is_identity())
+    {
+@q ****** (6) @>
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << "`Transform t' is not identity transform.  Transforming `this'." 
+                << endl;
+ 
+           t.show("t:");
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+       normal.show("normal before transformation:");
+
+       normal *= t;
+
+       normal.show("normal after transformation:");
+
+       show("`*this' before transformation:");
+
+       center.show("`center' before transformation:");
+
+       operator*=(t);
+
+       show("`*this' after transformation:");
+
+       center.show("`center' after transformation:");
+
+       Point down(0, -1, 0);
+
+       if (normal == down)
+          *this *= normal *= t.rotate(180, 0, 0);
+
+@q ****** (6) @>
+
+    } /* |if (!t.is_identity())| */
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+    else if (DEBUG)
+    { 
+       cerr << "`Transform t' is identity transform.  Not transforming `this'." 
+            << endl;
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
+    
+
+@q ***** (5) @>
+@
+@<Define |Superellipse| functions@>=
 
     Path::clear();
 
@@ -809,9 +861,24 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 @
 @<Define |Superellipse| functions@>=
 
-#if 0 
-   show("*this:");
-#endif 
+   show("*this after generation:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   if (!t.is_identity())
+   {
+      cerr << "`t' isn't identity." << endl;
+
+      normal *= *this *= t.inverse();
+
+      show("*this after reverse transformation:");
+   }
+   else
+      cerr << "`t' is identity." << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 @q ***** (5) @>
 @
