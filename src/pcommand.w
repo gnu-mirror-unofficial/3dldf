@@ -915,7 +915,7 @@ Added this rule.
    Pointer_Vector<real> *pv = 0;
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `command --> RESET_ARC "
@@ -934,75 +934,88 @@ Added this rule.
 
      pv = static_cast<Pointer_Vector<real>*>(@=$3@>);
 
-     if (pv)
-     {
-         if (pv->v.size() > 0)
-            begin = *(pv->v[0]);
-         if (pv->v.size() > 1)
-             end   = *(pv->v[1]);
-         if (pv->v.size() > 2)
-             resolution   = *(pv->v[2]);
-     }
-
-     status = Superellipse::fix_arc_boundaries(begin, end, scanner_node);
-
-     if (status != 0)
-     {
-         cerr << "ERROR!  In parser, rule `command: RESET_ARC superellipse_variable"
-              << endl 
-              << "numeric_list_optional':"
-              << endl 
-              << "`Superellipse::fix_arc_boundaries' failed, returning " << status << "." 
-              << endl 
-              << "Can't set arc length.  Continuing." << endl; 
-
-         goto END_RESET_ARC_RULE;
-      
-    }  /* |if (status != 0)| */
-
-@q ***** (5) @>
-@
-@<Define rules@>=
-
-#if DEBUG_COMPILE
-    else if (DEBUG)
-    { 
-       cerr << "In parser, rule `command --> RESET_ARC "
-            << "superellipse_variable numeric_list_optional':"
-            << endl 
-            << "`Superellipse::fix_arc_boundaries' succeeded, returning 0."
-            << endl
-            << "Will set arc length." << endl
-            << "`begin' == " << begin << endl 
-            << "`end' == " << end << endl;
-    }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
 @q ***** (5) @>
 @
 @<Define rules@>=
 
     if (s != 0)
     {
-       status = s->reset_arc(begin, end, resolution, scanner_node);
+@q ****** (6) @>
+
+     s->arc_begin  = -180;
+     s->arc_end    =  180;
+     s->resolution =   64;
+
+     if (pv)
+     {
+         if (pv->v.size() > 0)
+            s->arc_begin = *(pv->v[0]);
+         if (pv->v.size() > 1)
+             s->arc_end   = *(pv->v[1]);
+         if (pv->v.size() > 2)
+             s->resolution   = *(pv->v[2]);
+     }
+
+@q ****** (6) @>
+@
+@<Define rules@>=
+
+       status = s->generate_path(scanner_node);
+
+       if (status != 0)
+       {
+            cerr_strm << thread_name << "ERROR!  In parser, rule `command --> RESET_ARC "
+                      << "superellipse_variable numeric_list_optional':"
+                      << endl
+                      << "`Superellipse::generate_path' failed, returning " << status << "."
+                      << endl
+                      << "Failed to reset arc for `superellipse'.  Continuing."
+                      << endl;
+
+            log_message(cerr_strm);
+            cerr_message(cerr_strm, true);
+            cerr_strm.str("");
+
+            goto END_RESET_ARC_RULE;
+
+       }  /* |if (status != 0)|  */
+
+@q ****** (6) @>
+@
+@<Define rules@>=
 
 #if DEBUG_COMPILE
-       if (DEBUG)
+       else if (DEBUG)
        { 
             cerr_strm << thread_name << "In parser, rule `command --> RESET_ARC "
                       << "superellipse_variable numeric_list_optional':"
                       << endl
-                      << "`Superellipse::reset_arc' returned " << status 
+                      << "`Superellipse::generate_path' succeeded, returning 0."
                       << endl;
 
             log_message(cerr_strm);
             cerr_message(cerr_strm);
             cerr_strm.str("");
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
        }  
 #endif /* |DEBUG_COMPILE|  */@;         
+
+@q ****** (6) @>
+
+    }  /* |if (s != 0)| */
+
+@q ***** (5) @>
+
+    else
+    {
+        cerr_strm << thread_name << "WARNING!  In parser, rule `command --> RESET_ARC "
+                  << "superellipse_variable numeric_list_optional':"
+                  << endl
+                  << "`superellipse' is NULL.  Can't reset arc.  Continuing.";
+
+        log_message(cerr_strm);
+        cerr_message(cerr_strm, true);
+        cerr_strm.str("");
 
     }
 

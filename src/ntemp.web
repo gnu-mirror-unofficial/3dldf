@@ -1,21 +1,173 @@
 @q ** (2) @>
-
+@
 @q *** (3) Declaration @>
 
-Path
+@<Declare |Superellipse| functions@>=
+int
+Superellipse::sub_generate_superellipse_path(real begin = -PI, 
+                                             real end = PI, 
+                                             real resolution = 64,     
+                                             Point *axis_0 = 0,
+                                             Point *axis_1 = 0,
+                                             Scanner_Node scanner_node = 0);
+
+@q *** (3) Definition @>
+@
+@<Define |Superellipse| functions@>=
+int
 Superellipse::sub_generate_superellipse_path(real begin, 
                                              real end, 
                                              real resolution, 
+                                             Point *axis_0,
+                                             Point *axis_1,
                                              Scanner_Node scanner_node)
 { 
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+       cerr << "Entering `Superellipse::sub_generate_superellipse_path'."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   int status  = 0;
+   int status1 = 0;
+
+   Point p0;
+
+   real step = (arc_end - arc_begin) / resolution;
+
+   real two_over_beta = (2.0F / beta);
+   real two_over_gamma = (2.0F / gamma);
+
+   real x;
+   real z;
+
+   real a = x_semiaxis_length; 
+   real b = z_semiaxis_length;
+
+@q ***** (5) @>
+@
+@<Define |Superellipse| functions@>=
+
+#if LDF_REAL_DOUBLE
+    if (beta < 0)
+       beta = fabs(beta);
+
+    if (gamma < 0)
+       gamma = fabs(gamma);
+
+    if (superness_beta < 0)
+       superness_beta = fabs(superness_beta);
+
+    if (superness_gamma < 0)
+       superness_gamma = fabs(superness_gamma);
+#else 
+    if (beta < 0)
+       beta = fabsf(beta);
+
+    if (gamma < 0)
+       gamma = fabsf(gamma);
+
+    if (superness_beta < 0)
+       superness_beta = fabsf(superness_beta);
+
+    if (superness_gamma < 0)
+       superness_gamma = fabsf(superness_gamma);
+#endif
+
+@q ***** (5) @>
+@
+@<Define |Superellipse| functions@>=
+
+    Point origin(0, 0, 0);
+    Point up(0, 1, 0);
+
+   status = Superellipse::fix_arc_boundaries(begin, end);
+
+   if (status != 0)
+   {
+       cerr << "ERROR!  In parser, rule `superellipse_option_list:"
+            << endl 
+            << "superellipse_option_list WITH_ARC numeric_list':"
+            << endl 
+            << "`Superellipse::fix_arc_boundaries' failed, returning " << status << "." 
+            << endl 
+            << "Can't set arc length.  Continuing." << endl; 
+
+       goto END_SUPERELLIPSE_WITH_ARC_RULE;
+      
+   }  /* |if (status != 0)| */
+
+@q ***** (5) @>
+@
+@<Define rules@>=
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr << "In parser, rule `superellipse_option_list:"
+            << endl 
+            << "superellipse_option_list WITH_ARC numeric_list':"
+            << endl 
+            << "`Superellipse::fix_arc_boundaries' succeeded, returning 0."
+            << endl
+            << "Will set arc length." << endl; 
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+@
+@<Define rules@>=
+
+   s->arc_begin = begin;
+   s->arc_end   = end;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+    cerr << "s->arc_begin == " << s->arc_begin << endl
+         << "s->arc_end == " << s->arc_end << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+        cerr << "a               == " << a << endl
+             << "b               == " << b << endl 
+             << "beta            == " << beta << endl 
+             << "gamma           == " << gamma << endl 
+             << "two_over_beta   == " << two_over_beta << endl
+             << "two_over_gamma  == " << two_over_gamma << endl
+             << "superness_beta  == " << superness_beta << endl 
+             << "superness_gamma == " << superness_gamma << endl 
+             << "resolution      == " << resolution << endl 
+             << "step            == " << step << endl
+             << "arc_begin       == " << arc_begin << endl 
+             << "arc_end         == " << arc_end << endl 
+             << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
 
 
     Path::clear();
 
     bool first_time = true;
 
-    int sign_x =  1;
-    int sign_z = -1;
+    int sign_x = 1;
+    int sign_z = 1;
   
     real cos_t;
     real sin_t;
@@ -198,5 +350,20 @@ Superellipse::sub_generate_superellipse_path(real begin,
 @q ****** (6) @>
 
     } /* |for| */
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Superellipse::sub_generate_superellipse_path' successfully"
+            << endl 
+            << "with return value 0."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+   return 0;
 
 }  /* End of |Superellipse::sub_generate_superellipse_path| definition  */

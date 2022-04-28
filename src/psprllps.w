@@ -245,7 +245,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-   DEBUG = true; /* |false| */
+   DEBUG = false; /* |true| */
 
    if (DEBUG)
    { 
@@ -324,7 +324,7 @@ Added this rule.
 @=superellipse_option_list: /* Empty  */@>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 
   if (DEBUG)
   {
@@ -354,7 +354,7 @@ Added this rule.
 @=superellipse_option_list: superellipse_option_list WITH_A numeric_expression @>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 
   if (DEBUG)
   {
@@ -386,7 +386,7 @@ Added this rule.
 @=superellipse_option_list: superellipse_option_list WITH_B numeric_expression @>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 
   if (DEBUG)
   {
@@ -418,7 +418,7 @@ Added this rule.
 @=superellipse_option_list: superellipse_option_list WITH_BETA numeric_expression @>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 
   if (DEBUG)
   {
@@ -463,7 +463,7 @@ Added this rule.
 @=superellipse_option_list: superellipse_option_list WITH_GAMMA numeric_expression @>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 
   if (DEBUG)
   {
@@ -506,7 +506,7 @@ Added this rule.
 @=superellipse_option_list: superellipse_option_list WITH_SUPERNESS numeric_expression @>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 
   if (DEBUG)
   {
@@ -545,7 +545,7 @@ Added this rule.
 @=superellipse_option_list: superellipse_option_list WITH_SUPERNESS_BETA numeric_expression @>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 
   if (DEBUG)
   {
@@ -590,7 +590,7 @@ Added this rule.
 @=superellipse_option_list: superellipse_option_list WITH_SUPERNESS_GAMMA numeric_expression @>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 
   if (DEBUG)
   {
@@ -629,7 +629,7 @@ Added this rule.
 @=superellipse_option_list: superellipse_option_list WITH_RESOLUTION numeric_expression @>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 
   if (DEBUG)
   {
@@ -679,7 +679,7 @@ Added this rule.
   real end   = 0.0;
 
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
       cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_ARC "
@@ -741,67 +741,9 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5) @>
-@
-@<Define rules@>=
 
-   begin = *(pv->v[0]);
-   end   = *(pv->v[1]);
-
-   status = Superellipse::fix_arc_boundaries(begin, end);
-
-   if (status != 0)
-   {
-       cerr << "ERROR!  In parser, rule `superellipse_option_list:"
-            << endl 
-            << "superellipse_option_list WITH_ARC numeric_list':"
-            << endl 
-            << "`Superellipse::fix_arc_boundaries' failed, returning " << status << "." 
-            << endl 
-            << "Can't set arc length.  Continuing." << endl; 
-
-       goto END_SUPERELLIPSE_WITH_ARC_RULE;
-      
-   }  /* |if (status != 0)| */
-
-@q ***** (5) @>
-@
-@<Define rules@>=
-
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-       cerr << "In parser, rule `superellipse_option_list:"
-            << endl 
-            << "superellipse_option_list WITH_ARC numeric_list':"
-            << endl 
-            << "`Superellipse::fix_arc_boundaries' succeeded, returning 0."
-            << endl
-            << "Will set arc length." << endl; 
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ***** (5) @>
-@
-@<Define rules@>=
-
-   s->arc_begin = begin;
-   s->arc_end   = end;
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-    cerr << "s->arc_begin == " << s->arc_begin << endl
-         << "s->arc_end == " << s->arc_end << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ***** (5) @>
-@
-@<Define rules@>=
+   s->arc_begin = *(pv->v[0]);
+   s->arc_end   = *(pv->v[1]);
 
 END_SUPERELLIPSE_WITH_ARC_RULE:
 
@@ -815,12 +757,6 @@ END_SUPERELLIPSE_WITH_ARC_RULE:
   @=$$@> = static_cast<void*>(s);
 
 };
-
-
-
-
-
-
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
