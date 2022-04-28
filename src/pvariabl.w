@@ -4832,6 +4832,24 @@ Added this rule.
 
 };
 
+@q *** (3) any_variable --> superellipse_variable.  @>
+@*2 \§any variable> $\longrightarrow$ \§superellipse variable>.
+\initials{LDF 2022.04.28.}
+
+\LOG
+\initials{LDF 2022.04.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=any_variable: superellipse_variable@>@/
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+
 @q *** (3) any_variable --> circle_variable.@>
 @*2 \§any variable> $\longrightarrow$ \§circle variable>.
 \initials{LDF 2004.06.17.}  
