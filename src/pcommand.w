@@ -888,7 +888,105 @@ Added this rule.
 
 @q *** (3) @>
 
+@q ** (2) command --> UNSET_NAME color_variable.@>
+
+@ \§command> $\longrightarrow$ \.{UNSET\_NAME} \§color variable primary>.
+\initials{LDF 2022.04.28.}
+
+\LOG
+\initials{LDF 2022.04.28.}
+Added this rule.
+\ENDLOG
+
+@q *** (3) @>
+
+@<Define rules@>=
+@=command: RESET_ARC superellipse_variable numeric_list_optional@>@/
+{ 
+@q **** (4) @>
+
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = false; /* |true| */ @; 
+   if (DEBUG) 
+     {
+         cerr_strm << thread_name << "*** Parser:  `command --> RESET_ARC "
+                   << "superellipse_variable numeric_list_optional'."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */
+
+     entry = static_cast<Id_Map_Entry_Node>(@=$2@>);  
+
+     Superellipse *s = static_cast<Superellipse*>(entry->object);
+
+     Pointer_Vector<real> *pv = static_cast<Pointer_Vector<real>*>(@=$3@>);
+
+     real begin       = -PI;
+     real end         =  PI;
+     real resolution  =  32;
+
+     if (s != 0)
+     {
+        status = s->reset_arc(begin, end, resolution, scanner_node);
+
+#if DEBUG_COMPILE
+        if (DEBUG)
+        { 
+            cerr_strm << thread_name << "In parser, rule `command --> RESET_ARC "
+                      << "superellipse_variable numeric_list_optional':"
+                      << endl
+                      << "`Superellipse::reset_arc' returned " << status 
+                      << endl;
+
+            log_message(cerr_strm);
+            cerr_message(cerr_strm);
+            cerr_strm.str("");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+        }  
+#endif /* |DEBUG_COMPILE|  */@;         
+
+
+     }
+
+     @=$$@> = 0;
+
+@q **** (4) @>
+
+};
+
 @q ** (2) @>
+@
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> numeric_list_optional@>
+
+@q ** (2) @>
+@
+@<Define rules@>= 
+@=numeric_list_optional: /* Empty  */@>
+{
+
+  @=$$@> = static_cast<void*>(0);
+
+};
+
+@q ** (2) @>
+@
+@<Define rules@>= 
+@=numeric_list_optional: numeric_list@>
+{
+  @=$$@> = static_cast<void*>(@=$1@>);
+};
+
+
+
 
 @q * (1) @>
 

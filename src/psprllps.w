@@ -666,12 +666,19 @@ Added this rule.
 Added this rule.
 \ENDLOG 
 
+@q **** (4) @>
+
 @<Define rules@>=
 @=superellipse_option_list: superellipse_option_list WITH_ARC numeric_list @>@/
 {
+@q ***** (5) @>
+
+  real begin = 0;
+  real end   = 0;
+  real temp  = 0;
+
 #if DEBUG_COMPILE
   bool DEBUG = true; /* |false| */ @; 
-
   if (DEBUG)
   {
       cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_ARC "
@@ -680,28 +687,185 @@ Added this rule.
   }
 #endif /* |DEBUG_COMPILE|  */@;
 
+@q ***** (5) @>
+
   Superellipse *s = static_cast<Superellipse*>(@=$1@>);
 
   Pointer_Vector<real> *pv = static_cast<Pointer_Vector<real>*>(@=$3@>);
+
+  if (pv == 0)
+  {
+      cerr << "ERROR!  In parser, rule `superellipse_option_list:'"
+           << endl 
+           << "superellipse_option_list WITH_ARC numeric_list':"
+           << endl 
+           << "`numeric_list' is NULL.  Can't set arc length.  Continuing." 
+           << endl; 
+
+      goto END_SUPERELLIPSE_WITH_ARC_RULE;
+
+  }
+
+@q ***** (5) @>
 
   cerr << "pv->v.size() == " << pv->v.size() << endl;
 
   if (pv->v.size() < 2)
   {
-      cerr << "WARNING!  In parser, rule `superellipse_option_list:'"
+      cerr << "ERROR!  In parser, rule `superellipse_option_list:'"
            << endl 
            << "superellipse_option_list WITH_ARC numeric_list':"
            << endl 
            << "`pv->v.size()' == " << pv->v.size() << " (< 2)" << endl
            << "Can't set arc length.  Continuing." << endl; 
 
+      goto END_SUPERELLIPSE_WITH_ARC_RULE;
+
   }
 
-/* !!START HERE:  LDF 2022.04.27.  */ 
+@q ***** (5) @>
+@
+@<Define rules@>=
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+      cerr << "In parser, rule `superellipse_option_list:'"
+           << endl 
+           << "superellipse_option_list WITH_ARC numeric_list':"
+           << endl 
+           << "`pv->v.size()' == " << pv->v.size() << " (>= 2)" << endl
+           << "Will set arc length." << endl; 
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+@q ***** (5) @>
+@
+@<Define rules@>=
+
+   begin = fabs(*pv->v[0]);
+   end = fabs(*pv->v[1]);
+
+   if (begin < 0.0)
+   { 
+      cerr << "WARNING!  In parser, rule `superellipse_option_list:'"
+           << endl 
+           << "superellipse_option_list WITH_ARC numeric_list':"
+           << endl 
+           << "`begin' == " << begin << " (< 0)" << endl
+           << "Adding 360.0 to `begin'." << endl; 
+
+      begin += 360.0;
+   }
+
+   if (end < 0.0)
+   { 
+      cerr << "WARNING!  In parser, rule `superellipse_option_list:'"
+           << endl 
+           << "superellipse_option_list WITH_ARC numeric_list':"
+           << endl 
+           << "`end' == " << end << " (< 0)" << endl
+           << "Adding 360.0 to `end'." << endl; 
+
+      end += 360.0;
+   }
+
+@q ***** (5) @>
+@
+@<Define rules@>=
+
+  if (begin == end)
+  {
+      cerr << "ERROR!  In parser, rule `superellipse_option_list:'"
+           << endl 
+           << "superellipse_option_list WITH_ARC numeric_list':"
+           << endl 
+           << "`begin' and `end' are equal:  `begin' == `end' == " << begin
+           << endl
+           << "Can't set arc length.  Continuing." << endl; 
+
+      goto END_SUPERELLIPSE_WITH_ARC_RULE;
+
+  }
+
+@q ***** (5) @>
+
+  if (begin > end)
+  {
+      cerr << "WARNING!  In parser, rule `superellipse_option_list:'"
+           << endl 
+           << "superellipse_option_list WITH_ARC numeric_list':"
+           << endl 
+           << "`begin' > `end':  `begin' == " << begin 
+           << ", `end' == " << end
+           << endl
+           << "Switching values and continuing." << endl; 
+
+
+      temp  = begin;
+      begin = end;
+      end   = temp;
+
+  }
+
+@q ***** (5) @>
+@
+@<Define rules@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Before conversion:" << endl 
+           << "`begin' == " << begin << endl 
+           << "`end' == " << end << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;   
+
+   begin *= PI/180.0;
+   end *= PI/180.0;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "After conversion:" << endl 
+           << "`begin' == " << begin << endl 
+           << "`end' == " << end << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;   
+
+
+@q ***** (5) @>
+@
+@<Define rules@>=
+
+   s->arc_begin = begin;
+   s->arc_end   = end;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+    cerr << "s->arc_begin == " << s->arc_begin << endl
+         << "s->arc_end == " << s->arc_end << endl;
 
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
 
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+@
+@<Define rules@>=
+
+END_SUPERELLIPSE_WITH_ARC_RULE:
+
+  if (pv != 0)
+  {
+     pv->clear();
+     delete pv;
+     pv = 0;
+  }
 
   @=$$@> = static_cast<void*>(s);
 

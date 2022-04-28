@@ -593,6 +593,8 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     WITH_Y_SEMIAXIS@>@/
 @=%token <int_value>     WITH_Z_SEMIAXIS@>@/
 @=%token <int_value>     WITH_ARC@>@/
+@=%token <int_value>     RESET_ARC@>@/
+
 
 @=%token <pointer_value> PARABOLA@>@/
 @=%token <pointer_value> HYPERBOLA@>@/
