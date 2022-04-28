@@ -208,11 +208,22 @@ Superellipse(void)
 
    resolution        = 32;
 
-   arc_begin = -1;
-   arc_end   = -1;
+   arc_begin = -PI;
+   arc_end   = PI;
 
    return;
 }
+
+@q ** (2) Copy constructor.  @>
+@
+@<Declare |Superellipse| functions@>=
+Superellipse(const Superellipse &s) 
+{
+   operator=(s);
+   return;
+   
+}  /* End of |Superellipse| copy constructor definition  */
+
 
 @q ** (2) Destructor.  @>
 @
@@ -226,6 +237,57 @@ Superellipse::~Superellipse(void)
 {
    return;
 }
+
+@q * (1) Assignment. @>
+@* Assignment.
+@^\cofunc{Superellipse}{=}@>
+
+\LOG
+\initials{LDF 2022.04.28.}
+Added this funtion.
+\ENDLOG 
+
+@q ** (2) Declaration  @>
+
+@<Declare |Superellipse| functions@>=
+
+Superellipse&
+operator=(const Superellipse& e);
+
+@q ** (2) Definition  @>
+@
+@<Define |Superellipse| functions@>= 
+
+Superellipse&
+Superellipse::operator=(const Superellipse& s)
+{
+  if (this == &s)  /* \initials{LDF 2022.04.28.}  Make sure it's not
+                      self-assignment.  */
+    return *this;
+
+  Path::operator=(s);
+
+  beta              = s.beta;   /* |Superellipse| members. */
+  gamma             = s.gamma; 
+  superness_beta    = s.superness_beta;
+  superness_gamma   = s.superness_gamma;
+  resolution        = s.resolution;
+  x_semiaxis_length = s.x_semiaxis_length;
+  z_semiaxis_length = s.z_semiaxis_length;
+  arc_begin         = s.arc_begin;
+  arc_end           = s.arc_end;
+
+  center = s.center;  /* |Ellipse| members. */
+  axis_h = s.axis_h;
+  axis_v = s.axis_v;
+  focus_0 = s.focus_0;
+  focus_1 = s.focus_1;
+
+  number_of_points = s.number_of_points; /* |Reg_Cl_Plane_Curve| members. */
+
+  return *this;
+
+} /* End of |Superellipse::operator=| definition  */
 
 @q *** (3) Is |Superellipse|.@> 
 @  Is {\bf Superellipse}.
@@ -435,7 +497,7 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 @q ***** (5) @>
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
    if (DEBUG)
    { 
       cerr << "Entering `Superellipse::generate_path'."
@@ -483,7 +545,7 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 
     Point p0;
 
-    real step = 2 * PI / resolution;
+    real step = (arc_end - arc_begin) / resolution;
 
     real two_over_beta = (2.0F / beta);
     real two_over_gamma = (2.0F / gamma);
@@ -493,7 +555,6 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 
     real a = x_semiaxis_length; 
     real b = z_semiaxis_length;
-
 
 #if DEBUG_COMPILE
     if (DEBUG)
@@ -511,6 +572,10 @@ Superellipse::generate_path(Scanner_Node scanner_node)
              << "arc_begin       == " << arc_begin << endl 
              << "arc_end         == " << arc_end << endl 
              << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
     }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -532,7 +597,7 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 @
 @<Define |Superellipse| functions@>=
 
-    for (real t = -PI; t <= PI; t += step)
+    for (real t = arc_begin; t <= arc_end; t += step)
     {
 @q ****** (6) @>
 
@@ -542,8 +607,12 @@ Superellipse::generate_path(Scanner_Node scanner_node)
            cerr << "t == " << t << endl
                 << "cosf(t) == " << cosf(t) << endl
                 << "sinf(t) == " << sinf(t) << endl
-                << "(powf(cosf(t), two_over_beta)) == " << (powf(cosf(t), two_over_beta)) << endl
-                << "powf(sinf(t), two_over_gamma) == " << powf(sinf(t), two_over_gamma) << endl
+                << "(powf(cosf(t), two_over_beta)) == " 
+                << (powf(cosf(t), two_over_beta)) 
+                << endl
+                << "powf(sinf(t), two_over_gamma) == " 
+                << powf(sinf(t), two_over_gamma) 
+                << endl
                 << "two_over_beta == " << two_over_beta << endl
                 << "two_over_gamma == " << two_over_gamma << endl;
 
@@ -684,7 +753,11 @@ Superellipse::generate_path(Scanner_Node scanner_node)
 
        p0.set(x, 0, z);
        operator+=(p0); 
-       set_cycle();
+
+       if (arc_begin == -PI && arc_end == PI)
+          set_cycle(true);
+       else 
+          set_cycle(false);
 
 #if DEBUG_COMPILE
        if (DEBUG)
@@ -946,13 +1019,18 @@ Superellipse::is_elliptical(Scanner_Node scanner_node) const
 
 @q ** (2) Get rectangle.  @>
 @ Get rectangle.
+\initials{LDF 2022.04.27.}
+
+\LOG
+\initials{LDF 2022.04.27.}
+Added this function.
+\ENDLOG 
 
 @q *** (3) Declaration @>
 
 @<Declare |Superellipse| functions@>=
 int
 get_rectangle(Rectangle *r, Scanner_Node scanner_node = 0);
-
 
 @q *** (3) Definition @>
 @
@@ -1006,6 +1084,26 @@ Superellipse::get_rectangle(Rectangle *r, Scanner_Node scanner_node)
 @
 @<Define |Superellipse| functions@>=
 
+   if (arc_begin > -PI || arc_end < PI)
+   {
+       /* !! TODO:  LDF 2022.04.28.  Program this case.  */
+
+       cerr << "ERROR!  In `Superellipse::get_rectangle':" << endl 
+            << "`arc_begin' > -pi and/or `arc_end' < pi:"
+            << endl 
+            << "`arc_begin' == " << arc_begin << ", "
+            << "`arc_end' == " << arc_end << endl
+            << "Haven't programmed this case yet." << endl 
+            << "Exiting function unsuccessfully with return value 1."
+            << endl;
+
+       return 1;
+   }
+
+@q **** (4) @>
+@
+@<Define |Superellipse| functions@>=
+
    Point p0 = *points[0];
    Point p1 = *points[s/4];
    Point p2 = *points[s/2];
@@ -1041,6 +1139,75 @@ Superellipse::get_rectangle(Rectangle *r, Scanner_Node scanner_node)
    return 0;
 
 } /* End of |Superellipse::get_rectangle| definition */
+
+@q ** (2) Reset arc.  @>
+@ Reset arc.
+\initials{LDF 2022.04.28.}
+
+\LOG
+\initials{LDF 2022.04.28.}
+Added this funtion.
+\ENDLOG 
+
+@q *** (3) Declaration @>
+
+@<Declare |Superellipse| functions@>=
+int
+reset_arc(real begin = -1, 
+          real end = -1, 
+          real resolution = -1, 
+          Scanner_Node scanner_node = 0);
+
+
+@q *** (3) Definition @>
+@
+@<Define |Superellipse| functions@>=
+int
+Superellipse::reset_arc(real begin, 
+                        real end, 
+                        real resolution, 
+                        Scanner_Node scanner_node);
+{
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr << "Entering `Superellipse::reset_arc'." << endl
+           << "`begin' == " << begin << endl 
+           << "`end' == " << end << endl 
+           << "`resolution' == " << resolution << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define |Superellipse| functions@>=
+
+@q **** (4) @>
+@
+@<Define |Superellipse| functions@>=
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Superellipse::reset_arc' successfully with return value 0." 
+           << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+} /* End of |Superellipse::reset_arc| definition */
+
+
 
 @q * (1) Putting Superellipse together.@>
 @* Putting {\bf Superellipse} together.
