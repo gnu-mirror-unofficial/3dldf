@@ -1,133 +1,202 @@
-@q * (1) Fix arc boundaries.  @>
-@ Fix arc boundaries.
-\initials{LDF 2022.04.28.}
+@q ** (2) @>
 
-\LOG
-\initials{LDF 2022.04.28.}
-Added this function.
-\ENDLOG
+@q *** (3) Declaration @>
 
-@q ** (2) Declaration @>
-
-@<Declare |Superellipse| functions@>=
-static
-int
-fix_arc_boundaries(real &begin, real &end, Scanner_Node scanner_node);
-
-@q ** (2) Definition  @>
-@
-@<Define |Superellipse| functions@>=
-int
-Superellipse::fix_arc_boundaries(real &begin, real &end, Scanner_Node scanner_node)
+Path
+Superellipse::sub_generate_superellipse_path(real begin, 
+                                             real end, 
+                                             real resolution, 
+                                             Scanner_Node scanner_node)
 { 
-@q *** (3) @>
-
-#if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ 
-   if (DEBUG)
-   { 
-       cerr << "Entering `Superellipse::fix_arc_boundaries'." << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-   real temp = 0.0;
-
-@q *** (3) @>
-
-   if (begin < 0.0)
-   { 
-      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
-           << endl 
-           << "`begin' == " << begin << " (< 0)" << endl
-           << "Adding 360.0 to `begin'." << endl; 
-
-      begin += 360.0;
-   }
-
-   if (end < 0.0)
-   { 
-      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
-           << endl 
-           << "`end' == " << end << " (< 0)" << endl
-           << "Adding 360.0 to `end'." << endl; 
-
-      end += 360.0;
-   }
-
-@q *** (3) @>
-@
-@<Define |Superellipse| functions@>=
-
-  if (begin == end)
-  {
-      cerr << "ERROR!  In `Superellipse::fix_arc_boundaries':'"
-           << endl 
-           << "`begin' and `end' are equal:  `begin' == `end' == " << begin
-           << endl
-           << "Can't set arc length." << endl
-           << "Exiting function unsuccessfully with return value 1."
-           << endl;
-
-      return 1;
-
-  }
-
-@q ***** (5) @>
-
-  if (begin > end)
-  {
-      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
-           << endl 
-           << "`begin' > `end':  `begin' == " << begin 
-           << ", `end' == " << end
-           << endl
-           << "Switching values and continuing." << endl; 
 
 
-      temp  = begin;
-      begin = end;
-      end   = temp;
+    Path::clear();
 
-  }
+    bool first_time = true;
+
+    int sign_x =  1;
+    int sign_z = -1;
+  
+    real cos_t;
+    real sin_t;
+
+    operator+=("..");
 
 @q ***** (5) @>
 @
 @<Define |Superellipse| functions@>=
 
+    for (real t = arc_begin; t <= arc_end; t += step)
+    {
+@q ****** (6) @>
+
 #if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "Before conversion:" << endl 
-           << "`begin' == " << begin << endl 
-           << "`end' == " << end << endl;
-   }  
+       if (DEBUG)
+       { 
+           cerr << "t == " << t << endl
+                << "cosf(t) == " << cosf(t) << endl
+                << "sinf(t) == " << sinf(t) << endl
+                << "(powf(cosf(t), two_over_beta)) == " 
+                << (powf(cosf(t), two_over_beta)) 
+                << endl
+                << "powf(sinf(t), two_over_gamma) == " 
+                << powf(sinf(t), two_over_gamma) 
+                << endl
+                << "two_over_beta == " << two_over_beta << endl
+                << "two_over_gamma == " << two_over_gamma << endl;
+
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+       cos_t = cosf(t);
+    
+       if (cos_t < 0)
+       {
+          sign_x = -1;
+          cos_t *= -1;
+       }
+       else
+          sign_x = 1;
+
+       sin_t = sinf(t);
+    
+       if (sin_t < 0)
+       {
+          sign_z = -1;
+          sin_t *= -1;
+       }
+       else
+          sign_z = 1;
+#if LDF_REAL_DOUBLE
+       x = sign_x * a * sgn(cos_t) * pow(fabs(cos_t), two_over_beta);
+       z = sign_z * b * sgn(sin_t) * pow(fabs(sin_t), two_over_gamma);
+#else
+       x = sign_x * a * sgn(cos_t) * powf(fabsf(cos_t), two_over_beta);
+       z = sign_z * b * sgn(sin_t) * powf(fabsf(sin_t), two_over_gamma);
+#endif 
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          cerr << "x == " << x << endl
+               << "z == " << z << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
+  
+       status = fpclassify(x);
+       status1 = fpclassify(z);
+
+       if (   (status  == FP_NORMAL || status  == FP_ZERO) 
+           && (status1 == FP_NORMAL || status1 == FP_ZERO))
+       {
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+             cerr << "x and z are both normal or zero." << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
+       }
+       else if ((status == FP_NORMAL || status == FP_ZERO) && status1 == FP_SUBNORMAL)
+       {
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+             cerr << "x is normal or zero but z is subnormal.  Setting z to 0.0." << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+          z = 0.0;
+       }
+       else if (status == FP_SUBNORMAL && (status1 == FP_NORMAL || status1 == FP_ZERO))
+       {
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+             cerr << "z is normal or zero but x is subnormal.  Setting x-coordinate to 0.0." << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
+          x = 0.0;
+       }
+       else if (status == FP_SUBNORMAL || status == FP_SUBNORMAL)
+       {
+#if DEBUG_COMPILE
+          if (DEBUG) 
+          { 
+             cerr << "x and z are subnormal.  Setting x- and z-coordinates to 0.0." << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+          x = z = 0.0;
+       }
+       else if (status == FP_NAN && (1 - sinf(t)) < .1)
+       {
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+             cerr << "status == FP_NAN but (1 - sinf(t)) < .1.  Setting x to 0.0." << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
+          x = 0.0;
+       }
+       else if (status1 == FP_NAN && (1 - cosf(t)) < .1)
+       {
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+             cerr << "status1 == FP_NAN but (1 - cost(t)) < .1.  Setting z to 0.0." << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
+          z = 0.0;
+       }
+       else if (fabs(x) < .00001 || fabs(z) < .00001)
+       {
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+             cerr << "Absolute value of x and/or z is < .00001."
+                  << "Setting the small cooordinate or coordinatess to 0.0." 
+                  << endl;
+          }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+          if (fabs(x) < .00001)
+             x = 0.0;
+
+          if (fabs(z) < .00001)
+             z = 0.0;
+       }
+       else
+       {
+           cerr << "WARNING!  In `Superellipse::generate_path':" << endl 
+                << "x- and/or z-coordinate is not normal, subnormal or zero:" << endl;
+
+           if (status == FP_NAN)
+              cerr << "x is not a number." << endl;
+           else if (status == FP_INFINITE)
+              cerr << "x is positive or negative infinity." << endl;
+
+           cerr << "Skipping and continuing." << endl << endl; 
+
+           continue;
+       }
+
+       p0.set(x, 0, z);
+       operator+=(p0); 
+
+       if (arc_begin == -PI && arc_end == PI)
+          set_cycle(true);
+       else 
+          set_cycle(false);
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << endl;
+       }  
 #endif /* |DEBUG_COMPILE|  */@;   
 
-   begin *= PI/180.0;
-   end *= PI/180.0;
+@q ****** (6) @>
 
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "After conversion:" << endl 
-           << "`begin' == " << begin << endl 
-           << "`end' == " << end << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@;   
+    } /* |for| */
 
-@q *** (3) @>
-@
-@<Define |Superellipse| functions@>=
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-       cerr << "Exiting `Superellipse::fix_arc_boundaries' successfully "
-            << "with return value 0." 
-            << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-   return 0;
-
-} /* End of |Superellipse::fix_arc_boundaries| definition  */
+}  /* End of |Superellipse::sub_generate_superellipse_path| definition  */
