@@ -263,9 +263,7 @@ Added this rule.
 
    Transform t;
 
-   Point normal(0, 1, 0);
-
-   status = s->generate_path(t, normal, scanner_node); 
+   status = s->generate_path(t, scanner_node); 
  
    if (status != 0)
    {
@@ -374,6 +372,9 @@ Added this rule.
 
   s->x_semiaxis_length = @=$3@>;
 
+  s->right.set(@=$3@>, 0, 0); 
+  s->left.set(-@=$3@>, 0, 0); 
+
   @=$$@> = @=$1@>;
 
 };
@@ -405,6 +406,9 @@ Added this rule.
   Superellipse *s = static_cast<Superellipse*>(@=$1@>);
 
   s->z_semiaxis_length = @=$3@>;
+
+  s->forwards.set(0,  0,  @=$3@>); 
+  s->backwards.set(0, 0, -@=$3@>); 
 
   @=$$@> = @=$1@>;
 
