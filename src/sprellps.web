@@ -687,10 +687,12 @@ Superellipse::generate_path(Transform &u, Scanner_Node scanner_node)
        operator*=(u);
 
        Point down(0, -1, 0);
-
+#if 0 
        if (normal == down)
           *this *= u.rotate(180, 0, 0);
+#endif 
 
+      *this *= u.rotate(0, 180, 0);
 
        show("`*this' after transformation:");
        normal.show("normal after transformation:");

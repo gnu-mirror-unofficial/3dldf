@@ -39,18 +39,16 @@ beginfig(0);
 
   point p[];
 
-  s0 := get_superellipse with_resolution 20 with_superness .75 with_a 2 with_b 3
+  s0 := get_superellipse with_resolution 128 with_superness .75 with_a 2 with_b 3
     with_arc (0, 85);
 
-%% !! START HERE: LDF 2022.04.28. Try to get this to work.
-%% The paths don't match up when they're transformed.  
-  
   rotate s0 (10, 5, 13);
   %shift s0 (-1cm, 3cm);
 
   label.rt("0", get_point(0) s0);
 
 
+  
 % r0 := get_rectangle s0;
 
   % show r0;
@@ -58,12 +56,19 @@ beginfig(0);
 
   n := size s0 - 1;
   
-  draw s0 with_color red with_pen big_pen;
+  %draw s0 with_color red with_pen big_pen;
 
+  n := size s0 - 1;
+  message "n:";
+  show n;
+  
+  for i = 0 step 1 until n:
+    drawdot get_point (i) s0 with_color red;
+  endfor;
 
   
   % for i = 1 step 2 until n:
-  %   label.rt(decimal i, get_point (i) s0);
+  %   drawdot get_point (i) s0;
   % endfor;
 
   % s1 := get_superellipse with_resolution 64 with_superness .25 with_a 2 with_b 3;
@@ -77,14 +82,23 @@ beginfig(0);
 
   dotlabel.bot("(0, 0, 0)", origin);
 
-  reset_arc s0;
+  reset_arc s0 (-180, 180, 128);
 
-  draw s0 with_color blue;
+  %draw s0 with_color blue;
 
+  n := size s0 - 1;
+  message "n:";
+  show n;
+  
+  for i = 0 step 1 until n:
+    drawdot get_point (i) s0;
+  endfor;
+
+  
   label.rt("0", get_point(0) s0);
 
   
-endfig with_projection parallel_x_z;    
+endfig with_projection parallel_x_z no_sort;    
 end_mp;
 end;
 
