@@ -1,0 +1,23 @@
+macro ssuperellipse;
+
+
+def ssuperellipse (qq) {point r, point t,point l, point b, numeric s}  =
+qq := r{dir 90}...(mediate(xpart t,xpart r, s), mediate(zpart r,zpart t, s));
+enddef;
+
+
+
+% qq := r{up}...(s[xpart t,xpart r],s[zpart r,zpart t])
+
+%{t-r}...
+% t{left}...(s[xpart t,xpart l],s[zpart l,zpart t]){l-t}...
+% l{down}...(s[xpart b,xpart l],s[zpart l,zpart b]){b-l}...
+% b{right}...(s[xpart b,xpart r],s[zpart r,zpart b]){r-b}...cycle;
+
+
+path q;
+
+ssuperellipse (q) {right, forwards, left, backwards, .75};
+
+show q;
+
