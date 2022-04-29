@@ -888,235 +888,29 @@ Added this rule.
 
 @q *** (3) @>
 
-@q ** (2) command --> UNSET_NAME color_variable.@>
+@q ** (2) numeric_list_optional.  @>
 
-@ \§command> $\longrightarrow$ \.{UNSET\_NAME} \§color variable primary>.
+@ \§numeric list optional>.
+\initials{LDF 2022.04.28.}
+
+\LOG
+\initials{LDF 2022.04.28.}
+Added this type declaration.
+\ENDLOG 
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> numeric_list_optional@>
+
+@q ** (2) numeric_list_optional: /* Empty  */@>
+
+@ \§numeric list optional> $\longrightarrow$ \.{EMPTY}.
 \initials{LDF 2022.04.28.}
 
 \LOG
 \initials{LDF 2022.04.28.}
 Added this rule.
-\ENDLOG
+\ENDLOG 
 
-@q *** (3) @>
-
-@<Define rules@>=
-@=command: RESET_ARC superellipse_variable numeric_list_optional@>@/
-{ 
-@q **** (4) @>
-
-   @<Common declarations for rules@>@; 
-
-   real begin       = -180;
-   real end         =  180;
-   real resolution  =   32;
-
-   Superellipse *s = 0;
-   Pointer_Vector<real> *pv = 0;
-
-   Point up(0, 1, 0);
-   Point right(1, 0, 0);
- 
-@q **** (4) @>
-
-#if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ @; 
-   if (DEBUG) 
-     {
-         cerr_strm << thread_name << "*** Parser:  `command --> RESET_ARC "
-                   << "superellipse_variable numeric_list_optional'."
-                   << endl;
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-     }
-#endif /* |DEBUG_COMPILE|  */
-
-     entry = static_cast<Id_Map_Entry_Node>(@=$2@>);  
-
-     s = static_cast<Superellipse*>(entry->object);
-
-     pv = static_cast<Pointer_Vector<real>*>(@=$3@>);
-
-@q ***** (5) @>
-@
-@<Define rules@>=
-
-    if (s != 0)
-    {
-@q ****** (6) @>
-
-          
-       s->arc_begin  = (pv && pv->v.size() > 0) ? *(pv->v[0]) : -180.0;
-       s->arc_end    = (pv && pv->v.size() > 1) ? *(pv->v[1]) :  180.0;
-       s->resolution = (pv && pv->v.size() > 2) ? *(pv->v[2]) :   64;
-
-       Transform t;
-
-       Point right_unit_vector = s->right.unit_vector(false);
-
-       if (s->points.size() > 0) 
-       {
-@q ******* (7) @>
-
-          s->normal.show("s->normal:");
-          s->center.show("s->center:");
-          s->center.show("s->right:");
-          s->get_point(0).show("s->get_point(0):");
-          s->get_last_point().show("s->get_last_point():");
-
-          if (s->normal == up && right_unit_vector == right)
-          {
-@q ******** (8) @>
-
-#if DEBUG_COMPILE
-             if (DEBUG)
-             { 
-                cerr_strm << thread_name << "In parser, rule `command --> RESET_ARC "
-                          << "superellipse_variable numeric_list_optional':"
-                          << endl
-                          << "`s->normal' == (0, 1, 0) and `right_unit_vector' == (1, 0, 0)."
-                          << endl 
-                          << "No transformation necessary.";
-
-                log_message(cerr_strm);
-                cerr_message(cerr_strm);
-                cerr_strm.str("");
-
-             }           
-#endif /* |DEBUG_COMPILE|  */@;           
-
-@q ******** (8) @>
-
-          }  /* |if (s->normal == up && right_unit_vector == right)|  */
-
-@q ******* (7) @>
-
-          else
-          {
-@q ******** (8) @>
-
-#if DEBUG_COMPILE
-             if (DEBUG)
-             { 
-                cerr_strm << thread_name << "In parser, rule `command --> RESET_ARC "
-                          << "superellipse_variable numeric_list_optional':"
-                          << endl
-                          << "`s->normal' != (0, 1, 0) and/or right_unit_vector != (1, 0, 0)."
-                          << endl
-                          << "Transformation necessary:";
-
-                log_message(cerr_strm);
-                cerr_message(cerr_strm);
-                cerr_strm.str("");
-
-                cerr << "Before transformation:" << endl;
-
-                s->normal.show("s->normal:");
-                right_unit_vector.show("right_unit_vector:");
-
-             }           
-#endif /* |DEBUG_COMPILE|  */@;           
-
-@q ******** (8) @>
-
-             Point temp_pt = s->normal;
-
-             temp_pt.shift(s->center);
-
-             temp_pt.show("temp_pt after shifting to s->center:");
-
-             t.align_with_axis(s->center, temp_pt, 'y');
-
-             t.show("t:");
-
-@q ******** (8) @>
-
-          }
-
-@q ******* (7) @>
-
-       }  /* |if (s->points.size() > 0)| */
-
-@q ****** (6) @>
-@
-@<Define rules@>=
-
-       status = s->generate_path(t, scanner_node);
-
-       if (status != 0)
-       {
-            cerr_strm << thread_name << "ERROR!  In parser, rule `command --> RESET_ARC "
-                      << "superellipse_variable numeric_list_optional':"
-                      << endl
-                      << "`Superellipse::generate_path' failed, returning " << status << "."
-                      << endl
-                      << "Failed to reset arc for `superellipse'.  Continuing."
-                      << endl;
-
-            log_message(cerr_strm);
-            cerr_message(cerr_strm, true);
-            cerr_strm.str("");
-
-            goto END_RESET_ARC_RULE;
-
-       }  /* |if (status != 0)|  */
-
-@q ****** (6) @>
-@
-@<Define rules@>=
-
-#if DEBUG_COMPILE
-       else if (DEBUG)
-       { 
-            cerr_strm << thread_name << "In parser, rule `command --> RESET_ARC "
-                      << "superellipse_variable numeric_list_optional':"
-                      << endl
-                      << "`Superellipse::generate_path' succeeded, returning 0."
-                      << endl;
-
-            log_message(cerr_strm);
-            cerr_message(cerr_strm);
-            cerr_strm.str("");
-
-       }  
-#endif /* |DEBUG_COMPILE|  */@;         
-
-@q ****** (6) @>
-
-    }  /* |if (s != 0)| */
-
-@q ***** (5) @>
-
-    else
-    {
-        cerr_strm << thread_name << "WARNING!  In parser, rule `command --> RESET_ARC "
-                  << "superellipse_variable numeric_list_optional':"
-                  << endl
-                  << "`superellipse' is NULL.  Can't reset arc.  Continuing.";
-
-        log_message(cerr_strm);
-        cerr_message(cerr_strm, true);
-        cerr_strm.str("");
-
-    }
-
-END_RESET_ARC_RULE:
-
-    @=$$@> = 0;
-
-@q **** (4) @>
-
-};
-
-@q ** (2) @>
-@
-@<Type declarations for non-terminal symbols@>=
-@=%type <pointer_value> numeric_list_optional@>
-
-@q ** (2) @>
-@
 @<Define rules@>= 
 @=numeric_list_optional: /* Empty  */@>
 {
@@ -1125,16 +919,21 @@ END_RESET_ARC_RULE:
 
 };
 
-@q ** (2) @>
-@
+@q ** (2) numeric_list_optional: numeric_list @>
+
+@ \§numeric list optional> $\longrightarrow$ \§numeric list>.
+\initials{LDF 2022.04.28.}
+
+\LOG
+\initials{LDF 2022.04.28.}
+Added this rule.
+\ENDLOG 
+
 @<Define rules@>= 
 @=numeric_list_optional: numeric_list@>
 {
   @=$$@> = static_cast<void*>(@=$1@>);
 };
-
-
-
 
 @q * (1) @>
 
