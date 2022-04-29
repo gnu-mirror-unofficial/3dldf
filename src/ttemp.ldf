@@ -39,64 +39,31 @@ beginfig(0);
 
   point p[];
 
-  s0 := get_superellipse with_resolution 128 with_superness .75 with_a 2 with_b 3
-    with_arc (0, 85);
+  s0 := get_superellipse with_resolution 64 with_superness .75 with_a 2 with_b 3;
 
-  rotate s0 (10, 5, 13);
+  %rotate s0 (10, 5, 13);
   %shift s0 (-1cm, 3cm);
 
-  label.rt("0", get_point(0) s0);
-
-
+  draw s0 with_color red with_pen big_pen;
   
-% r0 := get_rectangle s0;
-
+  % r0 := get_rectangle s0;
   % show r0;
   % draw r0 with_color blue;
 
   n := size s0 - 1;
-  
-  %draw s0 with_color red with_pen big_pen;
-
-  n := size s0 - 1;
   message "n:";
   show n;
   
-  for i = 0 step 1 until n:
-    drawdot get_point (i) s0 with_color red;
+  for i = 0 step 4 until n:
+    dotlabel.top(decimal i,  get_point (i) s0);
   endfor;
 
+  s1 := s0;
+
+  rotate s1 (80, 0, 0);
+
+  draw s1 with_color blue;
   
-  % for i = 1 step 2 until n:
-  %   drawdot get_point (i) s0;
-  % endfor;
-
-  % s1 := get_superellipse with_resolution 64 with_superness .25 with_a 2 with_b 3;
-  % draw s1 with_color blue;
-
-  % s2 := get_superellipse with_resolution 64 with_superness 2 with_a 2 with_b 3;
-  % draw s2 with_color green;
-
-  % s4 := get_superellipse with_resolution 64 with_superness 1 with_a 2 with_b 3;
-  % draw s4 with_color magenta;
-
-  dotlabel.bot("(0, 0, 0)", origin);
-
-  reset_arc s0 (-180, 180, 128);
-
-  %draw s0 with_color blue;
-
-  n := size s0 - 1;
-  message "n:";
-  show n;
-  
-  for i = 0 step 1 until n:
-    drawdot get_point (i) s0;
-  endfor;
-
-  
-  label.rt("0", get_point(0) s0);
-
   
 endfig with_projection parallel_x_z no_sort;    
 end_mp;

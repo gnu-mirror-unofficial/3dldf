@@ -214,8 +214,8 @@ Superellipse(void)
 
    resolution        = 32;
 
-   arc_begin = -PI;
-   arc_end   = PI;
+   arc_begin = 0;
+   arc_end   = 360;
 
    normal.set(0, 1, 0);
    left.set(-1.0, 0.0, 0.0);
@@ -548,7 +548,7 @@ Superellipse::generate_path(Transform &u, Scanner_Node scanner_node)
 @q ***** (5) @>
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
    if (DEBUG)
    { 
       cerr << "Entering `Superellipse::generate_path'."
@@ -559,6 +559,12 @@ Superellipse::generate_path(Transform &u, Scanner_Node scanner_node)
 
    int status = 0;
    int status1 = 0;
+
+cerr << "arc_begin == " << arc_begin << endl;
+cerr << "arc_end == " << arc_end << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
    status = fix_arc_boundaries(scanner_node);
 
@@ -591,6 +597,10 @@ Superellipse::generate_path(Transform &u, Scanner_Node scanner_node)
             << "arc_end == " << arc_end << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 @q ***** (5) @>
 
@@ -1344,7 +1354,7 @@ Superellipse::fix_arc_boundaries(Scanner_Node scanner_node)
 @q *** (3) @>
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
    if (DEBUG)
    { 
        cerr << "Entering `Superellipse::fix_arc_boundaries'." << endl;
