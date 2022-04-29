@@ -91,9 +91,13 @@ Added this rule.
     } /* |if (entry == 0 || entry->object == 0)|  */
 
   else /* |entry != 0 && entry->object != 0|  */
-     @=$$@> = static_cast<void*>(create_new<Superellipse>(
-                                   static_cast<Superellipse*>(
-                                     entry->object))); 
+  {
+     Superellipse *s = static_cast<Superellipse*>(entry->object);
+     Superellipse *t = create_new<Superellipse>(0);
+     *t = *s;
+
+     @=$$@> = static_cast<void*>(t); 
+  }
 
 };
 

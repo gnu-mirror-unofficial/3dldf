@@ -548,7 +548,7 @@ Superellipse::generate_path(Transform &u, Scanner_Node scanner_node)
 @q ***** (5) @>
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
    if (DEBUG)
    { 
       cerr << "Entering `Superellipse::generate_path'."
@@ -560,11 +560,10 @@ Superellipse::generate_path(Transform &u, Scanner_Node scanner_node)
    int status = 0;
    int status1 = 0;
 
+#if 0 
 cerr << "arc_begin == " << arc_begin << endl;
 cerr << "arc_end == " << arc_end << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+#endif
 
    status = fix_arc_boundaries(scanner_node);
 
@@ -599,8 +598,6 @@ getchar();
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
 @q ***** (5) @>
 
@@ -689,10 +686,12 @@ getchar();
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
+#if 0 
        normal.show("normal before transformation:");
        show("`*this' before transformation:");
        center.show("`center' before transformation:");
        right.show("`right' before transformation:");
+#endif 
 
        operator*=(u);
 
@@ -704,10 +703,12 @@ getchar();
 
       *this *= u.rotate(0, 180, 0);
 
+#if 0 
        show("`*this' after transformation:");
        normal.show("normal after transformation:");
        center.show("`center' after transformation:");
        right.show("`right' after transformation:");
+#endif 
 
        real angle = right.angle(Point(1, 0, 0));
 
@@ -718,11 +719,13 @@ getchar();
           *this *= u.rotate(0, -angle, 0);
           angle = right.angle(Point(1, 0, 0));
 
+#if 0 
           cerr << "After rotation:  angle == " << angle << endl;
           show("`*this' after rotation:");
           normal.show("normal after rotation:");
           center.show("`center' after rotation:");
           right.show("`right' after rotation:");
+#endif 
 
 
        }
@@ -947,7 +950,9 @@ getchar();
 @
 @<Define |Superellipse| functions@>=
 
+#if 0 
    show("*this after generation:");
+#endif 
 
    if (!u.is_identity())
    {
@@ -955,13 +960,19 @@ getchar();
 
       *this *= u.inverse();
 
+#if 0 
       normal.show("normal after reverse transformation:");
       show("`*this' after reverse transformation:");
       center.show("`center' after reverse transformation:");
       right.show("`right' after reverse transformation:");
+#endif 
    }
    else
+   {
+#if 0 
       cerr << "`u' is identity." << endl;
+#endif 
+   }
 
 
 @q ***** (5) @>
@@ -1354,7 +1365,7 @@ Superellipse::fix_arc_boundaries(Scanner_Node scanner_node)
 @q *** (3) @>
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
    if (DEBUG)
    { 
        cerr << "Entering `Superellipse::fix_arc_boundaries'." << endl;

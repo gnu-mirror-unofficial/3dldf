@@ -301,7 +301,6 @@ of the points on the path is the same.
 @<Define rules@>=
 @=path_primary: SUBPATH numeric_list OF path_primary@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -379,7 +378,9 @@ of the points on the path is the same.
   else 
     {
       *p = q->subpath(static_cast<size_t>(*(w->v[0])), 
-                         static_cast<size_t>(*(w->v[1])));
+                      static_cast<size_t>(*(w->v[1])),
+                      false,
+                      "..");
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -473,11 +474,10 @@ Added this rule.
 @<Define rules@>=
 @=path_primary: SUBPATH numeric_list OF superellipse_primary@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr << "\n*** Parser: path_primary --> SUBPATH numeric_list "
@@ -486,8 +486,13 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
   Path* p = create_new<Path>(0);
-  Path* q = static_cast<Path*>(@=$4@>); 
-  
+
+  Superellipse* q = static_cast<Superellipse*>(@=$4@>); 
+
+#if 0
+  q->show("*q:");
+#endif 
+
   Pointer_Vector<real>* w = static_cast<Pointer_Vector<real>*>(@=$2@>); 
   
 @q **** (4) Error handling for the case that |(w->v.size() < 2)|.  @>
@@ -548,8 +553,9 @@ Added this rule.
 @<Define rules@>=
   else 
     {
-      *p = q->subpath(static_cast<size_t>(*(w->v[0])), 
-                         static_cast<size_t>(*(w->v[1])));
+       *p = q->Path::subpath(static_cast<size_t>(*(w->v[0])), 
+                             static_cast<size_t>(*(w->v[1])), 
+                             false, "..");
 
 #if DEBUG_COMPILE
    if (DEBUG)
