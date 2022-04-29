@@ -947,82 +947,26 @@ Added this rule.
     {
 @q ****** (6) @>
 
-     s->arc_begin  = -180;
-     s->arc_end    =  180;
-     s->resolution =   64;
-
-     if (pv)
-     {
-         if (pv->v.size() > 0)
-            s->arc_begin = *(pv->v[0]);
-         if (pv->v.size() > 1)
-             s->arc_end   = *(pv->v[1]);
-         if (pv->v.size() > 2)
-             s->resolution   = *(pv->v[2]);
-     }
-
-@q ****** (6) @>
-@
-@<Define rules@>=
+          
+       s->arc_begin  = (pv && pv->v.size() > 0) ? *(pv->v[0]) : -180.0;
+       s->arc_end    = (pv && pv->v.size() > 1) ? *(pv->v[1]) :  180.0;
+       s->resolution = (pv && pv->v.size() > 2) ? *(pv->v[2]) :   64;
 
        Transform t;
 
-       Point normal;
-
+       Point right_unit_vector = s->right.unit_vector(false);
 
        if (s->points.size() > 0) 
        {
 @q ******* (7) @>
 
-          normal = s->get_normal();
-
-          normal.show("normal:");
+          s->normal.show("s->normal:");
           s->center.show("s->center:");
+          s->center.show("s->right:");
           s->get_point(0).show("s->get_point(0):");
           s->get_last_point().show("s->get_last_point():");
 
-          if (normal == INVALID_POINT)
-          {
-            cerr_strm << thread_name << "ERROR!  In parser, rule `command --> RESET_ARC "
-                      << "superellipse_variable numeric_list_optional':"
-                      << endl
-                      << "`s->points.size()' > 0 but `Path::get_normal' failed, "
-                      << "returning `INVALID_POINT'." 
-                      << endl
-                      << "Failed to get normal for `path'.  Can't reset arc."
-                      << endl 
-                      << "Continuing.";
-
-            log_message(cerr_strm);
-            cerr_message(cerr_strm, true);
-            cerr_strm.str("");
-
-            goto END_RESET_ARC_RULE;
-
-          } /* |if (!INVALID_POINT)| */
-
-@q ******* (7) @>
-
-#if DEBUG_COMPILE
-          else if (DEBUG)
-          { 
-            cerr_strm << thread_name << "In parser, rule `command --> RESET_ARC "
-                      << "superellipse_variable numeric_list_optional':"
-                      << endl
-                      << "``Path::get_normal' succeeded, returning `Point':";
-
-            log_message(cerr_strm);
-            cerr_message(cerr_strm);
-            cerr_strm.str("");
-
-            normal.show("normal:");
- 
-          }      
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******* (7) @>
-
-          if (normal == up)
+          if (s->normal == up && right_unit_vector == right)
           {
 @q ******** (8) @>
 
@@ -1032,7 +976,9 @@ Added this rule.
                 cerr_strm << thread_name << "In parser, rule `command --> RESET_ARC "
                           << "superellipse_variable numeric_list_optional':"
                           << endl
-                          << "`normal' == (0, 1, 0).  No transformation necessary.";
+                          << "`s->normal' == (0, 1, 0) and `right_unit_vector' == (1, 0, 0)."
+                          << endl 
+                          << "No transformation necessary.";
 
                 log_message(cerr_strm);
                 cerr_message(cerr_strm);
@@ -1043,7 +989,7 @@ Added this rule.
 
 @q ******** (8) @>
 
-          }  /* |if (normal == up && s->get_point(0) == right)|  */
+          }  /* |if (s->normal == up && right_unit_vector == right)|  */
 
 @q ******* (7) @>
 
@@ -1057,7 +1003,7 @@ Added this rule.
                 cerr_strm << thread_name << "In parser, rule `command --> RESET_ARC "
                           << "superellipse_variable numeric_list_optional':"
                           << endl
-                          << "`normal' != (0, 1, 0)"
+                          << "`s->normal' != (0, 1, 0) and/or right_unit_vector != (1, 0, 0)."
                           << endl
                           << "Transformation necessary:";
 
@@ -1067,18 +1013,21 @@ Added this rule.
 
                 cerr << "Before transformation:" << endl;
 
-                normal.show("normal:");
+                s->normal.show("s->normal:");
+                right_unit_vector.show("right_unit_vector:");
 
              }           
 #endif /* |DEBUG_COMPILE|  */@;           
 
 @q ******** (8) @>
 
-             normal.shift(s->get_center());
+             Point temp_pt = s->normal;
 
-             normal.show("normal after shifting to center:");
+             temp_pt.shift(s->center);
 
-             t.align_with_axis(s->center, normal, 'y');
+             temp_pt.show("temp_pt after shifting to s->center:");
+
+             t.align_with_axis(s->center, temp_pt, 'y');
 
              t.show("t:");
 
@@ -1094,7 +1043,7 @@ Added this rule.
 @
 @<Define rules@>=
 
-       status = s->generate_path(t, normal, scanner_node);
+       status = s->generate_path(t, scanner_node);
 
        if (status != 0)
        {
