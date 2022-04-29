@@ -935,6 +935,32 @@ Added this rule.
   @=$$@> = static_cast<void*>(@=$1@>);
 };
 
+
+@q ** (2) command: RESET_ARC numeric_list_optional @>
+
+@ \§command> $\longrightarrow$ \.{RESET\_ARC} \§numeric list optional>.
+\initials{LDF 2022.04.29.}
+
+!! PLEASE NOTE:  This is a dummy rule.  It's needed so that Bison won't issue 
+a warning about  a ``useless'' nonterminal and useless rules.  I want to 
+keep \§numeric list optional> and its associated rules because I think I will
+use them in the future.
+\initials{LDF 2022.04.29.}
+
+\LOG
+\initials{LDF 2022.04.29.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=command: RESET_ARC numeric_list_optional@>
+{
+  @=$$@> = static_cast<void*>(0);
+};
+
+
+
+
 @q * (1) @>
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
