@@ -2905,7 +2905,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -2955,7 +2955,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -4488,6 +4488,225 @@ subtraction to work.
   
 };
 
+@q ** (2) numeric_primary: MEDIATE LEFT_PARENTHESIS numeric_expression @>
+@q ** (2) COMMA numeric_expression RIGHT_PARENTHESIS.                  @>
+
+@ \§numeric primary> $\longrightarrow$ \.{MEDIATE} 
+\.{LEFT\_PARENTHESIS} \§numeric expression> \.{COMMA} 
+\§numeric expression> \.{RIGHT\_PARENTHESIS}.                                       
+
+\LOG
+\initials{LDF 2022.04.12.}
+Added this rule.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define rules@>=
+@=numeric_primary: MEDIATE LEFT_PARENTHESIS numeric_expression @>
+@=COMMA numeric_expression RIGHT_PARENTHESIS@>
+{
+@q **** (4) @>
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+    if (DEBUG) 
+      {
+        cerr_strm << thread_name << "*** Parser: "
+                  << "`numeric_primary: MEDIATE LEFT_PARENTHESIS"
+                  << endl 
+                  << "numeric_expression COMMA numeric_expression RIGHT_PARENTHESIS'.";
+        
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+      }
+#endif /* |DEBUG_COMPILE|  */
+
+@q **** (4) @>
+
+   real r0 = @=$3@>;
+   real r1 = @=$5@>; 
+
+   real result = 0.0;
+
+@q **** (4) @>
+
+   if ((r0 >= 0 && r1 >= 0) || (r0 < 0 && r1 <= 0))
+   {
+#if LDF_REAL_FLOAT
+      if (MAX_REAL - fabsf(r0) <= fabsf(r1))
+      {
+          result = INVALID_REAL;
+      }  
+#else
+      if (MAX_REAL - fabs(r0) <= fabs(r1))
+      {
+          result = INVALID_REAL;
+      }  
+#endif     
+   }
+  
+@q **** (4) @>
+
+   if (result == INVALID_REAL)
+   {
+       cerr << "ERROR!  In parser, rule `numeric_primary: MEDIATE "
+            << "LEFT_PARENTHESIS numeric_expression"
+            << endl 
+            << "COMMA numeric_expression RIGHT_PARENTHESIS':"
+            << endl
+            << "The sum of the first two `numeric_expressions' >= `MAX_REAL'."
+            << endl
+            << "Can't perform the mediation operation."
+            << endl 
+            << "Set result to `INVALID_REAL' and will continue."
+            << endl;
+   }
+
+@q **** (4) @>
+
+   else
+   {
+      result = r0 + ((r1 - r0) * .5);
+   
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "In parser, rule `numeric_primary: MEDIATE "
+               << "LEFT_PARENTHESIS numeric_expression"
+               << endl 
+               << "COMMA numeric_expression RIGHT_PARENTHESIS':"
+               << endl
+               << "`result' == " << result
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+  
+   } /* |else| */
+
+@q **** (4) @>
+
+   @=$$@> = result;
+
+@q **** (4) @>   
+
+};
+
+@q ** (2) numeric_primary: MEDIATE LEFT_PARENTHESIS numeric_expression @>
+@q ** (2) COMMA numeric_expression COMMA numeric_expression            @>
+@q ** (2) RIGHT_PARENTHESIS.                                           @>
+
+@ \§numeric primary> $\longrightarrow$ \.{MEDIATE} 
+\.{LEFT\_PARENTHESIS} \§numeric expression> \.{COMMA} 
+\§numeric expression> \.{COMMA} \§numeric expression> 
+\.{RIGHT\_PARENTHESIS}.                                       
+
+\LOG
+\initials{LDF 2022.04.12.}
+Added this rule.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define rules@>=
+@=numeric_primary: MEDIATE LEFT_PARENTHESIS numeric_expression @>
+@=COMMA numeric_expression COMMA numeric_expression RIGHT_PARENTHESIS@>
+{
+@q **** (4) @>
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+    if (DEBUG) 
+      {
+        cerr_strm << thread_name << "*** Parser: "
+                  << "`numeric_primary: MEDIATE LEFT_PARENTHESIS"
+                  << endl 
+                  << "numeric_expression COMMA numeric_expression COMMA "
+                  << "numeric_expression RIGHT_PARENTHESIS'.";
+        
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+      }
+#endif /* |DEBUG_COMPILE|  */
+
+@q **** (4) @>
+
+   real r0 = @=$3@>;
+   real r1 = @=$5@>; 
+   real r2 = @=$7@>;
+
+   real result = 0.0;
+
+@q **** (4) @>
+
+   if ((r0 >= 0 && r1 >= 0) || (r0 < 0 && r1 <= 0))
+   {
+#if LDF_REAL_FLOAT
+      if (MAX_REAL - fabsf(r0) <= fabsf(r1))
+      {
+          result = INVALID_REAL;
+      }  
+#else
+      if (MAX_REAL - fabs(r0) <= fabs(r1))
+      {
+          result = INVALID_REAL;
+      }  
+#endif     
+   }
+  
+@q **** (4) @>
+
+   if (result == INVALID_REAL)
+   {
+       cerr << "ERROR!  In parser, rule `numeric_primary: MEDIATE "
+            << "LEFT_PARENTHESIS numeric_expression"
+            << endl 
+            << "COMMA numeric_expression COMMA numeric_expression "
+            << "RIGHT_PARENTHESIS':"
+            << endl
+            << "The sum of the first two `numeric_expressions' >= `MAX_REAL'."
+            << endl
+            << "Can't perform the mediation operation."
+            << endl 
+            << "Set result to `INVALID_REAL' and will continue."
+            << endl;
+   }
+
+@q **** (4) @>
+
+   else
+   {
+      result = r0 + ((r1 - r0) * r2);
+   
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "In parser, rule `numeric_primary: MEDIATE "
+               << "LEFT_PARENTHESIS numeric_expression"
+               << endl 
+               << "COMMA numeric_expression COMMA numeric_expression "
+               << "RIGHT_PARENTHESIS':"
+               << endl
+               << "`result' == " << result
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+  
+   } /* |else| */
+
+@q **** (4) @>
+
+   @=$$@> = result;
+
+@q **** (4) @>   
+
+};
 
 @q **** (4) numeric_token.  @>
 @ \§numeric token>.  
@@ -4589,9 +4808,7 @@ Added this type declaration.
   
 @q **** (4) @>   
 
-@*5 \§numeric list> $\longrightarrow$ 
-\.{LEFT\_PARENTHESIS} \§numeric sublist> 
-\.{RIGHT\_PARENTHESIS}.
+@*5 \§numeric list> $\longrightarrow$ \.{LEFT\_PARENTHESIS} \§numeric sublist> \.{RIGHT\_PARENTHESIS}.
 \initials{LDF 2005.01.26.}
 
 \LOG
