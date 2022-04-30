@@ -16635,8 +16635,6 @@ operator<<(ostream& o, Connector_Type& c)
 
    bool DEBUG = true; /* |false| */ 
 
-   stringstream temp_strm;
-
 @q ***** (5) Controls.  @>
 
 @ Controls.
@@ -16647,89 +16645,10 @@ operator<<(ostream& o, Connector_Type& c)
    if (c.type0 == Connector_Type::CONTROLS_TYPE)
    {
 
-       o << " .. ";
-
-       goto AAA;
-
 @q ****** (6) @>
 
-      real r;
-
-#if DEBUG_COMPILE
-      if (DEBUG)
-      { 
-         cerr << "In `operator<<(ostream&, Connector_Type&)':" << endl;
-
-         c.pt0->show("*cpt0:");
-         c.pt1->show("*cpt1:");
-
-      }  
-
-@q ****** (6) @>
-
-#endif /* |DEBUG_COMPILE|  */@; 
-
-      if (c.pt0)
-      {
-@q ******* (7) @>
-
-         r = 0.0;
-
-         cerr << "c.pt0 is non-NULL." << endl;
- 
-         temp_strm << ".. controls (" << c.pt0->get_x() << ", ";
-        
-         if ((r = c.pt0->get_y()) == 0)
-            r = c.pt0->get_z();
-
-         temp_strm << r << ") ";
-
-@q ******* (7) @>
-
-         if (c.pt1)
-         {
-            r = 0.0;
-  
-            cerr << "c.pt1 is non-NULL." << endl;
-
-            temp_strm << "and (" << c.pt1->get_x() << ", ";
-
-            if ((r = c.pt1->get_y()) == 0)
-               r = c.pt1->get_z();
-
-            temp_strm << r << ") ..";
-
-
-
-         }
-@q ******* (7) @>
-
-         else
-         {
-            cerr << "c.pt1 is NULL." << endl;
-
-            temp_strm << ".. ";
-         }
-
-@q ******* (7) @>
-
-      } /* |if (c.pt0)| */
-
-@q ****** (6) @>
-
-      else
-      {
-         cerr << "c.pt0 is NULL." << endl;
-         /* !! TODO:  Issue warning.  */
-
-         temp_strm << ".. ";
-      }
-
-@q ****** (6) @>
-  
-AAA: ;      
-
-   }  /* |if (c.type0 == Connector_Type::CONTROLS_TYPE)|  */
+      o << ".. ";
+   }
 
 
 @q ***** (5) Curl.  @>
@@ -16741,7 +16660,7 @@ AAA: ;
 
    else if (c.type0 == Connector_Type::CURL_TYPE && c.r0 >= 0 && c.r0 <= 4095.99998)
    {
-      temp_strm << "{curl " << c.r0 << "} " << c.connector_string;
+      o << "{curl " << c.r0 << "} " << c.connector_string;
    }
 
 
@@ -16765,27 +16684,27 @@ AAA: ;
       
       if (c.r0 < .75 && c.r1 < .75)
         {
-         temp_strm << " .. ";
+         o << " .. ";
       }
       else if (c.r0 >= .75)
       {
-         temp_strm << " .. tension ";
+         o << " .. tension ";
          if (c.atleast_flag0)
-            temp_strm << "atleast ";
-         temp_strm << c.r0;
+            o << "atleast ";
+         o << c.r0;
       }
 
       if (c.r1 >= .75)
       {
-         temp_strm << " and ";
+         o << " and ";
 
          if (c.atleast_flag1)
-            temp_strm << "atleast ";
-         temp_strm << c.r1;
+            o << "atleast ";
+         o << c.r1;
        }
 
       if (c.r0 >= .75)
-         temp_strm << " .. ";
+         o << " .. ";
 
    } /* |else if (c.type0 == Connector_Type::TENSION_TYPE)| */
 
@@ -16798,7 +16717,7 @@ AAA: ;
 
    else if (c.type0 == Connector_Type::DIR_TYPE && (c.pt0 != 0 || c.r0 != 0))
    {
-      temp_strm << "{";
+      o << "{";
 
       if (c.pt0 && c.r0 != 0)
       {
@@ -16811,14 +16730,14 @@ AAA: ;
    
       if (c.pt0)
       {
-          temp_strm << *(c.pt0);
+          o << *(c.pt0);
       }
       else if (c.r0 != 0)
       {
-          temp_strm << "dir " << c.r0;
+          o << "dir " << c.r0;
       }
       
-      temp_strm << "} " << c.connector_string;
+      o << "} " << c.connector_string;
          
    }  /* |else if (c.type0 == Connector_Type::DIR_TYPE && (c.pt0 != 0 || c.r0 != 0))| */
 
@@ -16831,7 +16750,7 @@ AAA: ;
 @<Define non-member non-template functions for |Connector_Type|@>=
 
    else if (!c.connector_string.empty())
-      temp_strm << c.connector_string;
+      o << c.connector_string;
 
 @q **** (4) type1.  @>
 @ type1.  
@@ -16847,7 +16766,7 @@ AAA: ;
    if (c.type1 == Connector_Type::CURL_TYPE && c.r1 >= 0 && c.r1 <= 4095.99998)
    {
       real xxx;
-      temp_strm << " {curl " << c.r1 << "}";
+      o << " {curl " << c.r1 << "}";
    }
 
 @q ***** (5) Direction.  @>
@@ -16859,7 +16778,7 @@ AAA: ;
 
    else if (c.type1 == Connector_Type::DIR_TYPE && (c.pt1 != 0 || c.r1 != 0))
    {
-      temp_strm << "{";
+      o << "{";
 
       if (c.pt1 && c.r1 != 0)
       {
@@ -16872,24 +16791,18 @@ AAA: ;
    
       if (c.pt1)
       {
-          temp_strm << *(c.pt1);
+          o << *(c.pt1);
       }
       else if (c.r1 != 0)
       {
-          temp_strm << "dir " << c.r1;
+          o << "dir " << c.r1;
       }
       
-      temp_strm << "} " << c.connector_string;
+      o << "} " << c.connector_string;
          
    }  /* |else if (c.type1 == Connector_Type::DIR_TYPE && (c.pt1 != 0 || c.r1 != 0))| */
 
 @q **** (4) @>
-
-   cerr << "temp_strm.str():" << endl 
-        << temp_strm.str()
-        << endl;
-
-   o << temp_strm.str();
 
    return o;
 
