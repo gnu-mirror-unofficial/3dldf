@@ -150,11 +150,17 @@ beginfig(103);
 
   message "size pv:";
   show size pv;
+
   
   draw pv0;
   draw pv1;
   draw pv2;
 
+  message "Showing pv0:";
+  show pv0;
+  message "Showed pv0 (see above)";
+  pause;
+  
 %% *** (3)    
   
   numeric n;
@@ -199,7 +205,7 @@ beginfig(103);
   message "n:";
   show n;
 
-  show pv1;
+  %show pv1;
 
   %pause;
   
@@ -235,7 +241,7 @@ beginfig(103);
 
   dotlabel.top("$z_0$", z0);
 
-  q0 := pv1;
+  q0 := pv0;
   % message "q0:";
   % show q0;
 
@@ -254,14 +260,17 @@ beginfig(103);
 
   path_vector qv;
 
-  qv := resolve q2 to 64 save;
+  qv := resolve q0 to 64 save;
 
-   n := size qv0 - 1;
+  n := size qv0 - 1;
   
-   for i = 0 upto n:
-     m[i] := get_point(i) qv0;
-     drawdot m[i] with_pen pencircle scaled (1mm, 1mm, 1mm) with_color blue;
-   endfor;
+  for i = 0 upto n:
+    m[i] := get_point(i) qv0;
+    drawdot m[i] with_pen pencircle scaled (1mm, 1mm, 1mm) with_color blue;
+  endfor;
+
+
+
   
 
  % %draw q7 with_color green with_pen big_pen;
