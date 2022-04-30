@@ -219,6 +219,7 @@ class Path : public Shape
 
    friend ostream& operator<<(ostream &o, Path &p);
 
+
  protected:
   
   bool line_switch;
@@ -16154,7 +16155,6 @@ operator<<(ostream &o, Path &p)
    vector<Connector_Type*>::iterator c_iter = p.connector_type_vector.begin();
 
 
-
    o.precision(7); 
 
    bool first_time = true;
@@ -16174,7 +16174,20 @@ operator<<(ostream &o, Path &p)
        ++p_iter;
 
        if (c_iter != p.connector_type_vector.end())
-           o << " " << **c_iter++;
+       {
+           if ((*c_iter)->pt0)
+           {
+              (*c_iter)->pt0->projective_coordinates[0] = (*c_iter)->pt0->get_x();
+              (*c_iter)->pt0->projective_coordinates[1] = (*c_iter)->pt0->get_y();
+           }
+           if ((*c_iter)->pt1)
+           {
+              (*c_iter)->pt1->projective_coordinates[0] = (*c_iter)->pt1->get_x();
+              (*c_iter)->pt1->projective_coordinates[1] = (*c_iter)->pt1->get_y();
+           }
+
+           o << **c_iter++ << " ";
+       }
        else if (p_iter == p.points.end() && p.is_cycle())
             o << " .."; 
        else if (p_iter == p.points.end() && !p.is_cycle())
@@ -16246,6 +16259,7 @@ class Connector_Type
                                                   bool do_test_planar, 
                                                   bool do_make_planar,         
                                                   bool do_ampersand);
+   friend ostream& operator<<(ostream &o, Path &p);
 
    int type0;
    int type1;
@@ -16635,6 +16649,8 @@ operator<<(ostream& o, Connector_Type& c)
 
    bool DEBUG = true; /* |false| */ 
 
+   cerr << "Entering operator<< for Connector_Type." << endl;
+
 @q ***** (5) Controls.  @>
 
 @ Controls.
@@ -16644,10 +16660,8 @@ operator<<(ostream& o, Connector_Type& c)
 
    if (c.type0 == Connector_Type::CONTROLS_TYPE)
    {
-      /* !!START HERE:  LDF 2022.01.15.  Find out why pt0 and pt1 aren't correct.  
-         Remember to have transforms affect these points!
 
-     */ 
+       cerr << "controls type." << endl;
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -16660,9 +16674,9 @@ operator<<(ostream& o, Connector_Type& c)
       }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-      o << ".. controls " << *(c.pt0) << " and " << *(c.pt1) << " ..";
-   }
+      o << ".. controls " << *(c.pt0) << " and " << *(c.pt1) << ".. ";
 
+   }  /* |if (c.type0 == Connector_Type::CONTROLS_TYPE)|  */
 
 @q ***** (5) Curl.  @>
 
@@ -16673,6 +16687,8 @@ operator<<(ostream& o, Connector_Type& c)
 
    else if (c.type0 == Connector_Type::CURL_TYPE && c.r0 >= 0 && c.r0 <= 4095.99998)
    {
+       cerr << "curl type." << endl;
+
       o << "{curl " << c.r0 << "} " << c.connector_string;
    }
 
@@ -16686,6 +16702,8 @@ operator<<(ostream& o, Connector_Type& c)
 
    else if (c.type0 == Connector_Type::TENSION_TYPE)
    {
+       cerr << "tension type." << endl;
+
       if (c.r0 < .75 && c.r1 >= .75)
       {
           c.r0 = c.r1; 
@@ -16730,6 +16748,8 @@ operator<<(ostream& o, Connector_Type& c)
 
    else if (c.type0 == Connector_Type::DIR_TYPE && (c.pt0 != 0 || c.r0 != 0))
    {
+       cerr << "dir type." << endl;
+
       o << "{";
 
       if (c.pt0 && c.r0 != 0)
@@ -16763,7 +16783,11 @@ operator<<(ostream& o, Connector_Type& c)
 @<Define non-member non-template functions for |Connector_Type|@>=
 
    else if (!c.connector_string.empty())
+   {
+       cerr << "plain type." << endl;
       o << c.connector_string;
+   }
+
 
 @q **** (4) type1.  @>
 @ type1.  
