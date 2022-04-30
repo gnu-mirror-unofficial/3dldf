@@ -2678,26 +2678,56 @@ Added this rule.
 
    Pointer_Vector<real>* pv = static_cast<Pointer_Vector<real>*>(@=$2@>);
 
-   real x = *(pv->v[0]);
- 
+   real x = 0;
    real y = 0;
    real z = 0;
+   
+   if (pv)
+   {
+      if (pv->v.size() > 0)
+         x = *(pv->v[0]);
 
-   if (pv->v.size() > 1)
-      y = *(pv->v[1]);   
+      if (pv->v.size() > 1)
+         y = *(pv->v[1]);   
 
-   if (pv->v.size() > 2)
-      z = *(pv->v[2]);   
+      if (pv->v.size() > 2)
+         z = *(pv->v[2]);   
+   }
 
    Point p(x, y, z);
    c->pt0 = create_new<Point>(p);
    c->r0 = 0;
 
-  
+   @=$$@> =  static_cast<void*>(c);
+ 
+};
+
+@q **** (4) @>
+@
+@<Define rules@>=
+@=path_modifier: LEFT_BRACE point_expression RIGHT_BRACE@>@/
+{
+   @<Common declarations for rules@>@; 
+
+   cerr << "path_modifier:  LEFT_BRACE point_expression RIGHT_BRACE" << endl;
+
+   Connector_Type *c = create_new<Connector_Type>(0);
+   c->type0 = Connector_Type::DIR_TYPE;
+
+   Point* p = static_cast<Point*>(@=$2@>);
+
+   if (p == 0)
+   {  
+      p = create_new<Point>(0);
+   }
+
+   c->pt0 = p;
+   c->r0 = 0;
 
    @=$$@> =  static_cast<void*>(c);
  
 };
+
 
 @q *** (3) @>
 @
