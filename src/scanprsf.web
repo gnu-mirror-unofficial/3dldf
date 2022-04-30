@@ -7481,11 +7481,11 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
      {
        cerr_mutex.lock(); 
        cerr << thread_name 
-            << "In `Scan_Parse::transformation_command_func':";
-       
+            << "In `Scan_Parse::transformation_command_func':" << endl;
+       cerr_mutex.unlock(); 
+
        entry->show("entry:");
 
-       cerr_mutex.unlock(); 
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -7592,7 +7592,15 @@ Added this section.
 
    if (entry->is_shape())
    {
+#if 0 
+          cerr << "Entry is shape." << endl;
+#endif 
+
           Shape* s = static_cast<Shape*>(entry->object);
+
+#if 0 
+          cerr << "Calling operator*=." << endl;
+#endif 
           
           *s *= *t;
 
@@ -7602,8 +7610,14 @@ Added this section.
                  cerr_mutex.lock(); 
                  cerr << thread_name 
                       << "In `Scan_Parse::transformation_command_func':";
-                 s->show("s:");
                  cerr_mutex.unlock(); 
+
+                 s->show("s:"); /* If this occurs before the mutex is unlocked, it will cause the program to block,
+                                   if the |show| function also locks it.  This should have been changed
+                                   for all |show| functions for |Shapes|, but it might not have been.
+                                   \initials{LDF 2022.04.30.}
+                                 */
+
             }    
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -7671,7 +7685,7 @@ Added code for handling |Pictures|.
       if (rotate_picture_flag)
          status = p->rotate_label_positions(real_vector);
 
-    } /* |else if (entry->type == TRANSFORM)|  */
+    } /* |else if (entry->type == PICTURE)|  */
 
 
 @q ***** (5)@>  
