@@ -265,9 +265,7 @@ Added this rule.
 
    Superellipse *s = static_cast<Superellipse*>(@=$2@>);
 
-   Transform t;
-
-   status = s->generate_path(t, scanner_node); 
+   status = s->generate_path(scanner_node); 
  
    if (status != 0)
    {
@@ -670,108 +668,6 @@ Added this rule.
 
 };
 
-@q *** (3) superellipse_option_list: superellipse_option_list WITH_ARC numeric_list @>
-
-@ \§superellipse option list> $\longrightarrow$ \§superellipse option list>
-\.{WITH\_ARC} \§numeric list>.
-\initials{LDF 2022.04.27.}
-
-\LOG
-\initials{LDF 2022.04.27.}
-Added this rule.
-\ENDLOG 
-
-@q **** (4) @>
-
-@<Define rules@>=
-@=superellipse_option_list: superellipse_option_list WITH_ARC numeric_list @>@/
-{
-@q ***** (5) @>
-
-  int status = 0;
-
-  real begin = 0.0;
-  real end   = 0.0;
-
-#if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
-  if (DEBUG)
-  {
-      cerr << "*** Parser: `superellipse_option_list: superellipse_option_list WITH_ARC "
-           << "numeric_list'."
-           << endl;
-  }
-#endif /* |DEBUG_COMPILE|  */@;
-
-@q ***** (5) @>
-
-  Superellipse *s = static_cast<Superellipse*>(@=$1@>);
-
-  Pointer_Vector<real> *pv = static_cast<Pointer_Vector<real>*>(@=$3@>);
-
-  if (pv == 0)
-  {
-      cerr << "ERROR!  In parser, rule `superellipse_option_list:"
-           << endl 
-           << "superellipse_option_list WITH_ARC numeric_list':"
-           << endl 
-           << "`numeric_list' is NULL.  Can't set arc length.  Continuing." 
-           << endl; 
-
-      goto END_SUPERELLIPSE_WITH_ARC_RULE;
-
-  }
-
-@q ***** (5) @>
-
-  cerr << "pv->v.size() == " << pv->v.size() << endl;
-
-  if (pv->v.size() < 2)
-  {
-      cerr << "ERROR!  In parser, rule `superellipse_option_list:"
-           << endl 
-           << "superellipse_option_list WITH_ARC numeric_list':"
-           << endl 
-           << "`pv->v.size()' == " << pv->v.size() << " (< 2)" << endl
-           << "Can't set arc length.  Continuing." << endl; 
-
-      goto END_SUPERELLIPSE_WITH_ARC_RULE;
-
-  }
-
-@q ***** (5) @>
-@
-@<Define rules@>=
-
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-      cerr << "In parser, rule `superellipse_option_list:"
-           << endl 
-           << "superellipse_option_list WITH_ARC numeric_list':"
-           << endl 
-           << "`pv->v.size()' == " << pv->v.size() << " (>= 2)" << endl
-           << "Will set arc length." << endl; 
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ***** (5) @>
-
-   s->arc_begin = *(pv->v[0]);
-   s->arc_end   = *(pv->v[1]);
-
-END_SUPERELLIPSE_WITH_ARC_RULE:
-
-  if (pv != 0)
-  {
-     pv->clear();
-     delete pv;
-     pv = 0;
-  }
-
-  @=$$@> = static_cast<void*>(s);
-
-};
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>

@@ -655,6 +655,38 @@ Added this rule.
 
 };
 
+@q ** (2) point_primary --> GET_NORMAL superellipse_primary@>
+@*1 \§point primary> $\longrightarrow$ \.{GET\_NORMAL} 
+\§superellipse primary>. 
+\initials{LDF 2022.04.29.}
+
+\LOG
+\initials{LDF 2022.04.29.}
+Added this rule.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define rules@>=
+@=point_primary: GET_NORMAL superellipse_primary@>@/
+{
+
+   Superellipse *s = static_cast<Superellipse*>(@=$2@>);
+
+   Point *p = create_new<Point>(0);
+
+   if (s == 0)
+      *p = INVALID_POINT;
+   else
+      *p = s->normal;
+
+   delete s;
+   s = 0;
+
+   @=$$@> =  static_cast<void*>(p);
+
+};
+
 @q ** (2) point_primary --> GET_NORMAL circle_primary@>
 @*1 \§point primary> $\longrightarrow$ \.{GET\_NORMAL} 
 \§circle primary>. 
@@ -2072,6 +2104,27 @@ to |Scan_Parse::get_center_func<Ellipse>|.
 {
 
    @=$$@> = Scan_Parse::get_center_func<Ellipse>(static_cast<Ellipse*>(@=$2@>));
+
+};
+
+@q ** (2) point_primary --> GET_CENTER superellipse_primary@>
+@*1 \§point primary> $\longrightarrow$ \.{GET\_CENTER} 
+\§superellipse primary>. 
+\initials{LDF 2022.04.29.}
+
+\LOG
+\initials{LDF 2022.04.29.}
+Added this rule.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define rules@>=
+
+@=point_primary: GET_CENTER superellipse_primary@>@/
+{
+
+   @=$$@> = Scan_Parse::get_center_func<Superellipse>(static_cast<Superellipse*>(@=$2@>));
 
 };
 
