@@ -10468,21 +10468,20 @@ void
 show(string text = "", char coords = 'w',
      const bool do_persp = true, const bool do_apply = true,
      Focus* f = 0, const unsigned short proj = Projections::persp,
-     const real factor = 1) const;
+     const real factor = 1,
+     int show_connectors_option = 0) const;
 
 @q *** (3) Definition.  @>
-
 @
 @<Define |Path| functions@>=
 void 
 Path::show(string text, char coords,
            const bool do_persp, const bool do_apply,
            Focus* f, const unsigned short proj,
-           const real factor) const
+           const real factor,
+           int show_connectors_option) const
 {
 @q ** (2) @>
-
-
 
 #if DEBUG_COMPILE
 
@@ -10492,21 +10491,12 @@ Path::show(string text, char coords,
    { 
        cerr << "Entering `Path::show'." << endl;
 
-
+       cerr << "show_connectors_option == " << show_connectors_option << endl;
 
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ** (2) @>
-
-   int show_connectors_option = false;
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-        cerr << "show_connectors_option == " << show_connectors_option << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
 
    bool quiet              = show_connectors_option & 1U;
    bool verbose            = show_connectors_option & 2U;
@@ -10877,6 +10867,9 @@ Path::show(string text, char coords,
   return;
 
 } /* End of |Path::show| definition.  */
+
+
+
 
 @q ** (2) Show Colors.@>
 @ Show {\bf Colors}.
