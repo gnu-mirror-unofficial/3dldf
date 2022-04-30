@@ -14973,7 +14973,8 @@ Path::resolve(Scanner_Node scanner_node,
 
    if (!is_linear() && scanner_node == 0)
    {
-      cerr << "ERROR!  In `Path::resolve':  Path is not linear and `Scanner_Node scanner_node' argument is NULL."
+      cerr << "ERROR!  In `Path::resolve':  Path is not linear and `Scanner_Node scanner_node' "
+           << "argument is NULL."
            << endl 
            << "This isn't permitted." << endl 
            << "Exiting function unsuccessfully with return value "
@@ -16134,7 +16135,11 @@ operator<<(ostream &o, Path &p)
    { 
        cerr << "Entering `operator<<' for `Path'." << endl;
 
-       p.show("p:");
+       p.show("p:", 'w', false, true, 0, Projections::parallel_x_y, 1, 16U);
+
+       cerr << "In operator<<:  Path p (see above)." << endl;
+       cerr << "XXX Enter <RETURN> to continue: ";
+       getchar(); 
    }  
 #endif /* |DEBUG_COMPILE|  */@;    
 
@@ -16631,7 +16636,11 @@ operator<<(ostream& o, Connector_Type& c)
 {
 @q ***** (5) @>
 
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
+
+   cerr << "Entering `operator<<' for `Connector_Type'." << endl;
+   cerr << "XXX Enter <RETURN> to continue: ";
+   getchar(); 
 
 @q ***** (5) Controls.  @>
 
