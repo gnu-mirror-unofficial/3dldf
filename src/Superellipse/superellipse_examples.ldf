@@ -1,0 +1,125 @@
+%% superellipse_examples.ldf
+%% Created by Laurence D. Finston (LDF) Sat 30 Apr 2022 05:24:53 AM CEST
+
+%% * (1) Top 
+
+verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
+
+input "plain.lmc";
+
+%% ** (2) 
+
+pen medium_pen;
+medium_pen := pencircle scaled (.5mm, .5mm, .5mm);
+pickup medium_pen;
+
+pen big_pen;
+big_pen := pencircle scaled (1mm, 1mm, 1mm);
+
+
+path frame;
+numeric frame_wd;
+numeric frame_ht;
+
+frame_wd := 14cm;
+frame_ht := 14cm;
+
+frame :=    (-.5frame_wd, 0, -.5frame_ht) -- (.5frame_wd, 0, -.5frame_ht) -- (.5frame_wd, 0, .5frame_ht)
+         -- (-.5frame_wd, 0, .5frame_ht) -- cycle;
+
+path q[];
+rectangle r[];
+
+focus f;
+
+set f with_position (0, 20, -50) 
+       with_direction (0, 20, 10) with_distance 70; 
+
+%% ** (2) 
+
+beginfig(0);
+
+%% *** (3)
+
+numeric n;
+  
+  pickup medium_pen;
+
+  draw (frame rotated (90, 0)) shifted (0, 0, -28cm);
+
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  
+  rectangle r[];
+  superellipse s[];
+
+  point p[];
+
+  s0 := get_superellipse with_resolution 64 with_superness .75 with_a 2 with_b 3;
+
+  rotate s0 (90, 0);
+  
+  draw s0 with_color red with_pen big_pen;
+
+  n := size s0 - 1;
+  
+  for i = 0 step 1 until n:
+    p[i] := get_point (i) s0;
+  endfor;
+
+  dotlabel.rt("0", p[0]);
+  dotlabel.rt( "4",  p[4]);
+  dotlabel.urt( "8 ", p[8]);
+  dotlabel.urt("12", p[12]);
+  dotlabel.top("16", p[16]);
+  dotlabel.ulft("20", p[20]);
+  dotlabel.ulft("24", p[24]);
+  dotlabel.lft("28", p[28]);
+  dotlabel.lft("32", p[32]);
+  dotlabel.lft("36", p[36]);
+  dotlabel.llft("40", p[40]);
+  dotlabel.llft("44", p[44]);
+  dotlabel.bot("48", p[48]);
+  dotlabel.lrt("52", p[52]);
+  dotlabel.lrt("56", p[56]);
+  dotlabel.rt("60", p[60]);
+
+  
+  % r0 := get_rectangle s0;
+  % show r0;
+  % draw r0 with_color blue;
+
+  n := size s0 - 1;
+  message "n:";
+  show n;
+  
+
+%% *** (3) 
+
+endfig with_projection parallel_x_y no_sort;
+
+
+%% ** (2) 
+
+end_mp;
+end;
+
+%% ** (2) End of 3DLDF code.
+
+%% * (1) Emacs-Lisp code for use in indirect buffers when using the          
+%%   	 GNU Emacs editor.  The local variable list is not evaluated when an 
+%%   	 indirect buffer is visited, so it's necessary to evaluate the       
+%%   	 following s-expression in order to use the facilities normally      
+%%   	 accessed via the local variables list.                              
+%%   	 \initials{LDF 2004.02.12}.                                          
+
+%% (progn (metapost-mode) (outline-minor-mode t) (setq fill-column 80))    
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:metapost
+%% eval:(outline-minor-mode t)
+%% eval:(read-abbrev-file abbrev-file-name)
+%% outline-regexp:"%% [*\f]+"
+%% End:
