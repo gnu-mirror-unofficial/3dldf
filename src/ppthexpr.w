@@ -2699,6 +2699,7 @@ Added this rule.
  
 };
 
+@q *** (3) @>
 @
 @<Define rules@>=
 @=path_modifier: LEFT_BRACE DIR numeric_expression RIGHT_BRACE@>@/
