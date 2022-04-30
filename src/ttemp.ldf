@@ -16,8 +16,8 @@ path frame;
 numeric frame_wd;
 numeric frame_ht;
 
-frame_wd := 14cm;
-frame_ht := 14cm;
+frame_wd := 10cm;
+frame_ht := 10cm;
 
 frame :=    (-.5frame_wd, 0, -.5frame_ht) -- (.5frame_wd, 0, -.5frame_ht) -- (.5frame_wd, 0, .5frame_ht)
          -- (-.5frame_wd, 0, .5frame_ht) -- cycle;
@@ -31,15 +31,17 @@ set f with_position (0, 20, -50)
        with_direction (0, 20, 10) with_distance 70; 
 
 
-beginfig(0);
+%% ** (2)
+
+beginfig(1);
 
   numeric n;
   
   pickup medium_pen;
 
-  draw frame shifted (0, 0, -28cm);
+  draw (frame rotated (90, 0)) shifted (0, 0, -28cm);
 
-  output current_picture with_projection parallel_x_z;
+  output current_picture with_projection parallel_x_y;
   clear current_picture;
   
   rectangle r[];
@@ -49,26 +51,106 @@ beginfig(0);
 
   s0 := get_superellipse with_resolution 64 with_superness .75 with_a 2 with_b 3;
 
-  rotate s0 (-45, 0, 0);
-  %shift s0 (-4cm, 0cm);
+  rotate s0 (90, 0);
 
- 
+  
+  draw s0 with_color red;
+
+  n := size s0 - 1;
+  
+  for i = 0 step 1 until n:
+    p[i] := get_point (i) s0;
+  endfor;
+  
+  dotlabel.rt("0", p[0]);
+  dotlabel.rt( "4",  p[4]);
+  dotlabel.urt( "8 ", p[8]);
+  dotlabel.urt("12", p[12]);
+  dotlabel.top("16", p[16]);
+  dotlabel.ulft("20", p[20]);
+  dotlabel.ulft("24", p[24]);
+  dotlabel.lft("28", p[28]);
+  dotlabel.lft("32", p[32]);
+  dotlabel.lft("36", p[36]);
+  dotlabel.llft("40", p[40]);
+  dotlabel.llft("44", p[44]);
+  dotlabel.bot("48", p[48]);
+  dotlabel.lrt("52", p[52]);
+  dotlabel.lrt("56", p[56]);
+  dotlabel.rt("60", p[60]);
+
+  q0 := subpath (4, 20) of s0;
+
+  draw q0 with_color blue;
+  
+endfig with_projection parallel_x_y no_sort;
+%endfig with_focus f;
+
+
+
+end_mp;
+end;
+
+
+%% ** (2)
+
+beginfig(0);
+
+  numeric n;
+  
+  pickup medium_pen;
+
+  draw (frame rotated (90, 0)) shifted (0, 0, -28cm);
+
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  
+  rectangle r[];
+  superellipse s[];
+
+  point p[];
+
+  s0 := get_superellipse with_resolution 64 with_superness .75 with_a 2 with_b 3;
+
+  rotate s0 (90, 0);
+
+  
   draw s0 with_color red with_pen big_pen;
 
-  p0 := get_center s0;
+  % p10 := get_center s0;
 
-  dotlabel.top("$p_0$", p0);
+  % dotlabel.top("$p_{10}$", p10);
 
-  p2 := get_normal s0;
+  % p11 := get_normal s0;
 
-  dotlabel.top("$p_2$", p2);
+  % dotlabel.top("$p_{11}$", p11);
   
   n := size s0 - 1;
   
-  for i = 0 step 4 until n:
-    dotlabel.top(decimal i,  get_point (i) s0);
+  for i = 0 step 1 until n:
+    p[i] := get_point (i) s0;
   endfor;
 
+
+  
+  dotlabel.rt("0", p[0]);
+  dotlabel.rt( "4",  p[4]);
+  dotlabel.urt( "8 ", p[8]);
+  dotlabel.urt("12", p[12]);
+  dotlabel.top("16", p[16]);
+  dotlabel.ulft("20", p[20]);
+  dotlabel.ulft("24", p[24]);
+  dotlabel.lft("28", p[28]);
+  dotlabel.lft("32", p[32]);
+  dotlabel.lft("36", p[36]);
+  dotlabel.llft("40", p[40]);
+  dotlabel.llft("44", p[44]);
+  dotlabel.bot("48", p[48]);
+  dotlabel.lrt("52", p[52]);
+  dotlabel.lrt("56", p[56]);
+  dotlabel.rt("60", p[60]);
+
+  
   % r0 := get_rectangle s0;
   % show r0;
   % draw r0 with_color blue;
@@ -82,19 +164,20 @@ beginfig(0);
 
   rotate s1 (90, 0, 0);
 
-  draw s1 with_color blue;
+  %draw s1 with_color blue;
 
-  p1 := get_center s1;
-  dotlabel.bot("$p_1$", p1);
+  % p1 := get_center s1;
+  % %dotlabel.bot("$p_1$", p1);
   
   q0 := subpath (0, 16) of s0;
 
-  draw q0 with_color green with_pen big_pen;
+  %draw q0 with_color green with_pen big_pen;
   
-endfig with_projection parallel_x_z no_sort;
+endfig with_projection parallel_x_y no_sort;
 %endfig with_focus f;
-end_mp;
-end;
+
+%% ** (2)
+
   
 
 

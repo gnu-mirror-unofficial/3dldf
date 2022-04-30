@@ -21,8 +21,8 @@ path frame;
 numeric frame_wd;
 numeric frame_ht;
 
-frame_wd := 14cm;
-frame_ht := 14cm;
+frame_wd := 10cm;
+frame_ht := 10cm;
 
 frame :=    (-.5frame_wd, 0, -.5frame_ht) -- (.5frame_wd, 0, -.5frame_ht) -- (.5frame_wd, 0, .5frame_ht)
          -- (-.5frame_wd, 0, .5frame_ht) -- cycle;
@@ -35,7 +35,7 @@ focus f;
 set f with_position (0, 20, -50) 
        with_direction (0, 20, 10) with_distance 70; 
 
-%% ** (2) 
+%% ** (2) Fig. 0:  Plain superellipse in x-y plane with numbered points.
 
 beginfig(0);
 
@@ -66,6 +66,8 @@ numeric n;
   for i = 0 step 1 until n:
     p[i] := get_point (i) s0;
   endfor;
+
+
 
   dotlabel.rt("0", p[0]);
   dotlabel.rt( "4",  p[4]);
