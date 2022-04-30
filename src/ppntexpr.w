@@ -670,6 +670,14 @@ Added this rule.
 @<Define rules@>=
 @=point_primary: GET_NORMAL superellipse_primary@>@/
 {
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ 
+   if (DEBUG)
+   { 
+       cerr << "In parser, rule `point_primary: GET_NORMAL superellipse_primary'." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
    Superellipse *s = static_cast<Superellipse*>(@=$2@>);
 
