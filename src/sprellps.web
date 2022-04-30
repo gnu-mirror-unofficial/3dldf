@@ -118,9 +118,6 @@ class Superellipse : public Ellipse
       real x_semiaxis_length; 
       real z_semiaxis_length;
 
-      real arc_begin;
-      real arc_end;
-
       Point normal;
       Point left;
       Point right;
@@ -214,9 +211,6 @@ Superellipse(void)
 
    resolution        = 32;
 
-   arc_begin = 0;
-   arc_end   = 360;
-
    normal.set(0, 1, 0);
    left.set(-1.0, 0.0, 0.0);
    right.set(1.0, 0.0, 0.0);
@@ -287,8 +281,6 @@ Superellipse::operator=(const Superellipse& s)
   resolution        = s.resolution;
   x_semiaxis_length = s.x_semiaxis_length;
   z_semiaxis_length = s.z_semiaxis_length;
-  arc_begin         = s.arc_begin;
-  arc_end           = s.arc_end;
 
   normal    = s.normal;
   left      = s.left;
@@ -331,12 +323,51 @@ operator*=(const Transform& t);
 Transform
 Superellipse::operator*=(const Transform& t)
 {
+@q ***** (5) @>
+
+  bool DEBUG = false; /* |true| */ 
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "In `Superellipse::operator*='." << endl;
+      center.show("center before:");
+      normal.show("normal before:");
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
 
   Ellipse::operator*=(t);
 
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      center.show("center after Ellipse::operator*=:");
+      normal.show("normal after Ellipse::operator*=:");
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
   normal *= left *= right *= forwards *= backwards *= t;
 
+  normal.shift(-center);
   normal.unit_vector(true);
+  normal.shift(center);
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      normal.show("normal after Superellipse::operator*=, shift(), unit_vector() and shift():");
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
 
   return t;
 
@@ -537,13 +568,13 @@ Added this function.
 
 @<Declare |Superellipse| functions@>=
 int
-generate_path(Transform &t, Scanner_Node scanner_node = 0);
+generate_path(Scanner_Node scanner_node = 0);
 
 @q **** (4) Definition @>
 @
 @<Define |Superellipse| functions@>=
 int
-Superellipse::generate_path(Transform &u, Scanner_Node scanner_node)
+Superellipse::generate_path(Scanner_Node scanner_node)
 {
 @q ***** (5) @>
 
@@ -560,50 +591,11 @@ Superellipse::generate_path(Transform &u, Scanner_Node scanner_node)
    int status = 0;
    int status1 = 0;
 
-#if 0 
-cerr << "arc_begin == " << arc_begin << endl;
-cerr << "arc_end == " << arc_end << endl;
-#endif
-
-   status = fix_arc_boundaries(scanner_node);
-
-   if (status != 0)
-   {
-       cerr << "ERROR!  In `Superellipse::generate_path':"
-            << endl 
-            << "`Superellipse::fix_arc_boundaries' failed, returning " << status << "." 
-            << endl 
-            << "Can't set arc length.  Exiting function unsuccessfully with return value 1." 
-            << endl; 
-
-       return 1;
-      
-   }  /* |if (status != 0)| */
-
-@q ***** (5) @>
-@
-@<Define |Superellipse| functions@>=
-
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-       cerr << "In `Superellipse::generate_path':"
-            << endl 
-            << "`Superellipse::fix_arc_boundaries' succeeded, returning 0."
-            << endl
-            << "Will set arc length." << endl 
-            << "arc_begin == " << arc_begin << endl
-            << "arc_end == " << arc_end << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-
-
 @q ***** (5) @>
 
    Point p0;
 
-   real step = (arc_end - arc_begin) / resolution;
+   real step = 2*PI / resolution;
 
    real two_over_beta = (2.0F / beta);
    real two_over_gamma = (2.0F / gamma);
@@ -661,97 +653,9 @@ cerr << "arc_end == " << arc_end << endl;
              << "superness_gamma == " << superness_gamma << endl 
              << "resolution      == " << resolution << endl 
              << "step            == " << step << endl
-             << "arc_begin       == " << arc_begin << endl 
-             << "arc_end         == " << arc_end << endl 
              << endl;
     }  
 #endif /* |DEBUG_COMPILE|  */@; 
-
-@q ***** (5) @>
-@
-@<Define |Superellipse| functions@>=
-
-    if (!u.is_identity())
-    {
-@q ****** (6) @>
-
-#if DEBUG_COMPILE
-       if (DEBUG)
-       { 
-           cerr << "`Transform u' is not identity transform.  Transforming `this'." 
-                << endl;
- 
-           u.show("u:");
-       }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-
-#if 0 
-       normal.show("normal before transformation:");
-       show("`*this' before transformation:");
-       center.show("`center' before transformation:");
-       right.show("`right' before transformation:");
-#endif 
-
-       operator*=(u);
-
-       Point down(0, -1, 0);
-#if 0 
-       if (normal == down)
-          *this *= u.rotate(180, 0, 0);
-#endif 
-
-      *this *= u.rotate(0, 180, 0);
-
-#if 0 
-       show("`*this' after transformation:");
-       normal.show("normal after transformation:");
-       center.show("`center' after transformation:");
-       right.show("`right' after transformation:");
-#endif 
-
-       real angle = right.angle(Point(1, 0, 0));
-
-       cerr << "angle == " << angle << endl;
-
-       if (angle != 0.0)
-       {
-          *this *= u.rotate(0, -angle, 0);
-          angle = right.angle(Point(1, 0, 0));
-
-#if 0 
-          cerr << "After rotation:  angle == " << angle << endl;
-          show("`*this' after rotation:");
-          normal.show("normal after rotation:");
-          center.show("`center' after rotation:");
-          right.show("`right' after rotation:");
-#endif 
-
-
-       }
-
-
-
-#if 0
-cerr << "YYY Enter <RETURN> to continue: ";
-getchar(); 
-#endif 
-
-
-@q ****** (6) @>
-
-    } /* |if (!u.is_identity())| */
-
-@q ***** (5) @>
-
-#if DEBUG_COMPILE
-    else if (DEBUG)
-    { 
-       cerr << "`Transform u' is identity transform.  Not transforming `this'." 
-            << endl;
-    }  
-#endif /* |DEBUG_COMPILE|  */@; 
-    
 
 @q ***** (5) @>
 @
@@ -773,7 +677,7 @@ getchar();
 @
 @<Define |Superellipse| functions@>=
 
-    for (real t = arc_begin; t <= arc_end; t += step)
+    for (real t = 0.0; t <= 2*PI; t += step)
     {
 @q ****** (6) @>
 
@@ -930,10 +834,7 @@ getchar();
        p0.set(x, 0, z);
        operator+=(p0); 
 
-       if (arc_begin == -PI && arc_end == PI)
-          set_cycle(true);
-       else 
-          set_cycle(false);
+       set_cycle(true);
 
 #if DEBUG_COMPILE
        if (DEBUG)
@@ -945,35 +846,6 @@ getchar();
 @q ****** (6) @>
 
     } /* |for| */
-
-@q ***** (5) @>
-@
-@<Define |Superellipse| functions@>=
-
-#if 0 
-   show("*this after generation:");
-#endif 
-
-   if (!u.is_identity())
-   {
-      cerr << "`u' isn't identity." << endl;
-
-      *this *= u.inverse();
-
-#if 0 
-      normal.show("normal after reverse transformation:");
-      show("`*this' after reverse transformation:");
-      center.show("`center' after reverse transformation:");
-      right.show("`right' after reverse transformation:");
-#endif 
-   }
-   else
-   {
-#if 0 
-      cerr << "`u' is identity." << endl;
-#endif 
-   }
-
 
 @q ***** (5) @>
 @
@@ -1082,9 +954,7 @@ Superellipse::show(string text, char coords,
         << "z_semiaxis_length  == " << z_semiaxis_length  << endl
         << "resolution         == " << resolution << endl
         << "x_semiaxis_length  == " << x_semiaxis_length << endl
-        << "z_semiaxis_length  == " << z_semiaxis_length << endl
-        << "arc_begin          == " << arc_begin << endl 
-        << "arc_end            == " << arc_end << endl;
+        << "z_semiaxis_length  == " << z_semiaxis_length << endl;
 
    normal.show("normal:");
    left.show("left:");
@@ -1285,26 +1155,6 @@ Superellipse::get_rectangle(Rectangle *r, Scanner_Node scanner_node)
 @
 @<Define |Superellipse| functions@>=
 
-   if (arc_begin > -PI || arc_end < PI)
-   {
-       /* !! TODO:  LDF 2022.04.28.  Program this case.  */
-
-       cerr << "ERROR!  In `Superellipse::get_rectangle':" << endl 
-            << "`arc_begin' > -pi and/or `arc_end' < pi:"
-            << endl 
-            << "`arc_begin' == " << arc_begin << ", "
-            << "`arc_end' == " << arc_end << endl
-            << "Haven't programmed this case yet." << endl 
-            << "Exiting function unsuccessfully with return value 1."
-            << endl;
-
-       return 1;
-   }
-
-@q **** (4) @>
-@
-@<Define |Superellipse| functions@>=
-
    Point p0 = *points[0];
    Point p1 = *points[s/4];
    Point p2 = *points[s/2];
@@ -1340,161 +1190,6 @@ Superellipse::get_rectangle(Rectangle *r, Scanner_Node scanner_node)
    return 0;
 
 } /* End of |Superellipse::get_rectangle| definition */
-
-@q * (1) Fix arc boundaries.  @>
-@ Fix arc boundaries.
-\initials{LDF 2022.04.28.}
-
-\LOG
-\initials{LDF 2022.04.28.}
-Added this function.
-\ENDLOG
-
-@q ** (2) Declaration @>
-
-@<Declare |Superellipse| functions@>=
-int
-fix_arc_boundaries(Scanner_Node scanner_node = 0);
-
-@q ** (2) Definition  @>
-@
-@<Define |Superellipse| functions@>=
-int
-Superellipse::fix_arc_boundaries(Scanner_Node scanner_node)
-{ 
-@q *** (3) @>
-
-#if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ 
-   if (DEBUG)
-   { 
-       cerr << "Entering `Superellipse::fix_arc_boundaries'." << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-   real temp = 0.0;
-
-@q *** (3) @>
-
-   while (arc_begin <= -360.0)
-   { 
-      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
-           << endl 
-           << "`arc_begin' == " << arc_begin << " (<= -360.0)" << endl
-           << "Adding 360.0 to `arc_begin'." << endl; 
-
-      arc_begin += 360.0;
-   }
-
-   while (arc_end < -360.0)
-   { 
-      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
-           << endl 
-           << "`arc_end' == " << arc_end << " (<= -360.0)" << endl
-           << "Adding 360.0 to `arc_end'." << endl; 
-
-      arc_end += 360.0;
-   }
-
-@q *** (3) @>
-
-   while (arc_begin > 360.0)
-   { 
-      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
-           << endl 
-           << "`arc_begin' == " << arc_begin << " (> 360.0)" << endl
-           << "Subtracting 360.0 from `arc_begin'." << endl; 
-
-      arc_begin -= 360.0;
-   }
-
-   while (arc_end > 360.0)
-   { 
-      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
-           << endl 
-           << "`arc_end' == " << arc_end << " (> 360.0)" << endl
-           << "Subtracting 360.0 from `arc_end'." << endl; 
-
-      arc_end -= 360.0;
-   }
-
-@q *** (3) @>
-@
-@<Define |Superellipse| functions@>=
-
-  if (arc_begin == arc_end)
-  {
-      cerr << "ERROR!  In `Superellipse::fix_arc_boundaries':'"
-           << endl 
-           << "`arc_begin' and `arc_end' are equal:  `arc_begin' == `arc_end' == " << arc_begin
-           << endl
-           << "Can't set arc length." << endl
-           << "Exiting function unsuccessfully with return value 1."
-           << endl;
-
-      return 1;
-
-  }
-
-@q ***** (5) @>
-
-  if (arc_begin > arc_end)
-  {
-      cerr << "WARNING!  In `Superellipse::fix_arc_boundaries':'"
-           << endl 
-           << "`arc_begin' > `arc_end':  `arc_begin' == " << arc_begin 
-           << ", `arc_end' == " << arc_end
-           << endl
-           << "Switching values and continuing." << endl; 
-
-
-      temp  = arc_begin;
-      arc_begin = arc_end;
-      arc_end   = temp;
-
-  }
-
-@q ***** (5) @>
-@
-@<Define |Superellipse| functions@>=
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "Before conversion:" << endl 
-           << "`arc_begin' == " << arc_begin << endl 
-           << "`arc_end' == " << arc_end << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@;   
-
-   arc_begin *= PI/180.0;
-   arc_end *= PI/180.0;
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "After conversion:" << endl 
-           << "`arc_begin' == " << arc_begin << endl 
-           << "`arc_end' == " << arc_end << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@;   
-
-@q *** (3) @>
-@
-@<Define |Superellipse| functions@>=
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-       cerr << "Exiting `Superellipse::fix_arc_boundaries' successfully "
-            << "with return value 0." 
-            << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-   return 0;
-
-} /* End of |Superellipse::fix_arc_boundaries| definition  */
 
 @q * (1) Putting Superellipse together.@>
 @* Putting {\bf Superellipse} together.
