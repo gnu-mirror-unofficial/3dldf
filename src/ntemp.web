@@ -1,123 +1,17 @@
-@q *** (3) path_primary --> SUBPATH numeric_list OF superellipse_primary  @>
-@*2 \§path primary> $\longrightarrow$ \.{SUBPATH} \§numeric list>
-\.{OF} \§path primary>.
-\initials{LDF 2022.04.29.}
-
-\LOG
-\initials{LDF 2022.04.29.}
-Added this rule.
-\ENDLOG 
-
-@q **** (4) Definition.  @>
-
-@<Define rules@>=
-@=path_primary: SUBPATH numeric_list OF superellipse_primary@>@/
-{
-
-  @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
-  if (DEBUG)
-    {
-      cerr << "\n*** Parser: path_primary --> SUBPATH numeric_list "
-           << "OF superellipse_primary'." << endl;
-    }
-#endif /* |DEBUG_COMPILE|  */@;
+      if (DEBUG)
+      { 
+         cerr << "In `operator<<(ostream&, Connector_Type&)':" << endl;
 
-  Path* p = create_new<Path>(0);
-  Path* q = static_cast<Path*>(@=$4@>); 
-  
-  Pointer_Vector<real>* w = static_cast<Pointer_Vector<real>*>(@=$2@>); 
-  
-@q **** (4) Error handling for the case that |(w->v.size() < 2)|.  @>
-@ Error handling for the case that |(w->v.size() < 2)|.
+         c.pt0->show("*cpt0:");
+         c.pt1->show("*cpt1:");
 
-@<Define rules@>=
-  if (w->v.size() < 2)
-    {
-
-      cerr << "ERROR! In `yyparse':" << endl 
-           << "Rule `path_primary --> SUBPATH numeric_list OF superellipse_primary', "
-           << endl 
-           << "Invalid indices for specifying `subpath':  `w->v.size() < 2'."
-           << "Setting the `path_primary' on the left-hand side to the "
-           << "`superellipse_primary' on the right-hand side "
-           << endl << "and proceeding with fingers crossed."
-           << endl; 
-
-      if (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
-        {
-
-      cerr << "In `yyparse':" << endl 
-           << "Rule `path_primary --> SUBPATH numeric_list OF superellipse_primary':"
-           << endl 
-           << "Type <RETURN> to continue.\n";  
-
-          getchar();  /* Don't delete this!  */@;  
-        }  
-
-    } /* |if (w->v.size() < 2)|  */@;
-
-@q **** (4) Error handling for the case that |(w->v.size() > 2)|.  @>
-@ Error handling for the case that |(w->v.size() > 2)|.
-
-@<Define rules@>=
-  else if (w->v.size() > 2)
-    {
-      cerr_strm << thread_name << "WARNING! In yyparse:\n"
-                << "Rule `path_primary --> SUBPATH numeric_list OF "
-                << "superellipse_primary':"
-                << endl 
-                << "Too many indices for specifying `subpath': "
-                << "`w->v.size() > 2'."
-                << endl
-                << "Using the first two, `" << w->v[0] 
-                << "' and `" 
-                << w->v[1] << "', and `continuing.";
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm, warning_stop_value);
-      cerr_strm.str("");
-
-    }  /* |else if (w->v.size() > 2)|  */@;
-
-@q **** (4) Success!  @>
-@ Success!
-
-@<Define rules@>=
-  else 
-    {
-      *p = q->subpath(static_cast<size_t>(*(w->v[0])), 
-                         static_cast<size_t>(*(w->v[1])));
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-     {
-       p->show("p:");
-       q->show("q:");
-     }
+      }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-    }
+      o << ".. controls " << "(" << c.pt0->get_x() << ", " 
+        << c.pt0->get_y() << ") ";
 
-@q **** (4) Finish and exit rule.  @>
-@ Finish and exit rule.
-@<Define rules@>=
-  
-  @=$$@> = static_cast<void*>(p);  
-
-  delete q;
-
-  for (vector<real*>::iterator iter = w->v.begin();
-       iter != w->v.end();
-       ++iter)
-    {
-      delete *iter;
-    }
-  
-  w->v.clear();
-  delete w;
-
-};
-
+      if (c.pt1)
+         o << " and (" << c.pt1->get_x() << ", "  << c.pt1->get_y() << ") ";

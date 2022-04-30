@@ -16644,10 +16644,23 @@ operator<<(ostream& o, Connector_Type& c)
 
    if (c.type0 == Connector_Type::CONTROLS_TYPE)
    {
+      /* !!START HERE:  LDF 2022.01.15.  Find out why pt0 and pt1 aren't correct.  
+         Remember to have transforms affect these points!
 
-@q ****** (6) @>
+     */ 
 
-      o << ".. ";
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "In `operator<<(ostream&, Connector_Type&)':" << endl;
+
+         c.pt0->show("*cpt0:");
+         c.pt1->show("*cpt1:");
+
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      o << ".. controls " << *(c.pt0) << " and " << *(c.pt1) << " ..";
    }
 
 
