@@ -14,14 +14,15 @@ beginfig(1);
 
     draw Q0;
 
-    dotlabel.rt(btex $z_0$ etex, z0) withcolor blue;
-    dotlabel.rt(btex $z_1$ etex, z1) withcolor blue;
-    dotlabel.bot(btex $z_2$ etex, z2) withcolor blue;
-    dotlabel.lrt(btex $z_3$ etex, z3) withcolor blue;
-    dotlabel.rt(btex $z_4$ etex, z4) withcolor blue;
-    dotlabel.urt(btex $z_5$ etex, z5) withcolor blue;
-    dotlabel.top(btex $z_6$ etex, z6) withcolor blue;
-    dotlabel.ulft(btex $z_7$ etex, z7) withcolor blue;
+    
+    % dotlabel.rt(btex $z_0$ etex, z0) withcolor blue;
+    % dotlabel.rt(btex $z_1$ etex, z1) withcolor blue;
+    % dotlabel.bot(btex $z_2$ etex, z2) withcolor blue;
+    % dotlabel.lrt(btex $z_3$ etex, z3) withcolor blue;
+    % dotlabel.rt(btex $z_4$ etex, z4) withcolor blue;
+    % dotlabel.urt(btex $z_5$ etex, z5) withcolor blue;
+    % dotlabel.top(btex $z_6$ etex, z6) withcolor blue;
+    % dotlabel.ulft(btex $z_7$ etex, z7) withcolor blue;
 
     message "Q0:";
     show Q0;

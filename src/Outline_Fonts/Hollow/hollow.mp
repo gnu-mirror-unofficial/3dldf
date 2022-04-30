@@ -1,5 +1,5 @@
 %%%% hollow.mp.
-%%%% Generated on Mon Apr 25 05:36:47 2022
+%%%% Generated on Sat Apr 30 08:53:07 2022
 %%%% from hollow.ldf by GNU 3DLDF 3.0.
 
 prologues := 3;outputtemplate := "%j%3c.eps";
@@ -48,34 +48,794 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.015000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.015000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
-draw (1.310482cm, 1.836915cm) .. controls (1.836915cm, 1.545697cm) and (2.497756cm, 1.545697cm) .. (2.732971cm, 1.545697cm)
-   .. controls (3.203401cm, 1.545697cm) and (4.984312cm, 1.545697cm) .. (4.984312cm, 3.393812cm) .. controls (4.984312cm, 4.043453cm) and (4.737896cm, 4.435478cm) .. (4.637090cm, 4.558685cm)
+draw (2.732971cm, 2.509237cm) .. controls (2.066529cm, 2.509237cm) and (2.037968cm, 2.871020cm) .. (2.037968cm, 3.394652cm)
+   .. controls (2.037968cm, 3.918285cm) and (2.066529cm, 4.289588cm) .. (2.732971cm, 4.289588cm) .. controls (3.399413cm, 4.289588cm) and (3.427975cm, 3.927806cm) .. (3.427975cm, 3.404173cm)
+ .. controls (3.427975cm, 2.880540cm) and (3.399413cm, 2.509237cm) .. cycle
 withcolor (1.000000, 0.000000, 0.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
-draw (4.323471cm, 4.861104cm) .. controls (3.797038cm, 5.208326cm) and (3.214601cm, 5.253129cm) .. (2.732971cm, 5.253129cm)
-   .. controls (2.262542cm, 5.253129cm) and (0.481630cm, 5.253129cm) .. (0.481630cm, 3.405013cm) .. controls (0.481630cm, 2.956985cm) and (0.604838cm, 2.396950cm) .. (1.030464cm, 2.027327cm)
-withcolor (0.000000, 0.000000, 1.000000) 
-withpen pencircle transformed begingroup; save T; transform T;
- xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
- yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
- ;
-draw (1.523855cm, 2.071290cm) .. controls (1.971323cm, 1.823754cm) and (2.533039cm, 1.823754cm) .. (2.732971cm, 1.823754cm)
-   .. controls (3.132836cm, 1.823754cm) and (4.646611cm, 1.823754cm) .. (4.646611cm, 3.394652cm) .. controls (4.646611cm, 3.946847cm) and (4.437158cm, 4.280067cm) .. (4.351473cm, 4.384794cm)
-withcolor (1.000000, 0.000000, 0.000000) 
-withpen pencircle transformed begingroup; save T; transform T;
- xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
- yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
- ;
-draw (4.084896cm, 4.641850cm) .. controls (3.637428cm, 4.936989cm) and (3.142357cm, 4.975071cm) .. (2.732971cm, 4.975071cm)
-   .. controls (2.333106cm, 4.975071cm) and (0.819331cm, 4.975071cm) .. (0.819331cm, 3.404173cm) .. controls (0.819331cm, 3.023349cm) and (0.924058cm, 2.547319cm) .. (1.285841cm, 2.233140cm)
-withcolor (0.000000, 0.000000, 1.000000) 
-withpen pencircle transformed begingroup; save T; transform T;
- xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
- yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
- ;
+drawdot (2.732972cm, 2.509238cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (2.252397cm, 2.068377cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.834858cm, 1.687624cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.479337cm, 1.368274cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.184816cm, 1.111626cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.950276cm, 0.918976cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.774701cm, 0.791622cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.657070cm, 0.730860cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.596368cm, 0.737986cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.591574cm, 0.814300cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.641672cm, 0.961096cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.745644cm, 1.179672cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.902471cm, 1.471326cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.111135cm, 1.837354cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.370618cm, 2.279053cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.679902cm, 2.797721cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (2.037969cm, 3.394653cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.679902cm, 2.798155cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.370618cm, 2.282531cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.111135cm, 1.849090cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.902471cm, 1.499144cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.745644cm, 1.234004cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.641672cm, 1.054982cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.591574cm, 0.963387cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.596368cm, 0.960530cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.657070cm, 1.047724cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.774701cm, 1.226278cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.950276cm, 1.497504cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.184816cm, 1.862712cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.479337cm, 2.323214cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.834858cm, 2.880320cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (2.252397cm, 3.535342cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (2.732972cm, 4.289589cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (2.252737cm, 3.535344cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.837573cm, 2.880339cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.488500cm, 2.323277cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.206535cm, 1.862861cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.992696cm, 1.497794cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.848002cm, 1.226780cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.773470cm, 1.048521cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.770119cm, 0.961720cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.838966cm, 0.965081cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.981030cm, 1.057306cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.197329cm, 1.237098cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.488880cm, 1.503161cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.856703cm, 1.854197cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (2.301814cm, 2.288909cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (2.825233cm, 2.806000cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (3.427976cm, 3.404175cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (2.825233cm, 2.805566cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (2.301814cm, 2.285432cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.856703cm, 1.842461cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.488880cm, 1.475343cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.197329cm, 1.182766cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.981030cm, 0.963420cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.838966cm, 0.815994cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.770119cm, 0.739177cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.773470cm, 0.731657cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.848002cm, 0.792124cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (0.992696cm, 0.919267cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.206535cm, 1.111775cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.488500cm, 1.368337cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (1.837573cm, 1.687642cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (2.252737cm, 2.068379cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
+drawdot (2.732972cm, 2.509238cm)
+   withcolor (0.000000, 0.000000, 1.000000)
+   withpen pencircle transformed
+begingroup; save T; transform T;
+xxpart T = 0.100000cm;
+xpart T = 0.000000cm;
+xypart T = 0.000000cm;
+yypart T = 0.100000cm;
+ypart T = 0.000000cm;
+yxpart T = 0.000000cm;
+T endgroup
+;
 label.top(btex $a_0^{0}$ etex , (2.240140cm, 1.030464cm));
 begingroup
 interim linecap := rounded;
@@ -212,40 +972,6 @@ label.top(btex $z_2$ etex , (2.323025cm, 2.889501cm));
 begingroup
 interim linecap := rounded;
 drawdot (2.323025cm, 2.889501cm) withpen pencircle scaled dotlabeldiam;endgroup;
-label.urt(btex $z_3$ etex , (1.523855cm, 2.071290cm))
- withcolor (1.000000, 0.000000, 0.000000);
-begingroup
-interim linecap := rounded;
-drawdot (1.523855cm, 2.071290cm) withpen pencircle scaled dotlabeldiam withcolor (1.000000, 0.000000, 0.000000);endgroup;
-label.top(btex $z_4$ etex , (2.732971cm, 1.823754cm));
-begingroup
-interim linecap := rounded;
-drawdot (2.732971cm, 1.823754cm) withpen pencircle scaled dotlabeldiam;endgroup;
-label.lft(btex $z_5$ etex , (4.646611cm, 3.394652cm));
-begingroup
-interim linecap := rounded;
-drawdot (4.646611cm, 3.394652cm) withpen pencircle scaled dotlabeldiam;endgroup;
-label.lft(btex $z_6$ etex , (4.351473cm, 4.384794cm));
-begingroup
-interim linecap := rounded;
-drawdot (4.351473cm, 4.384794cm) withpen pencircle scaled dotlabeldiam;endgroup;
-label.lft(btex $z_7$ etex , (4.084896cm, 4.641850cm));
-begingroup
-interim linecap := rounded;
-drawdot (4.084896cm, 4.641850cm) withpen pencircle scaled dotlabeldiam;endgroup;
-label.bot(btex $z_8$ etex , (2.732971cm, 4.975071cm));
-begingroup
-interim linecap := rounded;
-drawdot (2.732971cm, 4.975071cm) withpen pencircle scaled dotlabeldiam;endgroup;
-label.rt(btex $z_9$ etex , (0.819331cm, 3.404173cm));
-begingroup
-interim linecap := rounded;
-drawdot (0.819331cm, 3.404173cm) withpen pencircle scaled dotlabeldiam;endgroup;
-label.top(btex $z_{10}$ etex , (1.285841cm, 2.233140cm))
- withcolor (0.000000, 0.000000, 1.000000);
-begingroup
-interim linecap := rounded;
-drawdot (1.285841cm, 2.233140cm) withpen pencircle scaled dotlabeldiam withcolor (0.000000, 0.000000, 1.000000);endgroup;
 endfig;
 
 end;

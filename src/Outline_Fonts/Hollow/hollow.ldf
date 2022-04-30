@@ -235,17 +235,10 @@ beginfig(103);
 
   dotlabel.top("$z_0$", z0);
 
+  q0 := pv1;
   % message "q0:";
   % show q0;
-  % pause;
 
-  q0 := subpath (3, 6) of pv0;
-
-  draw q0 with_color red with_pen big_pen;
-
-  q1 := subpath (12, 15) of pv0;
-
-  draw q1 with_color blue with_pen big_pen;
 
   numeric scale_val;
   scale_val := .85;
@@ -253,35 +246,26 @@ beginfig(103);
   z2 := z0 scaled (scale_val, scale_val);
   dotlabel.top("$z_2$", z2);
   
-  q2 := (q0 scaled (scale_val, scale_val)) shifted by (z0 - z2);
+  q2 := (q0 scaled (scale_val, scale_val) shifted by (z0 - z2));
+
   draw q2 withcolor red with_pen big_pen;
-
-  q3 := (q1 scaled (scale_val, scale_val)) shifted by (z0 - z2);
-  draw q3 withcolor blue with_pen big_pen;
-
-  for i = 0 upto size q2 - 1:
-    z[3+i] := get_point (i) q2;
-    z[7+i] := get_point (i) q3;
-  endfor;
-
-  dotlabel.urt("$z_3$", z3) with_color red;
-  dotlabel.top("$z_4$", z4);
-  dotlabel.lft("$z_5$", z5);
-  dotlabel.lft("$z_6$", z6);
-
-
-  dotlabel.lft("$z_7$",     z7);
-  dotlabel.bot("$z_8$",     z8);
-  dotlabel.rt("$z_9$",     z9);
-  dotlabel.top("$z_{10}$", z10) with_color blue;
-
-    
-  % message "q0:";
-  % show q0;
-  % pause;
   
-%% *** (3)
-  		  
+  point m[];
+
+  path_vector qv;
+
+  qv := resolve q2 to 64 save;
+
+   n := size qv0 - 1;
+  
+   for i = 0 upto n:
+     m[i] := get_point(i) qv0;
+     drawdot m[i] with_pen pencircle scaled (1mm, 1mm, 1mm) with_color blue;
+   endfor;
+  
+
+ % %draw q7 with_color green with_pen big_pen;
+  
 endfig with_projection parallel_x_y no_sort;
 
 %% ** (2)
