@@ -3047,8 +3047,7 @@ Added this rule.
 
 @q **** (4) command --> SHOW path_expression@>
 
-@*3 \§command> $\longrightarrow$ \.{SHOW}
-\§path expression>.
+@*3 \§command> $\longrightarrow$ \.{SHOW} \§path expression>.
 \initials{LDF 2004.11.22.}
 
 \LOG
@@ -3068,6 +3067,9 @@ Replaced code with a call to |Scan_Parse::show_func|.
   
 @=command: SHOW path_expression@>@/
 {
+
+/* !!START HERE:  LDF 2022.04.30.  Add with_connectors_optional, etc.  */ 
+
     Scan_Parse::show_func<Path>(static_cast<Path*>(@=$2@>),
                                       "path",
                                       parameter);
