@@ -31,6 +31,66 @@ set f with_position (0, 20, -50)
        with_direction (0, 20, 10) with_distance 70; 
 
 
+%% ** (2) Fig. 2, Get rectangle
+
+beginfig(2);
+
+  numeric n;
+  
+  pickup medium_pen;
+
+  draw (frame rotated (90, 0)) shifted (0, 0, -28cm);
+
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  
+  rectangle r[];
+  superellipse s[];
+
+  point p[];
+
+  s0 := get_superellipse with_resolution 64 with_superness .75 with_a 2 with_b 3;
+
+  rotate s0 (90, 0);
+
+  rotate s0 (0, 45);
+  rotate s0 (45, 0);
+
+  
+  draw s0 with_color red;
+
+  n := size s0 - 1;
+  
+  for i = 0 step 1 until n:
+    p[i] := get_point (i) s0;
+  endfor;
+  
+  dotlabel.rt("0", p[0]);
+  dotlabel.rt( "4",  p[4]);
+  dotlabel.urt( "8 ", p[8]);
+  dotlabel.urt("12", p[12]);
+  dotlabel.top("16", p[16]);
+  dotlabel.ulft("20", p[20]);
+  dotlabel.ulft("24", p[24]);
+  dotlabel.lft("28", p[28]);
+  dotlabel.lft("32", p[32]);
+  dotlabel.lft("36", p[36]);
+  dotlabel.llft("40", p[40]);
+  dotlabel.llft("44", p[44]);
+  dotlabel.bot("48", p[48]);
+  dotlabel.lrt("52", p[52]);
+  dotlabel.lrt("56", p[56]);
+  dotlabel.rt("60", p[60]);
+
+  r0 := get_rectangle s0;
+
+  draw r0 with_color blue;
+  
+endfig with_projection parallel_x_y no_sort;
+%endfig with_focus f;
+
+
+
 %% ** (2)
 
 beginfig(1);
@@ -86,6 +146,7 @@ beginfig(1);
 endfig with_projection parallel_x_y no_sort;
 %endfig with_focus f;
 
+%% ** (2)
 
 
 end_mp;
