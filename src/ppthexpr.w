@@ -2654,7 +2654,9 @@ Added this rule.
 {
    @<Common declarations for rules@>@; 
 
+#if 0 
    cerr << "path_modifier:  LEFT_BRACE CURL numeric_expression RIGHT_BRACE" << endl;
+#endif 
 
    Connector_Type *c = create_new<Connector_Type>(0);
    c->type0 = Connector_Type::CURL_TYPE;
@@ -2671,7 +2673,9 @@ Added this rule.
 {
    @<Common declarations for rules@>@; 
 
+#if 0 
    cerr << "path_modifier:  LEFT_BRACE numeric_list RIGHT_BRACE" << endl;
+#endif 
 
    Connector_Type *c = create_new<Connector_Type>(0);
    c->type0 = Connector_Type::DIR_TYPE;
@@ -2709,7 +2713,9 @@ Added this rule.
 {
    @<Common declarations for rules@>@; 
 
+#if 0
    cerr << "path_modifier:  LEFT_BRACE point_expression RIGHT_BRACE" << endl;
+#endif 
 
    Connector_Type *c = create_new<Connector_Type>(0);
    c->type0 = Connector_Type::DIR_TYPE;
@@ -2736,7 +2742,9 @@ Added this rule.
 {
    @<Common declarations for rules@>@; 
 
+#if 0    
    cerr << "path_modifier:  LEFT_BRACE DIR numeric_expression RIGHT_BRACE" << endl;
+#endif 
 
    Connector_Type *c = create_new<Connector_Type>(0);
    c->type0 = Connector_Type::DIR_TYPE;

@@ -68,7 +68,10 @@ bin_PROGRAMS = prbsnflx$(EXEEXT) 3dldf$(EXEEXT) cnepspng$(EXEEXT) srtstrin$(EXEE
 OUTLINEFONTDIR := Outline_Fonts
 export OUTLINEFONTDIR
 
-SUBDIRS = $(OUTLINEFONTDIR) 
+SUPERELLIPSEDIR := Superellipse
+export SUPERELLIPSEDIR
+
+SUBDIRS = $(OUTLINEFONTDIR) $(SUPERELLIPSEDIR)
 
 # lib3dldfsp.la
 

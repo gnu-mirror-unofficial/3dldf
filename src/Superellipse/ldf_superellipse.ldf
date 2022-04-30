@@ -1,23 +1,87 @@
+%% ldf_superellipse.ldf
+%% Created by Laurence D. Finston (LDF) Sat 30 Apr 2022 07:01:53 AM CEST
+
+%% * (1) Top
+
+%% ** (2)
+
+verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
+
+input "plain.lmc";
+
 macro ssuperellipse;
 
 
 def ssuperellipse (qq) {point r, point t,point l, point b, numeric s}  =
-qq := r{dir 90}...(mediate(xpart t,xpart r, s), mediate(zpart r,zpart t, s));
+  qq := r{forwards}...(mediate(xpart t,xpart r, s), mediate(zpart r,zpart t, s)){t-r}
+    ...t{left}...(mediate(xpart t,xpart l, s),mediate(zpart l,zpart t,s)){l-t}...l{backwards}
+    ...(mediate(xpart b,xpart l, s),mediate(zpart l,zpart b, s)){b-l}...
+    b{right}...(mediate(xpart b,xpart r, s),mediate(zpart r,zpart b, s)){r-b}...cycle;
 enddef;
 
 
 
-% qq := r{up}...(s[xpart t,xpart r],s[zpart r,zpart t])
 
-%{t-r}...
-% t{left}...(s[xpart t,xpart l],s[zpart l,zpart t]){l-t}...
-% l{down}...(s[xpart b,xpart l],s[zpart l,zpart b]){b-l}...
+% qq := r{forwards}...(s[xpart t,xpart r],s[zpart r,zpart t])
+%{t-r}...t{left}...(s[xpart t,xpart l],s[zpart l,zpart t])
+%{l-t}...
+% l
+
+%{backwards}
+%...(s[xpart b,xpart l],s[zpart l,zpart b]){b-l}...
 % b{right}...(s[xpart b,xpart r],s[zpart r,zpart b]){r-b}...cycle;
 
 
 path q;
 
-ssuperellipse (q) {right, forwards, left, backwards, .75};
+beginfig(0);  
+
+  point p[];
+
+  p0 := (-2cm, 0);
+  p1 := (2cm, 0);
+
+  p2 := (0, 0, -3cm);
+  p3 := (0, 0, 3cm);
+
+  dotlabel.bot("origin", origin);
+  
+  dotlabel.rt("$p_1$ (right)", p1);
+  dotlabel.lft("$p_0$ (left)", p0);
+  dotlabel.top("$p_3$ (top)", p3);
+  dotlabel.bot("$p_2$ (bottom)", p2);
+    
+ssuperellipse (q) {p1, p3, p0, p2, .75};
 
 show q;
+  
+draw q;
 
+endfig with_projection parallel_x_z;
+
+
+%% ** (2) 
+
+end_mp;
+end;
+
+
+%% ** (2) End of 3DLDF code.
+
+%% * (1) Emacs-Lisp code for use in indirect buffers when using the          
+%%   	 GNU Emacs editor.  The local variable list is not evaluated when an 
+%%   	 indirect buffer is visited, so it's necessary to evaluate the       
+%%   	 following s-expression in order to use the facilities normally      
+%%   	 accessed via the local variables list.                              
+%%   	 \initials{LDF 2004.02.12}.                                          
+
+%% (progn (metapost-mode) (outline-minor-mode t) (setq fill-column 80))    
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:metapost
+%% eval:(outline-minor-mode t)
+%% eval:(read-abbrev-file abbrev-file-name)
+%% outline-regexp:"%% [*\f]+"
+%% End:

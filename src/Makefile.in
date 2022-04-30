@@ -483,7 +483,8 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 bin_PROGRAMS = prbsnflx$(EXEEXT) 3dldf$(EXEEXT) cnepspng$(EXEEXT) srtstrin$(EXEEXT)
 OUTLINEFONTDIR := Outline_Fonts
-SUBDIRS = $(OUTLINEFONTDIR) 
+SUPERELLIPSEDIR := Superellipse
+SUBDIRS = $(OUTLINEFONTDIR) $(SUPERELLIPSEDIR)
 
 # lib3dldfsp.la
 lib_LTLIBRARIES = lib3dldflb.la 
@@ -1096,6 +1097,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-libLTLIBRARIES
 .PRECIOUS: Makefile
 
 export OUTLINEFONTDIR
+export SUPERELLIPSEDIR
 
 # AM_LDFLAGS = -lgsl -lgslcblas -lm #### Using this didn't work.  LIBS must passed 
 #                                   #### to 'configure'.  LDF 2013.11.06.
