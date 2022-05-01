@@ -14951,7 +14951,7 @@ Path::resolve(Pointer_Vector<Path> *pv,
 {
 @q **** (4) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    bool do_subpath;
 
@@ -16132,7 +16132,7 @@ ostream&
 operator<<(ostream &o, Path &p)
 {
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
    if (DEBUG)
    { 
        cerr << "Entering `operator<<' for `Path'." << endl;
@@ -16155,7 +16155,6 @@ operator<<(ostream &o, Path &p)
    vector<Point*>::iterator p_iter = p.points.begin();
    vector<Connector_Type*>::iterator c_iter = p.connector_type_vector.begin();
 
-
    o.precision(7); 
 
    bool first_time = true;
@@ -16168,7 +16167,9 @@ operator<<(ostream &o, Path &p)
        if (p_iter == p.points.end())
           break;
 
+#if 0 
        (*p_iter)->show("**p_iter:");
+#endif 
 
        o << s << "(" << (*p_iter)->get_x() << "cm, " << (*p_iter)->get_y() << "cm)";
 
@@ -16648,9 +16649,11 @@ operator<<(ostream& o, Connector_Type& c)
 {
 @q ***** (5) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
+#if 0 
    cerr << "Entering operator<< for Connector_Type." << endl;
+#endif 
 
 @q ***** (5) Controls.  @>
 
@@ -16661,8 +16664,9 @@ operator<<(ostream& o, Connector_Type& c)
 
    if (c.type0 == Connector_Type::CONTROLS_TYPE)
    {
-
+#if 0 
        cerr << "controls type." << endl;
+#endif 
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -16688,7 +16692,9 @@ operator<<(ostream& o, Connector_Type& c)
 
    else if (c.type0 == Connector_Type::CURL_TYPE && c.r0 >= 0 && c.r0 <= 4095.99998)
    {
+#if 0 
        cerr << "curl type." << endl;
+#endif 
 
       o << "{curl " << c.r0 << "} " << c.connector_string;
    }
@@ -16703,7 +16709,9 @@ operator<<(ostream& o, Connector_Type& c)
 
    else if (c.type0 == Connector_Type::TENSION_TYPE)
    {
+#if 0 
        cerr << "tension type." << endl;
+#endif 
 
       if (c.r0 < .75 && c.r1 >= .75)
       {
@@ -16749,7 +16757,9 @@ operator<<(ostream& o, Connector_Type& c)
 
    else if (c.type0 == Connector_Type::DIR_TYPE && (c.pt0 != 0 || c.r0 != 0))
    {
-       cerr << "dir type." << endl;
+#if 0  
+      cerr << "dir type." << endl;
+#endif 
 
       o << "{";
 
@@ -16785,7 +16795,9 @@ operator<<(ostream& o, Connector_Type& c)
 
    else if (!c.connector_string.empty())
    {
-       cerr << "plain type." << endl;
+#if 0 
+      cerr << "plain type." << endl;
+#endif 
       o << c.connector_string;
    }
 
