@@ -243,12 +243,14 @@ Picture::output(Scanner_Node scanner_node,
                     << "max_y_proj == " << max_y_proj << endl
                     << "surface_hiding_value == " << surface_hiding_value
                     << endl 
-                    << "do_metafont == " << do_metafont;
+                    << "do_metafont == " << do_metafont
+                    << endl
+                    << "scanner_node->do_colors_output == " 
+                    << scanner_node->do_colors_output;
 
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
-
       }
 
 #endif /* |DEBUG_COMPILE|  */@; 

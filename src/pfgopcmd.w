@@ -170,6 +170,8 @@ Rewrote this rule.  It now calls |output_command_func|.
 
   Scan_Parse::output_command_func(scanner_node, false);
 
+  scanner_node->do_colors_output = true;
+
   @=$$@> = static_cast<void*>(0);
  
 };
@@ -366,6 +368,8 @@ Added this rule.
 
   Scan_Parse::output_command_func(scanner_node, true);
 
+  scanner_node->do_colors_output = true;
+
   @=$$@> = static_cast<void*>(0);
  
 };
@@ -434,6 +438,8 @@ and unnecessary.
     delete entry;
     entry = 0;
 
+    scanner_node->do_colors_output = true;
+
 };
 
 @q **** (4) with_clause_output_list @>
@@ -461,6 +467,8 @@ Added this rule.
 {
 
   @=$$@> = static_cast<void*>(0);
+ 
+  static_cast<Scanner_Node>(parameter)->do_colors_output = true;
 
 };
 
@@ -1100,6 +1108,30 @@ Added this rule.
    @=$$@> = @=$1@>;
 
 };
+
+@q ***** (5) with_clause_output --> WITH_NO_COLORS.@>
+
+@*4 \§with clause output> $\longrightarrow$ \.{WITH\_NO\_COLORS}.
+\initials{LDF 2022.05.01.}
+
+\LOG
+\initials{LDF 2022.05.01.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+  
+@=with_clause_output: WITH_NO_COLORS@>
+{
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+
+    scanner_node->do_colors_output = false;
+
+};
+
+
+
 
 @q ***** (5)  surface_hiding_option.@>
 @*4 \§surface hiding option>.

@@ -9718,7 +9718,13 @@ Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream, bool do_m
 
    int status;
 
-   bool do_colors = (do_metafont) ? false : true;
+   bool do_colors; 
+
+   if (do_metafont || !scanner_node->do_colors_output)
+      do_colors = false;
+   else 
+      do_colors = true;
+
    bool do_pens;
    bool do_dash_patterns;
 
@@ -9807,7 +9813,7 @@ Added code for suppressing output if the type of the current
 
                do_colors = false;
 
-               if (!do_metafont)
+               if (!do_metafont && scanner_node->do_colors_output)
                {
                   status = adjust_draw_color_vector();
 

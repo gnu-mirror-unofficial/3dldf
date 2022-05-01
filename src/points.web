@@ -7692,8 +7692,12 @@ but I've removed |drawdot_color|.
 
 @<Define |Point| functions@>=
 
-  if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) && draw_color_vector->ctr > 0)
+  if (   scanner_node->do_colors_output 
+      && draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+      && draw_color_vector->ctr > 0)
+  {
     *out_stream << endl << "   withcolor " << *(draw_color_vector->v[0]);
+  }
 
 @q **** (4) Handle |pen_vector|.@>
 @ Handle |pen_vector|.
@@ -8494,14 +8498,14 @@ Added code for outputting |*pen|, if |dot == true| and |Pen* pen| is non-null.
 
 @<Define |Label| functions@>=
 void
-Label::output(Scanner_Node s,
+Label::output(Scanner_Node scanner_node,
               const Focus& f,
               const unsigned short proj,
               real factor,
               const Transform& t)
 {
 
-   Output_Struct* os = s->out[Run_State::METAPOST_RS];
+   Output_Struct* os = scanner_node->out[Run_State::METAPOST_RS];
    ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
    if (!t.is_identity())
@@ -8552,7 +8556,11 @@ Label::output(Scanner_Node s,
                << pt->get_y('p', false)
                << Point::measurement_units << "))";
 
-if (text_color)
+
+
+
+
+    if (scanner_node->do_colors_output && text_color)
       *out_stream << endl << " withcolor " << *text_color;
 
    *out_stream << ";" << endl;
@@ -8573,7 +8581,7 @@ if (text_color)
             else 
                *out_stream << " withpen pencircle scaled dotlabeldiam";
           
-          if (dot_color)
+          if (scanner_node->do_colors_output && dot_color)
              *out_stream << " withcolor " << *dot_color;
 
           *out_stream << ";" << "endgroup;" << endl;

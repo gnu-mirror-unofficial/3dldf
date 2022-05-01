@@ -1,5 +1,5 @@
 %%%% hollow.mp.
-%%%% Generated on Sun May  1 14:55:52 2022
+%%%% Generated on Sun May  1 22:41:06 2022
 %%%% from hollow.ldf by GNU 3DLDF 3.0.
 
 prologues := 3;outputtemplate := "%j%3c.eps";
@@ -5894,7 +5894,6 @@ draw (3.635041cm, 2.344382cm) .. controls (3.650090cm, 2.343791cm) and (3.665133
    .. controls (3.944063cm, 2.626852cm) and (3.917427cm, 2.624455cm)..  (3.890737cm, 2.622516cm) .. controls (3.860373cm, 2.620309cm) and (3.830376cm, 2.614021cm)..  (3.801292cm, 2.603760cm)
    .. controls (3.770135cm, 2.592769cm) and (3.738726cm, 2.582649cm)..  (3.707089cm, 2.573410cm) .. controls (3.674422cm, 2.563869cm) and (3.642840cm, 2.549789cm)..  (3.612962cm, 2.531437cm)
    .. controls (3.583392cm, 2.513276cm) and (3.553667cm, 2.495405cm)..  (3.523788cm, 2.477829cm)
-withcolor (1.000000, 0.000000, 0.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.015000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.015000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6197,7 +6196,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 draw (2.133913cm, -1.041721cm) -- (1.709598cm, -1.060986cm)
-withcolor (0.000000, 1.000000, 0.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6238,7 +6236,6 @@ T endgroup
 draw (2.073473cm, 0.308501cm) .. controls (1.489995cm, 0.310874cm) and (1.464789cm, 0.686841cm)..  (1.464789cm, 1.230856cm)
    .. controls (1.464789cm, 1.774871cm) and (1.489995cm, 2.159915cm)..  (2.073473cm, 2.143431cm) .. controls (2.648111cm, 2.127196cm) and (2.672544cm, 1.756577cm)..  (2.672544cm, 1.221153cm)
  .. controls (2.672544cm, 0.685729cm) and (2.648111cm, 0.306165cm)..  cycle
-withcolor (0.000000, 0.000000, 0.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.015000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.015000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6248,7 +6245,6 @@ draw (1.709598cm, -1.060986cm) .. controls (1.688694cm, -1.061230cm) and (1.6677
    .. controls (1.533748cm, -1.058611cm) and (1.520527cm, -1.057078cm)..  (1.507379cm, -1.054903cm) .. controls (1.495769cm, -1.052982cm) and (1.484261cm, -1.050308cm)..  (1.472908cm, -1.046895cm)
    .. controls (1.462450cm, -1.043750cm) and (1.452220cm, -1.039657cm)..  (1.442309cm, -1.034652cm) .. controls (1.432599cm, -1.029749cm) and (1.423232cm, -1.023966cm)..  (1.414290cm, -1.017354cm)
    .. controls (1.404904cm, -1.010414cm) and (1.395967cm, -1.002668cm)..  (1.387553cm, -0.994179cm)
-withcolor (1.000000, 0.000000, 1.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6267,7 +6263,6 @@ T endgroup
 draw (2.073473cm, 0.079135cm) .. controls (1.342721cm, 0.079897cm) and (1.311089cm, 0.550706cm)..  (1.311089cm, 1.232091cm)
    .. controls (1.311089cm, 1.913477cm) and (1.342721cm, 2.395652cm)..  (2.073473cm, 2.372797cm) .. controls (2.790414cm, 2.350375cm) and (2.820837cm, 1.887923cm)..  (2.820837cm, 1.219962cm)
  .. controls (2.820837cm, 0.552001cm) and (2.790414cm, 0.078387cm)..  cycle
-withcolor (1.000000, 0.647059, 0.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6311,7 +6306,6 @@ draw (1.169900cm, 0.063199cm) .. (1.266927cm, 0.007078cm)
    .. (3.343883cm, 1.870146cm) .. (3.317611cm, 1.932276cm)
    .. (3.292453cm, 1.984154cm) .. (3.269591cm, 2.025696cm)
    .. (3.250207cm, 2.056814cm)
-withcolor (0.000000, 0.392157, 0.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6320,7 +6314,6 @@ draw (2.517534cm, -1.907696cm) .. controls (3.173965cm, -1.891093cm) and (3.5098
    .. controls (3.509857cm, -3.008919cm) and (2.591039cm, -3.046062cm)..  (2.329034cm, -3.056654cm) .. controls (1.998954cm, -3.069997cm) and (1.101656cm, -3.106270cm)..  (1.101656cm, -2.410600cm)
    .. controls (1.101656cm, -1.943507cm) and (1.363795cm, -1.936877cm)..  (1.557132cm, -1.931987cm)
  .. controls (1.557132cm, -1.931987cm) and (2.517534cm, -1.907696cm)..  cycle
-withcolor (0.000000, 0.000000, 0.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.015000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.015000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6334,7 +6327,6 @@ draw (1.025895cm, -0.770371cm) .. controls (1.022524cm, -0.766528cm) and (1.0191
    .. controls (0.924376cm, -0.472190cm) and (0.924798cm, -0.469038cm)..  (0.925294cm, -0.465901cm) .. controls (0.925779cm, -0.462837cm) and (0.926278cm, -0.459776cm)..  (0.926791cm, -0.456719cm)
    .. controls (0.927324cm, -0.453539cm) and (0.927881cm, -0.450365cm)..  (0.928461cm, -0.447196cm) .. controls (0.929098cm, -0.443716cm) and (0.929694cm, -0.440226cm)..  (0.930247cm, -0.436727cm)
    .. controls (0.930881cm, -0.432722cm) and (0.931496cm, -0.428713cm)..  (0.932091cm, -0.424700cm)
-withcolor (1.000000, 0.500000, 0.500000, 0.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6372,7 +6364,6 @@ draw (2.565534cm, -1.788277cm) .. controls (2.627634cm, -1.787860cm) and (2.6896
    .. controls (2.205076cm, -1.797792cm) and (2.247540cm, -1.796784cm)..  (2.289944cm, -1.794815cm) .. controls (2.326848cm, -1.793102cm) and (2.363726cm, -1.792228cm)..  (2.400558cm, -1.792191cm)
    .. controls (2.429650cm, -1.792162cm) and (2.458727cm, -1.791472cm)..  (2.487775cm, -1.790122cm) .. controls (2.506851cm, -1.789235cm) and (2.525923cm, -1.788783cm)..  (2.544980cm, -1.788765cm)
    .. controls (2.551832cm, -1.788758cm) and (2.558685cm, -1.788595cm)..  (2.565534cm, -1.788277cm)
-withcolor (0.000000, 0.000000, 1.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6410,7 +6401,6 @@ draw (0.824045cm, -0.290845cm) .. controls (0.819851cm, -0.297791cm) and (0.8156
    .. controls (0.781588cm, -1.176469cm) and (0.784310cm, -1.181724cm)..  (0.787160cm, -1.186881cm) .. controls (0.790033cm, -1.192078cm) and (0.792892cm, -1.197286cm)..  (0.795738cm, -1.202504cm)
    .. controls (0.798606cm, -1.207764cm) and (0.801608cm, -1.212923cm)..  (0.804739cm, -1.217972cm) .. controls (0.807894cm, -1.223061cm) and (0.811038cm, -1.228158cm)..  (0.814172cm, -1.233263cm)
    .. controls (0.817331cm, -1.238411cm) and (0.820624cm, -1.243444cm)..  (0.824045cm, -1.248355cm)
-withcolor (1.000000, 0.647059, 0.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6432,7 +6422,6 @@ draw (3.058909cm, 2.284353cm) .. (2.967431cm, 2.353295cm)
    .. (0.755847cm, 0.571589cm) .. (0.800881cm, 0.472917cm)
    .. (0.854477cm, 0.378522cm) .. (0.917171cm, 0.289556cm)
    .. (0.989491cm, 0.207163cm)
-withcolor (1.000000, 0.000000, 1.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6470,7 +6459,6 @@ draw (0.989596cm, -1.675754cm) .. controls (0.979293cm, -1.680746cm) and (0.9689
    .. controls (3.152107cm, -1.089557cm) and (3.085486cm, -1.077698cm)..  (3.018333cm, -1.069934cm) .. controls (2.948219cm, -1.061828cm) and (2.877859cm, -1.055030cm)..  (2.807279cm, -1.049546cm)
    .. controls (2.734312cm, -1.043876cm) and (2.661049cm, -1.040877cm)..  (2.587592cm, -1.040562cm) .. controls (2.512594cm, -1.040240cm) and (2.437449cm, -1.039793cm)..  (2.362154cm, -1.039221cm)
    .. controls (2.286234cm, -1.038644cm) and (2.210145cm, -1.039476cm)..  (2.133913cm, -1.041721cm)
-withcolor (1.000000, 0.000000, 0.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6488,7 +6476,6 @@ draw (1.707760cm, -0.853463cm) .. controls (1.405908cm, -0.856843cm) and (1.2878
    .. controls (1.372221cm, -3.798457cm) and (1.932591cm, -3.780489cm)..  (2.320817cm, -3.761180cm) .. controls (2.802586cm, -3.737218cm) and (4.320959cm, -3.661699cm)..  (4.320959cm, -2.309606cm)
    .. controls (4.320959cm, -0.824208cm) and (3.206085cm, -0.836689cm)..  (2.106545cm, -0.848999cm)
  .. controls (2.106545cm, -0.848999cm) and (1.707760cm, -0.853463cm)..  cycle
-withcolor (0.000000, 0.000000, 0.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.015000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.015000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -6496,7 +6483,6 @@ withpen pencircle transformed begingroup; save T; transform T;
 draw (-0.986611cm, -4.853165cm) -- (6.271218cm, -4.406896cm)
    -- (6.271218cm, 3.868966cm) -- (-0.986611cm, 4.260760cm)
  -- cycle
-withcolor (0.000000, 0.000000, 0.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.015000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.015000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
