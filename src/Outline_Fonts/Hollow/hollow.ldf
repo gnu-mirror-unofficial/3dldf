@@ -131,6 +131,12 @@ frame :=    ((-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht)
 
 dot_pen := pencircle scaled (.75mm, .75mm, .75mm);
 
+focus f;
+set f with_position (0cm, 2cm, -50) 
+       with_direction (0cm, 2cm, 10) with_distance 45; 
+
+%% ** (2) Fig. 103.  cmssbx10 "g".
+
 beginfig(103);
 
 %% *** (3)  
@@ -257,7 +263,7 @@ beginfig(103);
   z2 := z0 scaled (scale_val, scale_val);
   dotlabel.top("$z_2$", z2);
   
-  q2 := (q0 scaled (scale_val, scale_val) shifted by (z0 - z2));
+  q2 := q0 scaled (scale_val, scale_val) shifted by (z0 - z2);
 
   %draw q2 withcolor red with_pen big_pen;
   
@@ -295,17 +301,177 @@ beginfig(103);
   clear_connectors q4;
   draw q4 with_color magenta with_pen big_pen;  
 
+
+  z3 := z0 scaled (1.25, 1.25);
+  q5 := pv1 scaled (1.25, 1.25) shifted by (z0 - z3);
+
+  dotlabel.top("$z_3$", z3);
   
+  draw q5 with_color orange with_pen big_pen;
+
+  %fill q5;
+  %unfill pv1;
+
+  scale_val := .5;
+
+  q6 := resolve pv0 (6, 12) to 32;
+  z4 := mediate(a[0][6], a[0][11]); 
+  z5 := z4 scaled (scale_val, scale_val);
+  dotlabel.top("$z_4$", z4);
+  dotlabel.top("$z_5$", z5);
+
+  scale q6 (scale_val, scale_val);
+  shift q6 by (z4 - z5);
+    
+  draw q6 with_color red;
+  
+  z6 := mediate(a[2][3], a[2][1]);
+  dotlabel.top("$z_6$", z6);
+
+  scale_val := 1.25;
+
+  z7 := z6 scaled (scale_val, scale_val);
+  dotlabel.top("$z_7$", z7);
+
+  q7 := resolve pv2 to 64;
+  scale q7 (scale_val, scale_val);
+  shift q7 by (z6- z7);
+  draw q7 with_color blue with_pen big_pen;
+
+  
+  scale_val := .875;
+  z8 := z6 scaled (scale_val, scale_val);
+  dotlabel.top("$z_8$", z8);
+
+  q8 := resolve pv0 (17, 22) to 64;
+  scale q8 (scale_val, scale_val);
+  shift q8 by (z6- z8);
+  draw q8 with_color red with_pen big_pen;
+
+  scale_val := .6;
+  z9 := mediate(a[0][16], a[0][1]);
+  dotlabel.top("$z_9$", z9);
+  z10 := z9 scaled (scale_val, scale_val);
+  dotlabel.top("$z_{10}$", z10);
+  
+  q9 := resolve pv0 (15, 17) to 64;
+  scale q9 (scale_val, scale_val);
+  shift q9 by (z9- z10);
+  draw q9 with_color orange with_pen big_pen;
+
+  scale_val := .58;
+  q10 := resolve pv0 (1, 3) to 16;
+  scale q10 (scale_val, scale_val);
+  shift q10 by (z9 - z10);
+  draw q10 with_color teal_blue with_pen big_pen;
+
+  z11 := mediate(a[2][4], a[0][0]);
+  z12 := z11 scaled (scale_val, scale_val);
+
+  scale_val := .6;
+  %dotlabel.top("$z_{11}$", z11);
+  %dotlabel.top("$z_{12}$", z12);
+
+  q11 := resolve pv0 (0, 1) to 8;
+  scale q11 (scale_val, scale_val);
+  shift q11 by (z11 - z12);
+  draw q11 with_color magenta with_pen big_pen;
+  
+%% *** (3)
+
+
+  n := size q8 - 1;
+  z13 := get_point (n) q8;
+  dotlabel.lrt("$z_{13}$", z13);
+
+  z14 := get_point (0) q11;
+  dotlabel.bot("$z_{14}$", z14);
+
+  draw z13 -- z14 with_pen big_pen with_color green;
   
 
- % %draw q7 with_color green with_pen big_pen;
+%% *** (3)
+  
+  v0 := current_picture;  
+
+
+
   
 endfig with_projection parallel_x_y no_sort;
-
-%% ** (2)
+%endfig with_focus f;
 
 end_mp;
 end;
+
+
+%% ** (2) This works.  Rotating the "g".
+
+j := 1;
+for i = 104 upto 111:
+  beginfig(i);
+    current_picture := v0;
+    rotate current_picture (-10*j, 0, 0);
+  endfig with_focus f;
+  j += 1;
+endfor;
+
+
+beginfig(112);
+  current_picture := v0;
+  rotate current_picture (0, 30, 0);
+endfig with_focus f;
+
+j := 1;
+for i = 113 upto 119:
+  beginfig(i);
+    current_picture := v0;
+    rotate current_picture (-10*j, 0, 0);
+    rotate current_picture (0, 30, 0);
+  endfig with_focus f;
+  j += 1;
+endfor;
+
+
+beginfig(120);
+  current_picture := v0;
+  rotate current_picture (0, -30, 0);
+endfig with_focus f;
+
+j := 1;
+for i = 121 upto 127:
+  beginfig(i);
+    current_picture := v0;
+    rotate current_picture (-10*j, 0, 0);
+    rotate current_picture (0, -30, 0);
+  endfig with_focus f;
+  j += 1;
+endfor;
+
+
+beginfig(128);
+  current_picture := v0;
+endfig with_focus f;
+
+
+j := 1;
+for i = 129 upto 136:
+  beginfig(i);
+    current_picture := v0;
+    rotate current_picture (10*j, 0, 0);
+  endfig with_focus f;
+  j += 1;
+endfor;
+
+%% ** (2)
+
+%% * (1)
+
+
+
+
+
+
+
 
 
 
@@ -794,9 +960,6 @@ endfig with_projection parallel_x_y no_sort;
 
 %% ** (2)
 
-focus f;
-set f with_position (0cm, 2cm, -50) 
-       with_direction (0cm, 2cm, 10) with_distance 45; 
 
 
 %% ** (2)

@@ -620,10 +620,12 @@ hollow.ps: hollow.dvi
 hollow.pdf: hollow.dvi
 	dvipdfmx hollow.dvi
 
-hollow065.eps hollow165.eps hollow103.eps: hollow.mp
+hollow065.eps hollow165.eps hollow103.eps hollow104.eps: hollow.mp
 	mpost -numbersystem "double" hollow.mp
 
-hollow.dvi: hollow.tex hollow.600pk hollow065.eps hollow165.eps
+#hollow.600pk 
+
+hollow.dvi: hollow.tex hollow103.eps hollow104.eps
 	tex hollow.tex
 
 #### * (1) hollow bit-map fonts
