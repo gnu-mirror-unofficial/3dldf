@@ -7410,6 +7410,11 @@ Added declaration for |vector_type_plus_assign<Definition_Info_Type>|.
 This function is declared in \filename{pspglb.web}.
 \initials{LDF 2004.11.08.}
 
+!! TODO:  Check this function.  Try to get rid of the |bool clear_vector| argument.
+Without it, the rule \§path vector assignment> $\longrightarrow$ \§path vector variable> \.{ASSIGN} 
+\§path vector expression> fails if the \§path vector expression> isn't cleared first.
+\initials{LDF 2022.05.01.}
+
 \LOG
 \initials{LDF 2004.11.08.}
 Added this function.
@@ -7423,7 +7428,8 @@ int
 Scan_Parse::vector_type_assign(Scanner_Node scanner_node,
                                Id_Map_Entry_Node entry,
                                const Pointer_Vector<D>* object_vector,
-                               C* dummy)
+                               C* dummy,
+                               bool clear_vector)
 {
 
 @q ***** (5) Preliminaries.@> 
@@ -7531,7 +7537,8 @@ Now deleting |pv| and setting it to 0, if it's not 0 already.
 
 @<Define |Scan_Parse| template functions@>=
 
-  clear_vector_func(scanner_node, entry);
+  if (clear_vector)
+     clear_vector_func(scanner_node, entry);
 
   typedef Pointer_Vector<C> PV;
 
