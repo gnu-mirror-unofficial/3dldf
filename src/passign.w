@@ -6153,13 +6153,17 @@ Added this type declaration.
 @q ***** (5) path_vector_variable ASSIGN @>  
 @q ***** (5) path_vector_expression.     @> 
 
-@*3 \§path vector assignment>
-$\longrightarrow$ \§path vector variable> 
-\.{ASSIGN} \§path vector expression>.      
+@*3 \§path vector assignment> $\longrightarrow$ \§path vector variable> \.{ASSIGN} 
+\§path vector expression>.      
 
 \LOG
 \initials{LDF 2004.12.10.}
 Added this rule.
+
+\initials{LDF 2022.05.01.}
+Added code for clearing |entry->pv|.  Now passing |bool clear_vector = false| to 
+|Scan_Parse::vector_type_assign|.  I added this argument because previously 
+this rule would fail if the \§path vector expression> hadn't been cleared first.
 \ENDLOG
 
 @q ***** (5) Definition.@> 
@@ -6168,8 +6172,6 @@ Added this rule.
 
 @=path_vector_assignment: path_vector_variable ASSIGN path_vector_expression@>@/
 {
-
-   cerr << "Error after here 1." << endl; 
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
@@ -6189,11 +6191,7 @@ Added this rule.
 
   else if (@=$3@> == 0)
   {
-     cerr << "Error after here 2." << endl; 
-
      @=$$@> = static_cast<void*>(0);
-
-     cerr << "Error after here 3." << endl; 
   }
 
 @q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
@@ -6213,11 +6211,24 @@ Added this rule.
    PV* entry_pv = static_cast<PV*>(entry->object);
 
    if (entry_pv)
-     entry_pv->clear();
+   {
+      for (vector<Path*>::iterator iter = entry_pv->v.begin();
+           iter != entry_pv->v.end();
+           ++iter)
+      {
+         delete *iter;
+      }
+      entry_pv->v.clear();
+      entry_pv->clear();
+   }
+
+
 
    int status = vector_type_assign<Path, Path>(static_cast<Scanner_Node>(parameter),
                                            entry,
-                                           pv);
+                                           pv,
+                                           static_cast<Path*>(0),
+                                           false);
 
 @q ******* (7) Error handling:                           @> 
 @q ******* (7) |Scan_Parse::vector_type_assign| failed.@> 
