@@ -2860,6 +2860,8 @@ and |NO_MAKE_PLANAR|.
 
 @=%token <int_value> WITH_CONNECTORS@>@/
 
+@=%token <int_value> WITH_NO_COLORS@>@/
+
 @=%token <int_value> QUIET@>@/
 @=%token <int_value> VERBOSE@>@/
 
