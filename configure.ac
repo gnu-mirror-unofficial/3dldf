@@ -112,7 +112,7 @@ AC_CHECK_FUNCS([floor sqrt trunc])
 
 AC_CONFIG_FILES([Makefile src/Makefile src/Outline_Fonts/Makefile \
                  src/Outline_Fonts/Cmssbxldf_3D/Makefile \
-		 src/Outline_Fonts/Hollow/Makefile \
+		 src/Outline_Fonts/Hollow/Makefile src/Superellipse/Makefile \
                  doc/Makefile doc/old_doc/Makefile examples/Makefile accsdtbs/Makefile])
 
 # Checks for endianness.
