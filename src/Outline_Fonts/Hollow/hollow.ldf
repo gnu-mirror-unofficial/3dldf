@@ -82,7 +82,7 @@ small_pen := pencircle scaled (.075mm, .075mm, .075mm);
 medium_pen := pencircle scaled (.15mm, .15mm, .15mm);
 big_pen := pencircle scaled (2pt, 2pt, 2pt);
 huge_pen := pencircle scaled (3pt, 3pt, 3pt);
-dot_pen := pencircle scaled (3pt, 3pt, 3pt);
+dot_pen := pencircle scaled (1mm, 1mm, 1mm);
 
 let large_pen = big_pen;
 
@@ -129,7 +129,6 @@ frame :=    ((-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht)
 
 %% ** (2) Fig. 103 ("g" == 103 == 0147 == 0x67)
 
-dot_pen := pencircle scaled (.75mm, .75mm, .75mm);
 
 focus f;
 set f with_position (0cm, 2cm, -50) 
@@ -248,8 +247,11 @@ beginfig(103);
   q3 := qv0;
 
   clear_connectors q3;
-  draw q3 with_color green with_pen big_pen;  
+  draw q3 with_color dark_green with_pen big_pen;  
 
+
+
+  
   n := size q3 - 1;
   for i = 0 upto n:
     m[i] := get_point(i) qv0;
@@ -268,14 +270,13 @@ beginfig(103);
   clear_connectors q4;
   draw q4 with_color magenta with_pen big_pen;  
 
-
   z3 := z0 scaled (1.25, 1.25);
   q5 := pv1 scaled (1.25, 1.25) shifted by (z0 - z3);
 
-
-  
   draw q5 with_color orange with_pen big_pen;
 
+
+    
   %fill q5;
   %unfill pv1;
 
@@ -373,14 +374,16 @@ beginfig(103);
   
   v0 := current_picture;  
 
-%% *** (3)
-  
-  dotlabel.top("$a_0^{0}$", a[0][0]);
-  dotlabel.rt("$a_0^{1}$", a[0][1]);
-  dotlabel.rt("$a_0^{2}$", a[0][2]);
-  dotlabel.top("$a_0^{3}$", a[0][3]);
-  dotlabel.rt("$a_0^{4}$", a[0][4]);
-  dotlabel.rt("$a_0^{5}$", a[0][5]);
+%% *** (3) Labels
+
+  dotlabel.top("$\scriptstyle a_0^{0}$", a[0][0]);
+  dotlabel.rt("$\scriptstyle a_0^{1}$", a[0][1]);
+  dotlabel.rt("$\scriptstyle a_0^{2}$", a[0][2]);
+  drawdot a[0][3] with_pen dot_pen;
+  label("$\scriptstyle a_0^{3}$", a[0][3] shifted (.125cm, .75cm));
+  draw a[0][3] -- a[0][3] shifted (.125cm, .55cm) with_color dark_gray;
+  %dotlabel.rt("$a_0^{4}$", a[0][4]);
+  %dotlabel.rt("$a_0^{5}$", a[0][5]);
   dotlabel.lrt("$a_0^{6}$", a[0][6]);
   dotlabel.llft("$a_0^{7}$", a[0][7]);
   dotlabel.bot("$a_0^{8}$", a[0][8]);
@@ -411,26 +414,38 @@ beginfig(103);
   dotlabel.top("$a_2^{4}$", a[2][4]);		  
 
   dotlabel.top("$z_0$", z0);
+
+if false:
   dotlabel.top("$z_2$", z2);
+fi
 
-  dotlabel.top("0", get_point(0) q3) with_text_color green;
-
+  dotlabel.urt("0", get_point(0) q3) with_text_color green;
 
   n := size q3 - 1;
-  dotlabel.top(decimal n, get_point(n) q3) with_text_color green;
+  dotlabel.llft(decimal n, get_point(n) q3) with_text_color green; %% "32"
 
+if false:
   dotlabel.top("$z_3$", z3);
-  dotlabel.top("$z_4$", z4);
-  dotlabel.top("$z_5$", z5);
-  dotlabel.rt("$q_6$", get_point (n/2+3) q6) with_text_color red;
+fi
 
+  n := (size q6 / 2 + 3);
+  dotlabel.rt("$q_6$", get_point (n) q6) with_text_color red;
+
+  dotlabel.top("$z_4$", z4); 
+  dotlabel.top("$z_5$", z5);
+
+
+if false:  
   dotlabel.top("$z_6$", z6);
   dotlabel.top("$z_7$", z7);
+fi;
 
   n := size q7 /4;
   dotlabel.rt("$q_7$", get_point (n-5) q7) with_text_color blue;
 
+if false:
   dotlabel.top("$z_8$", z8);
+fi
 
   n := (size q8) * 13/16 + 3;
   dotlabel.rt("$q_8$", get_point (n) q8) with_text_color red;
@@ -451,12 +466,30 @@ beginfig(103);
   n := (size q11) - 1;
   dotlabel.bot("$q_{11}$", (get_point (n) q11)) with_text_color magenta;
 
+if false:
   n := size q8 - 1;
   dotlabel.lrt("$z_{13}$", z13);
-
   dotlabel.bot("$z_{14}$", z14);
+fi
 
   dotlabel.top("$q_{12}$", mediate(z13, z14)) with_text_color green;
+
+  n := (size q3 * 1/2) + 3;
+  dotlabel.lrt("$q_3$", get_point (n) q3) with_text_color dark_green;
+
+  n := (size q4) / 2;
+  dotlabel.ulft("$q_4$", get_point (n) q4) with_text_color magenta;
+
+
+  n := size q4 - 1;
+  dotlabel.rt("0", get_point (0) q4) with_text_color magenta;
+  dotlabel.ulft(decimal n, get_point (n) q4) with_text_color magenta;
+
+
+  n := (size q3 * 1/2) + 3;
+  dotlabel.lrt("$q_3$", get_point (n) q3) with_text_color dark_green;
+  n := size q5 * 3/ 4;
+  dotlabel.rt("$q_5$", get_point (n) q5) with_text_color orange;
 
 endfig with_projection parallel_x_y no_sort;
 %endfig with_focus f;
