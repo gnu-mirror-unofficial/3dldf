@@ -14983,11 +14983,10 @@ Path::resolve(Pointer_Vector<Path> *pv,
            << "argument is NULL."
            << endl 
            << "This isn't permitted." << endl 
-           << "Exiting function unsuccessfully with return value "
-           << "`static_cast<Pointer_Vector<Path, Path>*>(0)'."
+           << "Exiting function unsuccessfully with return value 1."
            << endl;
 
-      return static_cast<Pointer_Vector<Path, Path>*>(0);
+      return 1;
 
    }  /* |if (scanner_node == 0)| */
 
@@ -15036,11 +15035,10 @@ Path::resolve(Pointer_Vector<Path> *pv,
            << endl
            << "Can't resolve subpath."
            << endl 
-           << "Exiting function unsuccessfully with return value "
-           << "`static_cast<Pointer_Vector<Path, Path>*>(0)'."
+           << "Exiting function unsuccessfully with return value 1."
            << endl;
 
-      return static_cast<Pointer_Vector<Path, Path>*>(0);
+      return 1;
    }
    
    if (begin < 0)
@@ -15089,11 +15087,10 @@ Path::resolve(Pointer_Vector<Path> *pv,
            << endl
            << "A subpath of one point cannot be resolved."
            << endl
-           << "Exiting function unsuccessfully with return value "
-           << "`static_cast<Pointer_Vector<Path, Path>*>(0)'."
+           << "Exiting function unsuccessfully with return value 1."
            << endl;
 
-      return static_cast<Pointer_Vector<Path, Path>*>(0);
+      return 1;
    }
 #if DEBUG_COMPILE
    else if (DEBUG)
@@ -15196,10 +15193,10 @@ Added this section.
              << "`do_test_planar' is `true' and path is not planar."
              << endl 
              << "Can't resolve it." << endl 
-             << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+             << "Exiting function unsuccessfully with return value 1."
              << endl;
 
-        return static_cast<Pointer_Vector<Path, Path>*>(0);
+        return 1;
     }  
 #if DEBUG_COMPILE
     else if (DEBUG)
@@ -15325,11 +15322,10 @@ transferring it to the x-y plane.  Write a function for this.
                  << endl 
                  << "Failed to create temporary file."
                  << endl 
-                 << "Exiting function unsuccessfully with return value "
-                 << "`static_cast<Pointer_Vector<Path, Path>*>(0)'."
+                 << "Exiting function unsuccessfully with return value 1."
                  << endl;
 
-            return static_cast<Pointer_Vector<Path, Path>*>(0);
+            return 1;
 
     }  /* |if (fd_in == -1)|  */
 
@@ -15359,10 +15355,10 @@ transferring it to the x-y plane.  Write a function for this.
                  << endl 
                  << "Failed to create temporary file."
                  << endl 
-                 << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+                 << "Exiting function unsuccessfully with return value 1."
                  << endl;
 
-            return static_cast<Pointer_Vector<Path, Path>*>(0);
+            return 1;
 
     }  /* |if (fd_out == -1)|  */
 
@@ -15394,10 +15390,10 @@ transferring it to the x-y plane.  Write a function for this.
            << endl
            << "`errno' == " << errno << ":  " << strerror(errno)
            << endl
-           << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
-                 << endl;
+           << "Exiting function unsuccessfully with return value 1."
+           << endl;
 
-            return static_cast<Pointer_Vector<Path, Path>*>(0);
+            return 1;
 
    } /* |if (fp == 0)| */
 
@@ -15431,13 +15427,13 @@ transferring it to the x-y plane.  Write a function for this.
       if (feof(fp))
          cerr << "Reached EOF." << endl;
 
-      cerr << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+      cerr << "Exiting function unsuccessfully with return value 1."
            << endl;
 
 
       pclose(fp);
 
-      return static_cast<Pointer_Vector<Path, Path>*>(0);
+      return 1;
 
    }  /* |if (status == 0)| */
 
@@ -15518,12 +15514,12 @@ transferring it to the x-y plane.  Write a function for this.
             << endl 
             << "`errno' == " << errno << ":  " << strerror(errno)
             << endl
-            << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+            << "Exiting function unsuccessfully with return value 1."
             << endl;
 
        close(fd_in);
 
-       return static_cast<Pointer_Vector<Path, Path>*>(0);
+       return 1;
 
    } 
    else if (status < temp_strm.str().size())
@@ -15536,10 +15532,10 @@ transferring it to the x-y plane.  Write a function for this.
             << endl 
             << "`temp_in_filename' == " << "`" << temp_in_filename << "'."
             << endl 
-            << "Exiting function unsuccessfully with return value `static_cast<Pointer_Vector<Path, Path>*>(0)'."
+            << "Exiting function unsuccessfully with return value 1."
             << endl;
 
-       return static_cast<Pointer_Vector<Path, Path>*>(0);
+       return 1;
 
    } 
 #if DEBUG_COMPILE
@@ -15582,11 +15578,10 @@ transferring it to the x-y plane.  Write a function for this.
            << "Failed to execute `mpost' on temporary input file "
            << "`" << temp_in_filename << "'."
            << endl 
-           << "Exiting function unsuccessfully with return value "
-           << "`static_cast<Pointer_Vector<Path, Path>*>(0)'."
+           << "Exiting function unsuccessfully with return value 1."
            << endl;
 
-       return static_cast<Pointer_Vector<Path, Path>*>(0);
+       return 1;
 
   } /* |if (status != 0)| */
 
@@ -15619,11 +15614,10 @@ transferring it to the x-y plane.  Write a function for this.
            << endl
            << "`errno' == " << errno << ":  " << strerror(errno)
            << endl
-           << "Exiting function unsuccessfully with return value "
-           << "`static_cast<Pointer_Vector<Path, Path>*>(0)'."
+           << "Exiting function unsuccessfully with return value 1."
            << endl;
 
-            return static_cast<Pointer_Vector<Path, Path>*>(0);
+            return 1;
 
    } /* |if (fp == 0)| */
 
@@ -15993,7 +15987,10 @@ Added this function.
 @<Declare |Path| functions@>=
 virtual
 int
-reset_connectors(string s = "..", int begin = 0, int end = -1, Scanner_Node scanner_node = 0);
+reset_connectors(string s = "..", 
+                 int begin = 0, 
+                 int end = -1, 
+                 Scanner_Node scanner_node = 0);
 
 @q *** (3) Definition @>
 @
@@ -16018,7 +16015,8 @@ Path::reset_connectors(string s, int begin, int end, Scanner_Node scanner_node)
 
    if (!(s == "." || s == "..." || s == "--" || s == "---" || s == "&"))
    {
-       cerr << "ERROR!  In `Path::reset_connectors':  Invalid connector string specified:"
+       cerr << "ERROR!  In `Path::reset_connectors':  Invalid connector string "
+            << "specified:"
             << endl 
             << "`s' == " << s
             << endl 
@@ -16039,7 +16037,8 @@ Path::reset_connectors(string s, int begin, int end, Scanner_Node scanner_node)
    if (begin >= connector_type_vector.size())
    {
        cerr << "ERROR!  In `Path::reset_connectors':  (`begin' == " << begin << ") >= "
-            << "(`connector_type_vector.size()' == " << connector_type_vector.size() << ")"
+            << "(`connector_type_vector.size()' == " << connector_type_vector.size() 
+            << ")"
             << endl 
             << "Not resetting connectors." 
             << endl 

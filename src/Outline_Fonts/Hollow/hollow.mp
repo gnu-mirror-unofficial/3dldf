@@ -1,5 +1,5 @@
 %%%% hollow.mp.
-%%%% Generated on Sun May  1 02:15:13 2022
+%%%% Generated on Sun May  1 08:04:02 2022
 %%%% from hollow.ldf by GNU 3DLDF 3.0.
 
 prologues := 3;outputtemplate := "%j%3c.eps";
@@ -66,8 +66,29 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+draw (1.523856cm, 2.071291cm) .. (1.652326cm, 2.007994cm)
+   .. (1.784468cm, 1.956527cm) .. (1.917928cm, 1.915667cm)
+   .. (2.050352cm, 1.884188cm) .. (2.179388cm, 1.860869cm)
+   .. (2.302681cm, 1.844483cm) .. (2.417878cm, 1.833809cm)
+   .. (2.522626cm, 1.827622cm) .. (2.614572cm, 1.824699cm)
+   .. (2.691361cm, 1.823815cm) .. (2.773643cm, 1.823803cm)
+   .. (2.930004cm, 1.826823cm) .. (3.127785cm, 1.840198cm)
+   .. (3.353996cm, 1.871695cm) .. (3.595645cm, 1.929079cm)
+   .. (3.839742cm, 2.020117cm) .. (4.073295cm, 2.152575cm)
+   .. (4.283314cm, 2.334220cm) .. (4.456809cm, 2.572818cm)
+   .. (4.580787cm, 2.876134cm) .. (4.642258cm, 3.251936cm)
+   .. (4.644240cm, 3.495622cm) .. (4.632543cm, 3.637420cm)
+   .. (4.612547cm, 3.767593cm) .. (4.585899cm, 3.886093cm)
+   .. (4.554245cm, 3.992873cm) .. (4.519234cm, 4.087885cm)
+   .. (4.482513cm, 4.171084cm) .. (4.445729cm, 4.242422cm)
+   .. (4.410530cm, 4.301851cm) .. (4.378562cm, 4.349324cm)
+   .. (4.351475cm, 4.384796cm)
+withcolor (0.000000, 1.000000, 0.000000) 
+withpen pencircle transformed begingroup; save T; transform T;
+ xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
+ yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
+ ;
 drawdot (1.523856cm, 2.071291cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -79,7 +100,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (1.652326cm, 2.007994cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -91,7 +111,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (1.784468cm, 1.956527cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -103,7 +122,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (1.917928cm, 1.915667cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -115,7 +133,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (2.050352cm, 1.884188cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -127,7 +144,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (2.179388cm, 1.860869cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -139,7 +155,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (2.302681cm, 1.844483cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -151,7 +166,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (2.417878cm, 1.833809cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -163,7 +177,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (2.522626cm, 1.827622cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -175,7 +188,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (2.614572cm, 1.824699cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -187,7 +199,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (2.691361cm, 1.823815cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -199,7 +210,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (2.773643cm, 1.823803cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -211,7 +221,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (2.930004cm, 1.826823cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -223,7 +232,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (3.127785cm, 1.840198cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -235,7 +243,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (3.353996cm, 1.871695cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -247,7 +254,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (3.595645cm, 1.929079cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -259,7 +265,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (3.839742cm, 2.020117cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -271,7 +276,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.073295cm, 2.152575cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -283,7 +287,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.283314cm, 2.334220cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -295,7 +298,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.456809cm, 2.572818cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -307,7 +309,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.580787cm, 2.876134cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -319,7 +320,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.642258cm, 3.251936cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -331,7 +331,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.644240cm, 3.495622cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -343,7 +342,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.632543cm, 3.637420cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -355,7 +353,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.612547cm, 3.767593cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -367,7 +364,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.585899cm, 3.886093cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -379,7 +375,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.554245cm, 3.992873cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -391,7 +386,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.519234cm, 4.087885cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -403,7 +397,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.482513cm, 4.171084cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -415,7 +408,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.445729cm, 4.242422cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -427,7 +419,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.410530cm, 4.301851cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -439,7 +430,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.378562cm, 4.349324cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -451,7 +441,6 @@ yxpart T = 0.000000cm;
 T endgroup
 ;
 drawdot (4.351475cm, 4.384796cm)
-   withcolor (0.000000, 0.000000, 1.000000)
    withpen pencircle transformed
 begingroup; save T; transform T;
 xxpart T = 0.100000cm;
@@ -462,24 +451,24 @@ ypart T = 0.000000cm;
 yxpart T = 0.000000cm;
 T endgroup
 ;
-draw (1.523856cm, 2.071291cm) .. controls (1.566679cm, 2.050192cm) and (1.609503cm, 2.029093cm)..  (1.652326cm, 2.007994cm)
-   .. controls (1.694808cm, 1.987063cm) and (1.739020cm, 1.969844cm)..  (1.784468cm, 1.956527cm) .. controls (1.829118cm, 1.943445cm) and (1.873608cm, 1.929824cm)..  (1.917928cm, 1.915667cm)
-   .. controls (1.961210cm, 1.901841cm) and (2.005479cm, 1.891318cm)..  (2.050352cm, 1.884188cm) .. controls (2.093524cm, 1.877329cm) and (2.136546cm, 1.869554cm)..  (2.179388cm, 1.860869cm)
-   .. controls (2.220067cm, 1.852622cm) and (2.261260cm, 1.847147cm)..  (2.302681cm, 1.844483cm) .. controls (2.341173cm, 1.842008cm) and (2.379587cm, 1.838448cm)..  (2.417878cm, 1.833809cm)
-   .. controls (2.452634cm, 1.829599cm) and (2.487617cm, 1.827532cm)..  (2.522626cm, 1.827622cm) .. controls (2.553299cm, 1.827701cm) and (2.583966cm, 1.826726cm)..  (2.614572cm, 1.824699cm)
-   .. controls (2.640133cm, 1.823006cm) and (2.665768cm, 1.822711cm)..  (2.691361cm, 1.823815cm) .. controls (2.718776cm, 1.824998cm) and (2.746229cm, 1.824994cm)..  (2.773643cm, 1.823803cm)
-   .. controls (2.825775cm, 1.821537cm) and (2.877998cm, 1.822546cm)..  (2.930004cm, 1.826823cm) .. controls (2.995863cm, 1.832239cm) and (3.061797cm, 1.836698cm)..  (3.127785cm, 1.840198cm)
-   .. controls (3.203948cm, 1.844238cm) and (3.279627cm, 1.854775cm)..  (3.353996cm, 1.871695cm) .. controls (3.434725cm, 1.890061cm) and (3.515278cm, 1.909190cm)..  (3.595645cm, 1.929079cm)
-   .. controls (3.680219cm, 1.950009cm) and (3.762118cm, 1.980554cm)..  (3.839742cm, 2.020117cm) .. controls (3.919522cm, 2.060779cm) and (3.997450cm, 2.104975cm)..  (4.073295cm, 2.152575cm)
-   .. controls (4.152151cm, 2.202065cm) and (4.222976cm, 2.263321cm)..  (4.283314cm, 2.334220cm) .. controls (4.347140cm, 2.409217cm) and (4.405140cm, 2.488981cm)..  (4.456809cm, 2.572818cm)
-   .. controls (4.514503cm, 2.666432cm) and (4.556390cm, 2.768909cm)..  (4.580787cm, 2.876134cm) .. controls (4.608974cm, 3.000020cm) and (4.629504cm, 3.125525cm)..  (4.642258cm, 3.251936cm)
-   .. controls (4.650430cm, 3.332930cm) and (4.651093cm, 3.414505cm)..  (4.644240cm, 3.495622cm) .. controls (4.640247cm, 3.542880cm) and (4.636348cm, 3.590146cm)..  (4.632543cm, 3.637420cm)
-   .. controls (4.629017cm, 3.681236cm) and (4.622334cm, 3.724740cm)..  (4.612547cm, 3.767593cm) .. controls (4.603533cm, 3.807064cm) and (4.594650cm, 3.846564cm)..  (4.585899cm, 3.886093cm)
-   .. controls (4.577864cm, 3.922385cm) and (4.567287cm, 3.958066cm)..  (4.554245cm, 3.992873cm) .. controls (4.542402cm, 4.024480cm) and (4.530731cm, 4.056151cm)..  (4.519234cm, 4.087885cm)
-   .. controls (4.508896cm, 4.116420cm) and (4.496627cm, 4.144217cm)..  (4.482513cm, 4.171084cm) .. controls (4.470070cm, 4.194769cm) and (4.457808cm, 4.218549cm)..  (4.445729cm, 4.242422cm)
-   .. controls (4.435322cm, 4.262988cm) and (4.423563cm, 4.282841cm)..  (4.410530cm, 4.301851cm) .. controls (4.399742cm, 4.317585cm) and (4.389085cm, 4.333411cm)..  (4.378562cm, 4.349324cm)
-   .. controls (4.370347cm, 4.361748cm) and (4.361297cm, 4.373600cm)..  (4.351475cm, 4.384796cm)
-withcolor (0.000000, 0.392157, 0.000000) 
+draw (4.084898cm, 4.641852cm) .. (3.957902cm, 4.718262cm)
+   .. (3.829055cm, 4.782199cm) .. (3.699015cm, 4.834746cm)
+   .. (3.568442cm, 4.876985cm) .. (3.437995cm, 4.909998cm)
+   .. (3.308332cm, 4.934869cm) .. (3.180112cm, 4.952679cm)
+   .. (3.053995cm, 4.964511cm) .. (2.930639cm, 4.971448cm)
+   .. (2.810704cm, 4.974573cm) .. (2.692302cm, 4.975025cm)
+   .. (2.535940cm, 4.972005cm) .. (2.338159cm, 4.958630cm)
+   .. (2.111948cm, 4.927133cm) .. (1.870299cm, 4.869749cm)
+   .. (1.626202cm, 4.778710cm) .. (1.392649cm, 4.646253cm)
+   .. (1.182630cm, 4.464608cm) .. (1.009136cm, 4.226010cm)
+   .. (0.885158cm, 3.922694cm) .. (0.823686cm, 3.546892cm)
+   .. (0.820596cm, 3.331717cm) .. (0.827583cm, 3.219670cm)
+   .. (0.841348cm, 3.104722cm) .. (0.862644cm, 2.988141cm)
+   .. (0.892224cm, 2.871200cm) .. (0.930841cm, 2.755168cm)
+   .. (0.979248cm, 2.641318cm) .. (1.038199cm, 2.530919cm)
+   .. (1.108446cm, 2.425242cm) .. (1.190742cm, 2.325560cm)
+   .. (1.285841cm, 2.233141cm)
+withcolor (1.000000, 0.000000, 1.000000) 
 withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.070292cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.070292cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
@@ -620,6 +609,16 @@ label.top(btex $z_2$ etex , (2.323025cm, 2.889501cm));
 begingroup
 interim linecap := rounded;
 drawdot (2.323025cm, 2.889501cm) withpen pencircle scaled dotlabeldiam;endgroup;
+label.top(btex 0 etex , (1.523856cm, 2.071291cm))
+ withcolor (0.000000, 1.000000, 0.000000);
+begingroup
+interim linecap := rounded;
+drawdot (1.523856cm, 2.071291cm) withpen pencircle scaled dotlabeldiam;endgroup;
+label.top(btex 32 etex , (4.351475cm, 4.384796cm))
+ withcolor (0.000000, 1.000000, 0.000000);
+begingroup
+interim linecap := rounded;
+drawdot (4.351475cm, 4.384796cm) withpen pencircle scaled dotlabeldiam;endgroup;
 endfig;
 
 end;
