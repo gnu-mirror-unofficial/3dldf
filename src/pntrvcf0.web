@@ -709,18 +709,18 @@ Pointer_Vector<Path, Path>::resolve(Scanner_Node scanner_node,
 
        pv->clear();
 
-       pv = (*iter)->resolve(scanner_node, 
-                              res_val,
-                              begin,
-                              end,
-                              do_unlink, 
-                              do_transform,
-                              do_test_planar, 
-                              do_make_planar,         
-                              do_ampersand);
+       int status = (*iter)->resolve(pv,
+                                 scanner_node, 
+                                 res_val,
+                                 begin,
+                                 end,
+                                 do_unlink, 
+                                 do_transform,
+                                 do_test_planar, 
+                                 do_make_planar,         
+                                 do_ampersand);
 
 @q **** (4) @>
-#if 0 
 
        if (status != 0)
        {
@@ -756,7 +756,6 @@ Pointer_Vector<Path, Path>::resolve(Scanner_Node scanner_node,
        }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-#endif 
 
 @q **** (4) @>
 

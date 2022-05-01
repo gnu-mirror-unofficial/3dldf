@@ -940,10 +940,17 @@ Removed code.  Replaced it with a call to |Scan_Parse::get_point_func|.
 
 @=point_primary: GET_POINT numeric_secondary path_primary@>@/
 {
+    if (@=$3@> == 0)
+    {
+        Point *p = create_new<Point>(INVALID_POINT);
+ 
+        @=$$@> =  static_cast<void*>(p);
 
-    @=$$@> = Scan_Parse::get_point_func<Path>(@=$2@>, 
-                                              static_cast<Path*>(@=$3@>), 
-                                              parameter);
+    }
+    else
+       @=$$@> = Scan_Parse::get_point_func<Path>(@=$2@>, 
+                                                 static_cast<Path*>(@=$3@>), 
+                                                 parameter);
   
 };
 

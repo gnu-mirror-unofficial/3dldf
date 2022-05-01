@@ -12199,7 +12199,11 @@ Path::subpath(size_t start, size_t end,
               const bool cycle, const string connector) const
 {
   
-  bool DEBUG = false; /* |true| */@; 
+/* !!START HERE:  LDF 2022.04.30.  This function doesn't acct. for 
+   the new connectors.
+*/ 
+
+  bool DEBUG = true; /* |false| */@; 
   Path p;
 
 #if 0
@@ -14918,8 +14922,9 @@ Added this function.
 
 @<Declare |Path| functions@>=
 virtual
-Pointer_Vector<Path, Path>*
-resolve(Scanner_Node scanner_node,
+int
+resolve(Pointer_Vector<Path> *pv,
+        Scanner_Node scanner_node,
         int res_val,
         int begin = 0, 
         int end = -1,
@@ -14932,8 +14937,9 @@ resolve(Scanner_Node scanner_node,
 @q *** (3) Definition @>
 @
 @<Define |Path| functions@>=
-Pointer_Vector<Path, Path>*
-Path::resolve(Scanner_Node scanner_node,
+int
+Path::resolve(Pointer_Vector<Path> *pv,
+              Scanner_Node scanner_node,
               int res_val,
               int begin, 
               int end,
@@ -14956,7 +14962,6 @@ Path::resolve(Scanner_Node scanner_node,
    Path p;
    Path R;
 
-   Pointer_Vector<Path, Path> *pv = 0;
    Connector_Type *c = 0;
 
    stringstream temp_strm;
@@ -15162,18 +15167,17 @@ Added this section.
           p += *(points[i]);
        }
 
-       pv = create_new<Pointer_Vector<Path, Path> >(0);
        *pv += create_new<Path>(p);          
 
 #if DEBUG_COMPILE
        if (DEBUG)
        { 
-           cerr << "Exiting `Path::resolve' successfully with return value `Pointer_Vector<Path, Path>*'."
+           cerr << "Exiting `Path::resolve' successfully with return value 0."
                 << endl;
        }      
 #endif /* |DEBUG_COMPILE|  */@; 
 
-       return pv;       
+       return 0;       
 
 @q ***** (5) @>
 
@@ -15683,8 +15687,6 @@ transferring it to the x-y plane.  Write a function for this.
 @
 @<Define |Path| functions@>=
 
-   pv = create_new<Pointer_Vector<Path, Path> >(0);
-
 #if 0 
 
 /* !!START HERE:  LDF 2022.04.24.  Testing.  This puts the full path with the resolved part
@@ -15720,12 +15722,12 @@ transferring it to the x-y plane.  Write a function for this.
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-       cerr << "Exiting `Path::resolve' successfully with return value `Pointer_Vector<Path, Path>*'."
+       cerr << "Exiting `Path::resolve' successfully with return value 0."
             << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   return pv;
+   return 0;
 
 }  /* End of |Path::resolve| definition  */
 

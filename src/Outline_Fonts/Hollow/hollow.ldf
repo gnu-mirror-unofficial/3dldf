@@ -153,7 +153,6 @@ beginfig(103);
 
   show pv0 with_connectors 4;
   message "pv0 (see above)";
-  pause;
   
  
   draw pv0;
@@ -166,7 +165,6 @@ beginfig(103);
   message "Showing pv0:";
   show pv0 with_connectors 4;
   message "Showed pv0 (see above)";
-  pause;
   
 %% *** (3)    
   
@@ -267,7 +265,11 @@ beginfig(103);
 
   path_vector qv;
 
-  qv := resolve q0 to 64 save;
+  qv := resolve q2 (3, 6) to 32 save;
+
+  show qv0 with_connectors 4;
+  message "qv0 (see above)";
+  pause;
 
   n := size qv0 - 1;
   
@@ -276,6 +278,11 @@ beginfig(103);
     drawdot m[i] with_pen pencircle scaled (1mm, 1mm, 1mm) with_color blue;
   endfor;
 
+  draw qv0 with_color dark_green with_pen big_pen;
+  
+  %q3 := subpath (3, 5) of q2;
+  %draw q3 withcolor red with_pen big_pen;
+  
 
  % %draw q7 with_color green with_pen big_pen;
   

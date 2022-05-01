@@ -6166,9 +6166,10 @@ Added this rule.
 
 @<Define rules@>=
 
-@=path_vector_assignment: path_vector_variable @>  
-@=ASSIGN path_vector_expression@>@/
+@=path_vector_assignment: path_vector_variable ASSIGN path_vector_expression@>@/
 {
+
+   cerr << "Error after here 1." << endl; 
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
@@ -6180,11 +6181,20 @@ Added this rule.
 @<Define rules@>=
 
   if (entry == static_cast<Id_Map_Entry_Node>(0))
-    {
+  {
 
-      @=$$@> = static_cast<void*>(0); 
+    @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
+  } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
+
+  else if (@=$3@> == 0)
+  {
+     cerr << "Error after here 2." << endl; 
+
+     @=$$@> = static_cast<void*>(0);
+
+     cerr << "Error after here 3." << endl; 
+  }
 
 @q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
@@ -6194,7 +6204,7 @@ Added this rule.
 @<Define rules@>=
 
   else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
-    {
+  {
 
    typedef Pointer_Vector<Path> PV;
  
@@ -6218,7 +6228,7 @@ failed.
 
 @<Define rules@>=
 
-if (status != 0)
+   if (status != 0)
          {
 
             delete pv;

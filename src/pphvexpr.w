@@ -352,6 +352,9 @@ Added this rule.
      cerr_message(cerr_strm);
      cerr_strm.str("");
 
+     delete pv;
+     pv = 0;
+
      goto END_RESOLVE_RULE_0;
 
   }
@@ -491,6 +494,9 @@ Added this rule.
      cerr_message(cerr_strm);
      cerr_strm.str("");
 
+     delete pv;
+     pv = 0;
+
      goto END_RESOLVE_RULE_1;
   }
 
@@ -563,6 +569,8 @@ Added this rule.
 @q **** (4) @>
 
 END_RESOLVE_RULE_1:
+
+cerr << "Error after here 0." << endl; 
 
   @=$$@> =  static_cast<void*>(pv);
 
