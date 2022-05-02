@@ -449,7 +449,33 @@ beginfig(103);
   
   draw q17 with_color lime_green with_pen big_pen;
   
+  
+%% *** (3)
 
+  z30 := get_point(0) q8;
+  dotlabel.rt("$z_{30}$", z30);
+
+  n := size q11 - 1;
+  z31 := get_point(n) q11;
+  dotlabel.lft("$\scriptstyle z_{31}$", z31);
+
+  z32 := mediate(z30, z31) shifted (2mm, 0); 
+  dotlabel.lft("$\scriptstyle z_{32}$", z32);
+
+  q18 := z30 .. z32 .. z31;
+
+  q19 := resolve q18 to 7;
+
+  draw q19 with_color turquoise with_pen big_pen;
+
+  label.rt("$q_{19}$", z32) with_text_color turquoise;
+
+  % for i := 0 upto size q19 - 1:
+  %   drawdot get_point(i) q19 with_pen dot_pen;
+  % endfor;
+
+%% *** (3)  
+  
   
 %% *** (3)
 
@@ -555,7 +581,7 @@ fi
   %dotlabel.top("$z_{12}$", z12);
   
   n := (size q11) - 1;
-  dotlabel.bot("$q_{11}$", (get_point (n) q11)) with_text_color magenta;
+  label.urt("$\scriptstyle q_{11}$", (get_point (n) q11) shifted (0pt, -2pt)) with_text_color magenta;
 
 if false:
   n := size q8 - 1;
