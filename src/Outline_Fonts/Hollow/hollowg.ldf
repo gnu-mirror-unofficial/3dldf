@@ -449,16 +449,19 @@ beginfig(103);
   
   draw q17 with_color lime_green with_pen big_pen;
   
-  fill q17;
-  unfill q13;
-  fill q5;
-  unfill pv1;
 
   
 %% *** (3)
+
+  fill q17 with_color dark_gray;
+  unfill q13;
+  fill q5 with_color dark_gray;
+  unfill pv1;
   
   v0 := current_picture;  
 
+
+  
 %% *** (3) Labels
 
   dotlabel.top("$\scriptstyle a_0^{0}$", a[0][0]);
@@ -581,7 +584,7 @@ fi
   dotlabel.rt("$q_5$", get_point (n) q5) with_text_color orange;
 
 endfig with_projection parallel_x_y no_sort;
-%endfig with_focus f;
+%endfig with_focus f no_sort;
 
 % end_mp;
 % end;
@@ -594,7 +597,7 @@ for i = 104 upto 111:
   beginfig(i);
     current_picture := v0;
     rotate current_picture (-10*j, 0, 0);
-  endfig with_focus f;
+  endfig with_focus f no_sort;
   j += 1;
 endfor;
 
@@ -602,7 +605,7 @@ endfor;
 beginfig(112);
   current_picture := v0;
   rotate current_picture (0, 30, 0);
-endfig with_focus f with_no_colors;
+endfig with_focus f no_sort; 
 
 j := 1;
 for i = 113 upto 119:
@@ -610,7 +613,7 @@ for i = 113 upto 119:
     current_picture := v0;
     rotate current_picture (-10*j, 0, 0);
     rotate current_picture (0, 30, 0);
-  endfig with_focus f;
+  endfig with_focus f no_sort;
   j += 1;
 endfor;
 
@@ -618,7 +621,7 @@ endfor;
 beginfig(120);
   current_picture := v0;
   rotate current_picture (0, -30, 0);
-endfig with_focus f;
+endfig with_focus f no_sort;
 
 j := 1;
 for i = 121 upto 127:
@@ -626,14 +629,14 @@ for i = 121 upto 127:
     current_picture := v0;
     rotate current_picture (-10*j, 0, 0);
     rotate current_picture (0, -30, 0);
-  endfig with_focus f;
+  endfig with_focus f no_sort;
   j += 1;
 endfor;
 
 
 beginfig(128);
   current_picture := v0;
-endfig with_focus f;
+endfig with_focus f no_sort;
 
 
 j := 1;
@@ -641,7 +644,7 @@ for i = 129 upto 136:
   beginfig(i);
     current_picture := v0;
     rotate current_picture (10*j, 0, 0);
-  endfig with_focus f;
+  endfig with_focus f no_sort;
   j += 1;
 endfor;
 
