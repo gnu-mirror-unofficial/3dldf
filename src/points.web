@@ -11211,6 +11211,59 @@ set_z(real r)
    return;
 }
 
+@q ** (2) Flatten.  @>
+@ Flatten.  
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this function.
+\ENDLOG
+
+@<Declare |Point| functions@>=
+virtual
+int
+flatten(int coord = 2, real r = 0.0);
+
+@q *** (3) Definition @>
+@
+@<Define |Point| functions@>=
+int
+Point::flatten(int coord, real r)
+{
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr << "Entering `Point::flatten'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+   if (coord == 0)
+      set_x(r);
+   else if (coord == 1)
+      set_y(r);
+   else if (coord == 2)
+      set_z(r);
+   
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Point::flatten' successfully with return value 0." 
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+} /* End of |Point::flatten| definition  */
+
 @q ** (2) |Picture| copy constructor. @>
 @*1 |Picture| copy constructor.
 \initials{LDF 2002.12.05.}  
@@ -11407,6 +11460,53 @@ Removed call to |delete (*iter)->pt|.  |Label::pt| is now deleted in
 #endif /* |DEBUG_COMPILE|  */@;   
 
 }
+
+@q *** (3) |Picture::flatten| @>
+@
+@<Define |Picture| functions@>=
+int
+Picture::flatten(int coord, real r)
+{
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr << "Entering `Picture::flatten'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+   for (vector<Shape*>::iterator iter = shapes.begin();
+        iter != shapes.end();
+        ++iter)
+   {
+       (*iter)->flatten(coord, r);
+   }
+
+   for (vector<Label*>::iterator iter = labels.begin();
+        iter != labels.end();
+        ++iter)
+   {
+       (*iter)->pt->flatten(coord, r);
+   }
+
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Picture::flatten' successfully with return value 0." 
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+} /* End of |Picture::flatten| definition  */
 
 @q ** (2) Output.@> 
 @*1 Output.

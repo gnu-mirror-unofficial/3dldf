@@ -1,51 +1,59 @@
-@q **** (4) operation_assignment --> path_variable APPEND @>
-@q **** (4) path_expression.                              @>
-
-@*3 \§operation assignment> $\longrightarrow$ \§path variable> \.{APPEND} 
-\§path expression>.
+@q ** (2) Flatten.  @>
+@ Flatten.  
 \initials{LDF 2022.05.02.}
 
 \LOG
 \initials{LDF 2022.05.02.}
-Added this rule.
+Added this function.
 \ENDLOG
 
-@q **** (4) Definition.@> 
+@<Declare |Picture| functions@>=
+int
+flatten(int coord = 2, real r = 0.0);
 
-@<Define rules@>=
-@=path_secondary: path_secondary APPEND path_expression@>@/
+@q *** (3) Definition @>
+@
+@<Define |Picture| functions@>=
+int
+Picture::flatten(int coord, real r)
 {
-  @<Common declarations for rules@>@; 
+@q **** (4) @>
 
- #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
    if (DEBUG)
-     {
-
-          cerr_strm << thread_name << "*** Parser: `operation_assignment --> "
-                    << "path_variable APPEND path_expression'.";
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-     }
+   { 
+      cerr << "Entering `Picture::flatten'." << endl;
+   }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  Path *p = static_cast<Path*>(@=$1@>);
-  Path *q = static_cast<Path*>(@=$3@>);
-b  
-  p->append(*q, "..", true);
+@q **** (4) @>
 
-  delete q;
-  q = 0;
+   for (vector<Shape*>::iterator iter = shapes.begin();
+        iter != shapes.end();
+        ++iter)
+   {
+       (*iter)->flatten(coord, r);
+   }
 
-@q ***** (5)  Set |$$| to |static_cast<void*>(p)| and exit rule.@> 
+   for (vector<Label*>::iterator iter = labels.begin();
+        iter != labels.end();
+        ++iter)
+   {
+       (*iter)->pt->flatten(coord, r);
+   }
 
-@ Set |@=$$@>| to |static_cast<void*>(p)| and exit rule.
-\initials{LDF 2022.05.02.}
 
-@<Define rules@>=
+@q **** (4) @>
 
-  @=$$@> = static_cast<void*>(p);
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Picture::flatten' successfully with return value 0." 
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
-};
+   return 0;
+
+} /* End of |Picture::flatten| definition  */

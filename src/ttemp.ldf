@@ -1,12 +1,32 @@
 %% ttemp.ldf
 
-path p;
-p := (1, 2, 3) .. (2, 5, 6) .. (7, 8, 9);
-flatten p, 2.3;
+beginfig(0); 
+  path p;
+  p := (1, 2, 3) .. (2, 5, 6) .. (7, 8, 9);
 
-show p;
-message "p after flatten (see above)";
+  draw p;
   
+  point m[];
+
+  m0 := (2, 3, 4);
+
+  m1 := (10, 13.5, 6);
+
+  drawdot m0;
+  drawdot m1;
+
+  picture v[];
+
+  dotlabel.top("abc", m0);
+  
+  flatten current_picture;
+
+  show current_picture;
+
+  pause;
+  
+endfig;
+
 end;
 
 

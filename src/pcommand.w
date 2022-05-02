@@ -1025,7 +1025,7 @@ Added this rule.
      @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ 
+   DEBUG = false; /* |true| */ 
    if (DEBUG)
    { 
       cerr_strm << "*** Parser: `command: flatten_command path_variable numeric_optional."
@@ -1036,10 +1036,6 @@ Added this rule.
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -1053,12 +1049,9 @@ getchar();
    {
        Path *p = static_cast<Path*>(entry->object);
        p->flatten(@=$1@>, r);
+#if 0 
        p->show("*p:");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-
+#endif 
    }
 
    @=$$@> = static_cast<void*>(0);
@@ -1095,12 +1088,18 @@ Added this rule.
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+   entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
+
+   real r = @=$3@>;
+
+   if (entry && entry->object)
+   {
+       Picture *p = static_cast<Picture*>(entry->object);
+       p->flatten(@=$1@>, r);
+   }
 
    @=$$@> = static_cast<void*>(0);
 };
@@ -1122,10 +1121,10 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ 
+   DEBUG = false; /* |true| */ 
    if (DEBUG)
    { 
-      cerr_strm << "*** Parser: `command: flatten_command point_variable."
+      cerr_strm << "*** Parser: `command: flatten_command point_variable numeric_optional."
                 << endl 
                 << "`flatten_command'  == $1 == " << @=$1@> << endl
                 << "`numeric_optional' == $3 == " << @=$3@> << endl;
@@ -1134,11 +1133,21 @@ Added this rule.
       cerr_message(cerr_strm);
       cerr_strm.str("");
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+   entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
+
+   real r = @=$3@>;
+
+   if (entry && entry->object)
+   {
+       Point *p = static_cast<Point*>(entry->object);
+       p->flatten(@=$1@>, r);
+#if 0 
+       p->show("*p:");
+#endif 
+   }
 
    @=$$@> = static_cast<void*>(0);
 };
