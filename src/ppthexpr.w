@@ -284,6 +284,11 @@ rule.
 
 \initials{LDF 2004.09.24.}
 Changed |w| from |Real_Pointer_Vector*| to |Pointer_Vector<real>*|.
+
+\initials{LDF 2022.05.02.}
+!! BUG FIX:  Now calling |Path::subpath| without the |string connector| argument.
+Formerly, it was |".."|, which caused the connectors on |*this| to not be used.
+This became a bug after I implemented |class Connector_Type|.
 \ENDLOG 
 
 \TODO
@@ -379,8 +384,7 @@ of the points on the path is the same.
     {
       *p = q->subpath(static_cast<size_t>(*(w->v[0])), 
                       static_cast<size_t>(*(w->v[1])),
-                      false,
-                      "..");
+                      false);
 
 #if DEBUG_COMPILE
    if (DEBUG)
