@@ -121,6 +121,8 @@ frame_ht := 10cm;
 
 path frame;
 
+numeric fig_num;
+
 frame :=    ((-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht)
   -- (.5frame_wd, .5frame_ht) -- (-.5frame_wd, .5frame_ht)
   -- cycle) shifted (.475frame_wd, .5frame_ht-.825cm);
@@ -135,10 +137,11 @@ set f with_position (0cm, 2cm, -50)
 %% ** (2) Fig. 103.  cmssbx10 "g".
 
 
-
 beginfig(103);
 
 %% *** (3)  
+
+  fig_num := 103;
   
   path q[];
   
@@ -366,22 +369,22 @@ beginfig(103);
   z22 := mediate(z20, z21);
 
   %drawdot z22 with_pen dot_pen;
-  %label.urt("$z_{22}$", z22 shifted (-2pt, 0));
+
 
   z23 := mediate(z0, z22, 1.25);
-  dotlabel.top("$z_{23}$", z23);
+
 
   draw z0 -- z23 with_color dark_gray;
 
   z24 := z23 rotatedaround(z0, a[0][13]) 180;
 
-  dotlabel.lft("$z_{24}$", z24);
+
 
   draw z0 -- z24 with_color dark_gray;
 
   z25 := mediate(z0, z24, .805);
 
-  dotlabel.lft("$z_{25}$", z25);
+
 
   % n := magnitude(z25 - z0);
   % message "magnitude z25 - z0:";
@@ -390,10 +393,10 @@ beginfig(103);
 
   z26 := z25 rotatedaround(z0, a[0][13]) 180;
   
-  dotlabel.top("$\scriptstyle z_{26}$", z26);
+
 
   z27 := mediate(get_point(0) q3, get_point(32) q4);
-  %dotlabel.urt("$\scriptstyle z_{27}$", z27);
+
   
   q13 := q3;
   q13 += z26;
@@ -407,14 +410,14 @@ beginfig(103);
   draw q13 with_color blue with_pen big_pen;
 
   n := size q3 * 11/16;
-  label.rt("$q_{13}$", get_point(n) q13) with_text_color blue;
+
   
 %% *** (3)
 
   q14 := subpath (3, 6) of pv0;
   draw q14 with_color teal_blue with_pen big_pen;
 
-  label.rt("$q_{14}$", get_point(2) q14) with_text_color teal_blue;
+
   
   q15 := resolve q14 to 32;
   
@@ -424,20 +427,20 @@ beginfig(103);
 
   q16 := subpath (12, 15) of pv0;
   draw q16 with_color rose_madder with_pen big_pen;
-  label("$q_{16}$", get_point(1) q16 shifted (-.5cm, .25cm)) with_text_color rose_madder;
+
 
   
   z28 := mediate(a[0][3], a[0][15]);
-  dotlabel.llft("$\scriptstyle z_{28}$", z28);
+
 
   z29 := mediate(a[0][12], a[0][6]);
-  dotlabel.bot("$\scriptstyle z_{29}$", z29);
+
 
   q17 := q16 .. z28 .. q14 .. z29; 
   q17 += cycle; %% ?? Why doesn't it work to have '.. cycle' in the assignment above?
                 %% Fix this!  LDF 2022.05.02.
 
-  label("$q_{17}$", get_point(2) q14 shifted (.25cm, -.75cm)) with_text_color lime_green;
+
   
   draw q17 with_color lime_green with_pen big_pen;
   
@@ -445,14 +448,14 @@ beginfig(103);
 %% *** (3)
 
   z30 := get_point(0) q8;
-  dotlabel.rt("$z_{30}$", z30);
+
 
   n := size q11 - 1;
   z31 := get_point(n) q11;
-  dotlabel.lft("$\scriptstyle z_{31}$", z31);
+
 
   z32 := mediate(z30, z31) shifted (2mm, 0); 
-  dotlabel.lft("$\scriptstyle z_{32}$", z32);
+
 
   q18 := z31 .. z32 .. z30;
 
@@ -460,7 +463,7 @@ beginfig(103);
 
   draw q19 with_color turquoise with_pen big_pen;
 
-  label.rt("$q_{19}$", z32) with_text_color turquoise;
+
 
   % for i := 0 upto size q19 - 1:
   %   drawdot get_point(i) q19 with_pen dot_pen;
@@ -468,25 +471,33 @@ beginfig(103);
 
 %% *** (3)  
 
+  %% !! START HERE: LDF 2022.05.02.  Resolve q12 or q20.
+  
+  message "size q12:";
+  show size q12;
+  pause;
+  
   q20 := q19 .. q8 .. q12 .. q11;
   q20 += cycle;
 
   %draw q20 with_color cerulean_blue with_pen dot_pen;
-  label.top("$q_{20}$", a[0][21]) with_text_color cerulean_blue;
+
   
 %% *** (3)
 
-  % fill pv0 with_color dark_gray;
-  % unfill q20;
+  %fill pv0 with_color dark_gray;
+  draw q20;
 
-  fill q17 with_color dark_gray;
-  unfill q13;
-  fill q5 with_color dark_gray;
-  unfill pv1;
+  % fill q17 with_color dark_gray;
+  % unfill q13;
+  % fill q5 with_color dark_gray;
+  % unfill pv1;
 
-  fill q7 with_color dark_gray;
-  unfill pv2;
+  % fill q7 with_color dark_gray;
+  % unfill pv2;
+
   
+ 
   v0 := current_picture;  
   
 %% *** (3) Labels
@@ -527,12 +538,11 @@ beginfig(103);
   dotlabel.bot("$a_2^{2}$", a[2][2]);
   dotlabel.lft("$a_2^{3}$", a[2][3]);
   dotlabel.top("$a_2^{4}$", a[2][4]);		  
-
   dotlabel.top("$z_0$", z0);
 
-if false:
-  dotlabel.top("$z_2$", z2);
-fi
+  if false:
+    dotlabel.top("$z_2$", z2);
+  fi
 
   dotlabel.urt("0", get_point(0) q3) with_text_color green;
 
@@ -541,30 +551,30 @@ fi
 
   drawdot z21 with_pen dot_pen;
 
-label.llft(s, z21 shifted (5pt, 0)) with_text_color green; %% "32"
+  label.llft(s, z21 shifted (5pt, 0)) with_text_color green; %% "32"
 
-if false:
-  dotlabel.top("$z_3$", z3);
-fi
+  if false:
+    dotlabel.top("$z_3$", z3);
+  fi
 
   n := (size q6 / 2 + 3);
   dotlabel.rt("$q_6$", get_point (n) q6) with_text_color red;
 
   dotlabel.top("$z_4$", z4); 
 
-dotlabel.ulft("$z_5$", z5);
+  dotlabel.ulft("$z_5$", z5);
 
-if false:  
-  dotlabel.top("$z_6$", z6);
-  dotlabel.top("$z_7$", z7);
-fi;
+  if false:  
+    dotlabel.top("$z_6$", z6);
+    dotlabel.top("$z_7$", z7);
+  fi;
 
   n := size q7 /4;
   dotlabel.rt("$q_7$", get_point (n-5) q7) with_text_color blue;
 
-if false:
-  dotlabel.top("$z_8$", z8);
-fi
+  if false:
+    dotlabel.top("$z_8$", z8);
+  fi
 
   n := (size q8) * 13/16 + 3;
   dotlabel.rt("$q_8$", get_point (n) q8) with_text_color red;
@@ -584,11 +594,11 @@ fi
   n := (size q11) - 1;
   label.urt("$\scriptstyle q_{11}$", (get_point (n) q11) shifted (0pt, -2pt)) with_text_color magenta;
 
-if false:
-  n := size q8 - 1;
-  dotlabel.lrt("$z_{13}$", z13);
-  dotlabel.bot("$z_{14}$", z14);
-fi
+  if false:
+    n := size q8 - 1;
+    dotlabel.lrt("$z_{13}$", z13);
+    dotlabel.bot("$z_{14}$", z14);
+  fi
 
   dotlabel.bot("$q_{12}$", mediate(z13, z14)) with_text_color green;
 
@@ -609,6 +619,25 @@ fi
   dotlabel.lrt("$q_3$", get_point (n) q3) with_text_color dark_green;
   n := size q5 * 3/ 4;
   dotlabel.rt("$q_5$", get_point (n) q5) with_text_color orange;
+
+  %label.urt("$z_{22}$", z22 shifted (-2pt, 0));
+  dotlabel.top("$z_{23}$", z23);
+  dotlabel.lft("$z_{24}$", z24);
+  dotlabel.lft("$z_{25}$", z25);
+  dotlabel.top("$\scriptstyle z_{26}$", z26);
+  %dotlabel.urt("$\scriptstyle z_{27}$", z27);
+  label.rt("$q_{13}$", get_point(n) q13) with_text_color blue;
+  label.rt("$q_{14}$", get_point(2) q14) with_text_color teal_blue;
+  label("$q_{16}$", get_point(1) q16 shifted (-.5cm, .25cm)) with_text_color rose_madder;
+  dotlabel.llft("$\scriptstyle z_{28}$", z28);
+  dotlabel.bot("$\scriptstyle z_{29}$", z29);
+
+  label("$q_{17}$", get_point(2) q14 shifted (.25cm, -.75cm)) with_text_color lime_green;
+  dotlabel.rt("$z_{30}$", z30);
+  dotlabel.lft("$\scriptstyle z_{31}$", z31);
+  dotlabel.lft("$\scriptstyle z_{32}$", z32);
+  label.rt("$q_{19}$", z32) with_text_color turquoise;
+  label.top("$q_{20}$", a[0][21]) with_text_color cerulean_blue;
 
 endfig with_projection parallel_x_y no_sort;
 %endfig with_focus f no_sort;
