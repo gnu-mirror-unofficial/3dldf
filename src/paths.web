@@ -12165,9 +12165,11 @@ Path::slope(char a, char b)
   return points[1]->slope(*points[0], a, b);
 }
 
-@q ** Subpath.@>
+@q ** (2) Subpath.@>
+
 @ Subpath.
 @^\cfunc{Path}{subpath}@>
+
 |subpath| returns a new |Path| using |points[start]|through points[end- 1]| from |*this|.  
 If the optional |bool| argument |cycle| is used,
 |then the new |Path| will be a cycle, whether *this| is or not.  One
@@ -12192,29 +12194,34 @@ Changed |int i| to |size_t i| in the |for| loops that compare |i| to |start| and
 The way it was before caused GCC with the ``{\tt -Wall}'' option to issue a warning.
 \ENDLOG 
 
+@q *** (3) Declaration @>
+
 @<Declare |Path| functions@>=
 Path
 subpath(size_t start, size_t end, const bool cycle = false,
         const string connector = "") const;
 
-@q *** Definition.@>
+@q *** (3) Definition.@>
 @   
 @<Define |Path| functions@>=
 Path
 Path::subpath(size_t start, size_t end,
               const bool cycle, const string connector) const
 {
-  
-/* !!START HERE:  LDF 2022.04.30.  This function doesn't acct. for 
-   the new connectors.
-*/ 
+@q **** (4) @>
 
-  bool DEBUG = true; /* |false| */@; 
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */@;
+   if (DEBUG)
+   { 
+      cerr << "Entering `Path::subpath'." << endl;
+      show("*this:", 'w', true, true, 0, Projections::parallel_x_y, 1, 16U);
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
   Path p;
 
-#if 0
-  show("*this:");
-#endif 
+@q **** (4) @>
 
 @  \initials{LDF 2002.11.05.}  
 There is no ``|INVALID_PATH|'', so I return an empty one, if 
@@ -12232,6 +12239,8 @@ compare another |Path| to it.
       return p;  
     }
 
+@q **** (4) @>
+
 @ More error handling.  In these cases, it's possible
 to recover.
 \initials{LDF 2002.11.05.} 
@@ -12247,6 +12256,8 @@ to recover.
       start = 0;
     }
 
+@q **** (4) @>
+
   if (end > points.size())
     {
       cerr << "ERROR! In Path::subpath():\n"
@@ -12255,6 +12266,8 @@ to recover.
 
       end = points.size();
     }
+
+@q **** (4) @>
 
 @ If a |connector| argument is specified, all we have
 to do is put the appropriate |Points| from |points| onto |p.points|,
@@ -12287,6 +12300,8 @@ put |connector| onto |p.connectors|, and return |p|.
       return p;
     }
   
+@q **** (4) @>
+
 @ If no |connector| argument is specified, then we
 have to get the appropriate connectors from |*this|.  This is slightly
 tricky, because |connectors| doesn't have to contain a |connector| for
@@ -12336,11 +12351,23 @@ that add or remove connectors, so it's best to have this routine.
 
   }  /* |for| */
 
+@q **** (4) @>
+
   q.set_cycle(cycle);
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+  { 
+     cerr << "Exiting `Path::subpath' successfully with return value `Path q'." 
+          << endl;
+  }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
   return q;
 
 }  /* End of |Path::subpath| definition  */
+
+@q *** (3) @>
 
 @q ** (2) Getting points.@>
 @ Getting points. 
