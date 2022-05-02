@@ -89,7 +89,8 @@ def write_path (expr ppath, filename, do_show) =
 	message "precontrol " & decimal i & " of ppath:";
 	show precontrol i of ppath;
       fi
-      s := "and (" & decimal (xpart (precontrol i of ppath)) & ", " & decimal (ypart (precontrol i of ppath)) & ") "
+      s :=   "and (" & decimal (xpart (precontrol i of ppath)) & ", "
+	   & decimal (ypart (precontrol i of ppath)) & ") "
 	if i < length ppath: & ".. " fi ;
       
       write s to filename;
