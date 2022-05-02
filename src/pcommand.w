@@ -936,6 +936,244 @@ Added this rule.
 };
 
 
+@q ** (2) flatten_command @>
+
+@ \§flatten command>.
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> flatten_command@>
+
+@q ** (2) flatten_command: FLATTEN_X  @>
+
+@ \§flatten command> $\longrightarrow$ \.{FLATTEN\_X}.
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=flatten_command: FLATTEN_X@>
+{
+   @=$$@> = 0;
+};
+
+@q ** (2) flatten_command: FLATTEN_Y  @>
+
+@ \§flatten command> $\longrightarrow$ \.{FLATTEN\_Y}.
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this rule.
+\ENDLOG
+
+@q ** (2) flatten_command: FLATTEN_Y@>
+
+@ \§flatten command> $\longrightarrow$ \.{FLATTEN\_Y}.
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=flatten_command: FLATTEN_Y@>
+{
+   @=$$@> = 1;
+};
+
+@q ** (2) flatten_command: FLATTEN_Z  @>
+@ \§flatten command> $\longrightarrow$ \.{FLATTEN\_Z}.
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=flatten_command: FLATTEN_Z@>
+{
+   @=$$@> = 2;
+};
+
+@q ** (2) command: flatten_command path_variable @>
+
+@ command> $\longrightarrow$ \.{RESET\_ARC} \§numeric list optional>.
+\§command> \§flatten command> \§path variable> \§numeric optional>.
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=command: flatten_command path_variable numeric_optional@>
+{
+@q *** (3) @>
+
+     @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `command: flatten_command path_variable numeric_optional."
+                << endl 
+                << "`flatten_command'  == $1 == " << @=$1@> << endl
+                << "`numeric_optional' == $3 == " << @=$3@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q *** (3) @>
+
+   entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
+
+   real r = @=$3@>;
+
+   if (entry && entry->object)
+   {
+       Path *p = static_cast<Path*>(entry->object);
+       p->flatten(@=$1@>, r);
+       p->show("*p:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
+   }
+
+   @=$$@> = static_cast<void*>(0);
+
+@q *** (3) @>
+
+};
+
+@q ** (2) command: flatten_command picture_variable @>
+
+@ command> $\longrightarrow$ \.{RESET\_ARC} \§numeric list optional>.
+\§command> \§flatten command> \§picture variable> \§numeric optional>.
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=command: flatten_command picture_variable numeric_optional@>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `command: flatten_command picture_variable."
+                << endl 
+                << "`flatten_command' == $1 == " << @=$1@> << endl
+                << "`numeric_optional' == $3 == " << @=$3@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   @=$$@> = static_cast<void*>(0);
+};
+
+@q ** (2) command: flatten_command point_variable numeric_optional @>
+
+@ command> $\longrightarrow$ \§command> \§flatten command> \§point variable> 
+\§numeric optional>.
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=command: flatten_command point_variable numeric_optional@>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `command: flatten_command point_variable."
+                << endl 
+                << "`flatten_command'  == $1 == " << @=$1@> << endl
+                << "`numeric_optional' == $3 == " << @=$3@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   @=$$@> = static_cast<void*>(0);
+};
+
+@q ** (2) numeric_optional @>
+
+@ \§numeric optional>.
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <real_value> numeric_optional@>
+
+@q ** (2) numeric_optional: /* Empty  */@>
+@
+@<Define rules@>= 
+
+@=numeric_optional: /* Empty  */@>
+{
+   @=$$@> = 0.0;
+};
+
+@q ** (2) numeric_optional: COMMA numeric_expression @>
+@
+@<Define rules@>= 
+
+@=numeric_optional: COMMA numeric_expression @>
+{
+   @=$$@> = @=$2@>;
+};
+
 @q ** (2) command: RESET_ARC numeric_list_optional @>
 
 @ \§command> $\longrightarrow$ \.{RESET\_ARC} \§numeric list optional>.

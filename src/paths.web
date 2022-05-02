@@ -16153,6 +16153,18 @@ flatten(int coord = 2, real r = 0.0);
 int
 Path::flatten(int coord, real r)
 {
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr << "Entering `Path::flatten'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
    for (vector<Point*>::iterator iter = points.begin();
         iter != points.end();
         ++iter)
@@ -16165,6 +16177,16 @@ Path::flatten(int coord, real r)
            (*iter)->set_z(r);
    }
    
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Path::flatten' successfully with return value 0." 
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
    return 0;
 
 } /* End of |Path::flatten| definition  */

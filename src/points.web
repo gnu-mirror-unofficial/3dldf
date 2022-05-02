@@ -11163,10 +11163,56 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
 
    return 0;
 
+}  /* End of |Point::restore_points_from_database| definition  */
+
+
+@q ** (2) Set x-coordinate.  @>
+
+@ Set x-coordinate.  
+\initials{LDF 2022.05.02.}
+
+@<Declare |Point| functions@>=
+inline 
+void
+set_x(real r)
+{
+   world_coordinates[0] = r;
+
+   return;
 }
 
-@q ** (2) Copy constructor. @>
-@*1 Copy constructor.
+@q ** (2) Set y-coordinate.  @>
+
+@ Set y-coordinate.  
+\initials{LDF 2022.05.02.}
+
+@<Declare |Point| functions@>=
+inline 
+void
+set_y(real r)
+{
+   world_coordinates[1] = r;
+
+   return;
+}
+
+@q ** (2) Set z-coordinate.  @>
+
+@ Set z-coordinate.  
+\initials{LDF 2022.05.02.}
+
+@<Declare |Point| functions@>=
+inline 
+void
+set_z(real r)
+{
+   world_coordinates[2] = r;
+
+   return;
+}
+
+@q ** (2) |Picture| copy constructor. @>
+@*1 |Picture| copy constructor.
 \initials{LDF 2002.12.05.}  
 
 \LOG
