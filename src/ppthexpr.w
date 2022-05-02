@@ -1106,7 +1106,7 @@ Added this rule.
                                        @=$2@>);
 };
 
-@q *** (3) path_primary --> GET_CAP cone_primary.@>
+@q *** (3) path_primary --> GET_CAP      cone_primary.@>
 @*1 \§path primary> $\longrightarrow$ \.{GET\_CAP}
 \§cone primary>. 
 \initials{LDF 2006.11.09.}
@@ -2082,8 +2082,7 @@ Added this rule.
 };
 
 @q *** (3) path secondary --> path_secondary transformer.  @>
-@*2 \§path secondary> $\longrightarrow$ \§path secondary> 
-\§transformer>.
+@*2 \§path secondary> $\longrightarrow$ \§path secondary> \§transformer>.
 
 \LOG
 \initials{LDF 2004.06.07.}  
@@ -2132,8 +2131,7 @@ Removed debugging code.
 @q ****** (6) Definition.@> 
 
 @<Define rules@>=
-@=path_secondary: path_secondary REFLECTED_IN @>
-@=path_expression@>@/ 
+@=path_secondary: path_secondary REFLECTED_IN path_expression@>@/ 
 {
 
     Path* p = reflect_in_func<Path>(static_cast<Scanner_Node>(parameter),

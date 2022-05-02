@@ -1703,6 +1703,7 @@ Added this section.
               || entry->type == RECTANGLE
               || entry->type == REG_POLYGON
               || entry->type == ELLIPSE
+              || entry->type == SUPERELLIPSE
               || entry->type == CIRCLE))
 
       {
@@ -1766,6 +1767,8 @@ is cast to |Path*|.
                       q = static_cast<Path*>(create_new<Reg_Polygon>(0)); 
                    else if (entry->type == ELLIPSE)
                       q = static_cast<Path*>(create_new<Ellipse>(0)); 
+                   else if (entry->type == SUPERELLIPSE)
+                      q = static_cast<Path*>(create_new<Superellipse>(0)); 
                    else if (entry->type == CIRCLE)
                       q = static_cast<Path*>(create_new<Circle>(0)); 
                       
@@ -2013,6 +2016,8 @@ if (entry->type == PATH)
                       p = create_new<Rectangle>(0);      
                    else if (entry->type == ELLIPSE)
                       p = create_new<Ellipse>(0);      
+                   else if (entry->type == SUPERELLIPSE)
+                      p = create_new<Superellipse>(0);      
                    else if (entry->type == CIRCLE)
                       p = create_new<Circle>(0);      
                    else 

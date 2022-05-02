@@ -52,7 +52,11 @@
 
 %% * (1)
 
+
+
 input "../../plainldf.lmc";
+
+
 
 verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
 verbatim_metapost   "verbatimtex \font\eurm=eurm10 scaled 16000"
@@ -129,6 +133,8 @@ set f with_position (0cm, 2cm, -50)
        with_direction (0cm, 2cm, 10) with_distance 45; 
 
 %% ** (2) Fig. 103.  cmssbx10 "g".
+
+
 
 beginfig(103);
 
@@ -408,8 +414,46 @@ beginfig(103);
 
   draw q13 with_color blue with_pen big_pen;
 
-%% *** (3)
+  n := size q3 * 11/16;
+  label.rt("$q_{13}$", get_point(n) q13) with_text_color blue;
   
+%% *** (3)
+
+  q14 := subpath (3, 6) of pv0;
+  draw q14 with_color teal_blue with_pen big_pen;
+
+  label.rt("$q_{14}$", get_point(2) q14) with_text_color teal_blue;
+  
+  q15 := resolve q14 to 32;
+  
+  for i = 0 upto size q15 - 1:
+    drawdot get_point(i) q15 with_pen dot_pen;
+  endfor;
+
+  q16 := subpath (12, 15) of pv0;
+  draw q16 with_color rose_madder with_pen big_pen;
+  label("$q_{16}$", get_point(1) q16 shifted (-.5cm, .25cm)) with_text_color rose_madder;
+
+  
+  z28 := mediate(a[0][3], a[0][15]);
+  dotlabel.llft("$\scriptstyle z_{28}$", z28);
+
+  z29 := mediate(a[0][12], a[0][6]);
+  dotlabel.bot("$\scriptstyle z_{29}$", z29);
+
+  q17 := q16 .. z28 .. q14 .. z29; 
+  q17 += cycle; %% ?? Why doesn't it work to have '.. cycle' in the assignment above?
+                %% Fix this!  LDF 2022.05.02.
+
+  label("$q_{17}$", get_point(2) q14 shifted (.25cm, -.75cm)) with_text_color lime_green;
+  
+  draw q17 with_color lime_green with_pen big_pen;
+  
+  fill q17;
+  unfill q13;
+  fill q5;
+  unfill pv1;
+
   
 %% *** (3)
   
@@ -522,13 +566,13 @@ fi
   dotlabel.lrt("$q_3$", get_point (n) q3) with_text_color dark_green;
 
   n := (size q4) / 2;
-  dotlabel.ulft("$q_4$", get_point (n) q4) with_text_color magenta;
+  %dotlabel.ulft("$q_4$", get_point (n) q4) with_text_color magenta;
 
   n := size q4 - 1;
-  drawdot z20 with_pen dot_pen;
-  label.lft("\vbox{\hbox{0}\vskip-.125cm\hbox{$z_{20}$}}", z20 shifted (5pt, 0))
-     with_text_color magenta;
-  dotlabel.ulft(decimal n, get_point (n) q4) with_text_color magenta;
+  %drawdot z20 with_pen dot_pen;
+  %label.lft("\vbox{\hbox{0}\vskip-.125cm\hbox{$z_{20}$}}", z20 shifted (5pt, 0))
+  %   with_text_color magenta;
+  %dotlabel.ulft(decimal n, get_point (n) q4) with_text_color magenta;
 
 
   n := (size q3 * 1/2) + 3;

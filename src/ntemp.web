@@ -1,17 +1,51 @@
+@q **** (4) operation_assignment --> path_variable APPEND @>
+@q **** (4) path_expression.                              @>
 
-#if DEBUG_COMPILE
-      if (DEBUG)
-      { 
-         cerr << "In `operator<<(ostream&, Connector_Type&)':" << endl;
+@*3 \§operation assignment> $\longrightarrow$ \§path variable> \.{APPEND} 
+\§path expression>.
+\initials{LDF 2022.05.02.}
 
-         c.pt0->show("*cpt0:");
-         c.pt1->show("*cpt1:");
+\LOG
+\initials{LDF 2022.05.02.}
+Added this rule.
+\ENDLOG
 
-      }  
+@q **** (4) Definition.@> 
+
+@<Define rules@>=
+@=path_secondary: path_secondary APPEND path_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+ #if DEBUG_COMPILE
+   DEBUG = true; /* |false| */
+   if (DEBUG)
+     {
+
+          cerr_strm << thread_name << "*** Parser: `operation_assignment --> "
+                    << "path_variable APPEND path_expression'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-      o << ".. controls " << "(" << c.pt0->get_x() << ", " 
-        << c.pt0->get_y() << ") ";
+  Path *p = static_cast<Path*>(@=$1@>);
+  Path *q = static_cast<Path*>(@=$3@>);
+b  
+  p->append(*q, "..", true);
 
-      if (c.pt1)
-         o << " and (" << c.pt1->get_x() << ", "  << c.pt1->get_y() << ") ";
+  delete q;
+  q = 0;
+
+@q ***** (5)  Set |$$| to |static_cast<void*>(p)| and exit rule.@> 
+
+@ Set |@=$$@>| to |static_cast<void*>(p)| and exit rule.
+\initials{LDF 2022.05.02.}
+
+@<Define rules@>=
+
+  @=$$@> = static_cast<void*>(p);
+
+};

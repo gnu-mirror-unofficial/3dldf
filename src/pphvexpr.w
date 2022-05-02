@@ -570,8 +570,6 @@ Added this rule.
 
 END_RESOLVE_RULE_1:
 
-cerr << "Error after here 0." << endl; 
-
   @=$$@> =  static_cast<void*>(pv);
 
 };

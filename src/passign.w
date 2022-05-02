@@ -3199,6 +3199,83 @@ Removed all debugging code.
 
 };
 
+@q **** (4) path_assignment --> path_variable APPEND path_expression.  @>
+
+@*3 \§path assignment> $\longrightarrow$ \§path variable> \.{APPEND} 
+\§path expression>.
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this rule.
+\ENDLOG
+
+@q **** (4) Definition.@> 
+
+@<Define rules@>=
+@=path_assignment: path_variable APPEND path_expression@>@/
+{
+#if 0 
+
+/* !!START HERE:  LDF 2022.05.02.  */ 
+
+  @<Common declarations for rules@>@; 
+
+ #if DEBUG_COMPILE
+   DEBUG = true; /* |false| */
+   if (DEBUG)
+     {
+
+          cerr_strm << thread_name << "*** Parser: `path_assignment --> "
+                    << "path_variable APPEND path_expression'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+  Path *p = static_cast<Path*>(@=$3@>);
+
+  entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
+
+  if (entry && entry->object && p)
+  {
+     Path *q = static_cast<Path*>(entry->object);
+  
+     Int_Void_Ptr ivp = assign_simple<Path>(static_cast<Scanner_Node>(parameter),
+                                            "Path",
+                                            @=$1@>,
+                                            p);
+
+  @=$$@> = ivp.v;
+
+
+     q->append(*p, "..", true);
+
+     delete p; 
+     p = 0;
+  } 
+
+
+
+
+
+@q ***** (5)  Set |$$| to |static_cast<void*>(p)| and exit rule.@> 
+
+@ Set |@=$$@>| to |static_cast<void*>(p)| and exit rule.
+\initials{LDF 2022.05.02.}
+
+@<Define rules@>=
+
+
+  @=$$@> = static_cast<void*>(0);
+
+#endif 
+
+};
+
+
 @q ***** (5) path_assignment --> path_variable := circle_expression.@>   
 
 @*4 \§path assignment> $\longrightarrow$ \§path variable> 
