@@ -58,6 +58,7 @@ input "../../plainldf.lmc";
 
 
 
+
 verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
 verbatim_metapost   "verbatimtex \font\eurm=eurm10 scaled 16000"
                   & "\font\cmssbx=cmssbx10 scaled 8000 etex;";
@@ -137,6 +138,8 @@ set f with_position (0cm, 2cm, -50)
 %% ** (2) Fig. 103.  cmssbx10 "g".
 
 
+
+
 beginfig(103);
 
 %% *** (3)  
@@ -201,7 +204,7 @@ beginfig(103);
   for i = 0 upto n:
     a[1][i] := get_point (i) pv1;
   endfor;
-		  
+
 
 %% *** (3)    
   
@@ -647,9 +650,10 @@ beginfig(103);
 endfig with_projection parallel_x_y no_sort;
 %endfig with_focus f no_sort;
 
+
+
 % end_mp;
 % end;
-
 
 %% ** (2) This works.  Rotating the "g".
 
@@ -662,6 +666,7 @@ for i = 104 upto 111:
   endfig with_focus f no_sort;
   j += 1;
 endfor;
+
 
 
 beginfig(112);
@@ -687,6 +692,7 @@ beginfig(120);
   current_picture := v1;
   rotate current_picture (0, -30, 0);
 endfig with_focus f no_sort;
+
 
 j := 1;
 for i = 121 upto 127:
