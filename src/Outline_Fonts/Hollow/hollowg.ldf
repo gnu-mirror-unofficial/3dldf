@@ -302,6 +302,8 @@ beginfig(103);
   q7 := resolve pv2 to 64;
   scale q7 (scale_val, scale_val);
   shift q7 by (z6- z7);
+  q7 += cycle;
+
   draw q7 with_color blue with_pen big_pen;
 
 
@@ -317,51 +319,41 @@ beginfig(103);
 
 
 
+%% *** (3)
   
-  scale_val := .6;
+  scale_val := .7;
   z9 := mediate(a[0][16], a[0][1]);
   z10 := z9 scaled (scale_val, scale_val);
-  
+
   q9 := resolve pv0 (15, 17) to 64;
   scale q9 (scale_val, scale_val);
   shift q9 by (z9- z10);
   draw q9 with_color orange with_pen big_pen;
 
+%% *** (3)
 
-
-
-  scale_val := .58;
+  scale_val := .65;
   q10 := resolve pv0 (1, 3) to 16;
   scale q10 (scale_val, scale_val);
   shift q10 by (z9 - z10);
   draw q10 with_color teal_blue with_pen big_pen;
 
-
-
+%% *** (3)
   
+  scale_val := .6;
   z11 := mediate(a[2][4], a[0][0]);
   z12 := z11 scaled (scale_val, scale_val);
-
-  scale_val := .6;
-
-
   q11 := resolve pv0 (0, 1) to 8;
   scale q11 (scale_val, scale_val);
   shift q11 by (z11 - z12);
   draw q11 with_color magenta with_pen big_pen;
   
-
-
-
 %% *** (3)
 
   n := size q8 - 1;
   z13 := get_point (n) q8;
 
-
-
   z14 := get_point (0) q11;
-
 
   q12 := z13 -- z14;
   draw q12 with_pen big_pen with_color green;
@@ -462,7 +454,7 @@ beginfig(103);
   z32 := mediate(z30, z31) shifted (2mm, 0); 
   dotlabel.lft("$\scriptstyle z_{32}$", z32);
 
-  q18 := z30 .. z32 .. z31;
+  q18 := z31 .. z32 .. z30;
 
   q19 := resolve q18 to 7;
 
@@ -475,18 +467,27 @@ beginfig(103);
   % endfor;
 
 %% *** (3)  
-  
+
+  q20 := q19 .. q8 .. q12 .. q11;
+  q20 += cycle;
+
+  %draw q20 with_color cerulean_blue with_pen dot_pen;
+  label.top("$q_{20}$", a[0][21]) with_text_color cerulean_blue;
   
 %% *** (3)
+
+  % fill pv0 with_color dark_gray;
+  % unfill q20;
 
   fill q17 with_color dark_gray;
   unfill q13;
   fill q5 with_color dark_gray;
   unfill pv1;
+
+  fill q7 with_color dark_gray;
+  unfill pv2;
   
   v0 := current_picture;  
-
-
   
 %% *** (3) Labels
 
@@ -568,11 +569,11 @@ fi
   n := (size q8) * 13/16 + 3;
   dotlabel.rt("$q_8$", get_point (n) q8) with_text_color red;
 
-  dotlabel.top("$z_9$", z9);
-  dotlabel.top("$z_{10}$", z10);
+  dotlabel.lft("$z_9$", z9);
+  %dotlabel.top("$z_{10}$", z10);
 
   n := (size q9) * 3/4;
-  dotlabel.rt("$q_9$", get_point (n) q9) with_text_color orange;
+  label.lft("$q_9$", get_point (n) q9 shifted (2pt, 0)) with_text_color orange;
 
   n := (size q10) * 3/4;
   dotlabel.rt("$q_{10}$", (get_point (n) q10 shifted (0, -.125cm))) with_text_color teal_blue;
