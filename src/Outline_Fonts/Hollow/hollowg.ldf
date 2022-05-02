@@ -67,11 +67,6 @@ glyph g[];
 path_vector pv;
 point a[][];
 
-color dark_grey;
-dark_grey := (.5, .5, .5);
-
-let dark_gray := dark_grey;
-
 pen small_pen;
 pen medium_pen;
 pen big_pen;
@@ -390,6 +385,32 @@ beginfig(103);
 
   dotlabel.lft("$z_{25}$", z25);
 
+  % n := magnitude(z25 - z0);
+  % message "magnitude z25 - z0:";
+  % show n;
+  % pause;
+
+  z26 := z25 rotatedaround(z0, a[0][13]) 180;
+  
+  dotlabel.top("$\scriptstyle z_{26}$", z26);
+
+  z27 := mediate(get_point(0) q3, get_point(32) q4);
+  %dotlabel.urt("$\scriptstyle z_{27}$", z27);
+  
+  q13 := q3;
+  q13 += z26;
+  q13 += ..;
+  q13 := q13 .. q4;
+  q13 += ..;
+  q13 += z27;
+  q13 += ..;
+  q13 += cycle;
+
+  draw q13 with_color blue with_pen big_pen;
+
+%% *** (3)
+  
+  
 %% *** (3)
   
   v0 := current_picture;  
