@@ -1,5 +1,5 @@
 %%%% hollow.mp.
-%%%% Generated on Mon May  2 05:55:30 2022
+%%%% Generated on Mon May  2 06:15:53 2022
 %%%% from hollow.ldf by GNU 3DLDF 3.0.
 
 prologues := 3;outputtemplate := "%j%3c.eps";
@@ -838,7 +838,7 @@ label.ulft(btex $q_4$ etex , (1.392649cm, 4.646253cm))
 begingroup
 interim linecap := rounded;
 drawdot (1.392649cm, 4.646253cm) withpen pencircle scaled dotlabeldiam;endgroup;
-label.rt(btex 0 etex , (4.084898cm, 4.641852cm))
+label.llft(btex 0 etex , (4.084898cm, 4.641852cm))
  withcolor (1.000000, 0.000000, 1.000000);
 begingroup
 interim linecap := rounded;

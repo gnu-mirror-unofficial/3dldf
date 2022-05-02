@@ -3171,7 +3171,8 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = @=$1@> | 4;
+   @=$$@> = @=$1@> | 4; /* Connectors are shown as ``CC'' between the points
+                           and not following the path display.  */
 
 };
 
