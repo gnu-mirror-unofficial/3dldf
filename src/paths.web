@@ -16134,6 +16134,41 @@ Path::reset_connectors(string s, int begin, int end, Scanner_Node scanner_node)
 
 }  /* End of |Path::reset_connectors| definition  */
 
+@q ** (2) Flatten.  @>
+@ Flatten.  
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this function.
+\ENDLOG
+
+@<Declare |Path| functions@>=
+int
+flatten(int coord = 2, real r = 0.0);
+
+@q *** (3) Definition @>
+@
+@<Define |Path| functions@>=
+int
+Path::flatten(int coord, real r)
+{
+   for (vector<Point*>::iterator iter = points.begin();
+        iter != points.end();
+        ++iter)
+   {
+        if (coord == 0)
+           (*iter)->set_x(r);
+        else if (coord == 1)
+           (*iter)->set_y(r);
+        else if (coord == 2)
+           (*iter)->set_z(r);
+   }
+   
+   return 0;
+
+} /* End of |Path::flatten| definition  */
+
 @q ** (2) |operator<<| for |Paths|.  @>
 
 @ |operator<< for |Paths|.  
