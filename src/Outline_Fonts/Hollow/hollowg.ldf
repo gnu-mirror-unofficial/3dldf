@@ -52,7 +52,7 @@
 
 %% * (1)
 
-input "../../plain.lmc";
+input "../../plainldf.lmc";
 
 verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
 verbatim_metapost   "verbatimtex \font\eurm=eurm10 scaled 16000"
@@ -138,7 +138,7 @@ set f with_position (0cm, 2cm, -50)
 beginfig(103);
 
 %% *** (3)  
-
+  
   path q[];
   
   pickup medium_pen;
@@ -168,6 +168,7 @@ beginfig(103);
   % show pv0 with_connectors 4;
   % message "Showed pv0 (see above)";
   
+
 %% *** (3)    
   
   numeric n;
@@ -235,7 +236,7 @@ beginfig(103);
 
   path_vector qv;
 
-  qv := resolve q2 (3, 6) to 32;
+  qv := resolve q2 (3, 6) to 32 save;
 
   % show qv0 with_connectors 4;
   % message "qv0 (see above)";
@@ -246,15 +247,12 @@ beginfig(103);
   clear_connectors q3;
   draw q3 with_color dark_green with_pen big_pen;  
 
-
-
   
   n := size q3 - 1;
   for i = 0 upto n:
     m[i] := get_point(i) qv0;
     drawdot m[i] with_pen pencircle scaled (1mm, 1mm, 1mm);
   endfor;
-
 
   
   %q3 := subpath (3, 5) of q2;
@@ -389,8 +387,9 @@ beginfig(103);
   draw z0 -- z24 with_color dark_gray;
 
   z25 := mediate(z0, z24, .805);
+
   dotlabel.lft("$z_{25}$", z25);
-  
+
 %% *** (3)
   
   v0 := current_picture;  
@@ -445,8 +444,9 @@ fi
   n := size q3 - 1;
   s := "\vbox{\hbox{" & decimal n & "}\vskip-.125cm\hbox{$z_{21}$}}";
 
-  drawdot z1 with_pen dot_pen;
-  label.llft(s, z21 shifted (5pt, 0)) with_text_color green; %% "32"
+  drawdot z21 with_pen dot_pen;
+
+label.llft(s, z21 shifted (5pt, 0)) with_text_color green; %% "32"
 
 if false:
   dotlabel.top("$z_3$", z3);
@@ -456,8 +456,8 @@ fi
   dotlabel.rt("$q_6$", get_point (n) q6) with_text_color red;
 
   dotlabel.top("$z_4$", z4); 
-  dotlabel.ulft("$z_5$", z5);
 
+dotlabel.ulft("$z_5$", z5);
 
 if false:  
   dotlabel.top("$z_6$", z6);
@@ -473,7 +473,6 @@ fi
 
   n := (size q8) * 13/16 + 3;
   dotlabel.rt("$q_8$", get_point (n) q8) with_text_color red;
-
 
   dotlabel.top("$z_9$", z9);
   dotlabel.top("$z_{10}$", z10);
