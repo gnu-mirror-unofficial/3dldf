@@ -66,7 +66,11 @@
 \font\large=cmr12
 \font\largebx=cmbx12
 \font\Large=cmr17
+\font\Largebx=cmbx17
 \font\huge=cmr17 scaled \magstep1
+\font\hugebx=cmbx17 scaled \magstep1
+\font\Hugebx=cmbx17 scaled \magstep2
+\font\HUGEbx=cmbx17 scaled \magstep3    
 
 \font\hollow=hollow
 
@@ -107,10 +111,20 @@
 \figcnt=103
 \message{\the\figcnt}
 
-
 \loop
 \vbox{}
 \vskip1cm\line{\hskip1cm\epsffile{hollowg\the\figcnt .eps}\hss}
+\vskip.75cm
+\leftline{\hskip1cm{\Hugebx Fig.~\the\figcnt}}
+\vfil\eject
+\advance\figcnt by 1
+\ifnum\figcnt<128\repeat
+
+\loop
+\vbox{}
+\vskip12cm\line{\hskip1cm\epsffile{hollowg\the\figcnt .eps}\hss}
+\vskip.75cm
+\leftline{\hskip1cm{\Hugebx Fig.~\the\figcnt}}
 \vfil\eject
 \advance\figcnt by 1
 \ifnum\figcnt<137\repeat
