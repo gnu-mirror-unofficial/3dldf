@@ -79,7 +79,7 @@ pen huge_pen;
 pen dot_pen;
 
 small_pen := pencircle scaled (.075mm, .075mm, .075mm);
-medium_pen := pencircle scaled (.15mm, .15mm, .15mm);
+medium_pen := pencircle scaled (.25mm, .25mm, .25mm);
 big_pen := pencircle scaled (2pt, 2pt, 2pt);
 huge_pen := pencircle scaled (3pt, 3pt, 3pt);
 dot_pen := pencircle scaled (1mm, 1mm, 1mm);
@@ -371,8 +371,25 @@ beginfig(103);
 
   z20 := get_point(0)  q4;
   z21 := get_point(32) q3;
-  
-  
+
+  z22 := mediate(z20, z21);
+
+  %drawdot z22 with_pen dot_pen;
+  %label.urt("$z_{22}$", z22 shifted (-2pt, 0));
+
+  z23 := mediate(z0, z22, 1.25);
+  dotlabel.top("$z_{23}$", z23);
+
+  draw z0 -- z23 with_color dark_gray;
+
+  z24 := z23 rotatedaround(z0, a[0][13]) 180;
+
+  dotlabel.lft("$z_{24}$", z24);
+
+  draw z0 -- z24 with_color dark_gray;
+
+  z25 := mediate(z0, z24, .805);
+  dotlabel.lft("$z_{25}$", z25);
   
 %% *** (3)
   
