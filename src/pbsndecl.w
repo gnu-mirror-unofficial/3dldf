@@ -2004,6 +2004,10 @@ Added token declaration for |CLIP_TO|.
 @=%token <int_value> WITH_DASH_PATTERN_VECTOR@>@/
 @=%token <int_value> ON_PICTURE@>@/
 
+@=%token <int_value> FLATTEN_X@>@/
+@=%token <int_value> FLATTEN_Y@>@/
+@=%token <int_value> FLATTEN_Z@>@/
+
 @=%token <int_value> PICKUP@>@/
 @=%token <int_value> DROP_COLOR@>@/
 @=%token <int_value> DROP_DASH_PATTERN@>@/
