@@ -156,10 +156,16 @@ beginfig(103);
   message "size pv:";
   show size pv;
 
-  show pv0 with_connectors 4;
-  message "pv0 (see above)";
-  
- 
+  % show pv0 with_connectors 4;
+  % message "pv0 (see above)";
+  % pause;
+
+  q100 := subpath (0, 3) of pv0;
+
+  show q100 with_connectors 4;
+  message "q100 (subpath 0--3 of pv0 --- see above)";
+  pause;
+   
   draw pv0;
 
   draw pv1;

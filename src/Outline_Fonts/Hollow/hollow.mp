@@ -1,5 +1,5 @@
 %%%% hollow.mp.
-%%%% Generated on Sun May  1 22:41:06 2022
+%%%% Generated on Mon May  2 05:55:30 2022
 %%%% from hollow.ldf by GNU 3DLDF 3.0.
 
 prologues := 3;outputtemplate := "%j%3c.eps";
