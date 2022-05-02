@@ -75,11 +75,12 @@ def write_path (expr ppath, filename, do_show) =
 
     write "START PATH" to filename;
     
-    s =   "(" & decimal (xpart (point 0 of ppath)) & ", " &  decimal (ypart (point 0 of ppath)) & ") .. "
-        & "controls (" & decimal (xpart (postcontrol 0 of ppath)) & ", " & decimal (ypart (postcontrol 0 of ppath)) & ") ";
+    s =   "(" & decimal (xpart (point 0 of ppath)) & ", "
+       &  decimal (ypart (point 0 of ppath)) & ") .. "
+       & "controls (" & decimal (xpart (postcontrol 0 of ppath)) & ", "
+       & decimal (ypart (postcontrol 0 of ppath)) & ") ";
 
     write s to filename;
-
 
     %show s;    
 
@@ -104,8 +105,10 @@ def write_path (expr ppath, filename, do_show) =
 	  show postcontrol i of ppath;
 	fi
 
-	s :=   "(" & decimal (xpart (point i of ppath)) & ", " & decimal (ypart (point i of ppath)) & ") .. "
-	  & "controls (" & decimal (xpart (postcontrol i of ppath)) & ", " & decimal (ypart (postcontrol i of ppath)) & ") ";
+	s :=   "(" & decimal (xpart (point i of ppath)) & ", "
+	     & decimal (ypart (point i of ppath)) & ") .. "
+	  & "controls (" & decimal (xpart (postcontrol i of ppath)) & ", "
+	  & decimal (ypart (postcontrol i of ppath)) & ") ";
 
 	write s to filename;
 	%show s;
