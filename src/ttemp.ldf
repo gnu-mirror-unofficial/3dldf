@@ -29,8 +29,10 @@ beginfig(0);
   m0 := (1.75, 2.15);
   dotlabel.top("$m_0$", m0);
 
-
-  dotlabel.bot("$m_0$", m0) shifted (2cm, -1) with_text_color orange;
+  label.top("origin", origin);
+  
+  m1 := origin;
+  dotlabel.bot("$m_1$", m1) shifted (1cm, 1cm) with_text_color orange with_dot_color red;
 
   p2 := (p0 .. m0 .. p1);
   p2 += cycle;

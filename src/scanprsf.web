@@ -535,7 +535,7 @@ Added this section.
 @
 @<Define |Scan_Parse| functions@>=
 
-string position_str;
+  string position_str;
 
   Picture* picture_ptr;
 
@@ -6634,7 +6634,7 @@ Scan_Parse::drawdot_command(Scanner_Node scanner_node,
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   stringstream cerr_strm;
@@ -6654,7 +6654,7 @@ Scan_Parse::drawdot_command(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "Entering `Scan_Parse::drawdot_command()'.";
+                << "Entering `Scan_Parse::drawdot_command'.";
  
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
@@ -6684,22 +6684,22 @@ Added this section.
 @<Define |Scan_Parse| functions@>=
 
    if (ppoint == static_cast<Point*>(0))
-      {
-          cerr_strm << thread_name 
-                    << "ERROR! In `drawdot_command()':"
-                    << endl << "`Point* ppoint' == 0."
-                    << endl << "Not drawing or undrawing dot. "
-                    << "Will delete pointers on `scanner_node' "
-                    << "and exit function with return value 1.";
+   {
+       cerr_strm << thread_name 
+                 << "ERROR! In `drawdot_command()':"
+                 << endl << "`Point* ppoint' == 0."
+                 << endl << "Not drawing or undrawing dot. "
+                 << "Will delete pointers on `scanner_node' "
+                 << "and exit function with return value 1.";
 
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm, error_stop_value); 
-          cerr_strm.str(""); 
+       log_message(cerr_strm); 
+       cerr_message(cerr_strm, error_stop_value); 
+       cerr_strm.str(""); 
 
-          @<Reset pointers on |scanner_node|@>@;
+       @<Reset pointers on |scanner_node|@>@;
 
-          return 1;
-      }
+       return 1;
+   }
 
 @q **** (4) Check the pointers on |scanner_node|.@>
 
