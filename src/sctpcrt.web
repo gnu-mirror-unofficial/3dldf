@@ -4752,7 +4752,7 @@ a call to |add_synonym| for |defaultpen|.
 
     scanner_node->add_synonym("defaultpen", "default_pen");
 
-v = &(entry->object);
+    v = &(entry->object);
 
     scanner_node->default_pen = static_cast<Pen**>(v);
 
@@ -5769,13 +5769,13 @@ Now setting the type of |*p| to |Pen::NULL_PEN|.
 @<Define |Scanner_Type::create|@>=
   {
 
-Pen* p = create_new<Pen>(0);  
+    Pen* p = create_new<Pen>(0);  
     p->set_type(Pen::NULL_PEN);
 
     v = static_cast<void*>(p);
 
-scanner_node->add_entry("null_pen", PEN, regular, is_constant,
-                              not_array, Id_Map_Entry_Type::KNOWN, v);
+    scanner_node->add_entry("null_pen", PEN, regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
 
     scanner_node->add_synonym("nullpen", "null_pen");
 

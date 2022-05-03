@@ -126,11 +126,15 @@ this will be used for shifting the label.
 
     if (entry)
     {
+#if 0 
         cerr << "entry is non-NULL." << endl;
+#endif 
         
         if (entry->object)
         {
+#if 0 
            cerr << "entry->object is non-NULL." << endl;
+#endif 
 
            v = static_cast<Picture*>(entry->object);
         }
@@ -140,7 +144,9 @@ this will be used for shifting the label.
 
     else
     {
+#if 0 
         cerr << "entry is NULL." << endl;
+#endif 
     }
 
 @q ****** (6) @>
@@ -226,17 +232,22 @@ Added this section.
                            text_color,
                            dot_color,
                            static_cast<Id_Map_Entry_Node>(@=$12@>)); 
-  
+#if 0 
       cerr << "After `label_point_command':" << endl;
+#endif 
 
       if (p)
       {
+#if 0 
          cerr << "p is not-NULL." << endl;
+#endif 
 
       }
       else
       {
+#if 0 
          cerr << "p is NULL." << endl;
+#endif 
       }
 
 @q ******* (7) @>
