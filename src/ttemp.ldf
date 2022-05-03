@@ -1,32 +1,20 @@
 %% ttemp.ldf
 
+input "plainldf.lmc";
+verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
+
 beginfig(0); 
-  path p;
-  p := (1, 2, 3) .. (2, 5, 6) .. (7, 8, 9);
+  path p[];
+  p0 := (1, 0) .. (2, 0) .. (2, 2);
 
-  draw p;
+  draw p0 with_color blue;
+
+  p1 := (1.5, 2) .. (1, 2) .. (1, 0); 
+
+  draw p1 with_color blue;
   
-  point m[];
-
-  m0 := (2, 3, 4);
-
-  m1 := (10, 13.5, 6);
-
-  drawdot m0;
-  drawdot m1;
-
-  picture v[];
-
-  dotlabel.top("abc", m0);
-  
-  flatten current_picture;
-
-  show current_picture;
-
-  pause;
-  
-endfig;
-
+endfig with_projection parallel_x_y;
+end_mp;
 end;
 
 
