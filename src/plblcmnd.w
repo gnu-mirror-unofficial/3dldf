@@ -99,7 +99,10 @@ Added \§with color optional>.
 \initials{LDF 2022.05.03.}
 Added code for transforming the label without transforming the dot, if any.  Normally,
 this will be used for shifting the label.
-!! TODO:  Do this for the other \§label command> rules!
+!! TODO:  Do this for the other \§label command> rules!  Also, try to implement this
+in a more elegant way and also change the way the options for the \§label commands>
+are processed.  That is, I should use something like a \§label command option list>
+so that they can be in any order.
 \ENDLOG 
 
 @q ***** (5) Definition.@>
