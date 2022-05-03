@@ -530,7 +530,20 @@ We can't just return, because there might still be |Labels| on the
 |Picture|.
 \initials{LDF 2002.09.18.}  
 
+\LOG
+\initials{LDF 2022.05.03.}
+Disabled sorting and surface hiding.  I never use sorting and it has only 
+ever caused problems. This can easily be reversed, if needed.
+Surface hiding has never progressed passed a rudimentary stage
+and I doubt that the approach used is practical.
+\ENDLOG 
+
 @<Define |Picture| functions@>= 
+
+   sort_value = SUPPRESS_SORT;  /* Disabled sorting and surface hiding.  
+                                   \initials{LDF 2022.05.03.}  */
+
+   surface_hiding_value = 0;
 
    if (elements.size() > 0)
       {
@@ -539,16 +552,8 @@ We can't just return, because there might still be |Labels| on the
 @ Sort.
 \initials{LDF Undated.}
 
-\LOG
-\initials{LDF 2022.05.03.}
-Disabled sorting.  I never use it and it has only ever caused problems. 
-This can easily be reversed, if needed.
-\ENDLOG 
-
 @<Define |Picture| functions@>=
 
-          sort_value = SUPPRESS_SORT;  /* Disabled sorting.  
-                                          \initials{LDF 2022.05.03.}  */
 
           if (sort_value == MIN_Z)
             sort(elements.begin(), elements.end(), 
