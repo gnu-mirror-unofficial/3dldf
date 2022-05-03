@@ -437,7 +437,7 @@ Scan_Parse::label_point_command(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "Entering `Scan_Parse::label_point_command()'.";
+                << "Entering `Scan_Parse::label_point_command'.";
  
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
@@ -460,7 +460,7 @@ Added this section.
 
    if (position == static_cast<Point*>(0))
       {
-          cerr_strm << thread_name << "ERROR! In `Scan_Parse::label_point_command()':"
+          cerr_strm << thread_name << "ERROR! In `Scan_Parse::label_point_command':"
                 << endl 
                 << "`Point* position == 0'.  Deleting other pointers"
                 << endl 
@@ -501,7 +501,7 @@ Added this section.
     else
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::label_point_command()':"
+                << "ERROR! In `Scan_Parse::label_point_command':"
                 << endl << "Invalid value for `label_or_dotlabel': "
                 << label_or_dotlabel << endl 
                 << "Setting `dot' to `false' and continuing.";
@@ -547,7 +547,7 @@ string position_str;
   if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::label_point_command()':"
+                << "ERROR! In `Scan_Parse::label_point_command':"
                 << endl
                 << "`entry' == 0 or `entry->object' == 0."
                 << endl << "Deleting pointers and "
@@ -613,7 +613,7 @@ string position_str;
 
     default:
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::label_point_command()':"
+                << "ERROR! In `Scan_Parse::label_point_command':"
                 << endl
                 << "Invalid `label_suffix': " << label_suffix
                 << ". Will use \"\" and continue.";
@@ -635,7 +635,7 @@ string position_str;
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << thread_name << "In `Scan_Parse::label_point_command()':"
+      cerr_strm << thread_name << "In `Scan_Parse::label_point_command':"
                 << endl << "About to call `entry->lock()'.";
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
@@ -648,7 +648,7 @@ string position_str;
   if (status != 0)
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::label_point_command()':"
+                << "ERROR! In `Scan_Parse::label_point_command':"
                 << endl << "`entry->lock()' failed. "
                 << "Not making label, "
                 << "deleting pointers,"
@@ -678,7 +678,7 @@ string position_str;
 #if DEBUG_COMPILE
    else if (DEBUG)
      {
-       cerr_strm << thread_name << "In `Scan_Parse::label_point_command()':"
+       cerr_strm << thread_name << "In `Scan_Parse::label_point_command':"
                  << endl << "`entry->lock()' succeeded.";
        log_message(cerr_strm); 
        cerr_message(cerr_strm); 
@@ -704,7 +704,7 @@ string position_str;
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << thread_name << "In `Scan_Parse::label_point_command()':"
+      cerr_strm << thread_name << "In `Scan_Parse::label_point_command':"
                 << endl << "About to call `picture_ptr->lock()'.";
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
@@ -717,7 +717,7 @@ string position_str;
   if (status != 0)
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::label_point_command()':"
+                << "ERROR! In `Scan_Parse::label_point_command':"
                 << endl << "`picture_ptr->lock()' failed. "
                 << "Not making label, "
                 << "deleting pointers,"
@@ -750,7 +750,7 @@ string position_str;
 #if DEBUG_COMPILE
    else if (DEBUG)
      {
-       cerr_strm << thread_name << "In `Scan_Parse::label_point_command()':"
+       cerr_strm << thread_name << "In `Scan_Parse::label_point_command':"
                  << endl << "`picture_ptr->lock()' succeeded.";
        log_message(cerr_strm); 
        cerr_message(cerr_strm); 
@@ -760,7 +760,29 @@ string position_str;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-    position->label(*picture_ptr, *text_str, position_str, 0, text_color,
+    cerr << "In `label_point_command':" << endl;
+
+    if (transform)
+    {
+       cerr << "transform is non-NULL." << endl;
+
+       if (transform->is_identity())
+          cerr << "transform is identity transform." << endl;
+       else
+       {
+          cerr << "transform is not identity transform." << endl;
+
+          transform->show("*tranform:");
+       }
+    }
+    else
+       cerr << "transform is NULL." << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
+    position->label(*picture_ptr, *text_str, position_str, transform, text_color,
                     dot_color, dot);
 
     transform = 0;
@@ -775,7 +797,7 @@ string position_str;
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << thread_name << "In `Scan_Parse::label_point_command()':"
+      cerr_strm << thread_name << "In `Scan_Parse::label_point_command':"
                 << endl << "About to call `picture_ptr->unlock()'.";
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
@@ -788,7 +810,7 @@ string position_str;
   if (status != 0)
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::label_point_command()':"
+                << "ERROR! In `Scan_Parse::label_point_command':"
                 << endl << "`picture_ptr->unlock()' failed. "
                 << "Deleting pointers and will try to unlock `entry->mutex'"
                 << endl 
@@ -819,7 +841,7 @@ string position_str;
 #if DEBUG_COMPILE
    else if (DEBUG)
      {
-       cerr_strm << thread_name << "In `Scan_Parse::label_point_command()':"
+       cerr_strm << thread_name << "In `Scan_Parse::label_point_command':"
                  << endl << "`picture_ptr->unlock()' succeeded.";
        log_message(cerr_strm); 
        cerr_message(cerr_strm); 
@@ -839,7 +861,7 @@ string position_str;
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << thread_name << "In `Scan_Parse::label_point_command()':"
+      cerr_strm << thread_name << "In `Scan_Parse::label_point_command':"
                 << endl << "About to call `entry->unlock()'.";
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
@@ -852,7 +874,7 @@ string position_str;
   if (status != 0)
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::label_point_command()':"
+                << "ERROR! In `Scan_Parse::label_point_command':"
                 << endl << "`entry->unlock()' failed."
                 << endl 
                 << "Deleting pointers and exiting function with return value 1.";
@@ -880,7 +902,7 @@ string position_str;
 #if DEBUG_COMPILE
    else if (DEBUG)
      {
-       cerr_strm << thread_name << "In `Scan_Parse::label_point_command()':"
+       cerr_strm << thread_name << "In `Scan_Parse::label_point_command':"
                  << endl << "`entry->unlock()' succeeded.";
        log_message(cerr_strm); 
        cerr_message(cerr_strm); 
@@ -899,7 +921,7 @@ string position_str;
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "Exiting `Scan_Parse::label_point_command()'.";
+                << "Exiting `Scan_Parse::label_point_command'.";
  
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
@@ -1014,7 +1036,7 @@ Added this section.
 
    if (ppath == static_cast<Path*>(0))
       {
-          cerr_strm << thread_name << "ERROR! In `Scan_Parse::label_point_command()':"
+          cerr_strm << thread_name << "ERROR! In `Scan_Parse::label_point_command':"
                 << endl 
                 << "`Path* ppath == 0'.  Deleting other pointers"
                 << endl 

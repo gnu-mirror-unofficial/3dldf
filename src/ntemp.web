@@ -1,54 +1,149 @@
-@q **** (4) path_expression --> path_expression path_join @>   
-@q **** (4) CYCLE.                                        @>   
-
-@*3 \§path expression> $\longrightarrow$ 
-\§path expression> \§path join>  \.{CYCLE}.
-
-\LOG
-\initials{LDF 2004.11.01.}  
-Added this rule.
-
-\initials{LDF 2004.11.01.}
-Changed the way |Path *p| is handled. 
-Now calling |p->adjust_connectors|.
-\ENDLOG 
-
-@<Define rules@>= 
- 
-@=path_expression: path_expression path_join CYCLE@>@/
+void
+Label::output(Scanner_Node scanner_node,
+              const Focus& f,
+              const unsigned short proj,
+              real factor,
+              const Transform& t)
 {
-
-   @<Common declarations for rules@>@; 
+@q **** (4) @>
 
 #if DEBUG_COMPILE
-
-   DEBUG = false; /* |true| */
-
+   bool DEBUG = true; /* |false| */ 
    if (DEBUG)
    { 
-      cerr << "*** Parser:  Rule `path_expression: path_expression path_join CYCLE'."
-           << endl;
+       cerr << "Entering `Label::output'." << endl;
+
+       if (t)
+       {
+          cerr << "`t' is non-NULL." << endl;
+
+          t.show("*t:");
+       }
+       else
+          cerr << "`t' is NULL." << endl;
+
+       if (text_transform)
+       {
+          cerr << "text_transform is non-NULL." << endl;
+
+          if (text_transform->is_identity())
+          {
+             cerr << "*text_transform. is identity transformation." << endl;
+          }
+          else
+          {
+             cerr << "`*text_transform' is not identity transformation." << endl;
+             text_transform->show("t:");
+          }
+      }
+      else
+          cerr << "text_transform is NULL." << endl;
+
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  Path* p = static_cast<Path*>(@=$1@>);
-  Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
+@q **** (4) @>
 
-#if 0   
-   c->show("*c:");
+   Output_Struct* os = scanner_node->out[Run_State::METAPOST_RS];
+   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
+
+   if (!t.is_identity())
+      *text_pt *= *dot_pt *= t;
+
+   dot_pt->apply_transform();
+   text_pt->apply_transform();
+
+
+   if(!(dot_pt->project(f, proj, factor) && dot_pt->project(f, proj, factor)))
+     {
+       cerr << "WARNING! In Label::output:\n"
+            << "|Label::dot_pt| and/or |Label::text_pt| cannot be projected!"
+            << endl 
+            << "Not printing Label\n";
+       return;
+     }  
+
+   *out_stream << "label";
+   
+   if (position != "")
+     *out_stream << "." << position;
+   
+   *out_stream << "(btex " << text << " etex ";
+
+#if 0 
+   if (!t.is_identity())
+   {
+
+     *out_stream << " transformed "
+                 << "begingroup; save T; transform T;"
+                 << endl  
+                 << " xxpart T = " 
+                 << t.get_element(0, 0) << "; "
+                 << "xpart T = "                                   
+                 << t.get_element(3, 0) << "; "
+                 << "xypart T = "                                 
+                 << t.get_element(1, 0) << "; " 
+                 << endl                                                   
+                 << " yypart T = "                               
+                 << t.get_element(1, 1) << "; "
+                 << "ypart T = "                                   
+                 << t.get_element(3, 1) << "; "
+                 << "yxpart T = "                                 
+                 << t.get_element(0, 1) << "; "
+                 << "T endgroup ";
+
+   } /* |if (t && !t.is_identity())|  */@;
 #endif 
 
-  p->set_cycle(false);
-  p->adjust_connectors();
+   *out_stream << ", ("
+               << dot_pt->get_x('p', false)
+               << Point::measurement_units << ", "
+               << dot_pt->get_y('p', false)
+               << Point::measurement_units << "))";
 
-  *p += c->connector_string;
+   if (scanner_node->do_colors_output && text_color)
+     *out_stream << endl << " withcolor " << *text_color;
 
-  if (DEBUG)
-     cerr << "In rule path_expression: path_expression path_join CYCLE:" << endl  
-          << "Calling connector_type_vector.push_back." << endl;
+   *out_stream << ";" << endl;
 
-  p->set_cycle(true);
+   if (dot == true)
+   {
+       *out_stream << "begingroup" << endl 
+                   << "interim linecap := rounded;" 
+                   << endl
+                   << "drawdot (" 
+                   << dot_pt->get_x('p', false)
+                   << Point::measurement_units << ", "
+                   << dot_pt->get_y('p', false)
+                   << Point::measurement_units << ")";
 
-  @=$$@> = static_cast<void*>(p); 
+         if (pen)
+            *out_stream << " withpen " << *pen;
+         else 
+            *out_stream << " withpen pencircle scaled dotlabeldiam";
+       
+       if (scanner_node->do_colors_output && dot_color)
+          *out_stream << " withcolor " << *dot_color;
 
-};
+       *out_stream << ";" << "endgroup;" << endl;
+      
+   } /* |if (dot == true)|  */
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Label::output' successfully with `void' return value." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return;
+
+}  /* End of |Label::output| definition.  */
