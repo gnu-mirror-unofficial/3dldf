@@ -95,6 +95,11 @@ reference, or 0, on to |Scan_Parse::label_point_command|.
 
 \initials{LDF 2022.04.11.}
 Added \§with color optional>.
+
+\initials{LDF 2022.05.03.}
+Added code for transforming the label without transforming the dot, if any.  Normally,
+this will be used for shifting the label.
+!! TODO:  Do this for the other \§label command> rules!
 \ENDLOG 
 
 @q ***** (5) Definition.@>
