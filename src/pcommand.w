@@ -1152,6 +1152,58 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 };
 
+@q ** (2) command: flatten_command point_vector_variable numeric_optional @>
+
+@ command> $\longrightarrow$ \§command> \§flatten command> \§point vector variable> 
+\§numeric optional>.
+\initials{LDF 2022.05.02.}
+
+\LOG
+\initials{LDF 2022.05.02.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=command: flatten_command point_vector_variable numeric_optional@>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = false; /* |true| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `command: flatten_command point_vector_variable "
+                << "numeric_optional."
+                << endl 
+                << "`flatten_command'  == $1 == " << @=$1@> << endl
+                << "`numeric_optional' == $3 == " << @=$3@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
+
+   real r = @=$3@>;
+
+   if (entry && entry->object)
+   {
+       Pointer_Vector<Point> *pv = static_cast<Pointer_Vector<Point>*>(entry->object);
+  
+       for (vector<Point*>::iterator iter = pv->v.begin();#
+            iter != pv->v.end();
+            ++iter)
+       {
+          (*iter)->flatten(@=$1@>, r);
+       }
+   }
+
+   @=$$@> = static_cast<void*>(0);
+};
+
 @q ** (2) numeric_optional @>
 
 @ \§numeric optional>.
