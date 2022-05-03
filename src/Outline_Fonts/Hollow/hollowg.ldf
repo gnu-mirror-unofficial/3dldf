@@ -484,6 +484,15 @@ beginfig(103);
   
   draw q21 with_color cerulean_blue with_pen dot_pen;
 
+%% *** (3)
+
+  z33 := get_point(0) q6;
+  z34 := get_last_point q6;
+
+  dotlabel.lrt("$\scriptstyle z_{33}$", z33) with_color red;
+  dotlabel.top("$\scriptstyle z_{34}$", z34) with_color red;
+
+%% *** (3)  
 
   v0 := current_picture;
   clear current_picture;
@@ -522,7 +531,7 @@ beginfig(103);
   dotlabel.rt("$a_0^{9}$", a[0][9]);
   dotlabel.rt("$a_0^{10}$", a[0][10]);
   dotlabel.top("$a_0^{11}$", a[0][11]);
-  dotlabel.ulft("$a_0^{12}$", a[0][12]);
+  dotlabel.ulft("$\scriptstyle a_0^{12}$", a[0][12]) shifted (4pt, 0);
   dotlabel.top("$a_0^{13}$", a[0][13]);
   dotlabel.lft("$a_0^{14}$", a[0][14]);
   dotlabel.lft("$a_0^{15}$", a[0][15]);
@@ -566,7 +575,8 @@ beginfig(103);
   n := (size q6 / 2 + 3);
   dotlabel.rt("$q_6$", get_point (n) q6) with_text_color red;
 
-  dotlabel.top("$z_4$", z4); 
+  dotlabel.top("$z_4$", z4) shifted (0, .25cm);
+  draw z4 -- z4 shifted (0, .35cm) with_color dark_gray;
 
   dotlabel.ulft("$z_5$", z5);
 
@@ -627,7 +637,7 @@ beginfig(103);
   dotlabel.rt("$q_5$", get_point (n) q5) with_text_color orange;
 
   %label.urt("$z_{22}$", z22 shifted (-2pt, 0));
-  dotlabel.ulft("$z_{23}$", z23);
+  dotlabel.top("$\scriptstyle z_{23}$", z23) shifted (-2pt, .5pt);
   dotlabel.lft("$z_{24}$", z24);
   dotlabel.lft("$z_{25}$", z25);
   dotlabel.top("$\scriptstyle z_{26}$", z26);
