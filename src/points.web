@@ -8539,7 +8539,7 @@ Added code for outputting |*pen|, if |dot == true| and |Pen* pen| is non-null.
 @:BUG FIX@> BUG FIX:  Now outputting a newline after the semi-colon.
 \ENDLOG 
 
-@q *** (3) Dfn  @>
+@q *** (3) Definition   @>
 
 @<Define |Label| functions@>=
 void
@@ -8595,6 +8595,16 @@ getchar();
 
    dot_pt->apply_transform();
    text_pt->apply_transform();
+
+   if (text_transform)
+   {
+      *text_transform *= t.inverse();
+
+       text_transform->show("*text_transform after multiplication:");
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }
 
    if(!(dot_pt->project(f, proj, factor) && dot_pt->project(f, proj, factor)))
      {
