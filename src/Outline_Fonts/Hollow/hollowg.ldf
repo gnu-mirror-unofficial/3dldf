@@ -112,7 +112,7 @@ coeff_upper_horiz := .25;
 
 point z[];
 picture v[];
-picture dot_picture[];
+picture label_picture;
 
 numeric frame_wd;
 numeric frame_ht;
@@ -444,16 +444,12 @@ beginfig(103);
   
   q17 := q16 .. z28 .. q14 .. z29; 
   q17 += cycle; 
-
-
   
   draw q17 with_color lime_green with_pen big_pen;
-  
-  
+
 %% *** (3)
 
   z30 := get_point(0) q8;
-
 
   n := size q11 - 1;
   z31 := get_point(n) q11;
@@ -508,7 +504,7 @@ beginfig(103);
   unfill pv2;
 
   v1 := current_picture;
- 
+  clear current_picture; 
   
 %% *** (3) Labels
 
@@ -649,7 +645,17 @@ beginfig(103);
   label.rt("$q_{19}$", z32) with_text_color turquoise;
   label.top("$q_{20}$", a[0][21]) with_text_color cerulean_blue;
 
-endfig with_projection parallel_x_y no_sort;
+  label_picture := current_picture;
+
+%% *** (3)
+
+
+  %output v1 with_projection parallel_x_y;
+
+  current_picture += v0;
+  current_picture += label_picture;
+  
+endfig with_projection parallel_x_y; % no_sort;
 %endfig with_focus f no_sort;
 
 

@@ -203,6 +203,13 @@ class Point: protected Shape
   friend class Path;
   friend ostream& operator<<(ostream &o, Path &p);
 
+  friend void Label::output(Scanner_Node scanner_node,
+                            const Focus& f,
+                            const unsigned short proj,
+                            real factor,
+                            const Transform& t);
+
+
   private:
 
     Transform transform;
@@ -4589,7 +4596,9 @@ Picture::rotate(const Point& p0, const Point& p1,
      (*iter)->transform->show("transform before rotation:");  
 
      *(*iter)->transform *= t;
-     (*iter)->pt->rotate(p0, p1, angle);
+
+     (*iter)->dot_pt->rotate(p0, p1, angle);
+     (*iter)->text_pt->rotate(p0, p1, angle);
 
      (*iter)->transform->show("transform after rotation:");         
      
@@ -4626,7 +4635,8 @@ Picture::rotate(const real x, const real y, const real z)
      (*iter)->transform->show("transform before rotation:");  
 
      (*iter)->transform->rotate(x, y, z);
-     (*iter)->pt->rotate(x, y, z);
+     (*iter)->dot_pt->rotate(x, y, z);
+     (*iter)->text_pt->rotate(x, y, z);
 
      (*iter)->transform->show("transform after rotation:");         
      
@@ -8024,8 +8034,11 @@ catching |bad_alloc|.
 
           lbl = new Label;
 
-          lbl->pt = create_new<Point>(0);
-          *lbl->pt = *this;
+          lbl->dot_pt = create_new<Point>(0);
+          *lbl->dot_pt = *this;
+
+          lbl->text_pt = create_new<Point>(0);
+          *lbl->text_pt = *this;
 
           if (ttext_color)
              lbl->text_color = create_new<Color>(ttext_color);
@@ -8062,7 +8075,29 @@ catching |bad_alloc|.
 
    if (ttransform)
    {
-       lbl->transform = ttransform;
+
+#if 0
+       cerr << "`ttransform' is non-NULL." << endl;
+       ttransform->show("*ttransform:");
+#endif 
+
+       if (lbl->transform)
+       {
+          *(lbl->transform) = *ttransform;
+          delete ttransform;
+          ttransform = 0;
+       }
+       else
+       {
+          lbl->transform = ttransform;
+          ttransform = 0;
+       }
+
+#if 0 
+       cerr << "After assignment:" << endl;       
+       lbl->transform->show("Label::*transform:");
+#endif 
+
    }
    else
       lbl->transform = 0;
@@ -8250,8 +8285,10 @@ Point::label(Picture& picture,
             cerr << "It's some other value.\n";
           s << text_short;
       }
+
     if (DEBUG) 
       cerr << "s.str() == " << s.str() << endl;
+
     label(picture, s.str(), position_str, ttransform, ttext_color, ddot_color, dot); 
     return;
 
@@ -8396,8 +8433,11 @@ Label::~Label(void)
   \initials{LDF 2006.11.09.}  */
 #endif 
 
-   delete pt;
-   pt = 0;
+   delete dot_pt;
+   dot_pt = 0;
+
+   delete text_pt;
+   text_pt = 0;
 
    delete transform;
    transform = 0;
@@ -8433,7 +8473,7 @@ Now copying |Pen* pen|.
 
 \initials{LDF 2006.11.08.}
 Now calling |create_new<Point>| with 0 as its argument and then
-setting |*lbl->pt = *pt|.  Trying to fix a bug.
+setting |*lbl->dot_pt = *pt|.  Trying to fix a bug.
 \ENDLOG 
 
 @<Define |Label| functions@>=
@@ -8446,8 +8486,11 @@ Label::get_copy() const
 
    Label* lbl = new Label;
 
-   lbl->pt = create_new<Point>(0);
-   *lbl->pt = *pt;
+   lbl->dot_pt = create_new<Point>(0);
+   *lbl->dot_pt = *dot_pt;
+
+   lbl->text_pt = create_new<Point>(0);
+   *lbl->text_pt = *text_pt;
 
    lbl->transform = create_new<Transform>(transform);
 
@@ -8496,6 +8539,8 @@ Added code for outputting |*pen|, if |dot == true| and |Pen* pen| is non-null.
 @:BUG FIX@> BUG FIX:  Now outputting a newline after the semi-colon.
 \ENDLOG 
 
+@q *** (3) Dfn  @>
+
 @<Define |Label| functions@>=
 void
 Label::output(Scanner_Node scanner_node,
@@ -8504,18 +8549,46 @@ Label::output(Scanner_Node scanner_node,
               real factor,
               const Transform& t)
 {
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+       cerr << "Entering `Label::output'." << endl;
+
+       if (transform)
+       {
+          cerr << "`transform' is non-NULL." << endl;
+
+          transform->show("*transform:");
+       }
+       else
+          cerr << "`transform' is NULL." << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
 
    Output_Struct* os = scanner_node->out[Run_State::METAPOST_RS];
    ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
    if (!t.is_identity())
-     *pt *= t;
+      *text_pt *= *dot_pt *= t;
 
-   pt->apply_transform();
-   if(!pt->project(f, proj, factor))
+   dot_pt->apply_transform();
+   text_pt->apply_transform();
+
+   if(!(dot_pt->project(f, proj, factor) && dot_pt->project(f, proj, factor)))
      {
-       cerr << "WARNING! In Label::output():\n"
-            << "Point in Label cannot be projected! "
+       cerr << "WARNING! In Label::output:\n"
+            << "|Label::dot_pt| and/or |Label::text_pt| cannot be projected!"
+            << endl 
             << "Not printing Label\n";
        return;
      }  
@@ -8527,66 +8600,76 @@ Label::output(Scanner_Node scanner_node,
    
    *out_stream << "(btex " << text << " etex ";
 
-     if (transform && !transform->is_identity())
-        {
+   if (transform && !transform->is_identity())
+   {
 
-          *out_stream << " transformed "
-                      << "begingroup; save T; transform T;"
-                      << endl  
-                      << " xxpart T = " 
-                      << transform->get_element(0, 0) << "; "
-                      << "xpart T = "                                   
-                      << transform->get_element(3, 0) << "; "
-                      << "xypart T = "                                 
-                      << transform->get_element(1, 0) << "; " 
-                      << endl                                                   
-                      << " yypart T = "                               
-                      << transform->get_element(1, 1) << "; "
-                      << "ypart T = "                                   
-                      << transform->get_element(3, 1) << "; "
-                      << "yxpart T = "                                 
-                      << transform->get_element(0, 1) << "; "
-                      << "T endgroup ";
+     *out_stream << " transformed "
+                 << "begingroup; save T; transform T;"
+                 << endl  
+                 << " xxpart T = " 
+                 << transform->get_element(0, 0) << "; "
+                 << "xpart T = "                                   
+                 << transform->get_element(3, 0) << "; "
+                 << "xypart T = "                                 
+                 << transform->get_element(1, 0) << "; " 
+                 << endl                                                   
+                 << " yypart T = "                               
+                 << transform->get_element(1, 1) << "; "
+                 << "ypart T = "                                   
+                 << transform->get_element(3, 1) << "; "
+                 << "yxpart T = "                                 
+                 << transform->get_element(0, 1) << "; "
+                 << "T endgroup ";
 
-        } /* |if (transform && !transform->is_identity())|  */@;
+   } /* |if (transform && !transform->is_identity())|  */@;
 
    *out_stream << ", ("
-               << pt->get_x('p', false)
+               << dot_pt->get_x('p', false)
                << Point::measurement_units << ", "
-               << pt->get_y('p', false)
+               << dot_pt->get_y('p', false)
                << Point::measurement_units << "))";
 
 
 
 
 
-    if (scanner_node->do_colors_output && text_color)
-      *out_stream << endl << " withcolor " << *text_color;
+   if (scanner_node->do_colors_output && text_color)
+     *out_stream << endl << " withcolor " << *text_color;
 
    *out_stream << ";" << endl;
 
    if (dot == true)
-       {
-          *out_stream << "begingroup" << endl 
-                      << "interim linecap := rounded;" 
-                      << endl
-                      << "drawdot (" 
-                      << pt->get_x('p', false)
-                      << Point::measurement_units << ", "
-                      << pt->get_y('p', false)
-                      << Point::measurement_units << ")";
+   {
+       *out_stream << "begingroup" << endl 
+                   << "interim linecap := rounded;" 
+                   << endl
+                   << "drawdot (" 
+                   << dot_pt->get_x('p', false)
+                   << Point::measurement_units << ", "
+                   << dot_pt->get_y('p', false)
+                   << Point::measurement_units << ")";
 
-            if (pen)
-               *out_stream << " withpen " << *pen;
-            else 
-               *out_stream << " withpen pencircle scaled dotlabeldiam";
-          
-          if (scanner_node->do_colors_output && dot_color)
-             *out_stream << " withcolor " << *dot_color;
+         if (pen)
+            *out_stream << " withpen " << *pen;
+         else 
+            *out_stream << " withpen pencircle scaled dotlabeldiam";
+       
+       if (scanner_node->do_colors_output && dot_color)
+          *out_stream << " withcolor " << *dot_color;
 
-          *out_stream << ";" << "endgroup;" << endl;
-         
-      } /* |if (dot == true)|  */
+       *out_stream << ";" << "endgroup;" << endl;
+      
+   } /* |if (dot == true)|  */
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Label::output' successfully with `void' return value." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
    return;
 
@@ -11392,7 +11475,7 @@ Picture::operator+=(const Picture& p)
     {
       labels.push_back((*iter)->get_copy());
       @/@,
-      *(labels.back()->pt) *= p.transform;
+      *(labels.back()->dot_pt) *= p.transform;
     }
 }  
 
@@ -11490,7 +11573,8 @@ Picture::flatten(int coord, real r)
         iter != labels.end();
         ++iter)
    {
-       (*iter)->pt->flatten(coord, r);
+       (*iter)->dot_pt->flatten(coord, r);
+       (*iter)->text_pt->flatten(coord, r);
    }
 
 

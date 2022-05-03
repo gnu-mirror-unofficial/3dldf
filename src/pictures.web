@@ -134,7 +134,8 @@ class Label
 {
     friend class Point;
     friend class Picture;
-    Point* pt;
+    Point* dot_pt;
+    Point* text_pt;
     bool dot;
     string text;
     string position;
@@ -207,8 +208,9 @@ Label(void);
 @<Define |Label| functions@>=
 Label::Label(void)
 {
-   pt         = 0;
+   dot_pt     = 0;
    dot        = false;
+   text_pt    = 0;
    text       = "";
    position   = "";
 
@@ -230,7 +232,7 @@ Label::Label(void)
 \initials{LDF 2005.01.31.}
 Added this function declaration.  This function must be 
 defined in \filename{points.web}, because it calls |delete| on 
-the data member |Point* pt|, while |Point| is an incompletely defined
+the data member |Point* dot_pt|, while |Point| is an incompletely defined
 type in this file (\filename{pictures.web}). 
 \ENDLOG
 
@@ -244,7 +246,7 @@ type in this file (\filename{pictures.web}).
 \initials{LDF Undated.}
 
 These must be defined in \filename{points.web},
-because they require operations on |pt|, and |Point| is an incomplete
+because they require operations on |dot_pt|, and |Point| is an incomplete
 type in this file.
 \initials{LDF Undated.}
 
@@ -862,7 +864,7 @@ output(Scanner_Node s,
        const Focus& f,
        const unsigned short projection = Projections::persp,
        real factor = 1,
-       const unsigned short sort_value = Sorting::SUPPRESS_SORT,
+       unsigned short sort_value = Sorting::SUPPRESS_SORT,
        const bool do_warnings = true,
        const real min_x_proj = default_min_x_proj,
        const real max_x_proj = default_max_x_proj,
@@ -870,7 +872,7 @@ output(Scanner_Node s,
        const real max_y_proj = default_max_y_proj,
        const real min_z_proj = default_min_z_proj,
        const real max_z_proj = default_max_z_proj,
-       const unsigned short surface_hiding_value = 1,
+       unsigned short surface_hiding_value = 0,
        bool do_metafont = false);
 
 @q * Clear.@>

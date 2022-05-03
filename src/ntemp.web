@@ -1,59 +1,54 @@
-@q ** (2) Flatten.  @>
-@ Flatten.  
-\initials{LDF 2022.05.02.}
+@q **** (4) path_expression --> path_expression path_join @>   
+@q **** (4) CYCLE.                                        @>   
+
+@*3 \§path expression> $\longrightarrow$ 
+\§path expression> \§path join>  \.{CYCLE}.
 
 \LOG
-\initials{LDF 2022.05.02.}
-Added this function.
-\ENDLOG
+\initials{LDF 2004.11.01.}  
+Added this rule.
 
-@<Declare |Picture| functions@>=
-int
-flatten(int coord = 2, real r = 0.0);
+\initials{LDF 2004.11.01.}
+Changed the way |Path *p| is handled. 
+Now calling |p->adjust_connectors|.
+\ENDLOG 
 
-@q *** (3) Definition @>
-@
-@<Define |Picture| functions@>=
-int
-Picture::flatten(int coord, real r)
+@<Define rules@>= 
+ 
+@=path_expression: path_expression path_join CYCLE@>@/
 {
-@q **** (4) @>
+
+   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ 
+
+   DEBUG = false; /* |true| */
+
    if (DEBUG)
    { 
-      cerr << "Entering `Picture::flatten'." << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q **** (4) @>
-
-   for (vector<Shape*>::iterator iter = shapes.begin();
-        iter != shapes.end();
-        ++iter)
-   {
-       (*iter)->flatten(coord, r);
-   }
-
-   for (vector<Label*>::iterator iter = labels.begin();
-        iter != labels.end();
-        ++iter)
-   {
-       (*iter)->pt->flatten(coord, r);
-   }
-
-
-@q **** (4) @>
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "Exiting `Picture::flatten' successfully with return value 0." 
+      cerr << "*** Parser:  Rule `path_expression: path_expression path_join CYCLE'."
            << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   return 0;
+  Path* p = static_cast<Path*>(@=$1@>);
+  Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
 
-} /* End of |Picture::flatten| definition  */
+#if 0   
+   c->show("*c:");
+#endif 
+
+  p->set_cycle(false);
+  p->adjust_connectors();
+
+  *p += c->connector_string;
+
+  if (DEBUG)
+     cerr << "In rule path_expression: path_expression path_join CYCLE:" << endl  
+          << "Calling connector_type_vector.push_back." << endl;
+
+  p->set_cycle(true);
+
+  @=$$@> = static_cast<void*>(p); 
+
+};
