@@ -4583,24 +4583,24 @@ Picture::rotate(const Point& p0, const Point& p1,
 
   for (vector<Label*>::iterator iter = labels.begin(); iter != labels.end(); ++iter) 
   { 
-     if ((*iter)->transform == 0)
+     if ((*iter)->text_transform == 0)
      {
-        cerr << "(*iter)->transform is NULL." << endl;
-        (*iter)->transform = new Transform;
+        cerr << "(*iter)->text_transform is NULL." << endl;
+        (*iter)->text_transform = new Transform;
      }
      else
      {
-        cerr << "(*iter)->transform is non-NULL." << endl;
+        cerr << "(*iter)->text_transform is non-NULL." << endl;
      }
 
-     (*iter)->transform->show("transform before rotation:");  
+     (*iter)->text_transform->show("text_transform before rotation:");  
 
-     *(*iter)->transform *= t;
+     *(*iter)->text_transform *= t;
 
      (*iter)->dot_pt->rotate(p0, p1, angle);
      (*iter)->text_pt->rotate(p0, p1, angle);
 
-     (*iter)->transform->show("transform after rotation:");         
+     (*iter)->text_transform->show("text_transform after rotation:");         
      
   } 
 
@@ -4622,23 +4622,23 @@ Picture::rotate(const real x, const real y, const real z)
   
   for (vector<Label*>::iterator iter = labels.begin(); iter != labels.end(); ++iter) 
   { 
-     if ((*iter)->transform == 0)
+     if ((*iter)->text_transform == 0)
      {
-        cerr << "(*iter)->transform is NULL." << endl;
-        (*iter)->transform = new Transform;
+        cerr << "(*iter)->text_transform is NULL." << endl;
+        (*iter)->text_transform = new Transform;
      }
      else
      {
-        cerr << "(*iter)->transform is non-NULL." << endl;
+        cerr << "(*iter)->text_transform is non-NULL." << endl;
      }
 
-     (*iter)->transform->show("transform before rotation:");  
+     (*iter)->text_transform->show("text_transform before rotation:");  
 
-     (*iter)->transform->rotate(x, y, z);
+     (*iter)->text_transform->rotate(x, y, z);
      (*iter)->dot_pt->rotate(x, y, z);
      (*iter)->text_pt->rotate(x, y, z);
 
-     (*iter)->transform->show("transform after rotation:");         
+     (*iter)->text_transform->show("text_transform after rotation:");         
      
   } 
 
@@ -8081,26 +8081,26 @@ catching |bad_alloc|.
        ttransform->show("*ttransform:");
 #endif 
 
-       if (lbl->transform)
+       if (lbl->text_transform)
        {
-          *(lbl->transform) = *ttransform;
+          *(lbl->text_transform) = *ttransform;
           delete ttransform;
           ttransform = 0;
        }
        else
        {
-          lbl->transform = ttransform;
+          lbl->text_transform = ttransform;
           ttransform = 0;
        }
 
 #if 0 
        cerr << "After assignment:" << endl;       
-       lbl->transform->show("Label::*transform:");
+       lbl->text_transform->show("Label::*transform:");
 #endif 
 
    }
    else
-      lbl->transform = 0;
+      lbl->text_transform = 0;
 
    lbl->position = position_str;
 
@@ -8439,8 +8439,8 @@ Label::~Label(void)
    delete text_pt;
    text_pt = 0;
 
-   delete transform;
-   transform = 0;
+   delete text_transform;
+   text_transform = 0;
 
    delete text_color;
    text_color = 0;
@@ -8492,7 +8492,7 @@ Label::get_copy() const
    lbl->text_pt = create_new<Point>(0);
    *lbl->text_pt = *text_pt;
 
-   lbl->transform = create_new<Transform>(transform);
+   lbl->text_transform = create_new<Transform>(text_transform);
 
    if (text_color)
       lbl->text_color = create_new<Color>(text_color);
@@ -8557,14 +8557,26 @@ Label::output(Scanner_Node scanner_node,
    { 
        cerr << "Entering `Label::output'." << endl;
 
-       if (transform)
+       if (text_transform)
        {
-          cerr << "`transform' is non-NULL." << endl;
+          cerr << "`text_transform' is non-NULL." << endl;
 
-          transform->show("*transform:");
+          text_transform->show("*text_transform:");
        }
        else
-          cerr << "`transform' is NULL." << endl;
+          cerr << "`text_transform' is NULL." << endl;
+
+
+       if (t.is_identity())
+       {
+          cerr << "t is identity transformation." << endl;
+       }
+       else
+       {
+          cerr << "`t' is not identity transformation." << endl;
+          t.show("t:");
+       }
+
 
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
@@ -8600,38 +8612,36 @@ getchar();
    
    *out_stream << "(btex " << text << " etex ";
 
-   if (transform && !transform->is_identity())
+#if 0 
+   if (text_transform && !text_transform->is_identity())
    {
 
      *out_stream << " transformed "
                  << "begingroup; save T; transform T;"
                  << endl  
                  << " xxpart T = " 
-                 << transform->get_element(0, 0) << "; "
+                 << text_transform->get_element(0, 0) << "; "
                  << "xpart T = "                                   
-                 << transform->get_element(3, 0) << "; "
+                 << text_transform->get_element(3, 0) << "; "
                  << "xypart T = "                                 
-                 << transform->get_element(1, 0) << "; " 
+                 << text_transform->get_element(1, 0) << "; " 
                  << endl                                                   
                  << " yypart T = "                               
-                 << transform->get_element(1, 1) << "; "
+                 << text_transform->get_element(1, 1) << "; "
                  << "ypart T = "                                   
-                 << transform->get_element(3, 1) << "; "
+                 << text_transform->get_element(3, 1) << "; "
                  << "yxpart T = "                                 
-                 << transform->get_element(0, 1) << "; "
+                 << text_transform->get_element(0, 1) << "; "
                  << "T endgroup ";
 
-   } /* |if (transform && !transform->is_identity())|  */@;
+   } /* |if (text_transform && !text_transform->is_identity())|  */@;
+#endif 
 
    *out_stream << ", ("
                << dot_pt->get_x('p', false)
                << Point::measurement_units << ", "
                << dot_pt->get_y('p', false)
                << Point::measurement_units << "))";
-
-
-
-
 
    if (scanner_node->do_colors_output && text_color)
      *out_stream << endl << " withcolor " << *text_color;
@@ -10612,12 +10622,12 @@ Picture::operator*=(const Transform& t)
      cerr << "(*iter)->position == " << (*iter)->position << endl;
 #endif 
 
-     if ((*iter)->transform == 0)
+     if ((*iter)->text_transform == 0)
      {
 #if 0 
         cerr << "(*iter)->transform is NULL." << endl;
 #endif 
-        (*iter)->transform = new Transform;
+        (*iter)->text_transform = new Transform;
      }
 #if 0 
      else
@@ -10627,7 +10637,7 @@ Picture::operator*=(const Transform& t)
      (*iter)->transform->show("transform before rotation:");  
 #endif 
 
-     *(*iter)->transform *= t;
+     *(*iter)->text_transform *= t;
 
 #if 0
      (*iter)->transform->show("transform after rotation:");         

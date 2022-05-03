@@ -9,7 +9,10 @@ pen big_pen;
 medium_pen := pencircle scaled (.5mm, .5mm, .5mm);
 big_pen := pencircle scaled (1mm, 1mm, 1mm);
 
+focus f;
 
+set f with_position (0, 20, -50) 
+       with_direction (0, 20, 10) with_distance 70; 
 
 beginfig(0); 
   path p[];
@@ -24,14 +27,19 @@ beginfig(0);
   point m[];
 
   m0 := (1.75, 2.15);
-  dotlabel.top("$m_0$", m0) shifted (3cm, -1);
+  dotlabel.top("$m_0$", m0);
+
+
+  dotlabel.bot("$m_0$", m0) shifted (3cm, -1) with_text_color orange;
 
   p2 := (p0 .. m0 .. p1);
   p2 += cycle;
 
   %fill p2 with_pen medium_pen;
+
+  %rotate current_picture (70, 10, 10);
   
-endfig with_projection parallel_x_y;
+endfig with_focus f; % with_projection parallel_x_y;
 end_mp;
 end;
 
