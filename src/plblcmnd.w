@@ -109,10 +109,42 @@ Added \§with color optional>.
 @=with_color_optional with_text_color_optional with_dot_color_optional@>@/ 
 @=on_picture_optional@>@/
 {
+@q ****** (6) @>
+
+    @<Common declarations for rules@>@;
+
+    entry = static_cast<Id_Map_Entry_Node>(@=$12@>);
+
+    Picture *v = 0;
+
+@q ****** (6) @>
+
+    if (entry)
+    {
+        cerr << "entry is non-NULL." << endl;
+        
+        if (entry->object)
+        {
+           cerr << "entry->object is non-NULL." << endl;
+
+           v = static_cast<Picture*>(entry->object);
+        }
+    }
+
+@q ****** (6) @>
+
+    else
+    {
+        cerr << "entry is NULL." << endl;
+    }
+
+@q ****** (6) @>
 
     Color *c          = static_cast<Color*>(@=$9@>);
     Color *text_color = static_cast<Color*>(@=$10@>);
     Color *dot_color  = static_cast<Color*>(@=$11@>);
+
+@q ****** (6) @>
 
     if (c != 0) 
     {
@@ -134,15 +166,81 @@ Added \§with color optional>.
            dot_color = c;
     }
 
-    label_point_command(static_cast<Scanner_Node>(parameter),
-                        @=$1@>, 
-                        @=$2@>, 
-                        static_cast<string*>(@=$4@>),
-                        static_cast<Point*>(@=$6@>),
-                        static_cast<Transform*>(@=$8@>),
-                        text_color,
-                        dot_color,
-                        static_cast<Id_Map_Entry_Node>(@=$12@>)); 
+@q ****** (6) @>
+
+    Transform *t = static_cast<Transform*>(@=$8@>);
+
+    if (t == 0)
+    {
+       label_point_command(static_cast<Scanner_Node>(parameter),
+                           @=$1@>, 
+                           @=$2@>, 
+                           static_cast<string*>(@=$4@>),
+                           static_cast<Point*>(@=$6@>),
+                           0,
+                           text_color,
+                           dot_color,
+                           static_cast<Id_Map_Entry_Node>(@=$12@>)); 
+   }
+
+@q ****** (6) @>
+
+@ |Transform *t| is non-NULL.
+\initials{LDF 2022.05.03.}
+
+\LOG
+\initials{LDF 2022.05.03.}
+Added this section.
+\ENDLOG 
+
+@<Define rules@>= 
+
+   else
+   {
+@q ******* (7) @>
+
+       Point *p = static_cast<Point*>(@=$6@>);
+
+       Pen ppen;
+    
+       Transform u;
+       u.scale(.1, .1, .1);
+
+       ppen *= u;
+
+       p->drawdot(*v, dot_color, &ppen);
+
+       *p *= *t;
+
+       label_point_command(static_cast<Scanner_Node>(parameter),
+                           LABEL,
+                           @=$2@>,
+                           static_cast<string*>(@=$4@>),
+                           p,
+                           0,
+                           text_color,
+                           dot_color,
+                           static_cast<Id_Map_Entry_Node>(@=$12@>)); 
+  
+      cerr << "After `label_point_command':" << endl;
+
+      if (p)
+      {
+         cerr << "p is not-NULL." << endl;
+
+      }
+      else
+      {
+         cerr << "p is NULL." << endl;
+      }
+
+@q ******* (7) @>
+
+   }  /* |else| (|Transform *t| is non-NULL)  */
+
+@q ****** (6) @>
+
+   @=$$@> = static_cast<void*>(0);
 
 };
 
