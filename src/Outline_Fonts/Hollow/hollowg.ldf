@@ -406,7 +406,7 @@ beginfig(103);
   q13 += ..;
   q13 += cycle;
 
-  draw q13 with_color blue with_pen big_pen;
+  %draw q13 with_color blue with_pen big_pen;
 
   n := size q3 * 11/16;
 
@@ -445,7 +445,7 @@ beginfig(103);
   q17 := q16 .. z28 .. q14 .. z29; 
   q17 += cycle; 
   
-  draw q17 with_color lime_green with_pen big_pen;
+  %draw q17 with_color lime_green with_pen big_pen;
 
 %% *** (3)
 
@@ -608,7 +608,8 @@ beginfig(103);
   %dotlabel.top("$z_{12}$", z12);
   
   n := (size q11) - 1;
-  label.urt("$\scriptstyle q_{11}$", (get_point (n) q11) shifted (0pt, -2pt)) with_text_color magenta;
+  label.urt("$\scriptstyle q_{11}$", (get_point (n) q11) shifted (0pt, -2pt))
+    with_text_color magenta;
 
   if false:
     n := size q8 - 1;
@@ -619,10 +620,10 @@ beginfig(103);
   dotlabel.bot("$q_{12}$", mediate(z13, z14)) with_text_color green;
 
   n := (size q3 * 1/2) + 3;
-  dotlabel.lrt("$q_3$", get_point (n) q3) with_text_color dark_green;
+  dotlabel.lft("$q_3$", get_point (n) q3) with_text_color dark_green;
 
   n := (size q4) / 2;
-  %dotlabel.ulft("$q_4$", get_point (n) q4) with_text_color magenta;
+  dotlabel.ulft("$q_4$", get_point (n) q4) with_text_color magenta;
 
   n := size q4 - 1;
   %drawdot z20 with_pen dot_pen;
@@ -630,9 +631,6 @@ beginfig(103);
   %   with_text_color magenta;
   %dotlabel.ulft(decimal n, get_point (n) q4) with_text_color magenta;
 
-
-  n := (size q3 * 1/2) + 3;
-  dotlabel.lrt("$q_3$", get_point (n) q3) with_text_color dark_green;
   n := size q5 * 3/ 4;
   dotlabel.rt("$q_5$", get_point (n) q5) with_text_color orange;
 
@@ -642,7 +640,7 @@ beginfig(103);
   dotlabel.lft("$z_{25}$", z25);
   dotlabel.top("$\scriptstyle z_{26}$", z26);
   %dotlabel.urt("$\scriptstyle z_{27}$", z27);
-  label.rt("$q_{13}$", get_point(n) q13) with_text_color blue;
+  label.urt("$q_{13}$", get_point(n) q13) with_text_color blue;
   label.rt("$q_{14}$", get_point(2) q14) with_text_color teal_blue;
   label("$q_{16}$", get_point(1) q16 shifted (-.5cm, .25cm)) with_text_color rose_madder;
   dotlabel.llft("$\scriptstyle z_{28}$", z28);
