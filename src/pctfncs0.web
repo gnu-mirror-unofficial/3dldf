@@ -539,7 +539,16 @@ We can't just return, because there might still be |Labels| on the
 @ Sort.
 \initials{LDF Undated.}
 
+\LOG
+\initials{LDF 2022.05.03.}
+Disabled sorting.  I never use it and it has only ever caused problems. 
+This can easily be reversed, if needed.
+\ENDLOG 
+
 @<Define |Picture| functions@>=
+
+          sort_value = SUPPRESS_SORT;  /* Disabled sorting.  
+                                          \initials{LDF 2022.05.03.}  */
 
           if (sort_value == MIN_Z)
             sort(elements.begin(), elements.end(), 
