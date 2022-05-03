@@ -8601,6 +8601,9 @@ getchar();
       *text_transform *= t.inverse();
 
        text_transform->show("*text_transform after multiplication:");
+
+       *text_pt *= *text_transform;
+
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
 
@@ -8621,31 +8624,6 @@ getchar();
      *out_stream << "." << position;
    
    *out_stream << "(btex " << text << " etex ";
-
-#if 0 
-   if (text_transform && !text_transform->is_identity())
-   {
-
-     *out_stream << " transformed "
-                 << "begingroup; save T; transform T;"
-                 << endl  
-                 << " xxpart T = " 
-                 << text_transform->get_element(0, 0) << "; "
-                 << "xpart T = "                                   
-                 << text_transform->get_element(3, 0) << "; "
-                 << "xypart T = "                                 
-                 << text_transform->get_element(1, 0) << "; " 
-                 << endl                                                   
-                 << " yypart T = "                               
-                 << text_transform->get_element(1, 1) << "; "
-                 << "ypart T = "                                   
-                 << text_transform->get_element(3, 1) << "; "
-                 << "yxpart T = "                                 
-                 << text_transform->get_element(0, 1) << "; "
-                 << "T endgroup ";
-
-   } /* |if (text_transform && !text_transform->is_identity())|  */@;
-#endif 
 
    *out_stream << ", ("
                << dot_pt->get_x('p', false)
