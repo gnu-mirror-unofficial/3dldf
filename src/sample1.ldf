@@ -52,8 +52,366 @@
 
 %% * (1) New sample code.
 
+%% ** (2) Flattening point_vectors, path_vectors and picture_vectors.
 
-%% Resolve path.  LDF 2022.04.22.
+input "plainldf.lmc";
+verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
+
+pen medium_pen;
+pen big_pen;
+
+medium_pen := pencircle scaled (.5mm, .5mm, .5mm);
+big_pen := pencircle scaled (1mm, 1mm, 1mm);
+
+focus f;
+
+set f with_position (0, 20, -50) 
+       with_direction (0, 20, 10) with_distance 70; 
+
+beginfig(0);
+
+  point_vector pv;
+
+  pv += (1, 1, 1);
+  pv += (2, 2, 2);
+  pv += (3, 3, 3);
+
+  flatten pv;
+
+  % message "pv:";
+  % show pv;
+  % pause;
+
+  path_vector qv;
+
+  qv += (1, 1, 1) .. (2, 2, 2);
+  qv += (3, 3, 3) .. (4, 4, 4) .. (5, 5, 5);
+  qv += (13, 13, 23) .. (34, 45, 46) .. (65, 75, 85);
+
+  flatten qv;
+
+  % message "qv:";
+  % show qv;
+
+  picture_vector wv;
+  
+  wv++;
+  wv++;
+
+  draw qv0;
+  
+  wv0 := current_picture;
+  clear current_picture;
+
+  draw qv1;
+  draw qv2;
+
+  wv1 := current_picture;
+
+  flatten wv;
+
+  % message "wv:";
+  % show wv;
+  % pause;
+  
+endfig with_projection parallel_x_y;
+
+end_mp;
+end;
+
+%% ** (2) Labels with the text shifted.  Actually, any transformation can be used.
+
+beginfig(0); 
+  path p[];
+  p0 := (1, 0) .. (2, 0) .. (2, 2);
+
+  draw p0 with_color blue with_pen big_pen;
+
+  p1 := (1.5, 2) .. (1, 2) .. (1, 0); 
+
+  draw p1 with_color red with_pen big_pen;
+
+  point m[];
+
+  m0 := (1.75, 2.15);
+  dotlabel.top("$m_0$", m0);
+
+  label.top("origin", origin);
+  
+  m1 := origin;
+  dotlabel.bot("$m_1$", m1) shifted (1cm, 1cm) with_text_color orange with_dot_color red;
+
+  p2 := (p0 .. m0 .. p1);
+  p2 += cycle;
+
+  %fill p2 with_pen medium_pen;
+
+  rotate current_picture (10, 10, 10);
+  
+endfig with_focus f; % with_projection parallel_x_y;
+%endfig with_projection parallel_x_y;
+end_mp;
+end;
+
+%% ** (2) Superellipses
+
+%% *** (3) Get rectangle
+
+beginfig(2);
+
+  numeric n;
+  
+  pickup medium_pen;
+
+  draw (frame rotated (90, 0)) shifted (0, 0, -28cm);
+
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  
+  rectangle r[];
+  superellipse s[];
+
+  point p[];
+
+  s0 := get_superellipse with_resolution 64 with_superness .75 with_a 2 with_b 3;
+
+  rotate s0 (90, 0);
+
+  rotate s0 (0, 45);
+  rotate s0 (45, 0);
+
+  
+  draw s0 with_color red;
+
+  n := size s0 - 1;
+  
+  for i = 0 step 1 until n:
+    p[i] := get_point (i) s0;
+  endfor;
+  
+  dotlabel.rt("0", p[0]);
+  dotlabel.rt( "4",  p[4]);
+  dotlabel.urt( "8 ", p[8]);
+  dotlabel.urt("12", p[12]);
+  dotlabel.top("16", p[16]);
+  dotlabel.ulft("20", p[20]);
+  dotlabel.ulft("24", p[24]);
+  dotlabel.lft("28", p[28]);
+  dotlabel.lft("32", p[32]);
+  dotlabel.lft("36", p[36]);
+  dotlabel.llft("40", p[40]);
+  dotlabel.llft("44", p[44]);
+  dotlabel.bot("48", p[48]);
+  dotlabel.lrt("52", p[52]);
+  dotlabel.lrt("56", p[56]);
+  dotlabel.rt("60", p[60]);
+
+  r0 := get_rectangle s0;
+
+  draw r0 with_color blue;
+  
+endfig with_projection parallel_x_y no_sort;
+%endfig with_focus f;
+
+
+
+%% ** (2)
+
+beginfig(1);
+
+  numeric n;
+  
+  pickup medium_pen;
+
+  draw (frame rotated (90, 0)) shifted (0, 0, -28cm);
+
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  
+  rectangle r[];
+  superellipse s[];
+
+  point p[];
+
+  s0 := get_superellipse with_resolution 64 with_superness .75 with_a 2 with_b 3;
+
+  rotate s0 (90, 0);
+
+  
+  draw s0 with_color red;
+
+  n := size s0 - 1;
+  
+  for i = 0 step 1 until n:
+    p[i] := get_point (i) s0;
+  endfor;
+  
+  dotlabel.rt("0", p[0]);
+  dotlabel.rt( "4",  p[4]);
+  dotlabel.urt( "8 ", p[8]);
+  dotlabel.urt("12", p[12]);
+  dotlabel.top("16", p[16]);
+  dotlabel.ulft("20", p[20]);
+  dotlabel.ulft("24", p[24]);
+  dotlabel.lft("28", p[28]);
+  dotlabel.lft("32", p[32]);
+  dotlabel.lft("36", p[36]);
+  dotlabel.llft("40", p[40]);
+  dotlabel.llft("44", p[44]);
+  dotlabel.bot("48", p[48]);
+  dotlabel.lrt("52", p[52]);
+  dotlabel.lrt("56", p[56]);
+  dotlabel.rt("60", p[60]);
+
+  q0 := subpath (4, 20) of s0;
+
+  draw q0 with_color blue;
+  
+endfig with_projection parallel_x_y no_sort;
+%endfig with_focus f;
+
+%% ** (2)
+
+
+end_mp;
+end;
+
+
+%% ** (2)
+
+beginfig(0);
+
+  numeric n;
+  
+  pickup medium_pen;
+
+  draw (frame rotated (90, 0)) shifted (0, 0, -28cm);
+
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  
+  rectangle r[];
+  superellipse s[];
+
+  point p[];
+
+  s0 := get_superellipse with_resolution 64 with_superness .75 with_a 2 with_b 3;
+
+  rotate s0 (90, 0);
+
+  
+  draw s0 with_color red with_pen big_pen;
+
+  % p10 := get_center s0;
+
+  % dotlabel.top("$p_{10}$", p10);
+
+  % p11 := get_normal s0;
+
+  % dotlabel.top("$p_{11}$", p11);
+  
+  n := size s0 - 1;
+  
+  for i = 0 step 1 until n:
+    p[i] := get_point (i) s0;
+  endfor;
+
+
+  
+  dotlabel.rt("0", p[0]);
+  dotlabel.rt( "4",  p[4]);
+  dotlabel.urt( "8 ", p[8]);
+  dotlabel.urt("12", p[12]);
+  dotlabel.top("16", p[16]);
+  dotlabel.ulft("20", p[20]);
+  dotlabel.ulft("24", p[24]);
+  dotlabel.lft("28", p[28]);
+  dotlabel.lft("32", p[32]);
+  dotlabel.lft("36", p[36]);
+  dotlabel.llft("40", p[40]);
+  dotlabel.llft("44", p[44]);
+  dotlabel.bot("48", p[48]);
+  dotlabel.lrt("52", p[52]);
+  dotlabel.lrt("56", p[56]);
+  dotlabel.rt("60", p[60]);
+
+  
+  % r0 := get_rectangle s0;
+  % show r0;
+  % draw r0 with_color blue;
+
+  n := size s0 - 1;
+  message "n:";
+  show n;
+  
+
+  s1 := s0;
+
+  rotate s1 (90, 0, 0);
+
+  %draw s1 with_color blue;
+
+  % p1 := get_center s1;
+  % %dotlabel.bot("$p_1$", p1);
+  
+  q0 := subpath (0, 16) of s0;
+
+  %draw q0 with_color green with_pen big_pen;
+  
+endfig with_projection parallel_x_y no_sort;
+%endfig with_focus f;
+
+%% ** (2)
+
+  
+
+
+%% ** (2) Fig. 1
+
+beginfig(1);
+
+  s5 := get_superellipse with_resolution 64 with_superness .05 with_a 2 with_b 3;
+  draw s5;
+
+  n := size s5 - 1;
+
+  for i = 0 step 8 until n:
+    dotlabel.top(decimal i, get_point (i) s5);
+  endfor;
+
+endfig with_projection parallel_x_z;
+
+
+
+%% ** (2) Fig. 2
+
+beginfig(2);
+
+  s6 := get_superellipse with_resolution 64 with_superness_beta .70 with_superness_gamma .80 with_a 2 with_b 3;
+  draw s6;
+
+  n := size s6 - 1;
+
+  for i = 0 step 8 until n:
+    dotlabel.top(decimal i, get_point (i) s6);
+  endfor;
+
+  n := size s7 - 1;
+  s7 := get_superellipse with_resolution 64 with_superness_beta .25 with_superness_gamma .75 with_a 2 with_b 3;
+  draw s7 with_color blue;
+
+
+  n := size s8 - 1;
+  s8 := get_superellipse with_resolution 64 with_superness_beta .125 with_superness_gamma .825 with_a 2 with_b 3;
+  draw s8 with_color red;
+
+  n := size s9 - 1;
+  s9 := get_superellipse with_resolution 64 with_superness_beta .80 with_superness_gamma .10 with_a 2 with_b 3;
+  draw s9 with_color green;
+
+endfig with_projection parallel_x_z;
+
+%% ** (2) Resolve path.  LDF 2022.04.22.
 
 verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
 
