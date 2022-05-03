@@ -760,23 +760,30 @@ Added this section.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
+#if 0 
     cerr << "In `label_point_command':" << endl;
+#endif 
 
+#if 0 
     if (transform)
     {
        cerr << "transform is non-NULL." << endl;
 
        if (transform->is_identity())
+       {
           cerr << "transform is identity transform." << endl;
+       }
        else
        {
           cerr << "transform is not identity transform." << endl;
-
           transform->show("*tranform:");
        }
     }
     else
+    {
        cerr << "transform is NULL." << endl;
+    }
+#endif 
 
     position->label(*picture_ptr, *text_str, position_str, transform, text_color,
                     dot_color, dot);
