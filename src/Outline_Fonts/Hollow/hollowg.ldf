@@ -281,14 +281,16 @@ beginfig(103);
 
   scale_val := .5;
 
-  q6 := resolve pv0 (6, 12) to 32;
+  q6 := resolve pv0 (6, 12) to 64;
+  q6 += cycle;
+
   z4 := mediate(a[0][6], a[0][11]); 
   z5 := z4 scaled (scale_val, scale_val);
 
-
   scale q6 (scale_val, scale_val);
   shift q6 by (z4 - z5);
-    
+
+  
   draw q6 with_color red;
   n := size q6;
 
@@ -489,8 +491,55 @@ beginfig(103);
   z33 := get_point(0) q6;
   z34 := get_last_point q6;
 
+  z35 := mediate(z33, z26, .25);
+
+  n := (size q6 * 1/4) + 4;
+  z36 := get_point(n) q6;
+ %drawdot z36 with_pen dot_pen;
+
+
+  
+  n := size q6 * 3/4;
+  z37 := get_point(n) q6;
+  shift z37 (0, 0pt);
+  %drawdot z37 with_pen dot_pen;
+
+
+  z38 := z37 shifted (6.75pt, 0pt);
+  dotlabel.rt("$\scriptstyle z_{38}$", z38);
+
+  z39 := z36 shifted (8pt, -2pt);
+  dotlabel.top("$\scriptstyle z_{39}$", z39);
+
+  z40 := mediate(z37, z38);
+  shift z40 (0, 0pt);
+
+  dotlabel.top("$\scriptstyle z_{40}$", z40);
+
+  z41 := mediate(z36, z39);
+  shift z41 (0, -.5pt);
+  dotlabel.bot("$\scriptstyle z_{41}$", z41);
+  
+  draw z37 .. z40 .. z38 -- z39 .. z41 .. z36;
+  
+  q22 := z37 .. z40 .. z38 -- z39 .. z41 .. z36;
+
+  q22 += --;
+  q22 += cycle;
+  
+  draw q22 with_color blue;
+
+  
+  % q22 := z36 ... z39 ... z38 ... z37;
+  % q23 := resolve q22 to 32;
+
+  % draw q23; % with_color red with_pen big_pen;
+  
   dotlabel.lrt("$\scriptstyle z_{33}$", z33) with_color red;
   dotlabel.top("$\scriptstyle z_{34}$", z34) with_color red;
+  dotlabel.rt("$\scriptstyle z_{35}$", z35) with_color dark_green;
+  dotlabel.bot("$\scriptstyle z_{36}$", z36) shifted (0, 2pt);
+  dotlabel.top("$\scriptstyle z_{37}$", z37) shifted (0, -2pt);
 
 %% *** (3)  
 
@@ -512,6 +561,9 @@ beginfig(103);
   fill q7 with_color dark_gray;
   unfill pv2;
 
+  unfill q22;
+  unfill q6;
+  
   v1 := current_picture;
   clear current_picture; 
   
@@ -573,8 +625,8 @@ beginfig(103);
   fi
 
   n := (size q6 / 2 + 3);
-  dotlabel.rt("$q_6$", get_point (n) q6) with_text_color red;
-
+  label.lrt("$q_6$", get_point (n) q6) with_text_color red;
+  
   dotlabel.top("$z_4$", z4) shifted (0, .25cm);
   draw z4 -- z4 shifted (0, .35cm) with_color dark_gray;
 
@@ -644,7 +696,7 @@ beginfig(103);
   label.rt("$q_{14}$", get_point(2) q14) with_text_color teal_blue;
   label("$q_{16}$", get_point(1) q16 shifted (-.5cm, .25cm)) with_text_color rose_madder;
   dotlabel.llft("$\scriptstyle z_{28}$", z28);
-  dotlabel.bot("$\scriptstyle z_{29}$", z29);
+  dotlabel.lrt("$\scriptstyle z_{29}$", z29) with_color blue;
 
   label("$q_{17}$", get_point(2) q14 shifted (.25cm, -.75cm)) with_text_color lime_green;
   dotlabel.rt("$z_{30}$", z30);
