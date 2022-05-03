@@ -483,7 +483,7 @@ beginfig(103);
   q21 := resolve q20 to 360;
   q21 += cycle;
   
-  %draw q21 with_color cerulean_blue with_pen dot_pen;
+  draw q21 with_color cerulean_blue with_pen dot_pen;
 
 %% *** (3)
 
@@ -500,18 +500,18 @@ beginfig(103);
   
   n := size q6 * 3/4;
   z37 := get_point(n) q6;
-  shift z37 (0, 0pt);
+  shift z37 (0, -.75pt);
   %drawdot z37 with_pen dot_pen;
 
 
-  z38 := z37 shifted (6.75pt, 0pt);
+  z38 := z37 shifted (6.75pt, .5pt);
   dotlabel.rt("$\scriptstyle z_{38}$", z38);
 
-  z39 := z36 shifted (8pt, -2pt);
+  z39 := z36 shifted (10pt, -2pt);
   dotlabel.top("$\scriptstyle z_{39}$", z39);
 
   z40 := mediate(z37, z38);
-  shift z40 (0, 0pt);
+  shift z40 (0, 1pt);
 
   dotlabel.top("$\scriptstyle z_{40}$", z40);
 
@@ -528,7 +528,7 @@ beginfig(103);
   
   draw q22 with_color blue;
 
-  
+
   % q22 := z36 ... z39 ... z38 ... z37;
   % q23 := resolve q22 to 32;
 
@@ -562,6 +562,14 @@ beginfig(103);
 
   unfill q22;
   unfill q6;
+
+  scale_val := 2mm;
+  
+  undrawdot z37 shifted (0, -2.1pt)
+    with_pen (pensquare scaled (scale_val, scale_val, scale_val) rotated (0, 0, 1.25));
+    %with_color blue;
+
+  
   
   v1 := current_picture;
   clear current_picture; 
