@@ -206,7 +206,8 @@ class Point: protected Shape
   friend void Label::output(Scanner_Node scanner_node,
                             const Focus& f,
                             const unsigned short proj,
-                            real factor);
+                            real factor,
+                            const Transform& t);
 
 
   private:
@@ -7948,7 +7949,7 @@ Point::label(Picture& picture,
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -8075,8 +8076,8 @@ catching |bad_alloc|.
    if (ttransform)
    {
 
-#if 1 /* 0 */
-       cerr << "In Point::label:  `ttransform' is non-NULL." << endl;
+#if 0
+       cerr << "`ttransform' is non-NULL." << endl;
        ttransform->show("*ttransform:");
 #endif 
 
@@ -8092,34 +8093,14 @@ catching |bad_alloc|.
           ttransform = 0;
        }
 
-#if 1 /* 0 */
-       cerr << "In Point::label:  After assignment:" << endl;       
+#if 0 
+       cerr << "After assignment:" << endl;       
        lbl->text_transform->show("Label::*transform:");
 #endif 
 
    }
    else
       lbl->text_transform = 0;
-
-   if (lbl->text_transform)
-   {
-      cerr << "In Point::label:  lbl->text_transform is non-NULL." << endl;
-
-      if (lbl->text_transform->is_identity())
-         cerr << "In Point::label:  *(lbl->text_transform) is identity transform." << endl;   
-      else
-      {
-         cerr << "In Point::label:  *(lbl->text_transform) is not identity transform." 
-              << endl;   
-         lbl->text_transform->show("*lbl->text_transform:");
-      }
-   }
-   else
-      cerr << "In Point::label:  lbl->text_transform is NULL." << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
 
    lbl->position = position_str;
 
@@ -8565,7 +8546,8 @@ void
 Label::output(Scanner_Node scanner_node,
               const Focus& f,
               const unsigned short proj,
-              real factor)
+              real factor,
+              const Transform& t)
 {
 @q **** (4) @>
 
@@ -8577,20 +8559,23 @@ Label::output(Scanner_Node scanner_node,
 
        if (text_transform)
        {
-          cerr << "text_transform is non-NULL." << endl;
+          cerr << "`text_transform' is non-NULL." << endl;
 
-          if (text_transform->is_identity())
-          {
-             cerr << "*text_transform is identity transformation." << endl;
-          }
-          else
-          {
-             cerr << "`*text_transform' is not identity transformation." << endl;
-             text_transform->show("*text_transform:");
-          }
-      }
-      else
-          cerr << "text_transform is NULL." << endl;
+          text_transform->show("*text_transform:");
+       }
+       else
+          cerr << "`text_transform' is NULL." << endl;
+
+
+       if (t.is_identity())
+       {
+          cerr << "t is identity transformation." << endl;
+       }
+       else
+       {
+          cerr << "`t' is not identity transformation." << endl;
+          t.show("t:");
+       }
 
 
 cerr << "XXX Enter <RETURN> to continue: ";
@@ -8605,11 +8590,21 @@ getchar();
    Output_Struct* os = scanner_node->out[Run_State::METAPOST_RS];
    ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
-   if (text_transform && !text_transform->is_identity())
-      *text_pt *= *dot_pt *= *text_transform;
+   if (!t.is_identity())
+      *text_pt *= *dot_pt *= t;
 
    dot_pt->apply_transform();
    text_pt->apply_transform();
+
+   if (text_transform)
+   {
+      *text_transform *= t.inverse();
+
+       text_transform->show("*text_transform after multiplication:");
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }
 
    if(!(dot_pt->project(f, proj, factor) && dot_pt->project(f, proj, factor)))
      {
@@ -8628,28 +8623,28 @@ getchar();
    *out_stream << "(btex " << text << " etex ";
 
 #if 0 
-   if (!t.is_identity())
+   if (text_transform && !text_transform->is_identity())
    {
 
      *out_stream << " transformed "
                  << "begingroup; save T; transform T;"
                  << endl  
                  << " xxpart T = " 
-                 << t.get_element(0, 0) << "; "
+                 << text_transform->get_element(0, 0) << "; "
                  << "xpart T = "                                   
-                 << t.get_element(3, 0) << "; "
+                 << text_transform->get_element(3, 0) << "; "
                  << "xypart T = "                                 
-                 << t.get_element(1, 0) << "; " 
+                 << text_transform->get_element(1, 0) << "; " 
                  << endl                                                   
                  << " yypart T = "                               
-                 << t.get_element(1, 1) << "; "
+                 << text_transform->get_element(1, 1) << "; "
                  << "ypart T = "                                   
-                 << t.get_element(3, 1) << "; "
+                 << text_transform->get_element(3, 1) << "; "
                  << "yxpart T = "                                 
-                 << t.get_element(0, 1) << "; "
+                 << text_transform->get_element(0, 1) << "; "
                  << "T endgroup ";
 
-   } /* |if (t && !t.is_identity())|  */@;
+   } /* |if (text_transform && !text_transform->is_identity())|  */@;
 #endif 
 
    *out_stream << ", ("
@@ -8699,8 +8694,6 @@ getchar();
    return;
 
 }  /* End of |Label::output| definition.  */
-
-
 
 @q * (1) |Transform_Matrix| operations. @>
 @* {\bf Transform\_Matrix} operations.
