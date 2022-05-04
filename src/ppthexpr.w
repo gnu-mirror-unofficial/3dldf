@@ -243,32 +243,6 @@ Put the following code inside an |else| clause.
 
 };
 
-@q *** (3) path_primary --> REVERSE path_primary  @>
-@*2 \§path primary> $\longrightarrow$ \.{REVERSE} \§path primary>.
-
-\LOG
-\initials{LDF 2004.05.13.}  
-Added this rule.
-
-\initials{LDF 2004.11.26.}
-Changed |Path::reverse|, so that cyclical |Paths| can be 
-reversed. 
-
-\initials{LDF 2005.11.09.}
-Removed debugging code.
-\ENDLOG 
-
-@<Define rules@>=
-@=path_primary: REVERSE path_primary@>@/
-{
-  Path* p = static_cast<Path*>(@=$2@>); 
-
-  p->reverse(1, static_cast<Scanner_Node>(parameter));
-
-  @=$$@> = static_cast<void*>(p);  
-
-};
-
 @q *** (3) path_primary --> SUBPATH numeric_list OF path_primary  @>
 @*2 \§path primary> $\longrightarrow$ \.{SUBPATH} \§numeric list>
 \.{OF} \§path primary>.
