@@ -72,12 +72,14 @@ glyph g[];
 path_vector pv;
 point a[][];
 
+pen tiny_pen;
 pen small_pen;
 pen medium_pen;
 pen big_pen;
 pen huge_pen;
 pen dot_pen;
 
+tiny_pen := pencircle scaled (.05mm, .05mm, .05mm);
 small_pen := pencircle scaled (.075mm, .075mm, .075mm);
 medium_pen := pencircle scaled (.25mm, .25mm, .25mm);
 big_pen := pencircle scaled (2pt, 2pt, 2pt);
@@ -480,7 +482,7 @@ beginfig(200);
   
   %draw q21 with_color cerulean_blue with_pen dot_pen;
 
-%% *** (3)
+%% *** (3) Upper serif
 
   z33 := get_point(0) q6;
   z34 := get_last_point q6;
@@ -496,15 +498,12 @@ beginfig(200);
   shift z37 (-3pt, .5pt);
   %drawdot z37 with_pen dot_pen;
 
-
   z38 := z37 shifted (9.25pt, 1pt);
 
   z39 := z36 shifted (10pt, -2pt);
 
-
   z40 := mediate(z37, z38);
   shift z40 (0, 1pt);
-
 
 
   z41 := mediate(z36, z39);
@@ -527,7 +526,7 @@ beginfig(200);
 
   % draw q23; % with_color red with_pen big_pen;
   
-%% *** (3)
+%% *** (3) Connecting wedge between upper and lower bowls
 
   z42 := get_point(0) q9;
   z43 := get_point(size q9 - 1) q9;
@@ -543,16 +542,78 @@ beginfig(200);
 
   draw q24 with_pen big_pen with_color red;
 
-  z45 := get_point(size q24 * 27/32) q24;
+  n := size q24 * 27 / 32;
+  message "n:";
+  show n;
+
+  z45 := get_point(size q24 * 28/32) q24;
+
+  % message "get_point(28) q24 == z45:";
+  % show get_point(28) q24 == z45;
+
+  for i = 0 upto 28:
+    q25 += get_point(i) q24;
+    q25 += ..;
+  endfor;
+
+  draw q25 with_color turquoise with_pen big_pen;
+
   z46 := get_point(0) q24;
 
+  % message "size q9:";
+  % show size q9;
+
+  % message "size q10:";
+  % show size q10;
+
+  z47 := mediate(a[0][2], z42, .4);
+  dotlabel.top("$\scriptstyle z_{47}$", z47) with_color red; % shifted (0, 1pt)
+
+  z48 := get_point(0) q10;
+  dotlabel.lft("$\scriptstyle z_{48}$", z48) with_text_color teal_blue;
+
+  z49 := mediate(z48, z46);
+  dotlabel.lft("$\scriptstyle z_{49}$", z49); 
+
+  z50 := mediate(z43, z45, .25) shifted (-.5pt, 0);
+  z51 := mediate(z43, z45, .5) shifted (-.5pt, 0);
+  z52 := mediate(z43, z45, .75) shifted (-.5pt, 0);
+  
+  label.rt("$\scriptstyle z_{50}$", z50);
+  label.rt("$\scriptstyle z_{51}$", z51);
+  label.rt("$\scriptstyle z_{52}$", z52);
+
+  drawdot z50 with_pen medium_pen;
+  drawdot z51 with_pen medium_pen;
+  drawdot z52 with_pen medium_pen;
+  
+  z53 := get_last_point q10;
+  dotlabel.rt("$\scriptstyle z_{53}$", z53) with_text_color teal_blue;
+  % shifted (-2pt, -1pt);
+
+  q27 := q9;
+  reverse q27;
+
+  q28 := q10;
+  reverse q28;
+  
+  
+  q26 := q25 .. z52 .. z51 .. z50 ... z43 .. q27 -- z47 .. z53 .. q28
+         .. z49 .. z46;
+  clear_connectors q26;
+  q26 += ..;
+
+  q26 += cycle;
+  
+  %draw q26 with_color violet with_pen big_pen;
+  
   dotlabel.lft("$\scriptstyle z_{42}$", z42) shifted (1pt, 0)
     with_text_color orange;
-  dotlabel.bot("$\scriptstyle z_{43}$", z43) shifted (0, 1pt)
+  dotlabel.lft("$\scriptstyle z_{43}$", z43) shifted (0, 1pt)
     with_text_color orange;
   label("$q_{24}$", get_point(size q24/2) q24) with_color red;
   dotlabel.rt("$\scriptstyle z_{45}$", z45);
-  dotlabel.top("$\scriptstyle z_{46}$", z46);  
+  dotlabel.top("$\scriptstyle z_{46}$", z46) shifted (0, -2pt);  
   
 %% *** (3)
 
@@ -592,6 +653,8 @@ beginfig(200);
   %   with_pen (pensquare scaled (scale_val, scale_val, scale_val)
   % rotated (0, 0, 1.25) with_color blue;
 
+  unfill q26; %% Connecting wedge between upper and lower bowls.
+  
   v1 := current_picture;
   clear current_picture; 
   
