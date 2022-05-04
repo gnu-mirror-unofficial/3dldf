@@ -13501,6 +13501,10 @@ Path::reverse(int assign, Scanner_Node scanner_node)
 
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+  { 
+      cerr << "Entering |Path::reverse|." << endl;
+  }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
   stringstream cerr_strm;
@@ -13515,6 +13519,8 @@ Path::reverse(int assign, Scanner_Node scanner_node)
                                                    &warning_stop_value);
 
   using namespace Scan_Parse;
+
+
 
 @q **** (4) No assignment.  Call |const| version.@>
 @ No assignment.  Call |const| version.
@@ -13554,20 +13560,31 @@ in the reversed |Path|, which isn't what we want.
    Connector_Type *last_connector_type = connector_type_vector.back();
 
    while (connector_type_vector.size() < points.size() - 1)
-      connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
+      connector_type_vector.push_back(
+         create_new<Connector_Type>(last_connector_type));
+
+@
+\LOG
+\initials{LDF 2022.05.04.}
+!! BUG FIX:  Formerly, |connector_type_vector.back()| was deleted
+twice and not set to 0.  Changed this.
+\ENDLOG
+
+@<Define |Path| functions@>=
+
 
    while (connector_type_vector.size() > points.size() - 1)
    {
         delete connector_type_vector.back();
-        delete connector_type_vector.back();
+        connector_type_vector.back() = 0;
         connector_type_vector.pop_back();
    }
 
-
 @q **** (4).@> 
 
-@ If I don't explicitly refer to the |std| namespace here, this function is called, and since the 
-arguments are different from the one used for this function, this causes an error at compile time.  
+@ If I don't explicitly refer to the |std| namespace here, this function is called, 
+and since the arguments are different from the one used for this function, this 
+causes an error at compile time.  
 \initials{LDF 2002.4.7.}
 
 @<Define |Path| functions@>=
@@ -13586,6 +13603,7 @@ arguments are different from the one used for this function, this causes an erro
 #endif /* |DEBUG_COMPILE|  */@;
 
   std::reverse(connector_type_vector.begin(), connector_type_vector.end());
+
   std::reverse(points.begin(), points.end());
 
   if (is_cycle())
