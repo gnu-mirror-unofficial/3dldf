@@ -128,16 +128,16 @@ frame :=    ((-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht)
   -- (.5frame_wd, .5frame_ht) -- (-.5frame_wd, .5frame_ht)
   -- cycle) shifted (.475frame_wd, .5frame_ht-.825cm);
 
-%% ** (2) Fig. 103 ("g" == 103 == 0147 == 0x67)
+%% ** (2) Fig. 200 ("g" == 103 == 0147 == 0x67)
 
 
 focus f;
 set f with_position (0cm, 2cm, -50) 
-       with_direction (0cm, 2cm, 10) with_distance 45; 
+      with_direction (0cm, 2cm, 10) with_distance 45; 
 
 %% ** (2) Fig. 103.  cmssbx10 "g".
 
-beginfig(103);
+beginfig(200);
 
 %% *** (3)  
 
@@ -255,7 +255,7 @@ beginfig(103);
   n := size q3 - 1;
   for i = 0 upto n:
     m[i] := get_point(i) qv0;
-    drawdot m[i] with_pen pencircle scaled (1mm, 1mm, 1mm);
+    %drawdot m[i] with_pen pencircle scaled (1mm, 1mm, 1mm);
   endfor;
 
   
@@ -290,11 +290,8 @@ beginfig(103);
   scale q6 (scale_val, scale_val);
   shift q6 by (z4 - z5);
 
-  
-  draw q6 with_color red;
+  draw q6 with_color red with_pen big_pen;
   n := size q6;
-
-
   
   z6 := mediate(a[2][3], a[2][1]);
 
@@ -422,7 +419,7 @@ beginfig(103);
   q15 := resolve q14 to 32;
   
   for i = 0 upto size q15 - 1:
-    drawdot get_point(i) q15 with_pen dot_pen;
+    %drawdot get_point(i) q15 with_pen dot_pen;
   endfor;
 
   q16 := subpath (12, 15) of pv0;
@@ -500,24 +497,23 @@ beginfig(103);
   
   n := size q6 * 3/4;
   z37 := get_point(n) q6;
-  shift z37 (0, -.75pt);
+  shift z37 (-3pt, .5pt);
   %drawdot z37 with_pen dot_pen;
 
 
-  z38 := z37 shifted (6.75pt, .5pt);
-  dotlabel.rt("$\scriptstyle z_{38}$", z38);
+  z38 := z37 shifted (9.25pt, 1pt);
 
   z39 := z36 shifted (10pt, -2pt);
-  dotlabel.top("$\scriptstyle z_{39}$", z39);
+
 
   z40 := mediate(z37, z38);
   shift z40 (0, 1pt);
 
-  dotlabel.top("$\scriptstyle z_{40}$", z40);
+
 
   z41 := mediate(z36, z39);
   shift z41 (0, -.5pt);
-  dotlabel.bot("$\scriptstyle z_{41}$", z41);
+
   
   draw z37 .. z40 .. z38 -- z39 .. z41 .. z36;
   
@@ -526,19 +522,15 @@ beginfig(103);
   q22 += --;
   q22 += cycle;
   
-  draw q22 with_color blue;
+  draw q22 with_color blue with_pen big_pen;
 
+  % fill q22 with_color dark_gray;
+  % fill q6 with_color dark_gray;
 
   % q22 := z36 ... z39 ... z38 ... z37;
   % q23 := resolve q22 to 32;
 
   % draw q23; % with_color red with_pen big_pen;
-  
-  dotlabel.lrt("$\scriptstyle z_{33}$", z33) with_color red;
-  dotlabel.top("$\scriptstyle z_{34}$", z34) with_color red;
-  dotlabel.rt("$\scriptstyle z_{35}$", z35) with_color dark_green;
-  dotlabel.bot("$\scriptstyle z_{36}$", z36) shifted (0, 2pt);
-  dotlabel.top("$\scriptstyle z_{37}$", z37) shifted (0, -2pt);
 
 %% *** (3)  
 
@@ -563,14 +555,17 @@ beginfig(103);
   unfill q22;
   unfill q6;
 
+  scale_val := 4pt;
+  undrawdot z37 shifted (.333pt, -1.575pt)
+    with_pen pensquare scaled (scale_val, scale_val, scale_val) rotated (0, 0, 12)
+    with_color red;
+
   scale_val := 2mm;
   
-  undrawdot z37 shifted (0, -2.1pt)
-    with_pen (pensquare scaled (scale_val, scale_val, scale_val) rotated (0, 0, 1.25));
-    %with_color blue;
+  % undrawdot z37 shifted (0, -2.1pt)
+  %   with_pen (pensquare scaled (scale_val, scale_val, scale_val)
+  % rotated (0, 0, 1.25) with_color blue;
 
-  
-  
   v1 := current_picture;
   clear current_picture; 
   
@@ -712,6 +707,17 @@ beginfig(103);
   label.rt("$q_{19}$", z32) with_text_color turquoise;
   label.top("$q_{20}$", a[0][21]) with_text_color cerulean_blue;
 
+  dotlabel.rt("$\scriptstyle z_{38}$", z38);
+  dotlabel.top("$\scriptstyle z_{39}$", z39);
+  dotlabel.top("$\scriptstyle z_{40}$", z40);
+  dotlabel.bot("$\scriptstyle z_{41}$", z41);
+  dotlabel.lrt("$\scriptstyle z_{33}$", z33) with_color red;
+  dotlabel.top("$\scriptstyle z_{34}$", z34) with_color red;
+  dotlabel.rt("$\scriptstyle z_{35}$", z35) with_color dark_green;
+  dotlabel.bot("$\scriptstyle z_{36}$", z36) shifted (0, 2pt);
+  dotlabel.top("$\scriptstyle z_{37}$", z37) shifted (0, -2pt);
+
+
   label_picture := current_picture;
 
 %% *** (3)
@@ -722,18 +728,28 @@ beginfig(103);
   current_picture += v0;
   current_picture += label_picture;
   
-endfig with_projection parallel_x_y; % no_sort;
-%endfig with_focus f no_sort;
-
-
+endfig with_projection parallel_x_y;
 
 % end_mp;
 % end;
 
+
+%% ** (2)
+
+beginfig(201);
+  current_picture := v0;
+endfig with_projection parallel_x_y no_colors;
+
+%% ** (2)
+
+beginfig(202);
+  current_picture := v1;
+endfig with_projection parallel_x_y no_colors;
+
 %% ** (2) This works.  Rotating the "g".
 
 j := 1;
-for i = 104 upto 111:
+for i = 203 upto 210:
   beginfig(i);
     %current_picture := v0;
     current_picture := v1;
@@ -742,16 +758,14 @@ for i = 104 upto 111:
   j += 1;
 endfor;
 
-
-
-beginfig(112);
+beginfig(211);
   %current_picture := v0;
   current_picture := v1;
   rotate current_picture (0, 30, 0);
 endfig with_focus f no_sort; 
 
 j := 1;
-for i = 113 upto 119:
+for i = 212 upto 218:
   beginfig(i);
     %current_picture := v0;
     current_picture := v1;
@@ -762,7 +776,7 @@ for i = 113 upto 119:
 endfor;
 
 
-beginfig(120);
+beginfig(219);
   %current_picture := v0;
   current_picture := v1;
   rotate current_picture (0, -30, 0);
@@ -770,7 +784,7 @@ endfig with_focus f no_sort;
 
 
 j := 1;
-for i = 121 upto 127:
+for i = 220 upto 226:
   beginfig(i);
     %current_picture := v0;
     current_picture := v1;
@@ -780,15 +794,13 @@ for i = 121 upto 127:
   j += 1;
 endfor;
 
-
-beginfig(128);
+beginfig(227);
   %current_picture := v0;
   current_picture := v1;
 endfig with_focus f no_sort;
 
-
 j := 1;
-for i = 129 upto 136:
+for i = 228 upto 235:
   beginfig(i);
     %current_picture := v0;
     current_picture := v1;
