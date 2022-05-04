@@ -567,6 +567,7 @@ beginfig(200);
   % show size q10;
 
   z47 := mediate(a[0][2], z42, .4);
+  shift z47 (-1pt, -4pt);
   dotlabel.top("$\scriptstyle z_{47}$", z47) with_color red; % shifted (0, 1pt)
 
   z48 := get_point(0) q10;
@@ -596,16 +597,23 @@ beginfig(200);
 
   q28 := q10;
   reverse q28;
-  
-  
-  q26 := q25 .. z52 .. z51 .. z50 ... z43 .. q27 -- z47 .. z53 .. q28
+
+  clear_connectors q25;
+  q25 += ..;
+  clear_connectors q27;
+  q27 += ..;
+  clear_connectors q28;
+  q28 += ..;
+
+    
+  q26 := q25 .. z52 .. z51 .. z50 ... z43 .. q27 .. z47 .. z53 .. q28
          .. z49 .. z46;
-  clear_connectors q26;
-  q26 += ..;
 
   q26 += cycle;
   
   %draw q26 with_color violet with_pen big_pen;
+
+  %draw q26 with_color dark_gray with_pen big_pen;
   
   dotlabel.lft("$\scriptstyle z_{42}$", z42) shifted (1pt, 0)
     with_text_color orange;
@@ -653,7 +661,15 @@ beginfig(200);
   %   with_pen (pensquare scaled (scale_val, scale_val, scale_val)
   % rotated (0, 0, 1.25) with_color blue;
 
+
   unfill q26; %% Connecting wedge between upper and lower bowls.
+  draw q26 with_color dark_gray with_pen big_pen;
+
+  scale_val := 1.5mm;
+  drawdot z47 shifted (1.125pt, -2.5pt)
+    with_pen pensquare scaled (scale_val, scale_val, scale_val)
+        rotated (0, 0, 8)
+       with_color dark_gray;
   
   v1 := current_picture;
   clear current_picture; 
@@ -836,7 +852,7 @@ endfig with_projection parallel_x_y no_colors;
 
 beginfig(202);
   current_picture := v1;
-endfig with_projection parallel_x_y no_colors;
+endfig with_projection parallel_x_y;
 
 %% ** (2) This works.  Rotating the "g".
 
