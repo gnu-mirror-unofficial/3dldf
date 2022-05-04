@@ -222,9 +222,11 @@ Added this section.
 
        ppen *= u;
 
-       p->drawdot(*v, dot_color, &ppen);
+       if (@=$1@> == DOTLABEL)
+          p->drawdot(*v, dot_color, &ppen);
 
        *p *= *t;
+
 
        label_point_command(static_cast<Scanner_Node>(parameter),
                            LABEL,
