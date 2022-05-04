@@ -1277,7 +1277,7 @@ Added this rule.
    if (DEBUG)
    { 
       cerr_strm << "*** Parser: `command: flatten_command picture_vector_variable "
-                << "numeric_optional."
+                << "numeric_optional'."
                 << endl 
                 << "`flatten_command'  == $1 == " << @=$1@> << endl
                 << "`numeric_optional' == $3 == " << @=$3@> << endl;
@@ -1295,7 +1295,8 @@ Added this rule.
 
    if (entry && entry->object)
    {
-       Pointer_Vector<Picture> *pv = static_cast<Pointer_Vector<Picture>*>(entry->object);
+       Pointer_Vector<Picture> *pv 
+          = static_cast<Pointer_Vector<Picture>*>(entry->object);
   
        for (vector<Picture*>::iterator iter = pv->v.begin();
             iter != pv->v.end();
@@ -1338,6 +1339,58 @@ Added this type declaration.
 {
    @=$$@> = @=$2@>;
 };
+
+@q *** (3) command: REVERSE path_variable  @>
+@*2 \§command> $\longrightarrow$ \.{REVERSE} \§path variable>.
+
+\LOG
+\initials{LDF 2004.05.13.}  
+Added this rule.
+
+\initials{LDF 2004.11.26.}
+Changed |Path::reverse|, so that cyclical |Paths| can be 
+reversed. 
+
+\initials{LDF 2005.11.09.}
+Removed debugging code.
+
+\initials{LDF 2022.05.04.}
+Changed this rule from \§path primary> $\longrightarrow$ \.{REVERSE}
+\§path primary> to \§command> $\longrightarrow$ \.{REVERSE} 
+\§path variable>.
+\ENDLOG 
+
+@<Define rules@>=
+@=command: REVERSE path_variable@>@/
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `command:  REVERSE path_variable'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
+
+   if (entry && entry->object)
+   {
+     Path* p = static_cast<Path*>(entry->object); 
+     p->reverse(1, static_cast<Scanner_Node>(parameter));
+
+   }
+
+  @=$$@> = static_cast<void*>(0);  
+
+};
+
 
 @q ** (2) command: RESET_ARC numeric_list_optional @>
 
