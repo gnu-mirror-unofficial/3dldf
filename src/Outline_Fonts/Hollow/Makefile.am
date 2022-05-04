@@ -182,8 +182,7 @@ hollow.pdf: hollow.dvi
 
 .PHONY: eps
 
-eps:
-	mpost -numbersystem "double" hollowg.mp
+eps: hollowg000.eps
 
 hollowg000.eps hollowg065.eps hollowg165.eps hollowg200.eps: hollowg.mp
 	mpost -numbersystem "double" hollowg.mp

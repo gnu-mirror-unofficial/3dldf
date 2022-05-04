@@ -368,13 +368,13 @@ beginfig(200);
   z23 := mediate(z0, z22, 1.25);
 
 
-  draw z0 -- z23 with_color dark_gray;
+  %draw z0 -- z23 with_color dark_gray;
 
   z24 := z23 rotatedaround(z0, a[0][13]) 180;
 
 
 
-  draw z0 -- z24 with_color dark_gray;
+  %draw z0 -- z24 with_color dark_gray;
 
   z25 := mediate(z0, z24, .805);
 
@@ -456,6 +456,7 @@ beginfig(200);
   q18 := z31 .. z32 .. z30;
 
   q19 := resolve q18 to 7;
+  q19 -= cycle;
 
   draw q19 with_color turquoise with_pen big_pen;
 
@@ -477,7 +478,7 @@ beginfig(200);
   q21 := resolve q20 to 360;
   q21 += cycle;
   
-  draw q21 with_color cerulean_blue with_pen dot_pen;
+  %draw q21 with_color cerulean_blue with_pen dot_pen;
 
 %% *** (3)
 
@@ -489,8 +490,6 @@ beginfig(200);
   n := (size q6 * 1/4) + 4;
   z36 := get_point(n) q6;
  %drawdot z36 with_pen dot_pen;
-
-
   
   n := size q6 * 3/4;
   z37 := get_point(n) q6;
@@ -510,7 +509,6 @@ beginfig(200);
 
   z41 := mediate(z36, z39);
   shift z41 (0, -.5pt);
-
   
   draw z37 .. z40 .. z38 -- z39 .. z41 .. z36;
   
@@ -528,8 +526,35 @@ beginfig(200);
   % q23 := resolve q22 to 32;
 
   % draw q23; % with_color red with_pen big_pen;
+  
+%% *** (3)
 
-%% *** (3)  
+  z42 := get_point(0) q9;
+  z43 := get_point(size q9 - 1) q9;
+
+  scale_val := .875;
+  z44 := z32 scaled (scale_val, scale_val);
+
+  q24 := resolve q19 to 32;
+  scale q24 by (scale_val, scale_val);
+
+  shift q24 by (z32 - z44);
+  shift q24 (-.2cm, 2pt);
+
+  draw q24 with_pen big_pen with_color red;
+
+  z45 := get_point(size q24 * 27/32) q24;
+  z46 := get_point(0) q24;
+
+  dotlabel.lft("$\scriptstyle z_{42}$", z42) shifted (1pt, 0)
+    with_text_color orange;
+  dotlabel.bot("$\scriptstyle z_{43}$", z43) shifted (0, 1pt)
+    with_text_color orange;
+  label("$q_{24}$", get_point(size q24/2) q24) with_color red;
+  dotlabel.rt("$\scriptstyle z_{45}$", z45);
+  dotlabel.top("$\scriptstyle z_{46}$", z46);  
+  
+%% *** (3)
 
   v0 := current_picture;
   clear current_picture;
@@ -589,7 +614,7 @@ beginfig(200);
   dotlabel.ulft("$\scriptstyle a_0^{12}$", a[0][12]) shifted (4pt, 0);
   dotlabel.top("$a_0^{13}$", a[0][13]);
   dotlabel.lft("$a_0^{14}$", a[0][14]);
-  dotlabel.lft("$a_0^{15}$", a[0][15]);
+  dotlabel.top("$a_0^{15}$", a[0][15]);
   dotlabel.lft("$a_0^{16}$", a[0][16]);
   dotlabel.lft("$a_0^{17}$", a[0][17]);
   dotlabel.lft("$a_0^{18}$", a[0][18]);
@@ -650,14 +675,15 @@ beginfig(200);
   n := (size q8) * 13/16 + 3;
   dotlabel.rt("$q_8$", get_point (n) q8) with_text_color red;
 
-  dotlabel.lft("$z_9$", z9);
+  %dotlabel.lft("$z_9$", z9);
   %dotlabel.top("$z_{10}$", z10);
 
   n := (size q9) * 3/4;
   label.lft("$q_9$", get_point (n) q9 shifted (2pt, 0)) with_text_color orange;
 
   n := (size q10) * 3/4;
-  dotlabel.rt("$q_{10}$", (get_point (n) q10 shifted (0, -.125cm))) with_text_color teal_blue;
+  label.rt("$q_{10}$", (get_point (n) q10 shifted (0, -.125cm)))
+    with_text_color teal_blue;
 
   %dotlabel.top("$z_{11}$", z11);
   %dotlabel.top("$z_{12}$", z12);
@@ -697,16 +723,18 @@ beginfig(200);
   %dotlabel.urt("$\scriptstyle z_{27}$", z27);
   label.urt("$q_{13}$", get_point(n) q13) with_text_color blue;
   label.rt("$q_{14}$", get_point(2) q14) with_text_color teal_blue;
-  label("$q_{16}$", get_point(1) q16 shifted (-.5cm, .25cm)) with_text_color rose_madder;
-  dotlabel.llft("$\scriptstyle z_{28}$", z28);
+  label("$q_{16}$", get_point(1) q16 shifted (-.5cm, .25cm))
+    with_text_color rose_madder;
+  dotlabel.top("$\scriptstyle z_{28}$", z28) with_color blue;
   dotlabel.lrt("$\scriptstyle z_{29}$", z29) with_color blue;
 
-  label("$q_{17}$", get_point(2) q14 shifted (.25cm, -.75cm)) with_text_color lime_green;
+  label("$q_{17}$", get_point(2) q14 shifted (.25cm, -.75cm))
+    with_text_color lime_green;
   dotlabel.rt("$z_{30}$", z30);
-  dotlabel.lft("$\scriptstyle z_{31}$", z31);
-  dotlabel.lft("$\scriptstyle z_{32}$", z32);
+  dotlabel.bot("$\scriptstyle z_{31}$", z31);
+  dotlabel.bot("$\scriptstyle z_{32}$", z32);
   label.rt("$q_{19}$", z32) with_text_color turquoise;
-  label.top("$q_{20}$", a[0][21]) with_text_color cerulean_blue;
+  label.top("$q_{21}$", a[0][21]) with_text_color cerulean_blue;
 
   dotlabel.rt("$\scriptstyle z_{38}$", z38);
   dotlabel.top("$\scriptstyle z_{39}$", z39);
