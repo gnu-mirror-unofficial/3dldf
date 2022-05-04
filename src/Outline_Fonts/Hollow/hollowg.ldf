@@ -365,7 +365,6 @@ beginfig(200);
 
   %drawdot z22 with_pen dot_pen;
 
-
   z23 := mediate(z0, z22, 1.25);
 
 
@@ -553,10 +552,14 @@ beginfig(200);
   unfill q22;
   unfill q6;
 
+  %% This eliminates a "pimple" where q6 and q22 meet.
+  %% The way I've done this is just for demonstration purposes.
+  %% For a "production" font this should be thoroughly revised.
+  %% LDF 2022.05.04.
+
   scale_val := 4pt;
   undrawdot z37 shifted (.333pt, -1.575pt)
-    with_pen pensquare scaled (scale_val, scale_val, scale_val) rotated (0, 0, 12)
-    with_color red;
+    with_pen pensquare scaled (scale_val, scale_val, scale_val) rotated (0, 0, 12);
 
   scale_val := 2mm;
   
