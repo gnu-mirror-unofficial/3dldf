@@ -5286,16 +5286,25 @@ Added the optional arguments |int start|, |int end| and |Scanner_Node scanner_no
 
 @<Declare |Path| functions@>=
 int
-replace_connectors(string s = "..", int start = 0, int end = -1, bool expand = 0, Scanner_Node scanner_node = 0);
+replace_connectors(string s = "..", 
+                   Scanner_Node scanner_node = 0, 
+                   int start = 0, 
+                   int end = -1, 
+                   bool expand = 0);
 
 @q ** (2) Definition  @>
 @
 @<Define |Path| functions@>=
 int
-Path::replace_connectors(string s, int start, int end, bool expand, Scanner_Node scanner_node)
+Path::replace_connectors(string s, 
+                         Scanner_Node scanner_node,
+                         int start, 
+                         int end, 
+                         bool expand)
 {
 
-/* !!START HERE:  !! TODO:  Add error handling for the case that |start| and |end| are
+/* !!START HERE:  !! TODO:  Add error handling for the case 
+   that |start| and |end| are
    outside the range of |connector_type_vector|!  
    LDF 2022.04.06.
   

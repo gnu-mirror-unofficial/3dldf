@@ -180,6 +180,10 @@ hollow.ps: hollow.dvi
 hollow.pdf: hollow.dvi
 	dvipdfmx hollow.dvi
 
+.PHONY: mp
+
+mp: hollowg.mp
+
 .PHONY: eps
 
 eps: hollowg000.eps

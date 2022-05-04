@@ -1391,6 +1391,11 @@ Changed this rule from \§path primary> $\longrightarrow$ \.{REVERSE}
 };
 
 
+@q ** (2) command: REPLACE_CONNECTORS numeric_list_optional@>
+@
+
+
+
 @q ** (2) command: RESET_ARC numeric_list_optional @>
 
 @ \§command> $\longrightarrow$ \.{RESET\_ARC} \§numeric list optional>.
