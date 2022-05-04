@@ -1366,7 +1366,7 @@ Changed this rule from \§path primary> $\longrightarrow$ \.{REVERSE}
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ 
+   DEBUG = false; /* |true| */ 
    if (DEBUG)
    { 
       cerr_strm << "*** Parser: `command:  REVERSE path_variable'.";
@@ -1384,7 +1384,6 @@ Changed this rule from \§path primary> $\longrightarrow$ \.{REVERSE}
    {
      Path* p = static_cast<Path*>(entry->object); 
      p->reverse(1, static_cast<Scanner_Node>(parameter));
-
    }
 
   @=$$@> = static_cast<void*>(0);  
