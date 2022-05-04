@@ -180,7 +180,12 @@ hollow.ps: hollow.dvi
 hollow.pdf: hollow.dvi
 	dvipdfmx hollow.dvi
 
-hollowg065.eps hollowg165.eps hollowg103.eps hollowg104.eps: hollowg.mp
+.PHONY: eps
+
+eps:
+	mpost -numbersystem "double" hollowg.mp
+
+hollowg000.eps hollowg065.eps hollowg165.eps hollowg200.eps: hollowg.mp
 	mpost -numbersystem "double" hollowg.mp
 
 #hollowg.600pk 
