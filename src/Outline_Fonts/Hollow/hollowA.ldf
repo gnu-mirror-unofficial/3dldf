@@ -130,13 +130,16 @@ frame :=    ((-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht)
 %% ** (2) Fig. 103 ("g" == 103 == 0147 == 0x67)
 
 
-focus f;
-set f with_position (0cm, 2cm, -50) 
+focus f[];
+set f0 with_position (0cm, 2cm, -50) 
        with_direction (0cm, 2cm, 10) with_distance 45; 
 
 %% * (1) Fig. 165.  "A" with guidelines
 
-beginfig(165);
+transform t[];
+
+
+beginfig(0);
 
 %% ** (2)  
   
@@ -606,7 +609,7 @@ endfig with_projection parallel_x_y no_sort;
 
 %% * (1) Fig. 65.  "A", hollow, without guidelines
 
-beginfig(65);
+beginfig(1);
   draw frame;
   fill q2;
   unfill q0;
@@ -614,16 +617,65 @@ beginfig(65);
   unfill q3;
 endfig with_projection parallel_x_y no_sort;
 
+%% ** (2)
+
+%% ** (2)
+
+set f1 with_position (0cm, 3cm, -50) 
+       with_direction (0cm, 3cm, 10) with_distance 40; 
+
+beginfig(2);
+  draw frame shifted (-1cm, -2cm);
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  
+  draw q2;
+  draw q0;
+  draw q1;
+  draw q3;
+
+  dotlabel.bot("$z_{41}$", z41);
+  dotlabel.bot("$z_{42}$", z42);
+  dotlabel.bot("$z_{43}$", z43);
+  dotlabel.bot("$z_{44}$", z44);
+
+  dotlabel.top("$z_{45}$", z45);
+  dotlabel.top("$z_{46}$", z46);
+
+
+
+if false:
+  dotlabel.lrt("$z_{200}$", z200) with_color blue; 
+  dotlabel.llft("$z_{201}$", z201) with_color blue; 
+  dotlabel.urt("$z_{202}$", z202) with_color blue; 
+  dotlabel.rt("$z_{203}$", z203) with_color blue; 
+
+  dotlabel.top("$z_{161}$", z161) with_color blue;
+  dotlabel.top("$z_{261}$", z261) with_color blue;
+
+  dotlabel.bot("$z_{241}$", z241) with_color blue;
+  dotlabel.bot("$z_{242}$", z242) with_color blue;
+  dotlabel.bot("$z_{243}$", z243) with_color blue;
+  dotlabel.bot("$z_{244}$", z244) with_color blue;
+
+  dotlabel.top("$z_{245}$", z245) with_color blue;
+  dotlabel.top("$z_{246}$", z246) with_color blue;
+
+  dotlabel.top("$z_{300}$", z300) with_color blue;
+fi
+  
+  v4 := current_picture;
+
+endfig with_focus f1;
+
+
+
 
 %% ** (2)
 
 
 
-%% ** (2)
-
-transform t[];
-
-beginfig(66);
+beginfig(3);
 
 %% *** (3)
 
@@ -634,7 +686,6 @@ beginfig(66);
 %% *** (3)
   
   dotlabel.lft("origin", origin);
-  
   
   t0 := (identity rotated (70, 0, 0)) shifted (.5cm, 0);
   
@@ -723,11 +774,11 @@ beginfig(66);
 
   draw q3 transformed t1 with_pen big_pen with_color blue;
   
-endfig with_focus f no_sort;
+endfig with_focus f0 no_sort;
 
 %% ** (2)
 
-beginfig(67);
+beginfig(4);
 
   draw frame shifted (-1cm, -2cm);
   output current_picture with_projection parallel_x_y;
@@ -760,12 +811,11 @@ beginfig(67);
 
   v2 := current_picture;
   
-  
-endfig with_focus f no_sort;
+endfig with_focus f0 no_sort;
 
 %% ** (2)
 
-beginfig(68);
+beginfig(5);
 
   draw frame shifted (-1cm, -2cm);
   output current_picture with_projection parallel_x_y;
@@ -777,12 +827,12 @@ beginfig(68);
 
   current_picture := v3;
 
-endfig with_focus f no_sort;
+endfig with_focus f0 no_sort;
 
 
 %% ** (2)
 
-beginfig(68);
+beginfig(6);
 
   draw frame shifted (-1cm, -2cm);
   output current_picture with_projection parallel_x_y;
@@ -794,15 +844,23 @@ beginfig(68);
 
   current_picture := v3;
 
-endfig with_focus f no_sort;
+endfig with_focus f0 no_sort;
+
+
+
+end_mp;
+end_mf;
+end;
+
 
 %% ** (2)
+
 
 %% * (1) MF:  "A" 
 
 %% ** (2) Char 65.  Hollow
 
-beginchar("A", 2cm, 2cm, 0);
+beginchar(0, 2cm, 2cm, 0);
 
   transform t;
 
@@ -819,7 +877,7 @@ endchar with_projection parallel_x_y no_sort;
 
 %% ** (2) Char 67.  3D
 
-beginchar(67, 2cm, 2cm, 0);
+beginchar(1, 2cm, 2cm, 0);
 
   transform t;
 
@@ -835,7 +893,7 @@ endchar with_projection parallel_x_y no_sort;
 
 %% ** (2) Char 68.  3D
 
-beginchar(68, 2cm, 2cm, 0);
+beginchar(2, 2cm, 2cm, 0);
 
   transform t;
 
@@ -853,7 +911,7 @@ endchar with_projection parallel_x_y no_sort;
 
 %% ** (2) Char 69.  3D
 
-beginchar(69, 2cm, 2cm, 0);
+beginchar(3, 2cm, 2cm, 0);
 
   transform t;
 

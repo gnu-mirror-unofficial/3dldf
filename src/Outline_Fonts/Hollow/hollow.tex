@@ -105,29 +105,56 @@
 \nopagenumbers
 
 
-%% ** (2)
+%% * (1)
 
 \newcount\figcnt
-\figcnt=103
+\figcnt=0
 \message{\the\figcnt}
 
-\loop
-\vbox{}
-\vskip1cm\line{\hskip1cm\epsffile{hollowg\the\figcnt .eps}\hss}
-\vskip.75cm
-\leftline{\hskip1cm{\Hugebx Fig.~\the\figcnt}}
-\vfil\eject
-\advance\figcnt by 1
-\ifnum\figcnt<128\repeat
+%% * (1)
+
+%% ** (2) The letter "A"
 
 \loop
 \vbox{}
-\vskip12cm\line{\hskip1cm\epsffile{hollowg\the\figcnt .eps}\hss}
+\vskip1cm\line{\hskip1cm\epsffile{hollowA00\the\figcnt .eps}\hss}
 \vskip.75cm
 \leftline{\hskip1cm{\Hugebx Fig.~\the\figcnt}}
 \vfil\eject
 \advance\figcnt by 1
-\ifnum\figcnt<137\repeat
+\ifnum\figcnt<7\repeat
+
+
+%% ** (2) The letter "g"
+
+\figcnt=0
+\loop
+\vbox{}
+\vskip1cm\line{\hskip1cm\epsffile{hollowg20\the\figcnt .eps}\hss}
+\vskip.75cm
+\leftline{\hskip1cm{\Hugebx Fig.~20\the\figcnt}}
+\vfil\eject
+\advance\figcnt by 1
+\ifnum\figcnt<10\repeat
+
+\figcnt=10
+\loop
+\vbox{}
+\vskip1cm\line{\hskip1cm\epsffile{hollowg2\the\figcnt .eps}\hss}
+\vskip.75cm
+\leftline{\hskip1cm{\Hugebx Fig.~2\the\figcnt}}
+\vfil\eject
+\advance\figcnt by 1
+\ifnum\figcnt<36\repeat
+
+
+%% ** (2)
+
+%% * (1)
+
+\bye
+
+%% * (1)
 
 %% Blank page
 \headline={}
@@ -135,9 +162,8 @@
 \vfil\eject
 \bye
 
+%% * (1) hollow font
 
-
-%% ** (2)
 
 \vbox{}
 \vskip4cm

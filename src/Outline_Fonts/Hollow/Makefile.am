@@ -170,9 +170,11 @@ hollowg.%pk: hollowg.%gf
 gf: hollowg.1200gf hollowg.1315gf hollowg.1440gf hollowg.1728gf hollowg.2074gf \
     hollowg.2488gf hollowg.2986gf
 
-
 hollowg.mf hollowg.mp: hollowg.ldf
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) hollowg.ldf
+
+hollow.dvi: hollow.tex hollowA000.eps hollowg200.eps 
+	tex hollow.tex
 
 hollow.ps: hollow.dvi
 	dvips -o hollow.ps hollow.dvi
@@ -182,19 +184,26 @@ hollow.pdf: hollow.dvi
 
 .PHONY: mp
 
-mp: hollowg.mp
+#mp: hollowg.mp
 
 .PHONY: eps
 
-eps: hollowg000.eps
+#eps: hollowg000.eps
 
 hollowg000.eps hollowg065.eps hollowg165.eps hollowg200.eps: hollowg.mp
 	mpost -numbersystem "double" hollowg.mp
 
-#hollowg.600pk 
+#### * (1)
 
-hollow.dvi: hollow.tex hollowg103.eps hollowg104.eps
-	tex hollow.tex
+hollowA.mf hollowA.mp: hollowA.ldf
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) hollowA.ldf
+
+mp: hollowA.mp
+
+eps: hollowA000.eps
+
+hollowA000.eps hollowA001.eps hollowA002.eps hollowA003.eps: hollowA.mp
+	mpost -numbersystem "double" hollowA.mp
 
 #### * (1) hollow bit-map fonts
 
@@ -263,4 +272,5 @@ hollow_mf_test.ps: hollow_mf_test.dvi
 hollow_mf_test.pdf: hollow_mf_test.dvi
 	dvipdfmx hollow_mf_test.dvi
 
-#### * (1) 
+#### * (1) End of Makefile.am
+
