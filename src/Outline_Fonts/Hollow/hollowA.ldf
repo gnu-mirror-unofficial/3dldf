@@ -605,7 +605,7 @@ beginfig(0);
 
 %% ** (2)
 
-endfig with_projection parallel_x_y no_sort;
+endfig with_projection parallel_x_y;
 
 %% * (1) Fig. 65.  "A", hollow, without guidelines
 
@@ -615,7 +615,22 @@ beginfig(1);
   unfill q0;
   unfill q1;
   unfill q3;
-endfig with_projection parallel_x_y no_sort;
+
+  v10 := current_picture;
+  
+endfig with_projection parallel_x_y;
+
+verbatim_metafont "mode := ljfour; mode_setup;";
+
+beginchar(0, 20pt, 20pt, 20pt);
+  scale v10 (.25, .25, .25);
+  current_picture := v10;
+endchar with_projection parallel_x_y;
+
+
+end_mp;
+end_mf;
+end;
 
 %% ** (2)
 
@@ -742,12 +757,12 @@ beginfig(2);
 
   draw q3 transformed t1 with_pen big_pen with_color blue;
   
-endfig with_focus f0 no_sort;
+endfig with_focus f0;
 
 %% ** (2) Fig. 3, 3D, upright
 
-set f1 with_position (0cm, 0cm, -50) 
-       with_direction (0cm, 0cm, 10) with_distance 40; 
+set f1 with_position (0cm, 1.5cm, -50) 
+       with_direction (0cm, 1.5cm, 10) with_distance 40; 
 
 beginfig(3);
 
@@ -757,55 +772,72 @@ beginfig(3);
   output current_picture with_projection parallel_x_y;
   clear current_picture;
   
-  draw q2; %% Outline
-  draw q3 with_pen big_pen; % Inner triangle
-  %draw q0 with_color blue; %% Inner front, diagonals
-  %draw q1 with_color green; %% Inner front, horizontal
 
-
-  q4 := q2 transformed t2;
-  draw q4 with_color red;
-
-  q5 := q3 transformed t2;
-  draw q5 with_color red;
+  q4 := q2 transformed t2; %% Outline, set back
+  q5 := q3 transformed t2; %% Inner triangle, set back
   
   for i = 41 upto 46:
     z[400+i] := z[i] transformed t2;
   endfor;
 
   z461 := z61 transformed t2;
-  dotlabel.top("$\scriptstyle z_{461}$", z461);
 
-  q6 := z45 -- z445 -- z441 -- z41 -- cycle;
+  q6 := z45 -- z445 -- z441 -- z41 -- cycle; %% Left diagonal, outside
   %unfill q6;
-  draw q6 with_pen big_pen; 
 
-  q7 := z41 -- z45 -- z46 -- z44 -- z43 -- a[0][10] -- a[0][9] -- z42 -- cycle;
-  draw q7 with_pen big_pen;
+  q7 := z61 -- z461 -- z443 -- z43 -- cycle; % Right diagonal, inside
+
+  q8 := z45 -- z41 -- z42 -- z61 -- cycle; % Left diagonal, partial for filling 
+  q9 := a[0][9] -- a[1][5] -- a[1][4] -- a[0][10] -- cycle; % Horizontal, for filling            
+
 
   
 
-
+  draw q2;  %with_pen ;%; %% Outline
+  draw q3;  %with_pen ;%; % Inner triangle
+  %draw q0 with_color blue; %% Inner front, diagonals
+  %draw q1 with_color green; %% Inner front, horizontal
+  draw q4 with_color red; %% Outline, set back
+  draw q5 with_color red; %% Inner triangle, set back
+  draw q6; %with_pen ;%; %% Left diagonal, outside
+  draw q7; %with_pen ;%; % Right diagonal, inside
+  draw q8 with_color blue; % Left diagonal, partial for filling
+  draw q9 with_color blue; % Horizontal, for filling            
   
-  dotlabel.bot("$\scriptstyle z_{41}$", z41);
-  dotlabel.bot("$\scriptstyle z_{42}$", z42);
-  dotlabel.bot("$\scriptstyle z_{43}$", z43);
-  dotlabel.bot("$\scriptstyle z_{44}$", z44);
-  dotlabel.top("$\scriptstyle z_{45}$", z45);
-  dotlabel.top("$\scriptstyle z_{46}$", z46);
-  dotlabel.top("$\scriptstyle z_{61}$", z61);
 
-  dotlabel.urt("$\scriptstyle a_1^5$", a[1][5]);
-  dotlabel.urt("$\scriptstyle a_1^4$", a[1][4]);
-  dotlabel.lrt("$\scriptstyle a_0^9$", a[0][9]);
-  dotlabel.llft("$\scriptstyle a_0^{10}$", a[0][10]);
+  %unfill q6;
+  %unfill q2;
+  draw q7; % with_pen big_pen;
+  %unfill q8;
+  %unfill q9;
+  draw q2; %  with_pen big_pen;
+  draw q3; %  with_pen big_pen;
+  draw q6; %  with_pen big_pen;
+  
+%% *** (3)
 
-  dotlabel.bot("$\scriptstyle z_{441}$", z441) with_color red;
-  dotlabel.bot("$\scriptstyle z_{442}$", z442) with_color red;
-  dotlabel.bot("$\scriptstyle z_{443}$", z443) with_color red;
-  dotlabel.bot("$\scriptstyle z_{444}$", z444) with_color red;
-  dotlabel.top("$\scriptstyle z_{445}$", z445) with_color red;
-  dotlabel.top("$\scriptstyle z_{446}$", z446) with_color red;
+  if false:
+    dotlabel.bot("$\scriptstyle z_{41}$", z41);
+    dotlabel.bot("$\scriptstyle z_{42}$", z42);
+    dotlabel.bot("$\scriptstyle z_{43}$", z43);
+    dotlabel.bot("$\scriptstyle z_{44}$", z44);
+    dotlabel.top("$\scriptstyle z_{45}$", z45);
+    dotlabel.top("$\scriptstyle z_{46}$", z46);
+    dotlabel.top("$\scriptstyle z_{61}$", z61);
+
+    dotlabel.urt("$\scriptstyle a_1^5$", a[1][5]);
+    dotlabel.urt("$\scriptstyle a_1^4$", a[1][4]);
+    dotlabel.lrt("$\scriptstyle a_0^9$", a[0][9]);
+    dotlabel.llft("$\scriptstyle a_0^{10}$", a[0][10]);
+
+    dotlabel.bot("$\scriptstyle z_{441}$", z441) with_color red;
+    dotlabel.bot("$\scriptstyle z_{442}$", z442) with_color red;
+    dotlabel.bot("$\scriptstyle z_{443}$", z443) with_color red;
+    dotlabel.bot("$\scriptstyle z_{444}$", z444) with_color red;
+    dotlabel.top("$\scriptstyle z_{445}$", z445) with_color red;
+    dotlabel.top("$\scriptstyle z_{446}$", z446) with_color red;
+    dotlabel.top("$\scriptstyle z_{461}$", z461);
+  fi
   
   v4 := current_picture;
   clear current_picture;
@@ -816,9 +848,37 @@ beginfig(3);
   
 endfig with_focus f1;
 
+  
+beginfig(4); 
+
+  draw frame shifted (-1cm, -1cm);
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+
+  current_picture := v4;
+
+  pen temp_pen;
+  temp_pen := huge_pen; %% big_pen
+  
+  unfill q6;
+  unfill q2;
+  draw q7 with_pen temp_pen;
+  unfill q8;
+  unfill q9;
+  draw q2 with_pen temp_pen;
+  draw q3 with_pen temp_pen;
+  draw q6 with_pen temp_pen;
+
+  unfill z61 -- z46 -- z44 -- z43 -- cycle;
+  undraw a[1][4] -- a[0][10] with_pen temp_pen scaled (1.25, 1.25, 1.25);
+  draw q3 with_pen temp_pen;
+  draw a[0][9] -- a[0][10] -- z43 -- z44 -- z46 with_pen temp_pen;
+  
+endfig with_focus f1;
+
 %% ** (2)
 
-beginfig(4);
+beginfig(5);
 
   draw frame shifted (-1cm, -2cm);
   output current_picture with_projection parallel_x_y;
@@ -851,24 +911,7 @@ beginfig(4);
 
   v2 := current_picture;
   
-endfig with_focus f0 no_sort;
-
-%% ** (2)
-
-beginfig(5);
-
-  draw frame shifted (-1cm, -2cm);
-  output current_picture with_projection parallel_x_y;
-  clear current_picture;
-
-  v3 := v2;
-
-  rotate v3 (-10, 5);
-
-  current_picture := v3;
-
-endfig with_focus f0 no_sort;
-
+endfig with_focus f0;
 
 %% ** (2)
 
@@ -884,17 +927,9 @@ beginfig(6);
 
   current_picture := v3;
 
-endfig with_focus f0 no_sort;
-
-
-
-end_mp;
-end_mf;
-end;
-
+endfig with_focus f0;
 
 %% ** (2)
-
 
 %% * (1) MF:  "A" 
 
@@ -913,7 +948,7 @@ beginchar(0, 2cm, 2cm, 0);
   unfill q1;
   unfill q3;
 
-endchar with_projection parallel_x_y no_sort;
+endchar with_projection parallel_x_y;
 
 %% ** (2) Char 67.  3D
 
@@ -929,7 +964,7 @@ beginchar(1, 2cm, 2cm, 0);
 
   current_picture := v4;
 
-endchar with_projection parallel_x_y no_sort;
+endchar with_projection parallel_x_y;
 
 %% ** (2) Char 68.  3D
 
@@ -945,7 +980,7 @@ beginchar(2, 2cm, 2cm, 0);
 
   current_picture := v5;
 
-endchar with_projection parallel_x_y no_sort;
+endchar with_projection parallel_x_y;
 
 %% ** (2)
 
@@ -963,7 +998,7 @@ beginchar(3, 2cm, 2cm, 0);
 
   current_picture := v6;
 
-endchar with_projection parallel_x_y no_sort;
+endchar with_projection parallel_x_y;
 
 %% * (1)
 
