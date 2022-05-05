@@ -33,24 +33,17 @@ using namespace std;
 int
 main(void)
 {
-   cerr << "Entering ttemp." << endl;
 
-   char str[] = "-1.2019101008992986e-13";
-
-   errno = 0;
-   double d = strtod(str, 0);
+   double d = 2.2530540240150998e-06;
 
    cerr << "d == " << d << endl;
 
-   double e;
+   float f = 1e-05;
 
-   stringstream temp_strm;
+   cerr << "f == " << f << endl;
 
-   temp_strm << str;
+   cerr << "(d < f) == " << (d < f) << endl;
 
-   temp_strm >> e;
-
-   cerr << "e == " << fixed << e << endl;
  
    return 0;
 

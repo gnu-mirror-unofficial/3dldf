@@ -18,14 +18,15 @@ set f with_position (0, 20, -50)
 
 
 path q;
-q := unit_circle;
+q := unit_circle scaled (3cm, 0, 3cm);
+rotate q (90, 0);
 numeric r;
-r := directiontime (0, 1) q;
+r := directiontime (0, 1) of q;
 
 point p;
 p := (1, 2);
 
-r := directiontime p, q;
+%r := directiontime p of q;
 
 
 message "r:";

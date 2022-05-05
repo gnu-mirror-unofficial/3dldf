@@ -3486,6 +3486,9 @@ Added this rule.
    
     i = new bool;
 
+    real d = static_cast<real>(@=$1@>); 
+    real e = static_cast<real>(@=$3@>); 
+
 @q **** (4) |new bool| succeeded.@> 
 
 @ |new bool| succeeded.
@@ -3494,22 +3497,22 @@ Added this rule.
 @<Define rules@>=
 
   if (@=$2@> == LESS)
-    *i = (@=$1@> < @=$3@>) ? 1 : 0;
+    *i = (d < e) ? 1 : 0;
 
   else if (@=$2@> == LESS_OR_EQUAL)
-    *i = (@=$1@> <= @=$3@>) ? 1 : 0;
+    *i = (d <= e) ? 1 : 0;
 
   else if (@=$2@> == GREATER)
-    *i = (@=$1@> > @=$3@>) ? 1 : 0;
+    *i = (d > e) ? 1 : 0;
 
   else if (@=$2@> == GREATER_OR_EQUAL)
-    *i = (@=$1@> >= @=$3@>) ? 1 : 0;
+    *i = (d >= e) ? 1 : 0;
 
   else if (@=$2@> == EQUAL)
-    *i = (@=$1@> == @=$3@>) ? 1 : 0;
+    *i = (d == e) ? 1 : 0;
 
   else if (@=$2@> == NOT_EQUAL)
-    *i = (@=$1@> != @=$3@>) ? 1 : 0;
+    *i = (d != e) ? 1 : 0;
 
   else
     {

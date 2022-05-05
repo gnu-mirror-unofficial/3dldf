@@ -898,7 +898,14 @@ Point::reflect_off(const Plane& p,
 
 @q **** (4) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Entering `Point::reflect_off'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
   using namespace Scan_Parse;
 
@@ -1051,7 +1058,8 @@ There was no reason to do this.
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
 
-      delete reflection;
+      if (reflection)
+         delete reflection;
      
       reflection = 0;
 
@@ -1082,7 +1090,8 @@ There was no reason to do this.
         cerr_message(cerr_strm, error_stop_value);
         cerr_strm.str("");
 
-        delete reflection;
+        if (reflection)
+           delete reflection;
        
         reflection = 0;
 
@@ -1127,7 +1136,8 @@ Added this section.
         cerr_message(cerr_strm, error_stop_value);
         cerr_strm.str("");
 
-        delete reflection;
+        if (reflection)
+           delete reflection;
         
         reflection = 0;
 
@@ -1177,7 +1187,8 @@ Added this section.
         cerr_message(cerr_strm, error_stop_value);
         cerr_strm.str("");
 
-        delete reflection;
+        if (reflection)
+           delete reflection;
         
         reflection = 0;
 
@@ -1238,6 +1249,16 @@ Now setting |pv[1]| through |pv[3]|.
 \initials{LDF 2004.10.11.}
 
 @<Define |Point| functions@>=
+
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Point::reflect_off' successfully with return value 0." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
 
   return 0;
 

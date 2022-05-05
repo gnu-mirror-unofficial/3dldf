@@ -129,7 +129,7 @@ Removed code from this rule and put it into
 
   Pointer_Vector<real>* w = static_cast<Pointer_Vector<real>*>(@=$3@>); 
 
-  for (vector<float*>::iterator iter = w->v.begin(); iter != w->v.end(); ++iter)
+  for (vector<real*>::iterator iter = w->v.begin(); iter != w->v.end(); ++iter)
   {
      cerr << "**iter == " << **iter << endl;
   }

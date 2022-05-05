@@ -16235,9 +16235,27 @@ Path::get_directiontime(real x, real z, real *r, bool do_transform, Scanner_Node
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+   int status = 0;
+   stringstream temp_strm;
+
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
+
+   temp_strm << "path Q;" << endl << "Q = " << *this << ";" << endl
+             << "numeric n;" << endl << "n = directiontime (" << x << ", " << z << ") of Q;" 
+             << endl; 
+
+   cerr << "temp_strm.str() == " << endl << temp_strm.str() << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+
 
 @q **** (4) @>
 

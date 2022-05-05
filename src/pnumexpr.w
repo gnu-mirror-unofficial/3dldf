@@ -2975,13 +2975,13 @@ Added this rule.
 
 };
 
-@q ***** (5) numeric_secondary --> DIRECTIONTIME numeric_list path_primary.  @>
+@q ***** (5) numeric_secondary --> DIRECTIONTIME numeric_list OF path_primary.  @>
 
-@*4 \§numeric secondary> $\longrightarrow$ \.{DIRECTIONTIME} \§numeric list> §path primary>.
+@*4 \§numeric secondary> $\longrightarrow$ \.{DIRECTIONTIME} \§numeric list> \.{OF} §path primary>.
 \initials{LDF 2022.05.05.}
 
 @<Define rules@>=
-@=numeric_secondary: DIRECTIONTIME numeric_list path_primary@>@;
+@=numeric_secondary: DIRECTIONTIME numeric_list OF path_primary@>@;
 {
 @q ****** (6) @>
 
@@ -2994,7 +2994,7 @@ Added this rule.
        if (DEBUG)
        {
          cerr_strm << thread_name 
-                   << "*** Parser: numeric_secondary: DIRECTIONTIME numeric_list path_primary.";
+                   << "*** Parser: numeric_secondary: DIRECTIONTIME numeric_list OF path_primary.";
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);
@@ -3008,7 +3008,7 @@ Added this rule.
 @q ****** (6) @>
 
    Pointer_Vector<real> *pv = static_cast<Pointer_Vector<real>*>(@=$2@>);
-   Path *q = static_cast<Path*>(@=$3@>);
+   Path *q = static_cast<Path*>(@=$4@>);
 
    real r = 0.0;
 
@@ -3070,9 +3070,9 @@ getchar();
 
 };
 
-@q ***** (5) numeric_secondary --> DIRECTIONTIME point_secondary COMMA path_primary.  @>
+@q ***** (5) numeric_secondary --> DIRECTIONTIME point_secondary OF path_primary.  @>
 
-@*4 \§numeric secondary> $\longrightarrow$ \.{DIRECTIONTIME} \§point secondary> \.{COMMA} §path primary>.
+@*4 \§numeric secondary> $\longrightarrow$ \.{DIRECTIONTIME} \§point secondary> \.{OF} §path primary>.
 \initials{LDF 2022.05.05.}
 
 A comma is needed to separate the \§point secondary> from the \§path primary> because
@@ -3080,7 +3080,7 @@ otherwise the name of the |path| would just be considered a suffix of the name o
 \initials{LDF 2022.05.05.}
 
 @<Define rules@>=
-@=numeric_secondary: DIRECTIONTIME point_secondary COMMA path_primary@>@;
+@=numeric_secondary: DIRECTIONTIME point_secondary OF path_primary@>@;
 {
    @<Common declarations for rules@>@; 
  
@@ -3091,7 +3091,7 @@ otherwise the name of the |path| would just be considered a suffix of the name o
        if (DEBUG)
        {
          cerr_strm << thread_name 
-                   << "*** Parser: numeric_secondary: DIRECTIONTIME point_secondary COMMA path_primary.";
+                   << "*** Parser: numeric_secondary: DIRECTIONTIME point_secondary OF path_primary.";
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);

@@ -3760,8 +3760,8 @@ or |double|.  This eliminates a warning from GCC.
           operand = fmodf(operand, 360.0F);
           r = sin((PI/180.0F) * operand);
 #elif LDF_REAL_DOUBLE
-          operand = fmod(operand, 360.0D);
-          r = sin((PI/180.0D) * operand);
+          operand = fmod(operand, 360.0);
+          r = sin((PI/180.0) * operand);
 #else /* Default.  */
           operand = fmodf(operand, 360.0F);
           r = sin((PI/180.0F) * operand);
@@ -3795,8 +3795,8 @@ or |double|.  This eliminates a warning from GCC.
           operand = fmodf(operand, 360.0F);
           r = cos((PI/180.0F) * operand);
 #elif LDF_REAL_DOUBLE
-          operand = fmod(operand, 360.0D);
-          r = cos((PI/180.0D) * operand);
+          operand = fmod(operand, 360.0);
+          r = cos((PI/180.0) * operand);
 #else /* Default.  */
           operand = fmodf(operand, 360.0F);
           r = cos((PI/180.0F) * operand);
@@ -3827,7 +3827,7 @@ or |double|.  This eliminates a warning from GCC.
 #if LDF_REAL_FLOAT
           operand = fmodf(operand, 360.0F); 
 #elif LDF_REAL_DOUBLE
-          operand = fmod(operand, 360.0D);  
+          operand = fmod(operand, 360.0);  
 #else /* Default.  */
           operand = fmodf(operand, 360.0F); 
 #endif

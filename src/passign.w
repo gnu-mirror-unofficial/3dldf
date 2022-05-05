@@ -1871,7 +1871,7 @@ Added this rule.
      rv.push_back(0.0);
   }
 
-  for (vector<float*>::iterator iter = w->v.begin(); iter != w->v.end(); ++iter)
+  for (vector<real*>::iterator iter = w->v.begin(); iter != w->v.end(); ++iter)
   {
      rv.push_back(**iter);
   }
@@ -1879,7 +1879,7 @@ Added this rule.
 #if 0 
   cerr << "rv == " << endl;
 
-  for (vector<float>::iterator iter = rv.begin(); iter != rv.end(); ++iter)
+  for (vector<real>::iterator iter = rv.begin(); iter != rv.end(); ++iter)
   {
      cerr << "*iter == " << *iter << endl;
   }

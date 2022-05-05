@@ -709,7 +709,9 @@ Added declaration of |extern const Point ORIGIN|.
 
 @<Global constants@>=
 
-extern const Point INVALID_POINT(INVALID_REAL, INVALID_REAL, INVALID_REAL);
+extern const Point INVALID_POINT(std::numeric_limits<double>::max(), 
+                                 std::numeric_limits<double>::max(), 
+                                 std::numeric_limits<double>::max());
 extern const Point ORIGIN(0, 0, 0);
 extern const Point_Pair INVALID_POINT_PAIR(INVALID_POINT, INVALID_POINT);
 
@@ -1217,17 +1219,20 @@ Point::~Point(void)
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
+
     if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
        {
            delete pen_vector;
            pen_vector = static_cast<Pointer_Vector<Pen>*>(0); 
        }
 
+
     if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
        {
            delete dash_pattern_vector;
            dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0); 
        }
+
 
    if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
       {
@@ -1792,19 +1797,15 @@ Made |epsilon| non-inline.
 
 @<Declare |Point| functions@>=
 static
-real
+double
 epsilon(void);
 
 @
 @<Define |Point| functions@>=
-real
+double
 Point::epsilon(void)
 {
-#if LDF_REAL_DOUBLE
-  return .000000001;
-#else
-  return .00001;
-#endif 
+  return .000001;
 }
 
 @q ** Get Line.@>
