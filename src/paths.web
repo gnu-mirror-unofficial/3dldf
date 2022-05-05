@@ -15737,27 +15737,6 @@ transferring it to the x-y plane.  Write a function for this.
 @
 @<Define |Path| functions@>=
 
-#if 0 
-
-/* !!START HERE:  LDF 2022.04.24.  Testing.  This puts the full path with the resolved part
-   onto pv.  However, I think it should be the second element, not the first.
-*/ 
-
-   for (vector<Path*>::iterator iter = scanner_node->metapost_output_struct->path_vector.begin();
-        iter != scanner_node->metapost_output_struct->path_vector.end();
-        ++iter)
-   {
-      p = **iter;
-      p += "..";
-
-   }  /* |for| */
-
-   if (is_cycle())
-      p.set_cycle();
-
-   *pv += create_new<Path>(p);
-#endif 
-
    for (vector<Path*>::iterator iter = scanner_node->metapost_output_struct->path_vector.begin();
         iter != scanner_node->metapost_output_struct->path_vector.end();
         ++iter)
