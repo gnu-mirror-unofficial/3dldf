@@ -65,6 +65,7 @@
 \font\medium=cmr10
 \font\large=cmr12
 \font\largebx=cmbx12
+\font\largett=cmtt12
 \font\Large=cmr17
 \font\Largebx=cmbx17
 \font\huge=cmr17 scaled \magstep1
@@ -108,9 +109,19 @@
 
 \vbox{}
 \vskip1cm
-\leftline{{\hollow\char0}}
+\leftline{{\largebx Font} {\largett Hollow}}
+\vskip2cm
+\dimen0=1.125cm
+\advance\dimen0 by 4pt
+\dimen1=.465cm
+\advance\dimen1 by -1pt
+\leftline{{\hollow\lower\dimen0\hbox{\char0}\hskip3cm\char1\hskip1.5cm\raise.5cm\hbox{\char2}%
+\hskip4cm\raise\dimen1\hbox{\char3}}}
+\vskip2cm
+\leftline{\hskip1cm{\hollow\lower0pt\hbox{\char202}\hskip3cm}}
+\vfil\eject
 
-\bye
+%\bye
 
 %% * (1)
 
@@ -119,7 +130,6 @@
 \message{\the\figcnt}
 
 %% * (1)
-
 
 
 %% ** (2) The letter "A"

@@ -854,6 +854,13 @@ beginfig(202);
   current_picture := v1;
 endfig with_projection parallel_x_y;
 
+beginchar(202, 60pt, 60pt, 0);
+  v11 := v1;
+  scale v11 (.75, .75, .75);
+  current_picture := v11;
+endchar with_projection parallel_x_y no_colors;
+
+
 %% ** (2) This works.  Rotating the "g".
 
 j := 1;
@@ -922,7 +929,6 @@ endfor;
 %% * (1) End of 3DLDF code
 
 end_mp;
-end_mf;
 end;
 
 %% * (1) Local variables for Emacs

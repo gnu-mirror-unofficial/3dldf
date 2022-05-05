@@ -605,32 +605,29 @@ beginfig(0);
 
 %% ** (2)
 
-endfig with_projection parallel_x_y;
+endfig with_projection parallel_x_y; %% End of Fig. 0.
 
 %% * (1) Fig. 65.  "A", hollow, without guidelines
 
 beginfig(1);
-  draw frame;
+  %draw frame;
   fill q2;
   unfill q0;
   unfill q1;
   unfill q3;
 
   v10 := current_picture;
+
   
-endfig with_projection parallel_x_y;
+endfig with_projection parallel_x_y;  %% End of Fig. 1.
 
 verbatim_metafont "mode := ljfour; mode_setup;";
 
-beginchar(0, 20pt, 20pt, 20pt);
-  scale v10 (.25, .25, .25);
+beginchar(0, 60pt, 60pt, 60pt);
+  scale v10 (.5, .5, .5);
   current_picture := v10;
 endchar with_projection parallel_x_y;
 
-
-end_mp;
-end_mf;
-end;
 
 %% ** (2)
 
@@ -757,7 +754,7 @@ beginfig(2);
 
   draw q3 transformed t1 with_pen big_pen with_color blue;
   
-endfig with_focus f0;
+endfig with_focus f0; %% End of Fig. 2.
 
 %% ** (2) Fig. 3, 3D, upright
 
@@ -846,9 +843,10 @@ beginfig(3);
 
   current_picture := v4;
   
-endfig with_focus f1;
+endfig with_focus f1; %% End of Fig. 3.
 
-  
+%% ** (2)
+
 beginfig(4); 
 
   draw frame shifted (-1cm, -1cm);
@@ -869,12 +867,26 @@ beginfig(4);
   draw q3 with_pen temp_pen;
   draw q6 with_pen temp_pen;
 
+
+  
   unfill z61 -- z46 -- z44 -- z43 -- cycle;
   undraw a[1][4] -- a[0][10] with_pen temp_pen scaled (1.25, 1.25, 1.25);
   draw q3 with_pen temp_pen;
   draw a[0][9] -- a[0][10] -- z43 -- z44 -- z46 with_pen temp_pen;
+
+  %% This is a bit overwhelming.  Work on it for another fig./char.
+  %% LDF 2022.05.05.
+  %fill q0;
+  %fill q1;
   
-endfig with_focus f1;
+  v11 := current_picture;
+  
+endfig with_focus f1; %% End of Fig. 4.
+
+beginchar(1, 60pt, 60pt, 0);
+  scale v11 (.75, .75, .75);
+  current_picture := v11;
+endchar with_focus f1;
 
 %% ** (2)
 
@@ -910,8 +922,14 @@ beginfig(5);
   draw q3 transformed t1 with_pen big_pen;
 
   v2 := current_picture;
+  v12 := v2;
   
-endfig with_focus f0;
+endfig with_focus f0; %% End of Fig. 5.
+
+beginchar(2, 60pt, 60pt, 0);
+  scale v12 (.75, .75, .75);
+  current_picture := v12;
+endchar with_focus f0;
 
 %% ** (2)
 
@@ -925,90 +943,19 @@ beginfig(6);
 
   rotate v3 (-10, 5);
 
+  v13 := v3;
+  
   current_picture := v3;
 
-endfig with_focus f0;
+endfig with_focus f0; %% End of Fig. 6.
 
-%% ** (2)
-
-%% * (1) MF:  "A" 
-
-%% ** (2) Char 65.  Hollow
-
-beginchar(0, 2cm, 2cm, 0);
-
-  transform t;
-
-  t := identity scaled (.25, .25, .25);
-
-  q0 *= q1 *= q2 *= q3 *= t;
-
-  fill q2;
-  unfill q0;
-  unfill q1;
-  unfill q3;
-
-endchar with_projection parallel_x_y;
-
-%% ** (2) Char 67.  3D
-
-beginchar(1, 2cm, 2cm, 0);
-
-  transform t;
-
-  t := identity scaled (.25, .25, .25);
-
-  v4 := v2;
-
-  v4 *= t;
-
-  current_picture := v4;
-
-endchar with_projection parallel_x_y;
-
-%% ** (2) Char 68.  3D
-
-beginchar(2, 2cm, 2cm, 0);
-
-  transform t;
-
-  t := identity scaled (.25, .25, .25);
-
-  v5 := v3;
-
-  v5 *= t;
-
-  current_picture := v5;
-
-endchar with_projection parallel_x_y;
-
-%% ** (2)
-
-%% ** (2) Char 69.  3D
-
-beginchar(3, 2cm, 2cm, 0);
-
-  transform t;
-
-  t := (identity scaled (.25, .25, .25)) rotated (-20, -22);
-
-  v6 := v3;
-
-  v6 *= t;
-
-  current_picture := v6;
-
-endchar with_projection parallel_x_y;
-
-%% * (1)
+beginchar(3, 60pt, 60pt, 0);
+  scale v13 (.75, .75, .75);
+  current_picture := v13;
+endchar with_focus f0;
 
 end_mp;
-end_mf;
-
-%% * (1) End of 3DLDF code
-
 end;
-
 
 
 
