@@ -5233,6 +5233,33 @@ Added this section.
                                Id_Map_Entry_Type::KNOWN,
                                v);
 
+
+
+@q ****** (6) |epsilon|.@> 
+@ |epsilon|.
+\initials{LDF 2022.05.05.}
+
+\LOG
+\initials{LDF 2022.05.05.}
+Added this section.
+\ENDLOG
+
+@<Define |Scanner_Type::create|@>=
+
+       r = new real;
+
+       *r = Point::epsilon();        
+
+       v = static_cast<void*>(r); 
+
+       scanner_node->add_entry("epsilon",
+                               NUMERIC,
+                               regular,
+                               is_constant,
+                               not_array,
+                               Id_Map_Entry_Type::KNOWN,
+                               v);
+
 @q ****** (6).@> 
 @
 @<Define |Scanner_Type::create|@>=
