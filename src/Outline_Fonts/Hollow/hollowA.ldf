@@ -619,63 +619,31 @@ endfig with_projection parallel_x_y no_sort;
 
 %% ** (2)
 
-%% ** (2)
+  
+% if false:
+%   dotlabel.lrt("$z_{200}$", z200) with_color blue; 
+%   dotlabel.llft("$z_{201}$", z201) with_color blue; 
+%   dotlabel.urt("$z_{202}$", z202) with_color blue; 
+%   dotlabel.rt("$z_{203}$", z203) with_color blue; 
 
-set f1 with_position (0cm, 3cm, -50) 
-       with_direction (0cm, 3cm, 10) with_distance 40; 
+%   dotlabel.top("$z_{161}$", z161) with_color blue;
+%   dotlabel.top("$z_{261}$", z261) with_color blue;
+
+%   dotlabel.bot("$z_{241}$", z241) with_color blue;
+%   dotlabel.bot("$z_{242}$", z242) with_color blue;
+%   dotlabel.bot("$z_{243}$", z243) with_color blue;
+%   dotlabel.bot("$z_{244}$", z244) with_color blue;
+
+%   dotlabel.top("$z_{245}$", z245) with_color blue;
+%   dotlabel.top("$z_{246}$", z246) with_color blue;
+
+%   dotlabel.top("$z_{300}$", z300) with_color blue;
+% fi
+  
+
+%% ** (2)
 
 beginfig(2);
-  draw frame shifted (-1cm, -2cm);
-  output current_picture with_projection parallel_x_y;
-  clear current_picture;
-  
-  draw q2;
-  draw q0;
-  draw q1;
-  draw q3;
-
-  dotlabel.bot("$z_{41}$", z41);
-  dotlabel.bot("$z_{42}$", z42);
-  dotlabel.bot("$z_{43}$", z43);
-  dotlabel.bot("$z_{44}$", z44);
-
-  dotlabel.top("$z_{45}$", z45);
-  dotlabel.top("$z_{46}$", z46);
-
-
-
-if false:
-  dotlabel.lrt("$z_{200}$", z200) with_color blue; 
-  dotlabel.llft("$z_{201}$", z201) with_color blue; 
-  dotlabel.urt("$z_{202}$", z202) with_color blue; 
-  dotlabel.rt("$z_{203}$", z203) with_color blue; 
-
-  dotlabel.top("$z_{161}$", z161) with_color blue;
-  dotlabel.top("$z_{261}$", z261) with_color blue;
-
-  dotlabel.bot("$z_{241}$", z241) with_color blue;
-  dotlabel.bot("$z_{242}$", z242) with_color blue;
-  dotlabel.bot("$z_{243}$", z243) with_color blue;
-  dotlabel.bot("$z_{244}$", z244) with_color blue;
-
-  dotlabel.top("$z_{245}$", z245) with_color blue;
-  dotlabel.top("$z_{246}$", z246) with_color blue;
-
-  dotlabel.top("$z_{300}$", z300) with_color blue;
-fi
-  
-  v4 := current_picture;
-
-endfig with_focus f1;
-
-
-
-
-%% ** (2)
-
-
-
-beginfig(3);
 
 %% *** (3)
 
@@ -775,6 +743,78 @@ beginfig(3);
   draw q3 transformed t1 with_pen big_pen with_color blue;
   
 endfig with_focus f0 no_sort;
+
+%% ** (2) Fig. 3, 3D, upright
+
+set f1 with_position (0cm, 0cm, -50) 
+       with_direction (0cm, 0cm, 10) with_distance 40; 
+
+beginfig(3);
+
+  t2 := identity shifted (0, 0, 1cm);
+  
+  draw frame shifted (-1cm, -1cm);
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  
+  draw q2; %% Outline
+  draw q3 with_pen big_pen; % Inner triangle
+  %draw q0 with_color blue; %% Inner front, diagonals
+  %draw q1 with_color green; %% Inner front, horizontal
+
+
+  q4 := q2 transformed t2;
+  draw q4 with_color red;
+
+  q5 := q3 transformed t2;
+  draw q5 with_color red;
+  
+  for i = 41 upto 46:
+    z[400+i] := z[i] transformed t2;
+  endfor;
+
+  z461 := z61 transformed t2;
+  dotlabel.top("$\scriptstyle z_{461}$", z461);
+
+  q6 := z45 -- z445 -- z441 -- z41 -- cycle;
+  %unfill q6;
+  draw q6 with_pen big_pen; 
+
+  q7 := z41 -- z45 -- z46 -- z44 -- z43 -- a[0][10] -- a[0][9] -- z42 -- cycle;
+  draw q7 with_pen big_pen;
+
+  
+
+
+  
+  dotlabel.bot("$\scriptstyle z_{41}$", z41);
+  dotlabel.bot("$\scriptstyle z_{42}$", z42);
+  dotlabel.bot("$\scriptstyle z_{43}$", z43);
+  dotlabel.bot("$\scriptstyle z_{44}$", z44);
+  dotlabel.top("$\scriptstyle z_{45}$", z45);
+  dotlabel.top("$\scriptstyle z_{46}$", z46);
+  dotlabel.top("$\scriptstyle z_{61}$", z61);
+
+  dotlabel.urt("$\scriptstyle a_1^5$", a[1][5]);
+  dotlabel.urt("$\scriptstyle a_1^4$", a[1][4]);
+  dotlabel.lrt("$\scriptstyle a_0^9$", a[0][9]);
+  dotlabel.llft("$\scriptstyle a_0^{10}$", a[0][10]);
+
+  dotlabel.bot("$\scriptstyle z_{441}$", z441) with_color red;
+  dotlabel.bot("$\scriptstyle z_{442}$", z442) with_color red;
+  dotlabel.bot("$\scriptstyle z_{443}$", z443) with_color red;
+  dotlabel.bot("$\scriptstyle z_{444}$", z444) with_color red;
+  dotlabel.top("$\scriptstyle z_{445}$", z445) with_color red;
+  dotlabel.top("$\scriptstyle z_{446}$", z446) with_color red;
+  
+  v4 := current_picture;
+  clear current_picture;
+
+  rotate v4 (0, 40);
+
+  current_picture := v4;
+  
+endfig with_focus f1;
 
 %% ** (2)
 
