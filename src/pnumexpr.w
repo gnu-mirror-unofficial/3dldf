@@ -2951,7 +2951,6 @@ Added this rule.
 
 @=numeric_primary: TURNINGNUMBER path_expression@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -2976,20 +2975,179 @@ Added this rule.
 
 };
 
-@q ***** (5) numeric_primary --> DIRECTIONTIME picture_primary.  @>
+@q ***** (5) numeric_secondary --> DIRECTIONTIME numeric_list path_primary.  @>
 
-@*4 \§numeric primary> $\longrightarrow$ 
-\.{DIRECTIONTIME} \§picture primary>.
-\initials{LDF Undated.}
+@*4 \§numeric secondary> $\longrightarrow$ \.{DIRECTIONTIME} \§numeric list> §path primary>.
+\initials{LDF 2022.05.05.}
 
-\TODO
-@q { @>
-@:TO DO}{{\bf TO DO}@>
-@q } @> 
-@q !! TO DO:  @>
-\initials{LDF 2004.04.28.}
-Add this rule.  
-\ENDTODO 
+@<Define rules@>=
+@=numeric_secondary: DIRECTIONTIME numeric_list path_primary@>@;
+{
+@q ****** (6) @>
+
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG)
+   { 
+       if (DEBUG)
+       {
+         cerr_strm << thread_name 
+                   << "*** Parser: numeric_secondary: DIRECTIONTIME numeric_list path_primary.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+
+       }    
+       
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ****** (6) @>
+
+   Pointer_Vector<real> *pv = static_cast<Pointer_Vector<real>*>(@=$2@>);
+   Path *q = static_cast<Path*>(@=$3@>);
+
+   real r = 0.0;
+
+   if (pv && q && pv->v.size() >= 2)
+   {
+        cerr << "*(pv->v[0]) == " << *(pv->v[0]) << endl
+             << "*(pv->v[1]) == " << *(pv->v[1]) << endl;
+
+        q->show("q:");
+
+        bool b = true;
+
+        status = q->get_directiontime(*(pv->v[0]), *(pv->v[1]), &r, b, scanner_node); 
+
+        if (status != 0)
+        {
+           @=$$@> = INVALID_REAL;
+        }
+        else
+        {
+           @=$$@> = r;
+        }
+   }
+
+@q ****** (6) @>
+   else
+   {
+
+      if (pv && pv->v.size() < 2)
+         cerr << "`pv->v.size()' == " << pv->v.size() << " (< 2)" << endl;
+      else
+         cerr << "`pv' is NULL." << endl;
+
+      if (!q)
+         cerr << "`Path *q' is NULL." << endl;
+
+      @=$$@> = INVALID_REAL;
+
+   }  /* |else| */
+
+@q ****** (6) @>
+
+   if (pv)
+   {         
+      delete pv;
+      pv = 0;
+   }
+
+   if (q)
+   {
+      delete q;
+      q = 0;
+   }
+
+@q ****** (6) @>
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+};
+
+@q ***** (5) numeric_secondary --> DIRECTIONTIME point_secondary COMMA path_primary.  @>
+
+@*4 \§numeric secondary> $\longrightarrow$ \.{DIRECTIONTIME} \§point secondary> \.{COMMA} §path primary>.
+\initials{LDF 2022.05.05.}
+
+A comma is needed to separate the \§point secondary> from the \§path primary> because
+otherwise the name of the |path| would just be considered a suffix of the name of the |point|.
+\initials{LDF 2022.05.05.}
+
+@<Define rules@>=
+@=numeric_secondary: DIRECTIONTIME point_secondary COMMA path_primary@>@;
+{
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG)
+   { 
+       if (DEBUG)
+       {
+         cerr_strm << thread_name 
+                   << "*** Parser: numeric_secondary: DIRECTIONTIME point_secondary COMMA path_primary.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+
+       }    
+       
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   Point *p = static_cast<Point*>(@=$2@>);
+   Path *q  = static_cast<Path*>(@=$4@>);
+
+   real r = 0.0;
+
+   if (p && q)
+   {
+        p->show("p:");
+        q->show("q:");
+
+        @=$$@> = r;
+
+   }
+@q ****** (6) @>
+   else
+   {
+      if (!p)
+         cerr << "`Path *p' is NULL." << endl;
+
+      if (!q)
+         cerr << "`Path *q' is NULL." << endl;
+
+      @=$$@> = INVALID_REAL;
+
+   }  /* |else| */
+
+@q ****** (6) @>
+
+   if (p)
+   {         
+      delete p;
+      p = 0;
+   }
+
+   if (q)
+   {
+      delete q;
+      q = 0;
+   }
+
+@q ****** (6) @>
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+};
 
 @q **** (4) numeric_operator.  @>
 @ \§numeric operator>.

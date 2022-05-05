@@ -16,6 +16,23 @@ focus f;
 set f with_position (0, 20, -50) 
        with_direction (0, 20, 10) with_distance 70; 
 
+
+path q;
+q := unit_circle;
+numeric r;
+r := directiontime (0, 1) q;
+
+point p;
+p := (1, 2);
+
+r := directiontime p, q;
+
+
+message "r:";
+show r;
+end;
+
+
 %% ** (2) Fig. 0
 
 beginfig(0);

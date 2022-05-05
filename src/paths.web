@@ -16221,6 +16221,59 @@ Path::flatten(int coord, real r)
 
 } /* End of |Path::flatten| definition  */
 
+
+@q ** (2) Get directiontime (|get_directiontime|).  @>
+
+@ Get directiontime (|get_directiontime|).
+\initials{LDF 2022.05.05.}
+
+\LOG
+\initials{LDF 2022.05.05.}
+Added this function.
+\ENDLOG
+
+@q *** (3) Declaration @>
+
+@<Declare |Path| functions@>=
+int
+get_directiontime(real x, real z, real *r, bool do_transform = true, Scanner_Node scanner_node = 0);
+
+@q *** (3) Definition @>
+@
+@<Define |Path| functions@>=
+int
+Path::get_directiontime(real x, real z, real *r, bool do_transform, Scanner_Node scanner_node)
+{
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr << "Entering `Path::get_directiontime'." << endl
+           << "`x' == " << x << ", `z' == " << z << endl
+           << "`do_transform' == " << do_transform << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Path::get_directiontime' successfully with return value 0." 
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+}  /* End of |Path::get_directiontime| definition  */
+
 @q ** (2) |operator<<| for |Paths|.  @>
 
 @ |operator<< for |Paths|.  
