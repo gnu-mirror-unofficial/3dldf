@@ -869,7 +869,8 @@ for i = 203 upto 210:
     %current_picture := v0;
     current_picture := v1;
     rotate current_picture (-10*j, 0, 0);
-  endfig with_focus f no_sort;
+    v[i] := current_picture;
+  endfig with_focus f;
   j += 1;
 endfor;
 
@@ -879,6 +880,35 @@ beginfig(211);
   rotate current_picture (0, 30, 0);
 endfig with_focus f no_sort; 
 
+beginchar(211, 60pt, 60pt, 0);
+
+  draw frame with_pen big_pen shifted (-1cm, -1.75cm);
+  
+  draw pv0 with_pen big_pen; 
+
+  draw q17 with_pen big_pen; 
+  draw q5 with_pen big_pen; 
+
+  draw q7 with_pen big_pen; 
+
+  % undrawdot z37 shifted (.333pt, -1.575pt)
+  %   with_pen pensquare scaled (scale_val, scale_val, scale_val) rotated (0, 0, 12);
+
+  scale_val := 2mm;
+  
+  draw q26 with_pen big_pen; % dark_gray with_pen big_pen;
+
+  v311 := current_picture;
+
+  scale v311 (.75, .75, .75);
+  rotate v311 (0, 40);
+
+  current_picture := v311;
+
+endchar with_focus f no_colors;
+
+%% ** (2)
+
 j := 1;
 for i = 212 upto 218:
   beginfig(i);
@@ -886,7 +916,8 @@ for i = 212 upto 218:
     current_picture := v1;
     rotate current_picture (-10*j, 0, 0);
     rotate current_picture (0, 30, 0);
-  endfig with_focus f no_sort;
+    v[i] := current_picture;
+  endfig with_focus f;
   j += 1;
 endfor;
 
@@ -895,7 +926,8 @@ beginfig(219);
   %current_picture := v0;
   current_picture := v1;
   rotate current_picture (0, -30, 0);
-endfig with_focus f no_sort;
+  v[219] := current_picture;
+endfig with_focus f;
 
 
 j := 1;
@@ -905,14 +937,15 @@ for i = 220 upto 226:
     current_picture := v1;
     rotate current_picture (-10*j, 0, 0);
     rotate current_picture (0, -30, 0);
-  endfig with_focus f no_sort;
+    v[i] := current_picture;
+  endfig with_focus f;
   j += 1;
 endfor;
 
 beginfig(227);
   %current_picture := v0;
   current_picture := v1;
-endfig with_focus f no_sort;
+endfig with_focus f;
 
 j := 1;
 for i = 228 upto 235:
@@ -920,7 +953,8 @@ for i = 228 upto 235:
     %current_picture := v0;
     current_picture := v1;
     rotate current_picture (10*j, 0, 0);
-  endfig with_focus f no_sort;
+    v[i] := current_picture;
+  endfig with_focus f;
   j += 1;
 endfor;
 
