@@ -14669,7 +14669,11 @@ get_direction(real ttime,
 @
 @<Define |Path| functions@>=
 Point
-Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real *aangle, Scanner_Node scanner_node) const
+Path::get_direction(real ttime, 
+                    Point *x_axis_point, 
+                    int x_axis_direction, 
+                    real *aangle, 
+                    Scanner_Node scanner_node) const
 {
 @q **** (4) @>
 
@@ -14879,12 +14883,14 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
     << temp_filename << "\\\"; write decimal ypart d to \\\"" << temp_filename << "\\\"; ";
 
   if (aangle != 0)
-     s << "a = angle direction " << ttime << " of p; write decimal a to \\\"" << temp_filename << "\\\"; "; 
+     s << "a = angle direction " << ttime << " of p; write decimal a to "
+       << "\\\"" << temp_filename << "\\\"; "; 
   else 
      s << "write \\\"0\\\" to \\\"" << temp_filename << "\\\"; ";
 
   s << "end;\" "
-    << "| mpost -numbersystem \"double\" -interaction=\"batchmode\" >/dev/null; cat " << temp_filename;
+    << "| mpost -interaction=\"batchmode\" >/dev/null; "
+    << "cat " << temp_filename;
 
 #if 1 /* 0 */
   cerr << "s.str() == " << s.str() << endl;
@@ -15610,7 +15616,7 @@ transferring it to the x-y plane.  Write a function for this.
 
   temp_strm.str("");
 
-  temp_strm << "mpost -numbersystem \"double\" " << temp_in_filename; 
+  temp_strm << "mpost -interaction=\"batchmode\" " << temp_in_filename; 
 
   /* !! START HERE  LDF 2022.04.30.  Add temp file for the MP output.  */ 
 
