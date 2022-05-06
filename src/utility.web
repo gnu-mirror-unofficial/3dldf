@@ -1574,6 +1574,72 @@ round_real(real r)
 
 }  /* End of |round_real| definition  */
 
+
+@q * (1) Call MetaPost (|call_metapost|).  @>
+@ Call MetaPost (|call_metapost|).
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this function.
+\ENDLOG
+
+@q ** (2) Declaration @>
+
+@<Declare utility functions@>=
+int
+call_metapost(stringstream temp_strm, 
+              Scanner_Node scanner_node = 0,
+              bool read_output = true,  
+              bool save_temp_files = false,
+              bool suppress_output = false);
+
+@q ** (2) Definition @>
+@
+@<Define utility functions@>=
+int
+call_metapost(stringstream temp_strm, 
+              Scanner_Node scanner_node,
+              bool read_output,  
+              bool save_temp_files,
+              bool suppress_output)
+{
+@q *** (3) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+       cerr << "Entering `call_metapost'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   int status = 0;
+
+@q *** (3) @>
+@
+@<Define utility functions@>=
+
+
+
+
+@q *** (3) @>
+@
+@<Define utility functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `call_metapost' successfully with return value 0." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+}  /* End of |call_metapost| definition */
+
+
 @q * (1) Putting utilities together.@>
 @* Putting utilities together.
 \initials{LDF Undated.}
