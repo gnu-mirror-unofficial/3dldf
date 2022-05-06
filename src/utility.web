@@ -142,6 +142,7 @@ versions are now in their own RCS repository.
 #include "paraellp.h++"
 #include "parahypr.h++"
 #include "glyphs.h++"
+#include "mpoutput.h++"
 
 @q * Perspective functions.@>
 @* Perspective functions.
@@ -1590,7 +1591,7 @@ Added this function.
 typedef vector<pair<int, void*> > VP;
 
 int
-call_metapost(string& str, Scanner_Node scanner_node = 0, VP *vp = 0);
+call_metapost(string& str, Scanner_Node scanner_node, VP *vp = 0);
 
 @q ** (2) Definition @>
 @
@@ -1609,14 +1610,6 @@ call_metapost(string& str,
        cerr << "Entering `call_metapost'." << endl
             << "`str'     == " << str << endl;
 
-
-        if (scanner_node == 0)
-           cerr << "`scanner_node' is NULL." << endl;
-        else 
-        {
-           cerr << "`scanner_node' is non-NULL." << endl;
-        }
-
         if (vp == 0)
            cerr << "`vp' is NULL." << endl;
         else   
@@ -1626,6 +1619,32 @@ call_metapost(string& str,
    }
 
 #endif /* |DEBUG_COMPILE|  */@; 
+
+@q *** (3) @>
+@
+@<Define utility functions@>=
+
+   if (scanner_node == 0)
+   {
+      cerr << "ERROR!  In `call_metapost':  `scanner_node' is NULL." 
+           << endl
+           << "Can't call MetaPost.  Exiting function unsuccessfully with "
+           << "return value 1." << endl;
+
+      return 1;
+   }
+   else 
+   {
+      cerr << "`scanner_node' is non-NULL." << endl;
+ 
+      if (scanner_node->metapost_output_struct == 0)
+      {
+          cerr << "scanner_node->metapost_output_struct is NULL.  Creating." 
+               << endl;
+
+          scanner_node->metapost_output_struct = new Metapost_Output_Struct;
+      }
+   }
 
 @q *** (3) @>
 @
@@ -1662,17 +1681,17 @@ call_metapost(string& str,
          save = true;
       else if (iter->first == 2)
           save = false;
-      else if (iter->first == 3 && iter->second != 0)
+      else if (iter->first == 3 && iter->second != 0)  /* Paths  */
       {
           do_paths = true;
           qv = static_cast<vector<Path*>*>(iter->second);
       }
-      else if (iter->first == 4 && iter->second != 0)
+      else if (iter->first == 4 && iter->second != 0)  /* Points  */
       {
           do_points = true;
           pv = static_cast<vector<Point*>*>(iter->second);
       }
-      else if (iter->first == 5 && iter->second != 0)
+      else if (iter->first == 5 && iter->second != 0)  /* reals  */
       {
           do_reals = true;
           rv = static_cast<vector<real*>*>(iter->second);
@@ -1688,7 +1707,11 @@ call_metapost(string& str,
 
    }  /* |for| */
 
+@q *** (3) @>
+@
+@<Define utility functions@>=
 
+      
 
 
 @q *** (3) @>

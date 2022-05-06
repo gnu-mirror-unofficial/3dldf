@@ -2549,7 +2549,16 @@ Added |friend| declaration for |class Rhombic_Triacontahedron|.
 
   friend class Point;
 
-  friend int Scan_Parse::box_or_circle_text_func(int, Scanner_Node, Path *, Point *, Pointer_Vector<real> *, Transform *);
+  friend int Scan_Parse::box_or_circle_text_func(int, 
+                                                 Scanner_Node, 
+                                                 Path *, 
+                                                 Point *, 
+                                                 Pointer_Vector<real> *, 
+                                                 Transform *);
+
+  typedef vector<pair<int, void*> > VP;
+
+  friend int call_metapost(string&, Scanner_Node, VP*);
 
   @<|friend| declarations for functions in |namespace Scan_Parse|@>@;
 
