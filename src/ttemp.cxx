@@ -44,7 +44,19 @@ main(void)
 
    cerr << "(d < f) == " << (d < f) << endl;
 
+   float d_as_float = static_cast<float>(d);
+
+   cerr << "d_as_float == " << d_as_float << endl;
  
+   double f_as_double = static_cast<double>(f);
+
+   cerr << "f_as_double == " << f_as_double << endl;
+
+   cerr << "FLT_MIN == " << FLT_MIN << endl;
+
+   cerr << "(d < FLT_MIN) == " << (d < FLT_MIN) << endl;
+
+
    return 0;
 
 }

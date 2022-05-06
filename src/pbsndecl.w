@@ -287,7 +287,7 @@ Added |unsigned int uint_value|.
 @=%union@>
 {
   char string_value[64];
-  double real_value;
+  real real_value;
   signed int int_value;
   unsigned int uint_value;
   unsigned long long ulong_long_value;

@@ -16215,13 +16215,21 @@ Added this function.
 
 @<Declare |Path| functions@>=
 int
-get_directiontime(real x, real z, real *r, bool do_transform = true, Scanner_Node scanner_node = 0);
+get_directiontime(real x, 
+                  real y, 
+                  real *r, 
+                  bool do_transform = true, 
+                  Scanner_Node scanner_node = 0);
 
 @q *** (3) Definition @>
 @
 @<Define |Path| functions@>=
 int
-Path::get_directiontime(real x, real z, real *r, bool do_transform, Scanner_Node scanner_node)
+Path::get_directiontime(real x, 
+                        real y, 
+                        real *r, 
+                        bool do_transform, 
+                        Scanner_Node scanner_node)
 {
 @q **** (4) @>
 
@@ -16230,7 +16238,7 @@ Path::get_directiontime(real x, real z, real *r, bool do_transform, Scanner_Node
    if (DEBUG)
    { 
       cerr << "Entering `Path::get_directiontime'." << endl
-           << "`x' == " << x << ", `z' == " << z << endl
+           << "`x' == " << x << ", `y' == " << y << endl
            << "`do_transform' == " << do_transform << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -16243,7 +16251,8 @@ Path::get_directiontime(real x, real z, real *r, bool do_transform, Scanner_Node
 @<Define |Path| functions@>=
 
    temp_strm << "path Q;" << endl << "Q = " << *this << ";" << endl
-             << "numeric n;" << endl << "n = directiontime (" << x << ", " << z << ") of Q;" 
+             << "numeric n;" << endl << "n = directiontime (" << x << ", " 
+             << y << ") of Q;" 
              << endl; 
 
    cerr << "temp_strm.str() == " << endl << temp_strm.str() << endl;
