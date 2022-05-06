@@ -1589,7 +1589,8 @@ Added this function.
 @<Declare utility functions@>=
 int
 call_metapost(stringstream temp_strm, 
-              Scanner_Node scanner_node = 0,
+              Scanner_Node scanner_node,
+              bool clear_vectors = true,
               bool read_output = true,  
               bool save_temp_files = false,
               bool suppress_output = false);
@@ -1600,6 +1601,7 @@ call_metapost(stringstream temp_strm,
 int
 call_metapost(stringstream temp_strm, 
               Scanner_Node scanner_node,
+              bool clear_vectors,
               bool read_output,  
               bool save_temp_files,
               bool suppress_output)

@@ -1391,10 +1391,162 @@ Changed this rule from \§path primary> $\longrightarrow$ \.{REVERSE}
 };
 
 
-@q ** (2) command: REPLACE_CONNECTORS numeric_list_optional@>
-@
+@q ** (2) command: CALL_METAPOST string_expression call_metapost_option_list @>
+@ \§command> $\longrightarrow$ \.{CALL\_METAPOST} \§string expression> 
+\§call metapost option list>.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=command: CALL_METAPOST string_expression call_metapost_option_list@>
+{
+@q *** (3) @>
+
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `command: CALL_METAPOST string_expression "
+                << "call_metapost_option_list'."
+                << endl 
+                << "`call_metapost_option_list' == $3 == " << @=$3@> 
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q *** (3) @>
 
 
+@q *** (3) @>
+
+  @=$$@> = static_cast<void*>(0);
+};
+
+@q ** (2) call_metapost_option_list @>
+
+@ \§call metapost option list>.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this type declaration.
+\ENDLOG 
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <uint_value> call_metapost_option_list@>
+
+@q *** (3) call_metapost_option_list: /* Empty  */ @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{Empty}.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: /* Empty  */ @>
+{
+
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: /* Empty */'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+  @=$$@> = 0U;
+
+};
+
+@q *** (3) call_metapost_option_list: call_metapost_option_list SAVE @>
+
+@ \§call metapost option list> $\longrightarrow$ \§call metapost option list> \.{SAVE}.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list SAVE @>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list SAVE'."
+                << endl 
+                << "`call_metapost_option_list' == $1 == " << @=$1@> 
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+  @=$$@> = @=$1@> |= 1U;
+};
+
+@q *** (3) call_metapost_option_list: NO_SAVE @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{NO\_SAVE}.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list NO_SAVE @>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list NO_SAVE'."
+                << endl 
+                << "`call_metapost_option_list' == $1 == " << @=$1@> 
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+  @=$$@> |= (@=$1@> &= ~1U);
+};
 
 @q ** (2) command: RESET_ARC numeric_list_optional @>
 

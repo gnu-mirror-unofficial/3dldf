@@ -382,6 +382,7 @@ Added token declaration for |ULONG_LONG_TYPE|.
 @=%token <int_value>    RESOLVE@>@/
 @=%token <int_value>    WITH_RESOLUTION@>@/
 @=%token <int_value>    RESOLVED_TO@>@/
+@=%token <int_value>    CALL_METAPOST@>@/
 
 @=%token <string_value>     COMMA@>@/
 @=%token <string_value>     COLON@>@/ 

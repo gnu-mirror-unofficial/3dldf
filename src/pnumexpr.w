@@ -3144,9 +3144,6 @@ otherwise the name of the |path| would just be considered a suffix of the name o
 
 @q ****** (6) @>
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
 };
 
 @q **** (4) numeric_operator.  @>
