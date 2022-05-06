@@ -1636,9 +1636,10 @@ call_metapost(string& str,
    bool save  = false;
    bool clear = true;
 
-   bool do_paths  = false;
-   bool do_points = false;
-   bool do_reals  = false;
+   bool do_paths             = false;  
+   bool do_points            = false;
+   bool do_reals             = false;  
+   bool suppress_mp_stdout   = false;
 
    vector<real*>  *rv = 0;
    vector<Point*> *pv = 0;
@@ -1680,6 +1681,10 @@ call_metapost(string& str,
           clear = true;
       else if (iter->first == 7)
           clear = false;
+      else if (iter->first == 8)
+          suppress_mp_stdout = true;
+      else if (iter->first == 9)
+          suppress_mp_stdout = false;
 
    }  /* |for| */
 
@@ -1690,16 +1695,18 @@ call_metapost(string& str,
 @
 @<Define utility functions@>=
 
-   cerr << "save      == " << save << endl 
-        << "clear     == " << clear << endl 
-        << "do_paths  == " << do_paths << endl 
-        << "do_points == " << do_points << endl 
-        << "do_reals  == " << do_reals  << endl;
+   cerr << "save               == " << save << endl 
+        << "clear              == " << clear << endl 
+        << "do_paths           == " << do_paths << endl 
+        << "do_points          == " << do_points << endl 
+        << "do_reals           == " << do_reals  << endl
+        << "suppress_mp_stdout == " << suppress_mp_stdout << endl;
 
 @q *** (3) @>
 @
 @<Define utility functions@>=
 
+   
 
 /* !!START HERE:  LDF 2022.05.06. */ 
 

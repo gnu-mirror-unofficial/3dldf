@@ -2095,6 +2095,7 @@ Added token declarations for |DIRECTION|, |DIRECTIONTIME| and |DIRECTIONPOINT|.
 @=%token <int_value> AXONOMETRIC@>@/
 @=%token <int_value> ISOMETRIC@>@/
 @=%token <int_value> SUPPRESS@>@/
+@=%token <int_value> NO_SUPPRESS@>@/
 
 @=%token <int_value> GET_POSITION@>@/
 @=%token <int_value> GET_DIRECTION@>@/

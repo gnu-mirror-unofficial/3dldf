@@ -1927,6 +1927,84 @@ Added this rule.
 
 };
 
+@q *** (3) call_metapost_option_list: SUPPRESS @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{NO\_SUPPRESS}.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list SUPPRESS @>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list SUPPRESS'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   typedef vector<pair<int, void*> > VP;
+   VP *vp = static_cast<VP*>(@=$1@>);
+
+   vp->push_back(make_pair(8, static_cast<void*>(0)));
+
+   @=$$@> = static_cast<void*>(vp);
+
+};
+
+@q *** (3) call_metapost_option_list: NO_SUPPRESS @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{NO\_SUPPRESS}.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list NO_SUPPRESS @>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list NO_SUPPRESS'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   typedef vector<pair<int, void*> > VP;
+   VP *vp = static_cast<VP*>(@=$1@>);
+
+   vp->push_back(make_pair(9, static_cast<void*>(0)));
+
+   @=$$@> = static_cast<void*>(vp);
+
+};
+
+
+
 @q ** (2) command: RESET_ARC numeric_list_optional @>
 
 @ \§command> $\longrightarrow$ \.{RESET\_ARC} \§numeric list optional>.
