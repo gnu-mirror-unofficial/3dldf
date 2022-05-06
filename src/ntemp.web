@@ -1,149 +1,33 @@
-void
-Label::output(Scanner_Node scanner_node,
-              const Focus& f,
-              const unsigned short proj,
-              real factor,
-              const Transform& t)
-{
-@q **** (4) @>
+                << "$3 == " << @=$3@> << " (dec.) == 0x" 
+                << hex << @=$3@> << " (hex.) == 0" << oct << @=$3@> 
+                << " (oct.)" << dec << endl
+                << "Options:" << endl;
 
-#if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ 
-   if (DEBUG)
-   { 
-       cerr << "Entering `Label::output'." << endl;
+      if (@=$3@> & 1U)
+         cerr_strm << "SAVE:  Not deleting temporary MP input and output files." << endl;
+      else 
+         cerr_strm << "NO_SAVE:  Not deleting temporary MP input and output files." << endl;
 
-       if (t)
-       {
-          cerr << "`t' is non-NULL." << endl;
+      if (@=$3@> & 2U)
+         cerr_strm << "Saving paths to path_vector variable." << endl;
+      else 
+         cerr_strm << "Not saving paths to path_vector variable." << endl;
 
-          t.show("*t:");
-       }
-       else
-          cerr << "`t' is NULL." << endl;
+      if (@=$3@> & 4U)
+         cerr_strm << "Saving points to point_vector variable." << endl;
+      else 
+         cerr_strm << "Not saving points to point_vector variable." << endl;
 
-       if (text_transform)
-       {
-          cerr << "text_transform is non-NULL." << endl;
+      if (@=$3@> & 8U)
+         cerr_strm << "Saving numerics to numeric_vector variable." << endl;
+      else 
+         cerr_strm << "Not saving numerics to numeric_vector variable." << endl;
 
-          if (text_transform->is_identity())
-          {
-             cerr << "*text_transform. is identity transformation." << endl;
-          }
-          else
-          {
-             cerr << "`*text_transform' is not identity transformation." << endl;
-             text_transform->show("t:");
-          }
-      }
-      else
-          cerr << "text_transform is NULL." << endl;
+      if (@=$3@> & 16U)
+         cerr_strm << "Clearing vectors, if any, before calling MetaPost." << endl;
+      else 
+         cerr_strm << "Not clearing vectors, if any, before calling MetaPost." << endl;
 
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q **** (4) @>
-
-   Output_Struct* os = scanner_node->out[Run_State::METAPOST_RS];
-   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
-
-   if (!t.is_identity())
-      *text_pt *= *dot_pt *= t;
-
-   dot_pt->apply_transform();
-   text_pt->apply_transform();
-
-
-   if(!(dot_pt->project(f, proj, factor) && dot_pt->project(f, proj, factor)))
-     {
-       cerr << "WARNING! In Label::output:\n"
-            << "|Label::dot_pt| and/or |Label::text_pt| cannot be projected!"
-            << endl 
-            << "Not printing Label\n";
-       return;
-     }  
-
-   *out_stream << "label";
-   
-   if (position != "")
-     *out_stream << "." << position;
-   
-   *out_stream << "(btex " << text << " etex ";
-
-#if 0 
-   if (!t.is_identity())
-   {
-
-     *out_stream << " transformed "
-                 << "begingroup; save T; transform T;"
-                 << endl  
-                 << " xxpart T = " 
-                 << t.get_element(0, 0) << "; "
-                 << "xpart T = "                                   
-                 << t.get_element(3, 0) << "; "
-                 << "xypart T = "                                 
-                 << t.get_element(1, 0) << "; " 
-                 << endl                                                   
-                 << " yypart T = "                               
-                 << t.get_element(1, 1) << "; "
-                 << "ypart T = "                                   
-                 << t.get_element(3, 1) << "; "
-                 << "yxpart T = "                                 
-                 << t.get_element(0, 1) << "; "
-                 << "T endgroup ";
-
-   } /* |if (t && !t.is_identity())|  */@;
-#endif 
-
-   *out_stream << ", ("
-               << dot_pt->get_x('p', false)
-               << Point::measurement_units << ", "
-               << dot_pt->get_y('p', false)
-               << Point::measurement_units << "))";
-
-   if (scanner_node->do_colors_output && text_color)
-     *out_stream << endl << " withcolor " << *text_color;
-
-   *out_stream << ";" << endl;
-
-   if (dot == true)
-   {
-       *out_stream << "begingroup" << endl 
-                   << "interim linecap := rounded;" 
-                   << endl
-                   << "drawdot (" 
-                   << dot_pt->get_x('p', false)
-                   << Point::measurement_units << ", "
-                   << dot_pt->get_y('p', false)
-                   << Point::measurement_units << ")";
-
-         if (pen)
-            *out_stream << " withpen " << *pen;
-         else 
-            *out_stream << " withpen pencircle scaled dotlabeldiam";
-       
-       if (scanner_node->do_colors_output && dot_color)
-          *out_stream << " withcolor " << *dot_color;
-
-       *out_stream << ";" << "endgroup;" << endl;
-      
-   } /* |if (dot == true)|  */
-
-@q **** (4) @>
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-       cerr << "Exiting `Label::output' successfully with `void' return value." 
-            << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   return;
-
-}  /* End of |Label::output| definition.  */
+   status = call_metapost(*s, @=$3@>, scanner_node);

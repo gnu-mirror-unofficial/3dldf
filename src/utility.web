@@ -1588,7 +1588,8 @@ Added this function.
 
 @<Declare utility functions@>=
 int
-call_metapost(stringstream          temp_strm, 
+call_metapost(string&               str,
+              unsigned int options                  = 0U,
               Scanner_Node          scanner_node    = 0,
               Pointer_Vector<Path>  *qv             = 0,
               Pointer_Vector<Point> *pv             = 0,
@@ -1602,7 +1603,8 @@ call_metapost(stringstream          temp_strm,
 @
 @<Define utility functions@>=
 int
-call_metapost(stringstream temp_strm, 
+call_metapost(string& str,
+              unsigned int options,
               Scanner_Node scanner_node,
               Pointer_Vector<Path> *qv,
               Pointer_Vector<Point> *pv,
@@ -1618,7 +1620,42 @@ call_metapost(stringstream temp_strm,
    bool DEBUG = true; /* |false| */ 
    if (DEBUG)
    { 
-       cerr << "Entering `call_metapost'." << endl;
+       cerr << "Entering `call_metapost'." << endl
+            << "`str'     == " << str << endl
+            << "`options' == " << options << " == 0x" << hex
+            << options << " == 0" << oct << options << dec
+            << endl;
+
+        if (scanner_node == 0)
+           cerr << "`scanner_node' is NULL." << endl;
+        else 
+        {
+           cerr << "`scanner_node' is non-NULL." << endl;
+        }
+
+        if (qv == 0)
+           cerr << "`Pointer_Vector<Path> *qv' is NULL." << endl;
+        else   
+        {
+           cerr << "`Pointer_Vector<Path> *qv' is non-NULL." << endl
+                << "`qv->v.size()' == " << qv->v.size() << endl;
+        }
+
+        if (pv == 0)
+           cerr << "`Pointer_Vector<Point> *pv' is NULL." << endl;
+        else   
+        {
+           cerr << "`Pointer_Vector<Point> *pv' is non-NULL." << endl
+                << "`pv->v.size()' == " << pv->v.size() << endl;
+        }
+
+        if (rv == 0)
+           cerr << "`Pointer_Vector<real> *rv' is NULL." << endl;
+        else   
+        {
+           cerr << "`Pointer_Vector<real> *rv' is non-NULL." << endl
+                << "`rv->v.size()' == " << rv->v.size() << endl;
+        }
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -1640,6 +1677,11 @@ call_metapost(stringstream temp_strm,
    { 
        cerr << "Exiting `call_metapost' successfully with return value 0." 
             << endl;
+
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 

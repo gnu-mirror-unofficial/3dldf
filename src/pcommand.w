@@ -1415,36 +1415,7 @@ Added this rule.
       cerr_strm << "*** Parser: `command: CALL_METAPOST string_expression "
                 << "call_metapost_option_list'."
                 << endl 
-                << "`call_metapost_option_list' == " << endl
-                << "$3 == " << @=$3@> << " (dec.) == 0x" 
-                << hex << @=$3@> << " (hex.) == 0" << oct << @=$3@> 
-                << " (oct.)" << dec << endl
-                << "Options:" << endl;
-
-      if (@=$3@> & 1U)
-         cerr_strm << "SAVE:  Not deleting temporary MP input and output files." << endl;
-      else 
-         cerr_strm << "NO_SAVE:  Not deleting temporary MP input and output files." << endl;
-
-      if (@=$3@> & 2U)
-         cerr_strm << "Saving paths to path_vector variable." << endl;
-      else 
-         cerr_strm << "Not saving paths to path_vector variable." << endl;
-
-      if (@=$3@> & 4U)
-         cerr_strm << "Saving points to point_vector variable." << endl;
-      else 
-         cerr_strm << "Not saving points to point_vector variable." << endl;
-
-      if (@=$3@> & 8U)
-         cerr_strm << "Saving numerics to numeric_vector variable." << endl;
-      else 
-         cerr_strm << "Not saving numerics to numeric_vector variable." << endl;
-
-      if (@=$3@> & 16U)
-         cerr_strm << "Clearing vectors, if any, before calling MetaPost." << endl;
-      else 
-         cerr_strm << "Not clearing vectors, if any, before calling MetaPost." << endl;
+                << "`call_metapost_option_list' == " << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1455,6 +1426,47 @@ Added this rule.
 
 @q *** (3) @>
 
+   string *s = static_cast<string*>(@=$2@>);
+
+
+   status = 0;
+
+   if (status != 0)
+   {
+     cerr_strm << "ERROR!  In parser, `command: CALL_METAPOST string_expression "
+                << "call_metapost_option_list':"
+                << endl 
+                << "`call_metapost' failed, returning " << status << "."
+                << endl
+                << "Failed to execute MetaPost in child process."
+                << endl
+                << "Continuing.";
+
+     log_message(cerr_strm);
+     cerr_message(cerr_strm, true);
+     cerr_strm.str("");
+ 
+
+   }  /* |if (status != 0)| */
+
+@q *** (3) @>
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+     cerr_strm << "In parser, `command: CALL_METAPOST string_expression "
+                << "call_metapost_option_list':"
+                << endl 
+                << "`call_metapost' succeeded, returning 0.";
+
+     log_message(cerr_strm);
+     cerr_message(cerr_strm);
+     cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q *** (3) @>
 
 @q *** (3) @>
 
@@ -1472,7 +1484,7 @@ Added this type declaration.
 \ENDLOG 
 
 @<Type declarations for non-terminal symbols@>=
-@=%type <uint_value> call_metapost_option_list@>
+@=%type <pointer_value> call_metapost_option_list@>
 
 @q *** (3) call_metapost_option_list: /* Empty  */ @>
 
@@ -1504,7 +1516,7 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  @=$$@> = 0U;
+  @=$$@> = 0;
 
 };
 
@@ -1539,7 +1551,7 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  @=$$@> = @=$1@> |= 1U;
+  @=$$@> = 0;
 };
 
 @q *** (3) call_metapost_option_list: NO_SAVE @>
@@ -1573,7 +1585,7 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  @=$$@> |= (@=$1@> &= ~1U);
+  @=$$@> = 0;
 };
 
 @q *** (3) call_metapost_option_list: WITH_PATHS path_vector_variable @>
@@ -1636,7 +1648,7 @@ Added this rule.
 
 @q **** (4) @>
 
-  @=$$@> |= 2U;
+  @=$$@> = 0;
 
 };
 
@@ -1699,7 +1711,7 @@ Added this rule.
 
 @q **** (4) @>
 
-  @=$$@> |= 4U;
+  @=$$@> = 0;
 
 };
 
@@ -1775,7 +1787,7 @@ Added this rule.
 
 @q **** (4) @>
 
-  @=$$@> |= 8U;
+  @=$$@> = 0;
 
 };
 
@@ -1810,7 +1822,7 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  @=$$@> = @=$1@> |= 16U;
+  @=$$@> = 0;
 };
 
 @q *** (3) call_metapost_option_list: NO_CLEAR @>
@@ -1844,7 +1856,7 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  @=$$@> |= (@=$1@> &= ~16U);
+  @=$$@> = 0;
 };
 
 @q ** (2) command: RESET_ARC numeric_list_optional @>
