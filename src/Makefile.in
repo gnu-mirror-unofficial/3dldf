@@ -2428,6 +2428,10 @@ ttemp: ttemp000.eps
 ttemp000.eps: ttemp.mp writemcs.mp
 	mpost -numbersystem "double" $<
 
+.PHONY: mp
+
+mp: ttemp.mp
+
 ttemp.mp: ttemp.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) ttemp.ldf
 

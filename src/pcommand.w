@@ -1413,9 +1413,7 @@ Added this rule.
    if (DEBUG)
    { 
       cerr_strm << "*** Parser: `command: CALL_METAPOST string_expression "
-                << "call_metapost_option_list'."
-                << endl 
-                << "`call_metapost_option_list' == " << endl;
+                << "call_metapost_option_list'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1426,10 +1424,50 @@ Added this rule.
 
 @q *** (3) @>
 
-   string *s = static_cast<string*>(@=$2@>);
+   typedef vector<pair<int, void*> > VP;
 
+   string *str = static_cast<string*>(@=$2@>);
+   VP *vp = static_cast<VP*>(@=$3@>);
 
-   status = 0;
+@q *** (3) @>
+
+   if (vp == 0)
+      cerr << "vp is NULL." << endl;
+
+@q *** (3) @>
+
+   else
+   {
+@q **** (4) @>
+
+       cerr << "vp is non-NULL." << endl;
+
+       for (VP::iterator iter = vp->begin(); iter != vp->end(); ++iter)
+       {   
+@q ***** (5) @>
+
+           cerr << "`iter->first' == " << iter->first << endl;
+
+           if (iter->second == 0)
+              cerr << "`iter->second' is NULL." << endl;
+           else
+              cerr << "`iter->second' is non-NULL." << endl;
+
+  
+
+@q ***** (5) @>
+
+       } /* |for| */
+
+@q **** (4) @>
+
+   }  /* |else| */
+
+@q *** (3) @>
+@
+@<Define rules@>= 
+
+   status = call_metapost(*str, scanner_node, vp);
 
    if (status != 0)
    {
@@ -1516,7 +1554,11 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  @=$$@> = 0;
+   typedef vector<pair<int, void*> > VP;
+
+   VP *vp = new VP;
+
+   @=$$@> = static_cast<void*>(vp);
 
 };
 
@@ -1540,8 +1582,6 @@ Added this rule.
    if (DEBUG)
    { 
       cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list SAVE'."
-                << endl 
-                << "`call_metapost_option_list' == $1 == " << @=$1@> 
                 << endl;
 
       log_message(cerr_strm);
@@ -1551,7 +1591,13 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  @=$$@> = 0;
+   typedef vector<pair<int, void*> > VP;
+   VP *vp = static_cast<VP*>(@=$1@>);
+
+   vp->push_back(make_pair(1, static_cast<void*>(0)));
+
+   @=$$@> = static_cast<void*>(vp);
+
 };
 
 @q *** (3) call_metapost_option_list: NO_SAVE @>
@@ -1574,8 +1620,6 @@ Added this rule.
    if (DEBUG)
    { 
       cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list NO_SAVE'."
-                << endl 
-                << "`call_metapost_option_list' == $1 == " << @=$1@> 
                 << endl;
 
       log_message(cerr_strm);
@@ -1585,7 +1629,13 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  @=$$@> = 0;
+   typedef vector<pair<int, void*> > VP;
+   VP *vp = static_cast<VP*>(@=$1@>);
+
+   vp->push_back(make_pair(2, static_cast<void*>(0)));
+
+   @=$$@> = static_cast<void*>(vp);
+
 };
 
 @q *** (3) call_metapost_option_list: WITH_PATHS path_vector_variable @>
@@ -1612,8 +1662,6 @@ Added this rule.
    { 
       cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list "
                 << "WITH_PATHS path_vector_variable'."
-                << endl 
-                << "`call_metapost_option_list' == $1 == " << @=$1@> 
                 << endl;
 
       log_message(cerr_strm);
@@ -1627,6 +1675,10 @@ Added this rule.
 @
 @<Define rules@>= 
 
+   typedef vector<pair<int, void*> > VP;
+
+   VP *vp = static_cast<VP*>(@=$1@>);
+
    entry = static_cast<Id_Map_Entry_Node>(@=$3@>);
 
    Pointer_Vector<Path> *pv = 0;
@@ -1635,6 +1687,8 @@ Added this rule.
    {
       pv = static_cast<Pointer_Vector<Path>*>(entry->object);
       pv->show("*pv:");
+
+      vp->push_back(make_pair(3, entry->object));
    }
    else if (entry == 0)
    {
@@ -1645,10 +1699,9 @@ Added this rule.
        cerr << "`entry->object' is NULL." << endl;
    }
 
-
 @q **** (4) @>
 
-  @=$$@> = 0;
+   @=$$@> = static_cast<void*>(vp);
 
 };
 
@@ -1676,8 +1729,6 @@ Added this rule.
    { 
       cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list "
                 << "WITH_POINTS point_vector_variable'."
-                << endl 
-                << "`call_metapost_option_list' == $1 == " << @=$1@> 
                 << endl;
 
       log_message(cerr_strm);
@@ -1693,12 +1744,16 @@ Added this rule.
 
    entry = static_cast<Id_Map_Entry_Node>(@=$3@>);
 
+   typedef vector<pair<int, void*> > VP;
+   VP *vp = static_cast<VP*>(@=$1@>);
+
    Pointer_Vector<Point> *pv = 0;
 
    if (entry && entry->object)
    {
       pv = static_cast<Pointer_Vector<Point>*>(entry->object);
       pv->show("*pv:");
+      vp->push_back(make_pair(4, entry->object));
    }
    else if (entry == 0)
    {
@@ -1711,7 +1766,7 @@ Added this rule.
 
 @q **** (4) @>
 
-  @=$$@> = 0;
+   @=$$@> = static_cast<void*>(vp);
 
 };
 
@@ -1739,8 +1794,6 @@ Added this rule.
    { 
       cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list "
                 << "WITH_NUMERICS numeric_vector_variable'."
-                << endl 
-                << "`call_metapost_option_list' == $1 == " << @=$1@> 
                 << endl;
 
       log_message(cerr_strm);
@@ -1756,11 +1809,16 @@ Added this rule.
 
    entry = static_cast<Id_Map_Entry_Node>(@=$3@>);
 
+   typedef vector<pair<int, void*> > VP;
+   VP *vp = static_cast<VP*>(@=$1@>);
+
    Pointer_Vector<real> *pv = 0;
 
    if (entry && entry->object)
    {
       pv = static_cast<Pointer_Vector<real>*>(entry->object);
+
+      vp->push_back(make_pair(5, entry->object));
 
       if (pv->v.size() == 0)
          cerr << "`pv->v' is empty." << endl;
@@ -1787,7 +1845,8 @@ Added this rule.
 
 @q **** (4) @>
 
-  @=$$@> = 0;
+   @=$$@> = static_cast<void*>(vp);
+
 
 };
 
@@ -1811,8 +1870,6 @@ Added this rule.
    if (DEBUG)
    { 
       cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list CLEAR'."
-                << endl 
-                << "`call_metapost_option_list' == $1 == " << @=$1@> 
                 << endl;
 
       log_message(cerr_strm);
@@ -1822,7 +1879,14 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  @=$$@> = 0;
+
+   typedef vector<pair<int, void*> > VP;
+   VP *vp = static_cast<VP*>(@=$1@>);
+
+   vp->push_back(make_pair(6, static_cast<void*>(0)));
+
+   @=$$@> = static_cast<void*>(vp);
+
 };
 
 @q *** (3) call_metapost_option_list: NO_CLEAR @>
@@ -1845,8 +1909,6 @@ Added this rule.
    if (DEBUG)
    { 
       cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list NO_CLEAR'."
-                << endl 
-                << "`call_metapost_option_list' == $1 == " << @=$1@> 
                 << endl;
 
       log_message(cerr_strm);
@@ -1856,7 +1918,13 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  @=$$@> = 0;
+   typedef vector<pair<int, void*> > VP;
+   VP *vp = static_cast<VP*>(@=$1@>);
+
+   vp->push_back(make_pair(7, static_cast<void*>(0)));
+
+   @=$$@> = static_cast<void*>(vp);
+
 };
 
 @q ** (2) command: RESET_ARC numeric_list_optional @>
@@ -1880,9 +1948,6 @@ Added this rule.
 {
   @=$$@> = static_cast<void*>(0);
 };
-
-
-
 
 @q * (1) @>
 

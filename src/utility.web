@@ -1574,7 +1574,6 @@ round_real(real r)
 
 }  /* End of |round_real| definition  */
 
-
 @q * (1) Call MetaPost (|call_metapost|).  @>
 @ Call MetaPost (|call_metapost|).
 \initials{LDF 2022.05.06.}
@@ -1587,32 +1586,19 @@ Added this function.
 @q ** (2) Declaration @>
 
 @<Declare utility functions@>=
+
+typedef vector<pair<int, void*> > VP;
+
 int
-call_metapost(string&               str,
-              unsigned int options                  = 0U,
-              Scanner_Node          scanner_node    = 0,
-              Pointer_Vector<Path>  *qv             = 0,
-              Pointer_Vector<Point> *pv             = 0,
-              Pointer_Vector<real>  *rv             = 0,
-              bool                  clear_vectors   = true,
-              bool                  read_output     = true,  
-              bool                  save_temp_files = false,
-              bool                  suppress_output = false);
+call_metapost(string& str, Scanner_Node scanner_node = 0, VP *vp = 0);
 
 @q ** (2) Definition @>
 @
 @<Define utility functions@>=
 int
 call_metapost(string& str,
-              unsigned int options,
               Scanner_Node scanner_node,
-              Pointer_Vector<Path> *qv,
-              Pointer_Vector<Point> *pv,
-              Pointer_Vector<real> *rv,
-              bool clear_vectors,
-              bool read_output,  
-              bool save_temp_files,
-              bool suppress_output)
+              VP *vp)
 {
 @q *** (3) @>
 
@@ -1621,10 +1607,8 @@ call_metapost(string& str,
    if (DEBUG)
    { 
        cerr << "Entering `call_metapost'." << endl
-            << "`str'     == " << str << endl
-            << "`options' == " << options << " == 0x" << hex
-            << options << " == 0" << oct << options << dec
-            << endl;
+            << "`str'     == " << str << endl;
+
 
         if (scanner_node == 0)
            cerr << "`scanner_node' is NULL." << endl;
@@ -1633,40 +1617,91 @@ call_metapost(string& str,
            cerr << "`scanner_node' is non-NULL." << endl;
         }
 
-        if (qv == 0)
-           cerr << "`Pointer_Vector<Path> *qv' is NULL." << endl;
+        if (vp == 0)
+           cerr << "`vp' is NULL." << endl;
         else   
         {
-           cerr << "`Pointer_Vector<Path> *qv' is non-NULL." << endl
-                << "`qv->v.size()' == " << qv->v.size() << endl;
+           cerr << "`vp' is non-NULL." << endl;
         }
+   }
 
-        if (pv == 0)
-           cerr << "`Pointer_Vector<Point> *pv' is NULL." << endl;
-        else   
-        {
-           cerr << "`Pointer_Vector<Point> *pv' is non-NULL." << endl
-                << "`pv->v.size()' == " << pv->v.size() << endl;
-        }
-
-        if (rv == 0)
-           cerr << "`Pointer_Vector<real> *rv' is NULL." << endl;
-        else   
-        {
-           cerr << "`Pointer_Vector<real> *rv' is non-NULL." << endl
-                << "`rv->v.size()' == " << rv->v.size() << endl;
-        }
-   }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+@q *** (3) @>
+@
+@<Define utility functions@>=
+
    int status = 0;
+
+   bool save  = false;
+   bool clear = true;
+
+   bool do_paths  = false;
+   bool do_points = false;
+   bool do_reals  = false;
+
+   vector<real*>  *rv = 0;
+   vector<Point*> *pv = 0;
+   vector<Path*>  *qv = 0;
+
+@q *** (3) @>
+@
+@<Define utility functions@>=
+
+   for (VP::iterator iter = vp->begin(); iter != vp->end(); ++iter)
+   {
+      cerr << "iter->first == " << iter->first << endl;
+
+      if (iter->second == 0)
+         cerr << "iter->second is NULL." << endl;
+      else
+         cerr << "iter->second is non-NULL." << endl;
+
+      if (iter->first == 1)
+         save = true;
+      else if (iter->first == 2)
+          save = false;
+      else if (iter->first == 3 && iter->second != 0)
+      {
+          do_paths = true;
+          qv = static_cast<vector<Path*>*>(iter->second);
+      }
+      else if (iter->first == 4 && iter->second != 0)
+      {
+          do_points = true;
+          pv = static_cast<vector<Point*>*>(iter->second);
+      }
+      else if (iter->first == 5 && iter->second != 0)
+      {
+          do_reals = true;
+          rv = static_cast<vector<real*>*>(iter->second);
+      }
+      else if (iter->first == 6)
+          clear = true;
+      else if (iter->first == 7)
+          clear = false;
+
+   }  /* |for| */
+
+
+
+
+@q *** (3) @>
+@
+@<Define utility functions@>=
+
+   cerr << "save      == " << save << endl 
+        << "clear     == " << clear << endl 
+        << "do_paths  == " << do_paths << endl 
+        << "do_points == " << do_points << endl 
+        << "do_reals  == " << do_reals  << endl;
 
 @q *** (3) @>
 @
 @<Define utility functions@>=
 
 
-
+/* !!START HERE:  LDF 2022.05.06. */ 
 
 @q *** (3) @>
 @
@@ -1705,8 +1740,14 @@ This is what's compiled.
 \initials{LDF Undated.}
 @c
 @<Include files@>@;
+
+@q Declare perspective functions@>@;
 @q Define perspective functions@>@;
+
+@<Declare utility functions@>@;
 @<Define utility functions@>@;
+
+@<Declare comparison functions@>@;
 @<Define comparison functions@>@;
 
 @ This is what's written to \filename{utility.h}.
