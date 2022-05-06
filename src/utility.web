@@ -1588,12 +1588,15 @@ Added this function.
 
 @<Declare utility functions@>=
 int
-call_metapost(stringstream temp_strm, 
-              Scanner_Node scanner_node,
-              bool clear_vectors = true,
-              bool read_output = true,  
-              bool save_temp_files = false,
-              bool suppress_output = false);
+call_metapost(stringstream          temp_strm, 
+              Scanner_Node          scanner_node    = 0,
+              Pointer_Vector<Path>  *qv             = 0,
+              Pointer_Vector<Point> *pv             = 0,
+              Pointer_Vector<real>  *rv             = 0,
+              bool                  clear_vectors   = true,
+              bool                  read_output     = true,  
+              bool                  save_temp_files = false,
+              bool                  suppress_output = false);
 
 @q ** (2) Definition @>
 @
@@ -1601,6 +1604,9 @@ call_metapost(stringstream temp_strm,
 int
 call_metapost(stringstream temp_strm, 
               Scanner_Node scanner_node,
+              Pointer_Vector<Path> *qv,
+              Pointer_Vector<Point> *pv,
+              Pointer_Vector<real> *rv,
               bool clear_vectors,
               bool read_output,  
               bool save_temp_files,

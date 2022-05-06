@@ -17,6 +17,18 @@ set f with_position (0, 20, -50)
        with_direction (0, 20, 10) with_distance 70; 
 
 
+path_vector qv;
+point_vector pv;
+numeric_vector nv;
+
+nv += 1;
+nv += 2;
+
+call_metapost "abc" with_paths qv with_points pv with_numerics nv;
+
+end;
+
+
 path q;
 q := unit_circle scaled (3cm, 0, 3cm);
 rotate q (90, 0);

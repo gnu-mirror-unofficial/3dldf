@@ -2415,7 +2415,6 @@ Added token declarations for |WITH_DIVISIONS_LATITUDE|
 @=%token <int_value> DOUBLE_NAPPED@>@/
 
 @=%token <int_value> WITH_CURVE@>@/ 
-@=%token <int_value> WITH_PATH@>@/
 @=%token <int_value> WITH_ENVELOPE@>@/
 
 @q *** (3) Types for modifying |Shapes|.@>
@@ -3098,6 +3097,9 @@ and |WITH_SSA_S|.
 @<Token and precedence declarations@>=
 
 @=%token <int_value> WITH_POINTS@>@/ 
+@=%token <int_value> WITH_PATH@>@/
+@=%token <int_value> WITH_PATHS@>@/
+@=%token <int_value> WITH_NUMERICS@>@/
 
 @q *** (3) Types for conic sections.@>
 @*2 Types for conic sections.

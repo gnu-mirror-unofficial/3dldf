@@ -1415,8 +1415,36 @@ Added this rule.
       cerr_strm << "*** Parser: `command: CALL_METAPOST string_expression "
                 << "call_metapost_option_list'."
                 << endl 
-                << "`call_metapost_option_list' == $3 == " << @=$3@> 
-                << endl;
+                << "`call_metapost_option_list' == " << endl
+                << "$3 == " << @=$3@> << " (dec.) == 0x" 
+                << hex << @=$3@> << " (hex.) == 0" << oct << @=$3@> 
+                << " (oct.)" << dec << endl
+                << "Options:" << endl;
+
+      if (@=$3@> & 1U)
+         cerr_strm << "SAVE:  Not deleting temporary MP input and output files." << endl;
+      else 
+         cerr_strm << "NO_SAVE:  Not deleting temporary MP input and output files." << endl;
+
+      if (@=$3@> & 2U)
+         cerr_strm << "Saving paths to path_vector variable." << endl;
+      else 
+         cerr_strm << "Not saving paths to path_vector variable." << endl;
+
+      if (@=$3@> & 4U)
+         cerr_strm << "Saving points to point_vector variable." << endl;
+      else 
+         cerr_strm << "Not saving points to point_vector variable." << endl;
+
+      if (@=$3@> & 8U)
+         cerr_strm << "Saving numerics to numeric_vector variable." << endl;
+      else 
+         cerr_strm << "Not saving numerics to numeric_vector variable." << endl;
+
+      if (@=$3@> & 16U)
+         cerr_strm << "Clearing vectors, if any, before calling MetaPost." << endl;
+      else 
+         cerr_strm << "Not clearing vectors, if any, before calling MetaPost." << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1546,6 +1574,277 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@; 
 
   @=$$@> |= (@=$1@> &= ~1U);
+};
+
+@q *** (3) call_metapost_option_list: WITH_PATHS path_vector_variable @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{WITH\_PATHS}
+\§path vector variable>.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list WITH_PATHS path_vector_variable @>
+{
+@q **** (4) @>
+
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list "
+                << "WITH_PATHS path_vector_variable'."
+                << endl 
+                << "`call_metapost_option_list' == $1 == " << @=$1@> 
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+
+   entry = static_cast<Id_Map_Entry_Node>(@=$3@>);
+
+   Pointer_Vector<Path> *pv = 0;
+
+   if (entry && entry->object)
+   {
+      pv = static_cast<Pointer_Vector<Path>*>(entry->object);
+      pv->show("*pv:");
+   }
+   else if (entry == 0)
+   {
+       cerr << "`entry' is NULL." << endl;
+   }
+   else if (entry->object == 0)
+   {
+       cerr << "`entry->object' is NULL." << endl;
+   }
+
+
+@q **** (4) @>
+
+  @=$$@> |= 2U;
+
+};
+
+@q *** (3) call_metapost_option_list: WITH_POINTS point_vector_variable @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{WITH\_POINTS}
+\§point vector variable>.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list WITH_POINTS point_vector_variable @>
+{
+@q **** (4) @>
+
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list "
+                << "WITH_POINTS point_vector_variable'."
+                << endl 
+                << "`call_metapost_option_list' == $1 == " << @=$1@> 
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+
+   entry = static_cast<Id_Map_Entry_Node>(@=$3@>);
+
+   Pointer_Vector<Point> *pv = 0;
+
+   if (entry && entry->object)
+   {
+      pv = static_cast<Pointer_Vector<Point>*>(entry->object);
+      pv->show("*pv:");
+   }
+   else if (entry == 0)
+   {
+       cerr << "`entry' is NULL." << endl;
+   }
+   else if (entry->object == 0)
+   {
+       cerr << "`entry->object' is NULL." << endl;
+   }
+
+@q **** (4) @>
+
+  @=$$@> |= 4U;
+
+};
+
+@q *** (3) call_metapost_option_list: WITH_NUMERICS numeric_vector_variable @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{WITH\_NUMERICS}
+\§numeric vector variable>.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list WITH_NUMERICS numeric_vector_variable @>
+{
+@q **** (4) @>
+
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list "
+                << "WITH_NUMERICS numeric_vector_variable'."
+                << endl 
+                << "`call_metapost_option_list' == $1 == " << @=$1@> 
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+
+   entry = static_cast<Id_Map_Entry_Node>(@=$3@>);
+
+   Pointer_Vector<real> *pv = 0;
+
+   if (entry && entry->object)
+   {
+      pv = static_cast<Pointer_Vector<real>*>(entry->object);
+
+      if (pv->v.size() == 0)
+         cerr << "`pv->v' is empty." << endl;
+      else
+         cerr << "`pv->v':" << endl;
+
+      for (vector<real*>::iterator iter = pv->v.begin();
+           iter != pv->v.end();
+           ++iter)
+      {
+         cerr << (**iter) << endl;
+      }
+
+   }
+   else if (entry == 0)
+   {
+       cerr << "`entry' is NULL." << endl;
+   }
+   else if (entry->object == 0)
+   {
+       cerr << "`entry->object' is NULL." << endl;
+   }
+
+
+@q **** (4) @>
+
+  @=$$@> |= 8U;
+
+};
+
+@q *** (3) call_metapost_option_list: call_metapost_option_list CLEAR @>
+
+@ \§call metapost option list> $\longrightarrow$ \§call metapost option list> \.{CLEAR}.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list CLEAR @>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list CLEAR'."
+                << endl 
+                << "`call_metapost_option_list' == $1 == " << @=$1@> 
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+  @=$$@> = @=$1@> |= 16U;
+};
+
+@q *** (3) call_metapost_option_list: NO_CLEAR @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{NO\_CLEAR}.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list NO_CLEAR @>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list NO_CLEAR'."
+                << endl 
+                << "`call_metapost_option_list' == $1 == " << @=$1@> 
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+  @=$$@> |= (@=$1@> &= ~16U);
 };
 
 @q ** (2) command: RESET_ARC numeric_list_optional @>
