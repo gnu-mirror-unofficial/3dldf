@@ -1402,7 +1402,8 @@ Added this rule.
 \ENDLOG 
 
 @<Define rules@>= 
-@=command: CALL_METAPOST string_expression COMMA path_vector_variable call_metapost_option_list@>
+@=command: CALL_METAPOST string_expression LEFT_PARENTHESIS path_vector_variable_optional RIGHT_PARENTHESIS @>
+@=call_metapost_option_list @>
 {
 @q *** (3) @>
 
@@ -1426,9 +1427,9 @@ Added this rule.
 
    string *str = static_cast<string*>(@=$2@>);
   
-   entry = static_cast<Id_Map_Entry_Node>(@=$4@>);
    Pointer_Vector<Path> *qv = 0;
 
+   entry = static_cast<Id_Map_Entry_Node>(@=$4@>);
 
    if (!entry)
       cerr << "entry is NULL." << endl;
@@ -1491,15 +1492,20 @@ Added this rule.
 
 @q *** (3) @>
   
-   if (scanner_node->metapost_output_struct->path_vector.size() > 0)
+   if (qv && scanner_node->metapost_output_struct->path_vector.size() > 0)
    {
       qv->v = scanner_node->metapost_output_struct->path_vector;
       qv->ctr = scanner_node->metapost_output_struct->path_vector.size();
    }
 
-    qv->show("qv:");
-   
+   scanner_node->metapost_output_struct->path_vector.clear();
+   delete scanner_node->metapost_output_struct;
+   scanner_node->metapost_output_struct = 0;
+  
 
+   if (qv)
+      qv->show("qv:");
+   
 @q *** (3) @>
 
   @=$$@> = static_cast<void*>(0);
@@ -1550,6 +1556,27 @@ Added this rule.
 
    @=$$@> = 0U;
 
+};
+
+@q ** (2) @>
+@
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> path_vector_variable_optional@>
+
+@q ** (2) @>
+@
+@<Define rules@>= 
+@=path_vector_variable_optional: /* Empty  */@>
+{
+  @=$$@> = 0;
+};
+
+@q ** (2) @>
+@
+@<Define rules@>= 
+@=path_vector_variable_optional: path_vector_variable@>
+{
+  @=$$@> = @=$1@>;
 };
 
 @q *** (3) call_metapost_option_list: call_metapost_option_list SAVE @>

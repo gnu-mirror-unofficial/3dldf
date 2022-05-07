@@ -28,10 +28,15 @@ string s;
 
 s := "path p; p = (1,1) .. (2, 2) .. (3, 3);\nwrite_path(p, output_filename, false);";
 
-call_metapost s, qv save suppress;
+call_metapost s (qv) save suppress;
 
 message "qv in ttemp.ldf:";
 show qv;
+pause;
+
+call_metapost s () save suppress;
+
+message "After second call.";
 pause;
 
 % path r[];
