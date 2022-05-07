@@ -1491,11 +1491,26 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q *** (3) @>
+
+
   
    if (qv && scanner_node->metapost_output_struct->path_vector.size() > 0)
    {
-      qv->v = scanner_node->metapost_output_struct->path_vector;
-      qv->ctr = scanner_node->metapost_output_struct->path_vector.size();
+
+      for (vector<Path*>::iterator iter = scanner_node->metapost_output_struct->path_vector.begin();
+           iter != scanner_node->metapost_output_struct->path_vector.end();
+           ++iter)
+      {
+
+          status
+            = vector_type_plus_assign<Path>(scanner_node,
+                                            entry,
+                                            PATH_VECTOR,
+                                            PATH,
+                                            *iter);
+
+
+      }
    }
 
    scanner_node->metapost_output_struct->path_vector.clear();
