@@ -1531,6 +1531,10 @@ ttemp1.dvi: ttemp1.txt ttemp1.0
 ttemp1.0 ttemp1.1: ttemp1.mp
 	mpost -numbersystem "double" $<
 
+.PHONY: rmt # Remove temporary files
+
+rmt:
+	rm -f ldf_1.log mp_input.?????? mp_output.?????? mp_stdout_stderr.?????? 
 
 # .PHONY: tps
 
