@@ -88,7 +88,7 @@ Added this rule.
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name 

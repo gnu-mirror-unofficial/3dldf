@@ -1,33 +1,322 @@
-                << "$3 == " << @=$3@> << " (dec.) == 0x" 
-                << hex << @=$3@> << " (hex.) == 0" << oct << @=$3@> 
-                << " (oct.)" << dec << endl
-                << "Options:" << endl;
+@q ** (2) command: CALL_METAPOST string_expression call_metapost_option_list @>
+@ \§command> $\longrightarrow$ \.{CALL\_METAPOST} \§string expression> 
+\§call metapost option list>.
+\initials{LDF 2022.05.06.}
 
-      if (@=$3@> & 1U)
-         cerr_strm << "SAVE:  Not deleting temporary MP input and output files." << endl;
-      else 
-         cerr_strm << "NO_SAVE:  Not deleting temporary MP input and output files." << endl;
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
 
-      if (@=$3@> & 2U)
-         cerr_strm << "Saving paths to path_vector variable." << endl;
-      else 
-         cerr_strm << "Not saving paths to path_vector variable." << endl;
+@<Define rules@>= 
+@=command: CALL_METAPOST string_expression call_metapost_option_list@>
+{
+@q *** (3) @>
 
-      if (@=$3@> & 4U)
-         cerr_strm << "Saving points to point_vector variable." << endl;
-      else 
-         cerr_strm << "Not saving points to point_vector variable." << endl;
+   @<Common declarations for rules@>@; 
 
-      if (@=$3@> & 8U)
-         cerr_strm << "Saving numerics to numeric_vector variable." << endl;
-      else 
-         cerr_strm << "Not saving numerics to numeric_vector variable." << endl;
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `command: CALL_METAPOST string_expression "
+                << "call_metapost_option_list'.";
 
-      if (@=$3@> & 16U)
-         cerr_strm << "Clearing vectors, if any, before calling MetaPost." << endl;
-      else 
-         cerr_strm << "Not clearing vectors, if any, before calling MetaPost." << endl;
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
 
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
+@q *** (3) @>
 
-   status = call_metapost(*s, @=$3@>, scanner_node);
+   typedef vector<pair<int, void*> > VP;
+
+   string *str = static_cast<string*>(@=$2@>);
+   VP *vp = static_cast<VP*>(@=$3@>);
+
+@q *** (3) @>
+
+   if (vp == 0)
+      cerr << "vp is NULL." << endl;
+
+@q *** (3) @>
+
+   else
+   {
+@q **** (4) @>
+
+       cerr << "vp is non-NULL." << endl;
+
+       for (VP::iterator iter = vp->begin(); iter != vp->end(); ++iter)
+       {   
+@q ***** (5) @>
+
+           cerr << "`iter->first' == " << iter->first << endl;
+
+           if (iter->second == 0)
+              cerr << "`iter->second' is NULL." << endl;
+           else
+              cerr << "`iter->second' is non-NULL." << endl;
+
+  
+
+@q ***** (5) @>
+
+       } /* |for| */
+
+@q **** (4) @>
+
+   }  /* |else| */
+
+@q *** (3) @>
+@
+@<Define rules@>= 
+
+   status = call_metapost(*str, scanner_node, vp);
+
+   if (status != 0)
+   {
+     cerr_strm << "ERROR!  In parser, `command: CALL_METAPOST string_expression "
+                << "call_metapost_option_list':"
+                << endl 
+                << "`call_metapost' failed, returning " << status << "."
+                << endl
+                << "Failed to execute MetaPost in child process."
+                << endl
+                << "Continuing.";
+
+     log_message(cerr_strm);
+     cerr_message(cerr_strm, true);
+     cerr_strm.str("");
+ 
+
+   }  /* |if (status != 0)| */
+
+@q *** (3) @>
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+     cerr_strm << "In parser, `command: CALL_METAPOST string_expression "
+                << "call_metapost_option_list':"
+                << endl 
+                << "`call_metapost' succeeded, returning 0.";
+
+     log_message(cerr_strm);
+     cerr_message(cerr_strm);
+     cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q *** (3) @>
+
+@q *** (3) @>
+
+  @=$$@> = static_cast<void*>(0);
+};
+
+@q ** (2) call_metapost_option_list @>
+
+@ \§call metapost option list>.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this type declaration.
+\ENDLOG 
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> call_metapost_option_list@>
+
+@q *** (3) call_metapost_option_list: /* Empty  */ @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{Empty}.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: /* Empty  */ @>
+{
+
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: /* Empty */'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   typedef vector<pair<int, void*> > VP;
+
+   VP *vp = new VP;
+
+   @=$$@> = static_cast<void*>(vp);
+
+};
+
+@q *** (3) call_metapost_option_list: call_metapost_option_list SAVE @>
+
+@ \§call metapost option list> $\longrightarrow$ \§call metapost option list> \.{SAVE}.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list SAVE @>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list SAVE'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   typedef vector<pair<int, void*> > VP;
+   VP *vp = static_cast<VP*>(@=$1@>);
+
+   vp->push_back(make_pair(1, static_cast<void*>(0)));
+
+   @=$$@> = static_cast<void*>(vp);
+
+};
+
+@q *** (3) call_metapost_option_list: NO_SAVE @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{NO\_SAVE}.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list NO_SAVE @>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list NO_SAVE'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   typedef vector<pair<int, void*> > VP;
+   VP *vp = static_cast<VP*>(@=$1@>);
+
+   vp->push_back(make_pair(2, static_cast<void*>(0)));
+
+   @=$$@> = static_cast<void*>(vp);
+
+};
+
+@q *** (3) call_metapost_option_list: SUPPRESS @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{NO\_SUPPRESS}.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list SUPPRESS @>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list SUPPRESS'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   typedef vector<pair<int, void*> > VP;
+   VP *vp = static_cast<VP*>(@=$1@>);
+
+   vp->push_back(make_pair(8, static_cast<void*>(0)));
+
+   @=$$@> = static_cast<void*>(vp);
+
+};
+
+@q *** (3) call_metapost_option_list: NO_SUPPRESS @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{NO\_SUPPRESS}.
+\initials{LDF 2022.05.06.}
+
+\LOG
+\initials{LDF 2022.05.06.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list NO_SUPPRESS @>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list NO_SUPPRESS'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   typedef vector<pair<int, void*> > VP;
+   VP *vp = static_cast<VP*>(@=$1@>);
+
+   vp->push_back(make_pair(9, static_cast<void*>(0)));
+
+   @=$$@> = static_cast<void*>(vp);
+
+};

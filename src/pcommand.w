@@ -1688,7 +1688,7 @@ Added this rule.
       pv = static_cast<Pointer_Vector<Path>*>(entry->object);
       pv->show("*pv:");
 
-      vp->push_back(make_pair(3, entry->object));
+      vp->push_back(make_pair(3, &entry));
    }
    else if (entry == 0)
    {
@@ -1753,7 +1753,7 @@ Added this rule.
    {
       pv = static_cast<Pointer_Vector<Point>*>(entry->object);
       pv->show("*pv:");
-      vp->push_back(make_pair(4, entry->object));
+      vp->push_back(make_pair(4, &entry));
    }
    else if (entry == 0)
    {
@@ -1818,7 +1818,7 @@ Added this rule.
    {
       pv = static_cast<Pointer_Vector<real>*>(entry->object);
 
-      vp->push_back(make_pair(5, entry->object));
+      vp->push_back(make_pair(5, &entry));
 
       if (pv->v.size() == 0)
          cerr << "`pv->v' is empty." << endl;
