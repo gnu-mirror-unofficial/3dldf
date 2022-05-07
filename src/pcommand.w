@@ -1450,7 +1450,7 @@ Added this rule.
 @
 @<Define rules@>= 
 
-   status = call_metapost(*str, scanner_node);
+   status = call_metapost(*str, qv, scanner_node);
 
    if (status != 0)
    {
