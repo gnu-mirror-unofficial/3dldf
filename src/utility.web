@@ -1593,14 +1593,14 @@ Added this function.
 
 int
 call_metapost(string& str, Id_Map_Entry_Node path_entry, Id_Map_Entry_Node point_entry, 
-              Id_Map_Entry_Node real_entry, Scanner_Node scanner_node);
+              Id_Map_Entry_Node real_entry, unsigned int options, Scanner_Node scanner_node);
 
 @q ** (2) Definition @>
 @
 @<Define utility functions@>=
 int
 call_metapost(string& str, Id_Map_Entry_Node path_entry, Id_Map_Entry_Node point_entry, 
-              Id_Map_Entry_Node real_entry, Scanner_Node scanner_node)
+              Id_Map_Entry_Node real_entry, unsigned int options, Scanner_Node scanner_node)
 {
 @q *** (3) @>
 
@@ -1646,14 +1646,9 @@ call_metapost(string& str, Id_Map_Entry_Node path_entry, Id_Map_Entry_Node point
 
    int status = 0;
 
-   bool save  = false;
-   bool clear = true;
-
-   bool do_paths             = false;  
-   bool do_points            = false;
-   bool do_reals             = false;  
-   bool suppress_mp_stdout   = false;
-
+   bool save  = options & 1U;
+   bool clear = options & 2U;
+   bool suppress_mp_stdout = options & 4U;
 
 @q *** (3) @>
 @
@@ -1665,9 +1660,6 @@ call_metapost(string& str, Id_Map_Entry_Node path_entry, Id_Map_Entry_Node point
 
    cerr << "save               == " << save << endl 
         << "clear              == " << clear << endl 
-        << "do_paths           == " << do_paths << endl 
-        << "do_points          == " << do_points << endl 
-        << "do_reals           == " << do_reals  << endl
         << "suppress_mp_stdout == " << suppress_mp_stdout << endl;
 
 @q *** (3) @>
@@ -2039,6 +2031,9 @@ call_metapost(string& str, Id_Map_Entry_Node path_entry, Id_Map_Entry_Node point
            iter != scanner_node->metapost_output_struct->path_vector.end();
            ++iter)
       {
+
+/* !!START HERE:  Add error handling.  Also, add code for handling the |point_entry| and 
+   |real_entry|.  */ 
 
           status = Scan_Parse::vector_type_plus_assign<Path>(scanner_node,
                                                              path_entry,

@@ -1435,6 +1435,7 @@ Added this rule.
    Id_Map_Entry_Node point_entry = 0;
    Id_Map_Entry_Node real_entry = 0;
 
+
    if (@=$4@> != 0)
       path_entry = static_cast<Id_Map_Entry_Node>(@=$4@>);
 
@@ -1465,14 +1466,11 @@ Added this rule.
       cerr << "real_entry is non-NULL." << endl;
    }
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
 @q *** (3) @>
 @
 @<Define rules@>= 
 
-   status = call_metapost(*str, path_entry, point_entry, real_entry, scanner_node);
+   status = call_metapost(*str, path_entry, point_entry, real_entry, @=$8@>, scanner_node);
 
    if (status != 0)
    {
