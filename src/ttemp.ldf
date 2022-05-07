@@ -24,7 +24,11 @@ numeric_vector nv;
 nv += 1;
 nv += 2;
 
-call_metapost "z0 = (1,1);show z0;" with_paths qv with_points pv with_numerics nv save suppress;
+string s;
+
+s := "path p; p = (1,1) .. (2, 2) .. (3, 3);\nwrite_path(p, output_filename, false);";
+
+call_metapost s with_paths qv with_points pv with_numerics nv save suppress;
 
 end;
 

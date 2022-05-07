@@ -77,7 +77,7 @@
 
   temp_strm.str("");
 
-  temp_strm << "mpost " << temp_in_filename; 
+
 
   /*  << " >/dev/null 2>/dev/null";  */
 
@@ -86,40 +86,6 @@
 #endif 
 
   errno = 0;
-
-  status = system(temp_strm.str().c_str());
-
-  if (status != 0)
-  {
-      cerr << "ERROR!  In ``call_metapost':  `system' failed, returning `status' == " 
-           << status << "." 
-           << endl 
-           << "`errno' == " << errno << " == " << strerror(errno)
-           << endl 
-           << "Failed to execute `mpost' on temporary input file "
-           << "`" << temp_in_filename << "'."
-           << endl 
-           << "Exiting function unsuccessfully with return value 1."
-           << endl;
-
-       return 1;
-
-  } /* |if (status != 0)| */
-
-@q **** (4) @>
-
-#if DEBUG_COMPILE
-  else if (DEBUG)
-  { 
-      cerr << "In ``call_metapost':  `system' succeeded, returning 0."
-           << endl 
-           << "Executed `mpost' on temporary input file `" << temp_in_filename 
-           << "' successfully."
-           << endl; 
-
-  }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q **** (4) @>
 @
