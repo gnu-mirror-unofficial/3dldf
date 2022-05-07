@@ -11,151 +11,9 @@
 
    int status = 0;
 
-   FILE *fp = 0;
-
-   char buffer[64];
-   memset(buffer, '\0', 64);
-
-   char temp_in_filename[] = "mp_input.XXXXXX";
-    
-   errno = 0;
-   int fd_in = mkstemp(temp_in_filename);
-
-   if (fd_in == -1)
-   {
-           cerr << "ERROR!  In `call_metapost':"
-                << endl 
-                << "`mkstemp' failed, returning -1:"
-                << endl
-                << strerror(errno)
-                << endl 
-                << "Failed to create temporary file."
-                << endl 
-                << "Exiting function unsuccessfully with return value 1."
-                << endl;
-
-           return 1;
-
-   }  /* |if (fd_in == -1)|  */
-
-#if DEBUG_COMPILE
-    else if (DEBUG)
-    {
-        cerr << "In `call_metapost':"
-             << endl 
-             << "`mkstemp' succeeded:  `temp_in_filename' == " << temp_in_filename 
-             << endl;
-
-    }  /* |else if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-    char temp_out_filename[] = "mp_output.XXXXXX";
-    
-    errno = 0;
-    int fd_out = mkstemp(temp_out_filename);
-
-    if (fd_out == -1)
-    {
-            cerr << "ERROR!  In `call_metapost':"
-                 << endl 
-                 << "`mkstemp' failed, returning -1:"
-                 << endl
-                 << strerror(errno)
-                 << endl 
-                 << "Failed to create temporary file."
-                 << endl 
-                 << "Exiting function unsuccessfully with return value 1."
-                 << endl;
-
-            return 1;
-
-    }  /* |if (fd_out == -1)|  */
-
-#if DEBUG_COMPILE
-    else if (DEBUG)
-    {
-        cerr << "In `call_metapost':"
-             << endl 
-             << "`mkstemp' succeeded:  `temp_out_filename' == " << temp_out_filename 
-             << endl;
-
-    }  /* |else if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-
-@q **** (4) @>
-@
-@<Define utility functions@>=
 
    close(fd_out);
    fd_out = 0;
-
-   errno = 0;
-   fp = popen("date", "r");
-
-   if (fp == 0)
-   {
-      cerr << "ERROR!  In `call_metapost':  `popen' failed, returning 0:"
-           << endl
-           << "`errno' == " << errno << ":  " << strerror(errno)
-           << endl
-           << "Exiting function unsuccessfully with return value 1."
-           << endl;
-
-            return 1;
-
-   } /* |if (fp == 0)| */
-
-@q **** (4) @>
-
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-      cerr << "In `call_metapost':  `popen' succeeded."
-           << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q **** (4) @>
-@
-@<Define utility functions@>=
-
-   memset(buffer, '\0', 64);
-
-   errno = 0;
-
-   status = fread(buffer, 1, 64, fp);
-
-   if (status == 0)
-   {
-      cerr << "Error!  In `call_metapost':  `fread' failed, returning " << status << ":"
-           << endl;
-
-      if (ferror(fp))
-         cerr << "`errno' == " << errno << ":  " << strerror(errno) << endl;
-      if (feof(fp))
-         cerr << "Reached EOF." << endl;
-
-      cerr << "Exiting function unsuccessfully with return value 1."
-           << endl;
-
-
-      pclose(fp);
-
-      return 1;
-
-   }  /* |if (status == 0)| */
-
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-      cerr << "In `path::resolve':  `fread' succeeded, returning " << status << "."
-           << endl
-           << "`buffer' == " << buffer << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   pclose(fp);
 
 @q **** (4) @>
 @
@@ -212,52 +70,6 @@
 @q **** (4) @>
 @
 @<Define utility functions@>=
-
-   status = write(fd_in, temp_strm.str().c_str(), temp_strm.str().size());
-
-   errno = 0;
-
-   if (status == -1)
-   {
-       cerr << "ERROR!  In ``call_metapost':  `write' failed, returning -1:" 
-            << endl 
-            << "`errno' == " << errno << ":  " << strerror(errno)
-            << endl
-            << "Exiting function unsuccessfully with return value 1."
-            << endl;
-
-       close(fd_in);
-
-       return 1;
-
-   } 
-   else if (status < temp_strm.str().size())
-   {
-       cerr << "ERROR!  In ``call_metapost':  `write' failed, returning `status' == " << status << ":" 
-            << endl 
-            << "`status < `temp_strm.str().size()' == " << temp_strm.str().size() << ":"
-            << endl
-            << "Failed to write `temp_strm.str()' completely to temporary MetaPost input file"
-            << endl 
-            << "`temp_in_filename' == " << "`" << temp_in_filename << "'."
-            << endl 
-            << "Exiting function unsuccessfully with return value 1."
-            << endl;
-
-       return 1;
-
-   } 
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-       cerr << "In ``call_metapost':  `write' succeeded, returning `status' == " 
-            << status << "."
-            << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   close(fd_in);
-   fd_in = 0;
 
 @q **** (4) @>
 @
@@ -384,6 +196,7 @@
    {
       unlink(temp_in_filename);
       unlink(temp_out_filename);
+      unlink(temp_log_filename);
    }
 
 @q **** (4) @>
