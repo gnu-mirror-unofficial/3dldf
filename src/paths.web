@@ -214,7 +214,6 @@ class Path : public Shape
    friend int Scanner_Type::show_database(void);
    friend int yyparse(yyscan_t);
    friend int zzlex(yyscan_t);
-   friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
    friend int Scan_Parse::drawing_command_glyph(Scanner_Node, int, Glyph*);
 
    friend ostream& operator<<(ostream &o, Path &p);
@@ -16430,7 +16429,6 @@ class Connector_Type
    friend int zzlex(yyscan_t);
    friend ostream& operator<<(ostream& o, Connector_Type& c); 
    friend void* Scan_Parse::clip_to_func(void* arg1, void* parameter);
-   friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
    friend int Pointer_Vector<Path, Path>::resolve(Scanner_Node scanner_node, 
                                                   int res_val,
                                                   int begin,
