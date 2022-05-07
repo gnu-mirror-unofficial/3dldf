@@ -1059,8 +1059,9 @@ utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ mpoutput.h++ origami.h++ \
                        solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
-                       cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                       paraellp.h++ parahypr.h++ glyphs.h++ newwrite.h++ pctfncs0.h++ \
+                       cones.h++ cylinder.h++ ellpsoid.h++ parser.h++ parabold.h++ \
+                       paraellp.h++ parahypr.h++ spheres.h++ sphrdevl.h++ glyphs.h++ \
+                       newwrite.h++ pctfncs0.h++ \
                        scnmptpt.h++ sprellps.h++ 
 	$(CXXCOMPILE) -c -o $@ $<
 

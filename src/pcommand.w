@@ -1391,9 +1391,12 @@ Changed this rule from \§path primary> $\longrightarrow$ \.{REVERSE}
 };
 
 
-@q ** (2) command: CALL_METAPOST string_expression path_vector_variable call_metapost_option_list @>
-@ \§command> $\longrightarrow$ \.{CALL\_METAPOST} \§string expression> 
-\§call metapost option list>.
+@q ** (2) command: CALL_METAPOST string_expression LEFT_PARENTHESIS path_vector_variable_optional @>
+@q point_vector_variable_optional numeric_vector_variable_optional RIGHT_PARENTHESIS              @>
+@q call_metapost_option_list                                                                      @>
+
+
+@ \§command> $\longrightarrow$ \.{CALL\_METAPOST} \§string expression>  $\ldots$
 \initials{LDF 2022.05.06.}
 
 \LOG
@@ -1402,7 +1405,8 @@ Added this rule.
 \ENDLOG 
 
 @<Define rules@>= 
-@=command: CALL_METAPOST string_expression LEFT_PARENTHESIS path_vector_variable_optional RIGHT_PARENTHESIS @>
+@=command: CALL_METAPOST string_expression LEFT_PARENTHESIS path_vector_variable_optional @>
+@=point_vector_variable_optional numeric_vector_variable_optional RIGHT_PARENTHESIS @>
 @=call_metapost_option_list @>
 {
 @q *** (3) @>
@@ -1427,30 +1431,48 @@ Added this rule.
 
    string *str = static_cast<string*>(@=$2@>);
   
-   Pointer_Vector<Path> *qv = 0;
+   Id_Map_Entry_Node path_entry = 0;
+   Id_Map_Entry_Node point_entry = 0;
+   Id_Map_Entry_Node real_entry = 0;
 
-   entry = static_cast<Id_Map_Entry_Node>(@=$4@>);
+   if (@=$4@> != 0)
+      path_entry = static_cast<Id_Map_Entry_Node>(@=$4@>);
 
-   if (!entry)
-      cerr << "entry is NULL." << endl;
+   if (!path_entry)
+      cerr << "path_entry is NULL." << endl;
    else
    {
-       qv = static_cast<Pointer_Vector<Path>*>(entry->object);
+      cerr << "path_entry is non-NULL." << endl;
+   }
 
-       if (qv == 0)
-          cerr << "qv is NULL." << endl;
-       else
-       {
-          cerr << "qv is non-NULL." << endl;
-          cerr << " qv->v.size() == " <<  qv->v.size() << endl;
-       }
-  }
+   if (@=$5@> != 0)
+      point_entry = static_cast<Id_Map_Entry_Node>(@=$4@>);
+
+   if (!point_entry)
+      cerr << "point_entry is NULL." << endl;
+   else
+   {
+      cerr << "point_entry is non-NULL." << endl;
+   }
+
+   if (@=$6@> != 0)
+      real_entry = static_cast<Id_Map_Entry_Node>(@=$4@>);
+
+   if (!real_entry)
+      cerr << "real_entry is NULL." << endl;
+   else
+   {
+      cerr << "real_entry is non-NULL." << endl;
+   }
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 @q *** (3) @>
 @
 @<Define rules@>= 
 
-   status = call_metapost(*str, qv, scanner_node);
+   status = call_metapost(*str, path_entry, point_entry, real_entry, scanner_node);
 
    if (status != 0)
    {
@@ -1484,46 +1506,19 @@ Added this rule.
      cerr_message(cerr_strm);
      cerr_strm.str("");
 
-     cerr << "scanner_node->metapost_output_struct->path_vector.size() == " 
-          << scanner_node->metapost_output_struct->path_vector.size() << endl;
+     if (scanner_node->metapost_output_struct)
+        cerr << "scanner_node->metapost_output_struct->path_vector.size() == " 
+             << scanner_node->metapost_output_struct->path_vector.size() << endl;
+     else 
+        cerr << "scanner_node->metapost_output_struct is NULL." << endl;
+
 
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q *** (3) @>
 
-
-  
-   if (qv && scanner_node->metapost_output_struct->path_vector.size() > 0)
-   {
-
-      for (vector<Path*>::iterator iter = scanner_node->metapost_output_struct->path_vector.begin();
-           iter != scanner_node->metapost_output_struct->path_vector.end();
-           ++iter)
-      {
-
-          status
-            = vector_type_plus_assign<Path>(scanner_node,
-                                            entry,
-                                            PATH_VECTOR,
-                                            PATH,
-                                            *iter);
-
-
-      }
-   }
-
-   scanner_node->metapost_output_struct->path_vector.clear();
-   delete scanner_node->metapost_output_struct;
-   scanner_node->metapost_output_struct = 0;
-  
-
-   if (qv)
-      qv->show("qv:");
-   
-@q *** (3) @>
-
-  @=$$@> = static_cast<void*>(0);
+   @=$$@> = 0;
 };
 
 @q ** (2) call_metapost_option_list @>
@@ -1593,6 +1588,49 @@ Added this rule.
 {
   @=$$@> = @=$1@>;
 };
+
+@q ** (2) @>
+@
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> point_vector_variable_optional@>
+
+@q ** (2) @>
+@
+@<Define rules@>= 
+@=point_vector_variable_optional: /* Empty  */@>
+{
+  @=$$@> = 0;
+};
+
+@q ** (2) @>
+@
+@<Define rules@>= 
+@=point_vector_variable_optional: COMMA point_vector_variable@>
+{
+  @=$$@> = @=$2@>;
+};
+
+@q ** (2) @>
+@
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> numeric_vector_variable_optional@>
+
+@q ** (2) @>
+@
+@<Define rules@>= 
+@=numeric_vector_variable_optional: /* Empty  */@>
+{
+  @=$$@> = 0;
+};
+
+@q ** (2) @>
+@
+@<Define rules@>= 
+@=numeric_vector_variable_optional: COMMA numeric_vector_variable@>
+{
+  @=$$@> = @=$2@>;
+};
+
 
 @q *** (3) call_metapost_option_list: call_metapost_option_list SAVE @>
 
