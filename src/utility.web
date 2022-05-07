@@ -1589,18 +1589,14 @@ Added this function.
 
 @<Declare utility functions@>=
 
-typedef vector<pair<int, void*> > VP;
-
 int
-call_metapost(string& str, Scanner_Node scanner_node, VP *vp = 0);
+call_metapost(string& str, Scanner_Node scanner_node);
 
 @q ** (2) Definition @>
 @
 @<Define utility functions@>=
 int
-call_metapost(string& str,
-              Scanner_Node scanner_node,
-              VP *vp)
+call_metapost(string& str, Scanner_Node scanner_node)
 {
 @q *** (3) @>
 
@@ -1610,13 +1606,6 @@ call_metapost(string& str,
    { 
        cerr << "Entering `call_metapost'." << endl
             << "`str'     == " << str << endl;
-
-        if (vp == 0)
-           cerr << "`vp' is NULL." << endl;
-        else   
-        {
-           cerr << "`vp' is non-NULL." << endl;
-        }
    }
 
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -1672,60 +1661,6 @@ call_metapost(string& str,
 @q *** (3) @>
 @
 @<Define utility functions@>=
-
-   for (VP::iterator iter = vp->begin(); iter != vp->end(); ++iter)
-   {
-      cerr << "iter->first == " << iter->first << endl;
-
-      if (iter->second == 0)
-         cerr << "iter->second is NULL." << endl;
-      else
-         cerr << "iter->second is non-NULL." << endl;
-
-      if (iter->first == 1)
-         save = true;
-      else if (iter->first == 2)
-          save = false;
-      else if (iter->first == 3 && iter->second != 0)  /* Paths  */
-      {
-          do_paths = true;
-          path_vector_entry = *(static_cast<Id_Map_Entry_Node*>(iter->second));
-          path_pv = static_cast<Pointer_Vector<Path>*>(path_vector_entry->object);
-
-          if (path_pv == 0)
-              cerr << "path_pv is NULL." << endl;
-          else
-              cerr << "path_pv is not NULL." << endl;
-      }
-      else if (iter->first == 4 && iter->second != 0)  /* Points  */
-      {
-          do_points = true;
-          point_vector_entry = *(static_cast<Id_Map_Entry_Node*>(iter->second));
-          point_pv = static_cast<Pointer_Vector<Point>*>(point_vector_entry->object);
-      }
-      else if (iter->first == 5 && iter->second != 0)  /* reals  */
-      {
-          do_reals = true;
-          real_vector_entry = *(static_cast<Id_Map_Entry_Node*>(iter->second));
-          real_pv = static_cast<Pointer_Vector<real>*>(real_vector_entry->object);
-      }
-      else if (iter->first == 6)
-          clear = true;
-      else if (iter->first == 7)
-          clear = false;
-      else if (iter->first == 8)
-          suppress_mp_stdout = true;
-      else if (iter->first == 9)
-          suppress_mp_stdout = false;
-
-   }  /* |for| */
-
-@q *** (3) @>
-@
-@<Define utility functions@>=
-
-      
-
 
 @q *** (3) @>
 @
@@ -2103,30 +2038,6 @@ call_metapost(string& str,
 @
 @<Define utility functions@>=
 
-  if (scanner_node->metapost_output_struct->path_vector.size() > 0 && path_pv != 0)
-  {
-     cerr << "Here I am." << endl;           
-
-     Pointer_Vector<Path> temp_pv;
-
-     for (vector<Path*>::iterator iter = scanner_node->metapost_output_struct->path_vector.begin();
-          iter != scanner_node->metapost_output_struct->path_vector.end();
-          ++iter)
-     {
-        temp_pv.v.push_back(create_new<Path>(0));
-        *(temp_pv.v.back()) = **iter;
-        temp_pv.ctr++;
-     }
-     
-     *path_pv = temp_pv;
-
-
-  }
-
-@q *** (3) @>
-@
-@<Define utility functions@>=
-
    if (save)
    {
        cerr << "Wrote input file `" << temp_in_filename << "', "
@@ -2145,8 +2056,6 @@ call_metapost(string& str,
       unlink(temp_out_filename);
       unlink(temp_stdout_stderr_filename);
    }
-
-   scanner_node->metapost_output_struct = 0;
 
 #if DEBUG_COMPILE
    if (DEBUG)

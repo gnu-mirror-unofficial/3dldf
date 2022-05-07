@@ -28,9 +28,31 @@ string s;
 
 s := "path p; p = (1,1) .. (2, 2) .. (3, 3);\nwrite_path(p, output_filename, false);";
 
-call_metapost s with_paths qv with_points pv with_numerics nv save suppress;
+call_metapost s, qv save suppress;
 
-show qv0;
+message "qv in ttemp.ldf:";
+show qv;
+pause;
+
+% path r[];
+% r0 := (1, 1) .. (2, 2);
+% r1 := (1, 1) .. (2, 2);
+
+% qv += r0;
+% qv += r1;
+
+
+% message "size qv:";
+% show size qv;
+% pause;
+
+% message "qv:";
+% show qv;
+
+% message "qv0:";
+% show qv0;
+
+
 
 %path_vector rv;
 

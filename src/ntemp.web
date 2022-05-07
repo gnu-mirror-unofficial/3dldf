@@ -1,5 +1,5 @@
-@q ** (2) command: CALL_METAPOST string_expression call_metapost_option_list @>
-@ \§command> $\longrightarrow$ \.{CALL\_METAPOST} \§string expression> 
+@q ** (2) path_vector_primary: CALL_METAPOST string_expression call_metapost_option_list @>
+@ \§path vector primary> $\longrightarrow$ \.{CALL\_METAPOST} \§string expression> 
 \§call metapost option list>.
 \initials{LDF 2022.05.06.}
 
@@ -9,7 +9,7 @@ Added this rule.
 \ENDLOG 
 
 @<Define rules@>= 
-@=command: CALL_METAPOST string_expression call_metapost_option_list@>
+@=path_vector_primary: CALL_METAPOST string_expression call_metapost_option_list@>
 {
 @q *** (3) @>
 
@@ -19,7 +19,7 @@ Added this rule.
    DEBUG = true; /* |false| */ 
    if (DEBUG)
    { 
-      cerr_strm << "*** Parser: `command: CALL_METAPOST string_expression "
+      cerr_strm << "*** Parser: `path_vector_primary: CALL_METAPOST string_expression "
                 << "call_metapost_option_list'.";
 
       log_message(cerr_strm);
@@ -78,7 +78,7 @@ Added this rule.
 
    if (status != 0)
    {
-     cerr_strm << "ERROR!  In parser, `command: CALL_METAPOST string_expression "
+     cerr_strm << "ERROR!  In parser, `path_vector_primary: CALL_METAPOST string_expression "
                 << "call_metapost_option_list':"
                 << endl 
                 << "`call_metapost' failed, returning " << status << "."
@@ -99,7 +99,7 @@ Added this rule.
 #if DEBUG_COMPILE
    else if (DEBUG)
    { 
-     cerr_strm << "In parser, `command: CALL_METAPOST string_expression "
+     cerr_strm << "In parser, `path_vector_primary: CALL_METAPOST string_expression "
                 << "call_metapost_option_list':"
                 << endl 
                 << "`call_metapost' succeeded, returning 0.";
@@ -114,6 +114,9 @@ Added this rule.
 @q *** (3) @>
 
 @q *** (3) @>
+
+
+
 
   @=$$@> = static_cast<void*>(0);
 };

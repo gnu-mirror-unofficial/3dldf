@@ -966,8 +966,7 @@ class Id_Map_Entry_Type
 
   friend int yyparse(yyscan_t);
 
-  typedef vector<pair<int, void*> > VP;
-  friend int call_metapost(string& str, Scanner_Node scanner_node, VP *vp);
+  friend int call_metapost(string& str, Scanner_Node scanner_node);
 
   @<|friend| declarations for functions in |namespace Scan_Parse|@>@;
 
@@ -2559,9 +2558,7 @@ Added |friend| declaration for |class Rhombic_Triacontahedron|.
                                                  Pointer_Vector<real> *, 
                                                  Transform *);
 
-  typedef vector<pair<int, void*> > VP;
-
-  friend int call_metapost(string&, Scanner_Node, VP*);
+  friend int call_metapost(string&, Scanner_Node);
 
   @<|friend| declarations for functions in |namespace Scan_Parse|@>@;
 
