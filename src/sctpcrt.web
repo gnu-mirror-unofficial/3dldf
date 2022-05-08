@@ -2987,6 +2987,9 @@ calls to |scanner_node->add_synonym| for
                            DIRECTIONPOINT, 
                            spark);
 
+   scanner_node->add_entry("precontrol", PRECONTROL, spark);
+   scanner_node->add_entry("postcontrol", POSTCONTROL, spark);
+
    scanner_node->add_synonym("direction_point", "directionpoint");
 
    scanner_node->add_entry("with_sides", WITH_SIDES, spark);
@@ -3371,9 +3374,11 @@ Added call to |scanner_node->add_entry| for |intersection|.
   scanner_node->add_entry("intersection", INTERSECTION, spark);
   scanner_node->add_entry("intersection_point", INTERSECTION_POINT, spark);
   scanner_node->add_entry("intersection_points", INTERSECTION_POINTS, spark);
+  scanner_node->add_entry("intersectiontimes", INTERSECTIONTIMES, spark);
 
   scanner_node->add_synonym("intersectionpoint", "intersection_point");
   scanner_node->add_synonym("intersectionpoints", "intersection_points");
+  scanner_node->add_synonym("intersection_times", "intersectiontimes");
 
 @q **** (4) Types for conditionals.  @>
 @*3 Types for conditionals.

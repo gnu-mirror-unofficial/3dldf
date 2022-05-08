@@ -144,6 +144,40 @@ def write_path (expr ppath, filename, do_show) =
     
 enddef;
 
+%% * (1) write_numeric
+
+%% * (1) write_path
+
+def write_numeric (expr nn, filename, do_show) =
+
+  begingroup;
+    save s;
+    string s;
+    
+    if do_show:
+      message "Entering write_numeric.";
+    fi
+
+    s = "REAL " & decimal nn; 
+
+    if do_show:
+      message "s == " & s;
+    fi
+    
+    write s to filename;
+
+    if do_show:
+      message "Exiting write_numeric.";
+    fi
+
+  endgroup;
+    
+enddef;
+
+%% ** (2) End of write_numeric definition
+
+%% * (1)
+
 endinput;
 
 % %% * (1)

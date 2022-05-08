@@ -17,7 +17,28 @@ set f with_position (0, 20, -50)
        with_direction (0, 20, 10) with_distance 70; 
 
 
+
+path q;
+q := unit_circle scaled (3cm, 0, 3cm);
+rotate q (90, 0);
+numeric r;
+r := directiontime (0, 1) of q;
+
+message "r:";
+show r;
+pause;
+
+r := directiontime (1, 1) of q;
+
+message "r:";
+show r;
+pause;
+
+end;
+
+
 path q[];
+
 
 beginfig(0);
 

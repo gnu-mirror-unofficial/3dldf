@@ -2075,6 +2075,9 @@ Added token declarations for |DIRECTION|, |DIRECTIONTIME| and |DIRECTIONPOINT|.
 @=%token <int_value> DIRECTIONTIME@>@/
 @=%token <int_value> DIRECTIONPOINT@>@/
 
+@=%token <int_value> PRECONTROL@>@/
+@=%token <int_value> POSTCONTROL@>@/
+
 @=%token <int_value> WITH_POSITION@>@/
 @=%token <int_value> WITH_DIRECTION@>@/
 @=%token <int_value> WITH_DISTANCE@>@/
@@ -2504,6 +2507,7 @@ Added token declaration for |INTERSECTION|.
 @<Token and precedence declarations@>=
 
 @=%token <int_value> INTERSECTION@>@/
+@=%token <int_value> INTERSECTIONTIMES@>@/
 @=%token <int_value> INTERSECTION_POINT@>@/
 @=%token <int_value> INTERSECTION_POINTS@>@/
 
