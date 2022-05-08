@@ -1470,7 +1470,20 @@ Added this rule.
 @
 @<Define rules@>= 
 
-   status = call_metapost(*str, path_entry, point_entry, real_entry, @=$8@>, scanner_node);
+   bool save               = @=$8@> & 1U;
+   bool clear              = @=$8@> & 2U;
+   bool suppress_mp_stdout = @=$8@> & 4U;
+   bool do_transform       = @=$8@> & 8U;
+
+   status = call_metapost(*str, 
+                          path_entry, 
+                          point_entry, 
+                          real_entry, 
+                          save, 
+                          clear, 
+                          suppress_mp_stdout, 
+                          do_transform, 
+                          scanner_node);
 
    if (status != 0)
    {
@@ -1765,7 +1778,7 @@ Added this rule.
 
 @q *** (3) call_metapost_option_list: SUPPRESS @>
 
-@ \§call metapost option list> $\longrightarrow$ \.{NO\_SUPPRESS}.
+@ \§call metapost option list> $\longrightarrow$ \.{SUPPRESS}.
 \initials{LDF 2022.05.06.}
 
 \LOG
@@ -1828,6 +1841,74 @@ Added this rule.
    @=$$@> = @=$1@> &= ~4U;
 
 };
+
+
+@q *** (3) call_metapost_option_list: WITH_TRANSFORM @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{WITH\_TRANSFORM}.
+\initials{LDF 2022.05.08.}
+
+\LOG
+\initials{LDF 2022.05.08.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list WITH_TRANSFORM @>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list WITH_TRANSFORM'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   @=$$@> = @=$1@> |= 8U;
+
+};
+
+@q *** (3) call_metapost_option_list: WITH_NO_TRANSFORM @>
+
+@ \§call metapost option list> $\longrightarrow$ \.{WITH\_NO\_TRANSFORM}.
+\initials{LDF 2022.05.08.}
+
+\LOG
+\initials{LDF 2022.05.08.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=call_metapost_option_list: call_metapost_option_list WITH_NO_TRANSFORM @>
+{
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `call_metapost_option_list: call_metapost_option_list WITH_NO_TRANSFORM'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   @=$$@> = @=$1@> &= ~8U;
+
+};
+
 
 
 @q ** (2) command: RESET_ARC numeric_list_optional @>

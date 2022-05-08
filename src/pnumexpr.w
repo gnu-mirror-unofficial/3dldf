@@ -2886,10 +2886,12 @@ Added this rule.
   
 };
 
-@q ***** (5) numeric_primary --> ANGLE DIRECTION numeric_expression OF path_expression x_axis_point_optional minus_optional@>@/
+@q ***** (5) numeric_primary --> ANGLE DIRECTION numeric_expression OF path_expression @>@/
+@q x_axis_point_optional minus_optional@>@/
 
-@ \§numeric primary> $\longrightarrow$ \.{ANGLE} \.{DIRECTION} \§numeric expression> \.{Of} \§path expression>
-\§x axis point optional>  \§minus optional>.
+@ \§numeric primary> $\longrightarrow$ \.{ANGLE} \.{DIRECTION} 
+\§numeric expression> \.{Of} \§path expression> \§x axis point optional>
+\§minus optional>.
 \initials{LDF 2021.11.24.}
 
 \LOG
@@ -2899,7 +2901,8 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=numeric_primary: ANGLE DIRECTION numeric_expression OF path_expression x_axis_point_optional minus_optional@>@/
+@=numeric_primary: ANGLE DIRECTION numeric_expression OF path_expression @>@/
+@=x_axis_point_optional minus_optional@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -2909,7 +2912,8 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "*** Parser: ANGLE DIRECTION numeric_expression OF path_expression x_axis_point_optional minus_optional.";
+                << "*** Parser: ANGLE DIRECTION numeric_expression OF path_expression "
+                << "x_axis_point_optional minus_optional.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -2935,7 +2939,6 @@ Added this rule.
   @=$$@> = r;
   
 };
-
 
 @q ***** (5) numeric_primary --> TURNINGNUMBER path_expression@>@/
 
@@ -2977,11 +2980,15 @@ Added this rule.
 
 @q ***** (5) numeric_secondary --> DIRECTIONTIME numeric_list OF path_primary.  @>
 
-@*4 \§numeric secondary> $\longrightarrow$ \.{DIRECTIONTIME} \§numeric list> \.{OF} §path primary>.
+@*4 \§numeric secondary> $\longrightarrow$ \.{DIRECTIONTIME} \§numeric list> \.{OF} §path primary>
+\§call metapost option list>.
 \initials{LDF 2022.05.05.}
 
+!! TODO:  LDF 2022.05.08.  Make this work for the cast that the path has to be 
+transformed.
+
 @<Define rules@>=
-@=numeric_secondary: DIRECTIONTIME numeric_list OF path_primary@>@;
+@=numeric_secondary: DIRECTIONTIME numeric_list OF path_primary call_metapost_option_list @>@;
 {
 @q ****** (6) @>
 
@@ -2994,12 +3001,15 @@ Added this rule.
        if (DEBUG)
        {
          cerr_strm << thread_name 
-                   << "*** Parser: numeric_secondary: DIRECTIONTIME numeric_list OF path_primary.";
+                   << "*** Parser: numeric_secondary: DIRECTIONTIME numeric_list OF path_primary"
+                   << endl 
+                   << "call_metapost_option_list."
+                   << endl 
+                   << "`call_metapost_option_list' ($5) == " << @=$5@>;
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);
          cerr_strm.str("");
-
        }    
        
    }  
@@ -3010,6 +3020,11 @@ Added this rule.
    Pointer_Vector<real> *pv = static_cast<Pointer_Vector<real>*>(@=$2@>);
    Path *q = static_cast<Path*>(@=$4@>);
 
+   bool save               = @=$5@> & 1U;
+   bool clear              = @=$5@> & 2U;
+   bool suppress_mp_stdout = @=$5@> & 4U;
+   bool do_transform       = @=$5@> & 8U;
+
    real r = 0.0;
 
    if (pv && q && pv->v.size() >= 2)
@@ -3019,9 +3034,7 @@ Added this rule.
 
         q->show("q:");
 
-        bool b = true;
-
-        status = q->get_directiontime(*(pv->v[0]), *(pv->v[1]), &r, b, scanner_node); 
+        status = q->get_directiontime(*(pv->v[0]), *(pv->v[1]), &r, save, clear, suppress_mp_stdout, do_transform, scanner_node); 
 
         if (status != 0)
         {
@@ -3065,14 +3078,12 @@ Added this rule.
 
 @q ****** (6) @>
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
 };
 
-@q ***** (5) numeric_secondary --> DIRECTIONTIME point_secondary OF path_primary.  @>
+@q ***** (5) numeric_secondary --> DIRECTIONTIME point_secondary OF path_primary call_metapost_option_list.  @>
 
-@*4 \§numeric secondary> $\longrightarrow$ \.{DIRECTIONTIME} \§point secondary> \.{OF} §path primary>.
+@*4 \§numeric secondary> $\longrightarrow$ \.{DIRECTIONTIME} \§point secondary> \.{OF} §path primary>
+\§call metapost option list>.
 \initials{LDF 2022.05.05.}
 
 A comma is needed to separate the \§point secondary> from the \§path primary> because
@@ -3080,7 +3091,7 @@ otherwise the name of the |path| would just be considered a suffix of the name o
 \initials{LDF 2022.05.05.}
 
 @<Define rules@>=
-@=numeric_secondary: DIRECTIONTIME point_secondary OF path_primary@>@;
+@=numeric_secondary: DIRECTIONTIME point_secondary OF path_primary call_metapost_option_list@>@;
 {
    @<Common declarations for rules@>@; 
  
@@ -3091,7 +3102,9 @@ otherwise the name of the |path| would just be considered a suffix of the name o
        if (DEBUG)
        {
          cerr_strm << thread_name 
-                   << "*** Parser: numeric_secondary: DIRECTIONTIME point_secondary OF path_primary.";
+                   << "*** Parser: numeric_secondary: DIRECTIONTIME point_secondary"
+                   << endl 
+                   << "OF path_primary call_metapost_option_list.";
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);

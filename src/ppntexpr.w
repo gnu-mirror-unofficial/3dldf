@@ -2871,9 +2871,9 @@ Added this rule.
 
 };
 
-
 @q ** (2) point_primary --> DIRECTION numeric_expression OF path_expression x_axis_point_optional @>
 @q ** (2) minus_optional                                                                          @>
+
 @*1 \ypoint primary> $\longrightarrow$ \.{DIRECTION} \§numeric expression> \.{OF} \§path expression>
 \§x axis point optional> \§minus optional>.
 \initials{LDF 2021.11.24.}

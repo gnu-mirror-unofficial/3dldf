@@ -1191,15 +1191,29 @@ Added this function.
 @<Declare utility functions@>=
 
 int
-call_metapost(string str, Id_Map_Entry_Node path_entry, Id_Map_Entry_Node point_entry, 
-              Id_Map_Entry_Node real_entry, unsigned int options, Scanner_Node scanner_node);
+call_metapost(string str, 
+              Id_Map_Entry_Node path_entry, 
+              Id_Map_Entry_Node point_entry, 
+              Id_Map_Entry_Node real_entry, 
+              bool save,
+              bool clear,
+              bool suppress_mp_stdout,
+              bool do_transform,
+              Scanner_Node scanner_node);
 
 @q ** (2) Definition @>
 @
 @<Define utility functions@>=
 int
-call_metapost(string str, Id_Map_Entry_Node path_entry, Id_Map_Entry_Node point_entry, 
-              Id_Map_Entry_Node real_entry, unsigned int options, Scanner_Node scanner_node)
+call_metapost(string str, 
+              Id_Map_Entry_Node path_entry, 
+              Id_Map_Entry_Node point_entry, 
+              Id_Map_Entry_Node real_entry, 
+              bool save,
+              bool clear,
+              bool suppress_mp_stdout,
+              bool do_transform,
+              Scanner_Node scanner_node)
 {
 @q *** (3) @>
 
@@ -1245,9 +1259,6 @@ call_metapost(string str, Id_Map_Entry_Node path_entry, Id_Map_Entry_Node point_
 
    int status = 0;
 
-   bool save  = options & 1U;
-   bool clear = options & 2U;
-   bool suppress_mp_stdout = options & 4U;
 
 @q *** (3) @>
 @
@@ -1257,9 +1268,13 @@ call_metapost(string str, Id_Map_Entry_Node path_entry, Id_Map_Entry_Node point_
 @
 @<Define utility functions@>=
 
-   cerr << "save               == " << save << endl 
-        << "clear              == " << clear << endl 
-        << "suppress_mp_stdout == " << suppress_mp_stdout << endl;
+   cerr << "save               == " << save 
+        << endl 
+        << "clear              == " << clear 
+        << endl 
+        << "suppress_mp_stdout == " << suppress_mp_stdout 
+        << endl
+        << "do_transform       == " << do_transform << endl;
 
 @q *** (3) @>
 @
