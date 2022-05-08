@@ -14859,6 +14859,9 @@ Path::get_direction(real ttime,
 /* !!START HERE:  LDF 2021.11.24.  Add error handling.  Make sure unlink works.  
    Also, add a way of setting a point to put on the x-axis.  */ 
 
+/* !!START HERE:  LDF 2022.05.08.  Check whether this still works.  Maybe rewrite using a call
+   to |call_metapost|.  */ 
+
   s << "echo \"\\path p; p = ";
 
   string connector;
@@ -14993,7 +14996,7 @@ resolve(Pointer_Vector<Path> *pv,
         int res_val,
         int begin = 0, 
         int end = -1,
-        bool do_unlink = true, 
+        bool save = true, 
         bool do_transform = true,
         bool do_test_planar = true,
         bool do_make_planar = true,
@@ -15008,7 +15011,7 @@ Path::resolve(Pointer_Vector<Path> *pv,
               int res_val,
               int begin, 
               int end,
-              bool do_unlink, 
+              bool save, 
               bool do_transform,
               bool do_test_planar, 
               bool do_make_planar,         
@@ -15040,7 +15043,7 @@ Path::resolve(Pointer_Vector<Path> *pv,
 
    unsigned int options = 0U;
 
-   if (!do_unlink)
+   if (save)
       options |= 1U; /* |save| in |call_metapost|.  \initials{LDF 2022.05.08.}  */
 
 
@@ -15070,7 +15073,7 @@ Path::resolve(Pointer_Vector<Path> *pv,
             << "`res_val'        == " << res_val << endl 
             << "`begin'          == " << begin << endl 
             << "`end'            == " << end << endl 
-            << "`do_unlink'      == " << do_unlink << endl 
+            << "`save'      == " << save << endl 
             << "`do_transform'   == " << do_transform << endl
             << "`do_ampersand'   == " << do_ampersand << endl
             << "`do_test_planar' == " << do_test_planar << endl 
@@ -15400,7 +15403,14 @@ transferring it to the x-y plane.  Write a function for this.
 
    string str = temp_strm.str();
 
-   status = call_metapost(str, 0, 0, 0, options, scanner_node);
+
+   /* Passing |false| as |do_transform| argument to |call_metapost| because
+      we did the transformation above.
+      \initials{LDF 2022.05.08.}  */
+
+   status = call_metapost(str, 0, 0, 0, save, false, false, 
+                          false, /* This is |do_transform| argument to |call_metapost|.  */
+                          scanner_node);
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -15415,6 +15425,16 @@ transferring it to the x-y plane.  Write a function for this.
            << scanner_node->metapost_output_struct->path_vector.size() << endl;
    else 
       cerr << "scanner_node->metapost_output_struct is NULL." << endl;
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+ 
+   /* !!START HERE:  LDF 2022.05.08.  Transform back if transformation was performed.
+      Check how this function works again and do this carefully!
+      LDF 2022.05.08.     
+   */ 
+
 
 @q **** (4) @>
 @
@@ -15907,7 +15927,10 @@ int
 get_directiontime(real x, 
                   real y, 
                   real *r, 
-                  bool do_transform = true, 
+                  bool save,               
+                  bool clear,              
+                  bool suppress_mp_stdout,
+                  bool do_transform,
                   Scanner_Node scanner_node = 0);
 
 @q *** (3) Definition @>
@@ -15917,7 +15940,10 @@ int
 Path::get_directiontime(real x, 
                         real y, 
                         real *r, 
-                        bool do_transform, 
+                        bool save,               
+                        bool clear,              
+                        bool suppress_mp_stdout,
+                        bool do_transform,
                         Scanner_Node scanner_node)
 {
 @q **** (4) @>
@@ -15959,7 +15985,9 @@ Path::get_directiontime(real x,
 @
 @<Define |Path| functions@>=
 
-   status = call_metapost(temp_strm.str(), 0, 0, 0, 1U, scanner_node);
+
+   status = call_metapost(temp_strm.str(), 0, 0, 0, save, clear, 
+                          suppress_mp_stdout, do_transform, scanner_node);
 
    cerr << "status == " << status << endl;
 
@@ -16140,7 +16168,7 @@ class Connector_Type
                                                   int res_val,
                                                   int begin,
                                                   int end,
-                                                  bool do_unlink, 
+                                                  bool save, 
                                                   bool do_transform,
                                                   bool do_test_planar, 
                                                   bool do_make_planar,         
