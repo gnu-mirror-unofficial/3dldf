@@ -15402,16 +15402,19 @@ transferring it to the x-y plane.  Write a function for this.
 
    status = call_metapost(str, 0, 0, 0, options, scanner_node);
 
-   cerr << "`call_metapost' returned `status' == " << status << endl;
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "`call_metapost' returned `status' == " << status << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
 
    if (scanner_node->metapost_output_struct)
       cerr << "scanner_node->metapost_output_struct->path_vector.size() == " 
            << scanner_node->metapost_output_struct->path_vector.size() << endl;
    else 
       cerr << "scanner_node->metapost_output_struct is NULL." << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
 @q **** (4) @>
 @
@@ -15424,9 +15427,12 @@ getchar();
        pv->v.push_back(*iter);
    }
 
-cerr << "pv->v.size() == " << pv->v.size() << endl;
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "pv->v.size() == " << pv->v.size() << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
    scanner_node->metapost_output_struct->path_vector.clear();
    scanner_node->metapost_output_struct->real_vector.clear();
@@ -15939,16 +15945,16 @@ Path::get_directiontime(real x,
              << y << ") of Q;" 
              << endl; 
 
-   cerr << "temp_strm.str() == " << endl << temp_strm.str() << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "temp_strm.str() == " << endl << temp_strm.str() << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
-
-
 
 @q **** (4) @>
 
