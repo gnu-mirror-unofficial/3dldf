@@ -15890,7 +15890,6 @@ Path::flatten(int coord, real r)
 
 } /* End of |Path::flatten| definition  */
 
-
 @q ** (2) Get directiontime (|get_directiontime|).  @>
 
 @ Get directiontime (|get_directiontime|).
@@ -15940,9 +15939,13 @@ Path::get_directiontime(real x,
 @
 @<Define |Path| functions@>=
 
-   temp_strm << "path Q;" << endl << "Q = " << *this << ";" << endl
-             << "numeric n;" << endl << "n = directiontime (" << x << ", " 
-             << y << ") of Q;" 
+   temp_strm << "input writemcs.mp;" << endl << "path Q;" << endl << "Q = " << *this << ";"  
+             << endl
+             << "numeric n;" << endl << "n = directiontime (" << x << ", " << y << ") of Q;" 
+             << endl 
+             << "message \"n:\";show n;" << endl 
+             << "write_numeric(n, output_filename, true);" << endl 
+             << "end;"
              << endl; 
 
 #if DEBUG_COMPILE
@@ -15955,6 +15958,25 @@ Path::get_directiontime(real x,
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
+
+   status = call_metapost(temp_strm.str(), 0, 0, 0, 1U, scanner_node);
+
+   cerr << "status == " << status << endl;
+
+   if (scanner_node->metapost_output_struct)
+   {
+      cerr << "scanner_node->metapost_output_struct->real_vector.size() == " 
+           << scanner_node->metapost_output_struct->real_vector.size() << endl;
+
+      if (scanner_node->metapost_output_struct->real_vector.size() > 0)
+         *r = scanner_node->metapost_output_struct->real_vector[0];
+      
+      delete scanner_node->metapost_output_struct;
+      scanner_node->metapost_output_struct = 0;
+      
+   }
+   else
+     cerr << "scanner_node->metapost_output_struct is NULL." << endl;
 
 @q **** (4) @>
 
