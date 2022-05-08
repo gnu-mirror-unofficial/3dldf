@@ -17,6 +17,62 @@ set f with_position (0, 20, -50)
        with_direction (0, 20, 10) with_distance 70; 
 
 
+path q[];
+
+beginfig(0);
+
+  pickup medium_pen;
+
+  circle c;
+
+  set c with_diameter 12cm with_point_count 8;
+
+  rotate c (90, 0);
+
+  q0 := c;
+  
+  draw q0;
+
+  point p[];
+
+  for i = 0 upto 7:
+    p[i] := get_point (i) q0;
+  endfor;
+
+  dotlabel.rt("$p_0$", p0);
+  dotlabel.urt("$p_1$", p1);
+  dotlabel.top("$p_2$", p2);
+  dotlabel.ulft("$p_3$", p3);
+  dotlabel.lft("$p_4$", p4);
+  dotlabel.llft("$p_5$", p5);
+  dotlabel.bot("$p_6$", p6);
+  dotlabel.lrt("$p_7$", p7);
+  
+  for i = 0 upto (size q0 - 1):
+    %drawdot get_point (i) q0 with_pen dot_pen with_color blue;
+  endfor;
+
+  path_vector pv;
+  
+  pv := resolve q0 to 18 with_no_transform save;
+
+  message "size pv:";
+  show size pv;
+
+  message "pv:";
+  show pv;
+
+  message "pv0:";
+  show pv0;
+
+  
+endfig with_projection parallel_x_y;
+
+end_mp;
+end;
+
+
+
 path_vector qv;
 point_vector pv;
 numeric_vector nv;

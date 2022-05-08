@@ -3,12 +3,10 @@
 
 boolean extern;
 
-string output_filename;
 input TEX;
 
 prologues := 3;
 outputtemplate := "%j%3c.eps";
-input writemcs.mp;
 
 numeric begin_val;
 numeric end_val;
@@ -30,11 +28,6 @@ path Q[];
 pair r[];
 
 string date_str;
-
-
-  
-
-
 
 endinput;
 
