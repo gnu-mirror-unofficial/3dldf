@@ -3046,6 +3046,71 @@ Added this rule.
    @=$$@> = -1;
 }
 
+@q ** (2) point_primary: PRECONTROL numeric_expression OF path_primary @>
+
+@ \§point primary> $\longrightarrow$ \.{PRECONTROL} \§numeric expression> \.{OF} \§path primary>
+\§call metapost option list>.
+\initials{LDF 2022.05.08.}
+
+\LOG
+\initials{LDF 2022.05.08.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=point_primary: PRECONTROL numeric_expression OF path_primary call_metapost_option_list@>
+{
+   @<Common declarations for rules@>@; 
+
+   Path *q = static_cast<Path*>(@=$4@>);
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG)
+      {
+          cerr_strm << thread_name 
+                    << "*** Parser:  `point_primary: PRECONTROL numeric_expression OF path_primary call_metapost_option_list'."
+                    << endl
+                    << "`numeric_expression' == " << @=$2@>;
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+
+          q->show("*q:");
+
+      }
+#endif /* |DEBUG_COMPILE|  */@;
+
+     bool controls_exist = true;
+
+     cerr << "q->connector_type_vector.size() == " << q->connector_type_vector.size() << endl;
+     cerr << "q->points.size() == " << q->points.size() << endl;
+     cerr << "q->is_cycle() == " << q->is_cycle() << endl;
+
+     if (q->is_cycle() && q->connector_type_vector.size() < q->points.size())
+        controls_exist = false;
+     else if (!q->is_cycle() && q->connector_type_vector.size() < (q->points.size() - 1)) 
+        controls_exist = false;
+
+     cerr << "controls_exist == " << controls_exist << endl;
+
+
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
+
+
+
+   Point *p = create_new<Point>(0);
+   p->set(1,2,3);
+
+   @=$$@> = static_cast<Point*>(p);
+
+};
+
 @q ** (2) point secondary.  @>
 @*1 \§point secondary>.
 \initials{LDF Undated.}

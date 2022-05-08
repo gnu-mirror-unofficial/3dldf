@@ -18,9 +18,39 @@ set f with_position (0, 20, -50)
 
 
 
-path q;
-q := unit_circle scaled (3cm, 0, 3cm);
-rotate q (90, 0);
+path q[];
+q0 := unit_circle scaled (3cm, 0, 3cm);
+rotate q0 (90, 0);
+
+point p[];
+
+p0 := precontrol 1 of q0;
+
+message "p0:";
+show p0;
+
+pause;
+
+q1 := (1, 1){dir 30} .. {dir 20}(2, 2){dir 10} .. {dir 19}(3, 3);
+p1 := precontrol 1 of q1;
+
+message "p1:";
+show p1;
+
+pause;
+
+q2 := (1, 1){dir 30} .. {dir 20}(2, 2){dir 10} .. {dir 19}(3, 3){dir 19} -- cycle;
+p2 := precontrol 1 of q2;
+
+message "p2:";
+show p2;
+
+pause;
+
+
+end;
+
+
 numeric r;
 r := directiontime (0, 1) of q;
 
